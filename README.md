@@ -40,11 +40,13 @@ Esta proyección cumple con los objetivos del proyecto, ya que permite generar u
 
 Los parámetros del origen de la proyección se pueden utilizar como punto de centrado de la cuadrícula: LATITUD_O = 4.0 ° N y LONGITUD_O = 73.0 ° W.
 
+NOTA: las Islas colombianas, como San Andrés, a pesar de ser parte del  [territorio oficial de Colombia (*OSM ID 2287617*)](https://www.openstreetmap.org/relation/2287617), no forman parte de la cuadrícula.
+
 ### Códigos jerárquicos
 
 Las celdas de un [sistema de cuadrícula discreta](https://en.wikipedia.org/wiki/Discrete_global_grid) (global o de un solo país) se pueden identificar de manera única por sus coordenadas de matriz ij, o por un solo número, llamado identificador.
 
-Para proporcionar un **sistema de geocodificación jerárquico y compacto**, adoptamos el [algoritmo Geohash generalizado](https://ppkrauss.github.io/Sfc4q/), que se basa en la partición uniforme y recurrente de celdas cuadriláteras en 4 subcélulas, indexándolas por la curva de Morton.
+Para proporcionar un **sistema de geocodificación jerárquico y compacto**, adoptamos el [algoritmo Geohash Generalizado](https://ppkrauss.github.io/Sfc4q/), que se basa en la partición uniforme y recurrente de celdas cuadriláteras en 4 subcélulas, indexándolas por la curva de Morton.
 
 ![](assets/BR_new-ZCurve.png)
 
