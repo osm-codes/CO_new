@@ -4,15 +4,17 @@
 
 Sumario:
 
-* [Presentación](#presentación)
+&nbsp;&nbsp; [Presentación](#presentación)
 
-  * [Proyección adoptada y origen](#proyección-adoptada-y-origen)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Proyección adoptada y origen](#proyección-adoptada-y-origen)
 
-  * [Códigos jerárquicos](#códigos-jerárquicos)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Códigos jerárquicos](#códigos-jerárquicos)
 
-  * [Códigos abreviados (mnemotécnicos)](#códigos-abreviados-mnemotécnicos)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Códigos abreviados (mnemotécnicos)](#códigos-abreviados-mnemotécnicos)
 
-* [Decisiones abiertas y consensuadas](#decisiones-abiertas-y-consensuadas)
+&nbsp;&nbsp; [Decisiones abiertas y consensuadas](#decisiones-abiertas-y-consensuadas)
+
+&nbsp;&nbsp; [Implementacion en PostGIS](#implementacion-en-postgis)
 
 ## Presentación
 
@@ -30,7 +32,7 @@ El proyecto OSM.Codes propone un sistema de cuadrícula discreto adaptado al con
 
 ### Proyección adoptada y origen
 
-Esto proyecto adopta el [Sistema de Proyección Único para Colombia](https://origen.igac.gov.co/index.html), según la resolución 471 de 2020 del IGAC. En Colombia la proyección cartográfica oficial, se basa en una proyección Transversa de Mercator TM, usando un cilindro transverso como superficie de referencia y secante a la esfera. Este sistema prioriza ángulos (conforme), garantizando así que un ángulo formado entre dos líneas sobre la superficie terrestre se conserve luego de aplicarse la proyección. Los demás parámetros fueron seleccionados cuidadosamente de modo que, se cubriese todo el territorio continental, se evite el uso de coordenadas negativas y con un factor de escala k=0,9992 se optimizó que las distorsiones en la representación de área fuesen mínimas ([ABC Nueva projección cartográfica para Colombia](https://origen.igac.gov.co/docs/ABC_Nueva_Proyeccion_Cartografica_Colombia.pdf)).
+Esto proyecto adopta el [Sistema de Proyección Único para Colombia](https://origen.igac.gov.co/index.html), según la resolución 471 de 2020 del IGAC. En Colombia la proyección cartográfica oficial, se basa en una proyección Transversa de Mercator TM, usando un cilindro transverso como superficie de referencia y secante a la esfera. Este sistema prioriza ángulos (conforme), garantizando así que un ángulo formado entre dos líneas sobre la superficie terrestre se conserve luego de aplicarse la proyección. Los demás parámetros fueron seleccionados cuidadosamente de modo que, se cubriese todo el territorio continental, se evite el uso de coordenadas negativas y con un factor de escala k=0,9992 se optimizó que las distorsiones en la representación de área fuesen mínimas ([ABC Nueva proyección cartográfica para Colombia](https://origen.igac.gov.co/docs/ABC_Nueva_Proyeccion_Cartografica_Colombia.pdf)).
 
 ![](assets/parametro-proyeccion.png)
 
@@ -50,9 +52,9 @@ Para proporcionar un **sistema de geocodificación jerárquico y compacto**, ado
 
 ![](assets/BR_new-ZCurve.png)
 
-Na ilustração utilizamos a  que permite representar células de grades de todos os níveis. Quando a grade tem 16¹=16  células, 16²=256 células ou outra potência de 16, sem grades intermediárias, pode-se adotar a convenção hexadecimal, ou seja, onde os dígitos seguem a sequẽncia 0-9, A-F.  Quando a representação precisa ser mais compacta, pode-se adotar a representação base32, ou seja, onde cada dígito pode ter 32 valores diferentes.
+Na ilustração utilizamos a  que permite representar células de grades de todos os níveis. Quando a grade tem 16¹=16  células, 16²=256 células ou outra potência de 16, sem grades intermediárias, pode-se adotar a convenção hexadecimal, ou seja, onde os dígitos seguem a sequẽncia 0-9, A-F.  Quando a representação precisa ser mais compacta, pode-se adotar a representação [base32](https://en.wikipedia.org/wiki/Base32), ou seja, onde cada dígito pode ter 32 valores diferentes.
 
-En la ilustración usamos [*base16h*](https://ppkrauss.github.io/Sfc4q) ([fundamentación](http://addressforall.org/_foundations/art1.pdf)), que nos permite representar celdas de cuadrícula de todos los niveles. Cuando la cuadrícula tiene 16¹=16 celdas, 16²=256 celdas u otra potencia de 16, sin cuadrículas intermedias, se puede adoptar la convención hexadecimal &mdash; es decir, donde los dígitos siguen la secuencia 0-9 y A-F. Cuando la representación necesita ser más compacta, se puede adoptar la representación [*base32*](https://en.wikipedia.org/wiki/Base32), es decir, donde cada dígito puede tener 32 valores diferentes.
+En la ilustración usamos [*base16h*](https://ppkrauss.github.io/Sfc4q) ([fundamentación](http://addressforall.org/_foundations/art1.pdf)), que nos permite representar celdas de cuadrícula de todos los niveles. Cuando la cuadrícula tiene 16¹=16 celdas, 16²=256 celdas u otra potencia de 16, sin cuadrículas intermedias, se puede adoptar la convención hexadecimal &mdash; es decir, donde los dígitos siguen la secuencia 0-9 y A-F de la [numeracion hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal). Cuando la representación necesita ser más compacta, se puede adoptar la representación [*base32*](https://en.wikipedia.org/wiki/Base32), es decir, donde cada dígito puede tener 32 valores diferentes.
 
 ### Códigos abreviados (mnemotécnicos)
 
@@ -67,26 +69,48 @@ Una de las funciones de codificación / decodificación implementadas de la prop
 
 <img align="right" width="350" src="assets/IGAC-origenFig7-distorciones.png"/>
 
-La decisión principal ya ha sido cuidadosamente tomada por el IGAC, reforzando las convenciones indicados en la tabla 1 a través de la [Resolucion IGAC 471 de 2020](https://igac.gov.co/sites/igac.gov.co/files/normograma/resolucion_471_de_2020.pdf). La ilustración del lateral muestra cómo el sistema adoptado redujo las distorsiones en la representación de área al mínimo.
 
-Otra decisión cuidadosamente tomada, por los matemáticos, fue la adopción de poderes de 2 para cada nivel jerárquico de la cuadrícula, a partir del nivel cero &mdash; nivel inicial del "conjunto de cobertura" de Colombia y su mar territorial. <!-- 1141748/262 = 16 -->
+La decisión principal ya ha sido cuidadosamente tomada por el IGAC, reforzando las convenciones indicados en la tabla 1 a través de la [Resolucion IGAC 471 de 2020](https://igac.gov.co/sites/igac.gov.co/files/normograma/resolucion_471_de_2020.pdf). La ilustración del lateral muestra cómo el sistema adoptado redujo las distorsiones en la representación de área al mínimo. Según el "ABC", en la práctica, para una precisión de metros, con esta proyección
+
+> las  áreas  y  las  distancias  reales  no  cambian.
+
+Otra decisión cuidadosamente tomada, por los matemáticos, fue la adopción de [potencia de 2](https://en.wikipedia.org/wiki/Power_of_two) para cada nivel jerárquico de la cuadrícula, a partir del nivel cero &mdash; nivel inicial del "conjunto de cobertura" de Colombia y su mar territorial. <!-- 1141748/262 = 16 -->
 
 ![](assets/powers2-grid.png)
 
 Pero varias otras decisiones **están abiertas, para ser discutidas y votadas por entidades colombianas**:
 
-1. ¿Usar la cuadrícula para múltiples propósitos?  <br/>Es decir, tanto para aplicaciones en Estadística y visualización de datos, como para aplicaciones logísticas, incluido el código postal.
+1. ¿Incluir o no incluir **islas**?
+
+2. ¿Usar la cuadrícula para múltiples propósitos?  <br/>Es decir, tanto para aplicaciones en Estadística y visualización de datos, como para aplicaciones logísticas, incluido el código postal.
 
 
-2. ¿Utiliza la unidad de **1&#160;m** como referencia? <br/> podría ser, por ejemplo, 100&#160;m o 1&#160;km (la decisión afectaría la elección de la cobertura).
+3. ¿Utiliza la unidad de **1&#160;m** como referencia? <br/> podría ser, por ejemplo, 100&#160;m o 1&#160;km (la decisión afectaría la elección de la cobertura).
 
-3. ¿Ofrece solo una opción de *base* o dos opciones? <br/>Por ejemplo, base32 para código postal y base16h para aplicaciones estadísticas.
+4. ¿Ofrece solo una opción de *base* o dos opciones? <br/>Por ejemplo, base32 para código postal y base16h para aplicaciones estadísticas.
 
 
-4. ¿Usar el alfabeto Geohash en minúsculas (`0123456789bcdefghjkmnpqrstuvwxyz`) ou mayúsculas *No Vogal except U*, NVU (`0123456789BCDFGHJKLMNPQRSTUVWXYZ`)?  
+5. ¿Usar el alfabeto Geohash en minúsculas (`0123456789bcdefghjkmnpqrstuvwxyz`) ou mayúsculas *No Vogal except U*, NVU (`0123456789BCDFGHJKLMNPQRSTUVWXYZ`)?  
 
-5. ¿Indexación por [Curva de Hilbert](https://es.wikipedia.org/wiki/Curva_de_Hilbert) o [Curva de Morton](https://en.wikipedia.org/wiki/Z-order_curve)?
+6. ¿Indexación por [Curva de Hilbert](https://es.wikipedia.org/wiki/Curva_de_Hilbert) o [Curva de Morton](https://en.wikipedia.org/wiki/Z-order_curve)?
 
-6.  ... otras decisiones.
+7.  ... otras decisiones.
 
 Discutir en  https://github.com/osm-codes/CO_new/issues
+
+## Implementacion en PostGIS
+
+Paso a paso em PostgreSQL v12 o mas moderno:
+
+1. Prepare la base de datos con `Extension PostGIS`.
+2. Ejecutar script SQL [pubLib05pgis-extraSRID.sql](https://github.com/AddressForAll/pg_pubLib-v1/blob/main/src/pubLib05pgis-extraSRID.sql). Trara
+3. Use
+
+![](assets/bbox-v3mins.800px.png)
+
+Para visualizar
+```SQL
+
+```
+
+Experimentar quebra em 262km
