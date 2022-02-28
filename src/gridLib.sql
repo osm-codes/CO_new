@@ -7,103 +7,159 @@
 
 
 CREATE extension IF NOT EXISTS postgis;
-DROP SCHEMA IF EXISTS lib_co_grid CASCADE;
-CREATE SCHEMA lib_co_grid;
+DROP SCHEMA IF EXISTS libgrid_co CASCADE;
+CREATE SCHEMA libgrid_co;
 
--------
+-------------------
+-- Heper functions:
 
-CREATE FUNCTION lib_co_grid.str_geohash_encode_bypgis(
-  latLon text
-) RETURNS text as $wrap$
-  SELECT ST_GeoHash(  ST_SetSRID(ST_MakePoint(x[2],x[1]),4326),  8)
-  FROM (SELECT str_geouri_decode(LatLon)) t(x)
-$wrap$ LANGUAGE SQL IMMUTABLE;
-
-
-CREATE FUNCTION lib_co_grid.num_base_decode(
-  p_val text,
-  p_base int, -- from 2 to 36
-  p_alphabet text = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-) RETURNS numeric(500,0) AS $f$
-		  SELECT SUM(
-	       ( p_base::numeric(500,0)^(length($1)-i) )::numeric(500,0)
-	       *   -- base^j * digit_j
-	       ( strpos(p_alphabet,d) - 1 )::numeric(500,0)
-	    )::numeric(500,0) --- returns numeric?
-  		FROM regexp_split_to_table($1,'') WITH ORDINALITY t1(d,i)
+CREATE or replace FUNCTION jsonb_array_to_floats(j_numbers jsonb) RETURNS float[] AS $f$
+  select array_agg(x::float) from jsonb_array_elements(j_numbers) t(x)
 $f$ LANGUAGE SQL IMMUTABLE;
 
-CREATE FUNCTION lib_co_grid.num_baseGeohash_decode(p_val text) RETURNS numeric(500,0) AS $wrap$
-   SELECT lib_co_grid.num_base_decode(p_val, 32, '0123456789bcdefghjkmnpqrstuvwxyz');
-$wrap$ LANGUAGE SQL IMMUTABLE;
+CREATE or replace FUNCTION libgrid_co.digitVal_to_digit(v int) RETURNS char as $f$
+  -- v from 0 to 31.
+  SELECT substr('0123456789BCDFGHJKLMNPQRSTUVWXYZ', v+1, 1)
+$f$ LANGUAGE SQL IMMUTABLE;
+
+CREATE FUNCTION libgrid_co.cellGeom_to_bbox(r geometry) RETURNS float[] AS $f$
+    SELECT array[min(st_X(g)), min(st_Y(g)), max(st_X(g)), max(st_Y(g))]
+    FROM (SELECT (dp).geom as g  FROM (SELECT ST_DumpPoints(r) AS dp) t1 LIMIT 4) t2
+$f$ LANGUAGE SQL IMMUTABLE;
 
 ---------------
+---------------
+---------------
 
+CREATE TABLE libgrid_co.L0_cell262km AS
+ WITH grid AS ( -- A grid from Colombian terrestrial box:
+  SELECT size, (ST_SquareGrid(  size, ST_MakeEnvelope(4304477, 1089833, 5685106, 2957996, 9377)  )).*
+  FROM (SELECT 262144 as size) t0
+ )
+  SELECT ROW_NUMBER() OVER() as gid,
+         ''::char AS gid_code,
+         libgrid_co.cellGeom_to_bbox(geom) AS bbox,
+         geom
+  FROM grid
+  WHERE ST_Intersects(geom, (SELECT ST_Transform(geom,9377) FROM ingest.fdw_jurisdiction_geom WHERE isolabel_ext='CO') )
+;
+DELETE FROM libgrid_co.L0_cell262km WHERE gid=3   -- remove island
+;
+UPDATE libgrid_co.L0_cell262km
+SET gid=n, gid_code=libgrid_co.digitVal_to_digit(32-n::int)
+FROM (
+  SELECT ROW_NUMBER() OVER(ORDER BY ST_Y(pt), ST_X(pt) DESC) AS n, gid
+  FROM (SELECT gid, st_centroid(geom) as pt FROM libgrid_co.L0_cell262km) t0
+) t
+WHERE L0_cell262km.gid=t.gid
+;
 
-CREATE FUNCTION lib_co_grid.osmcode_encode(
+---------------
+---------------
+---------------
+-- Main functions:
+
+CREATE FUNCTION libgrid_co.osmcode_encode_xy(
+   p_geom geometry(Point,9377),
+   code_size int default 8
+) RETURNS text AS $f$
+  SELECT gid_code || str_ggeohash_encode(
+          ST_X(p_geom),
+          ST_Y(p_geom),
+          code_size,
+          5,
+          '0123456789BCDFGHJKLMNPQRSTUVWXYZ',
+          bbox  -- cover-cell specification
+        )
+  FROM libgrid_co.L0_cell262km
+  WHERE ST_Contains(geom,p_geom)
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.osmcode_encode_xy(geometry(Point,9377), int)
+  IS 'Encodes geometry (of standard Colombia projection) as standard Colembia-OSMcode.'
+;
+-- SELECT libgrid_co.osmcode_encode( ST_Transform(ST_SetSRID(ST_MakePoint(3.461,-76.577),4326),9377) );
+
+CREATE or replace FUNCTION libgrid_co.osmcode_encode(
+  p_geom geometry(Point, 4326),
+  code_size int default 8
+) RETURNS text AS $wrap$
+  SELECT libgrid_co.osmcode_encode_xy( ST_Transform(p_geom,9377), code_size )
+$wrap$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.osmcode_encode(geometry(Point,4326), int)
+  IS 'Encodes LatLon (WGS84) as the standard Colombia-OSMcode. Wrap for libgrid_co.osmcode_encode(geometry(Point,9377)).'
+;
+
+CREATE or replace FUNCTION libgrid_co.osmcode_encode(
    lat float,
    lon float,
-   numberOfChars int default 8
-) RETURNS text AS $f$
-  SELECT str_ggeohash_encode(
-         ST_X(geom),
-         ST_Y(geom),
-         numberOfChars,
-         5, -- baseBits
-         '0123456789BCDFGHJKLMNPQRSTUVWXYZ', -- base32nvU as http://addressforall.org/_foundations/art1.pdf
-         5685106, -- max_x
-         4304477, -- min_x
-         2957996, -- max_y
-         1089833 -- min_y
-       )
-  FROM (SELECT ST_Transform( ST_SetSRID(ST_MakePoint(lon,lat),4326) , 9377)) t(geom)
-$f$ LANGUAGE SQL IMMUTABLE;
+   code_size int default 8
+) RETURNS text AS $wrap$
+  SELECT libgrid_co.osmcode_encode(
+      ST_SetSRID(ST_MakePoint(lon,lat),4326),
+      code_size
+    )
+$wrap$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.osmcode_encode(float,float,int)
+  IS 'Encodes LatLon as the standard Colombia-OSMcode. Wrap for osmcode_encode(geometry)'
+;
+
+CREATE FUNCTION libgrid_co.osmcode_encode(uri text) RETURNS text AS $wrap$
+   -- pending add parameter to enforce size
+  SELECT libgrid_co.osmcode_encode(latLon[1],latLon[2]) -- pending uncertain_to_size
+  FROM (SELECT str_geouri_decode(uri)) t(latLon)
+$wrap$ LANGUAGE SQL IMMUTABLE;
 
 
-CREATE FUNCTION lib_co_grid.osmcode_decode_boxXY(
-   code text
-) RETURNS float[] AS $f$
-  SELECT str_ggeohash_decode_box(
-         code,
-         5, -- baseBits
-         '{"0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "b":10, "c":11, "d":12, "f":13, "g":14, "h":15, "j":16, "k":17, "l":18, "m":19, "n":20, "p":21, "q":22, "r":23, "s":24, "t":25, "u":26, "v":27, "w":28, "x":29, "y":30, "z":31}'::jsonb,
-         5685106, -- max_x
-         4304477, -- min_x
-         2957996, -- max_y
-         1089833  -- min_y
-       )
-$f$ LANGUAGE SQL IMMUTABLE;
+---
 
-CREATE FUNCTION lib_co_grid.osmcode_decode_XY(
-   code text,
-   witherror boolean default false
-) RETURNS float[] AS $f$
-  SELECT CASE WHEN witherror THEN xy || array[bbox[3] - xy[1], bbox[4] - xy[2]] ELSE xy END
+CREATE FUNCTION libgrid_co.osmcode_encode2_xy(
+   p_geom geometry(Point,9377),
+   code_size int default 8
+) RETURNS jsonb AS $f$
+
+  SELECT  jsonb_build_object('code',gid_code||(j->>'code'), 'box',j->'box')
   FROM (
-    SELECT array[(bbox[1] + bbox[3]) / 2, (bbox[2] + bbox[4]) / 2] AS xy, bbox
-    FROM (SELECT lib_co_grid.osmcode_decode_boxXY(code)) t1(bbox)
-  ) t2
+    SELECT gid_code, str_ggeohash_encode2(
+            ST_X(p_geom),
+            ST_Y(p_geom),
+            code_size,
+            5,
+            '0123456789BCDFGHJKLMNPQRSTUVWXYZ',
+            bbox  -- cover-cell specification
+          ) AS j
+    FROM libgrid_co.L0_cell262km
+    WHERE ST_Contains(geom,p_geom)
+  ) t
+
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION lib_co_grid.osmcode_decode_XY(text,boolean)
-  IS 'Decodes Colombia-OSM_code into a XY point of its official projection.'
+COMMENT ON FUNCTION libgrid_co.osmcode_encode2_xy(geometry(Point,9377), int)
+  IS 'Encodes geometry (of standard Colombia projection) as standard Colembia-OSMcode.'
+;
+-- SELECT libgrid_co.osmcode_encode( ST_Transform(ST_SetSRID(ST_MakePoint(3.461,-76.577),4326),9377) );
+
+CREATE FUNCTION libgrid_co.osmcode_encode2_latlon(
+   p_geom geometry(Point,4326),
+   code_size int default 8
+) RETURNS jsonb AS $f$
+  SELECT libgrid_co.osmcode_encode2_xy( ST_Transform(p_geom,9377), code_size )
+$f$ LANGUAGE SQL IMMUTABLE;
+
+
+CREATE or replace FUNCTION libgrid_co.osmcode_encode2(
+   lat float,
+   lon float,
+   code_size int default 8
+) RETURNS jsonb AS $wrap$
+  SELECT libgrid_co.osmcode_encode2_latlon(
+      ST_SetSRID(ST_MakePoint(lon,lat),4326),
+      code_size
+    )
+$wrap$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.osmcode_encode2(float,float,int)
+  IS 'Encodes LatLon as the standard Colombia-OSMcode. Wrap for osmcode_encode(geometry)'
 ;
 
-CREATE or replace FUNCTION lib_co_grid.osmcode_decode_topoint(
-   code text
- ) RETURNS geometry AS $f$
-  SELECT ST_Transform( ST_SetSRID(ST_MakePoint(xy[1],xy[2]),9377) , 4326) -- trocar x y?
-  FROM ( SELECT lib_co_grid.osmcode_decode_XY(code,false) ) t(xy)
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION lib_co_grid.osmcode_decode_topoint(text)
-  IS 'Decodes Colombia-OSM_code into a WGS84 point.'
-;
-
-CREATE or replace FUNCTION lib_co_grid.osmcode_decode(
-   code text
- ) RETURNS float[] AS $f$
-  SELECT array[ST_Y(geom), ST_X(geom)]
-  FROM ( SELECT lib_co_grid.osmcode_decode_topoint(code) ) t(geom)
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION lib_co_grid.osmcode_decode_topoint(text)
-  IS 'Decodes Colombia-OSM_code into standard LatLon array.'
-;
+CREATE FUNCTION libgrid_co.osmcode_encode2(uri text,code_size int default 8) RETURNS jsonb AS $wrap$
+  SELECT libgrid_co.osmcode_encode2(latLon[1],latLon[2],code_size) -- pending uncertain_to_size
+  FROM (SELECT str_geouri_decode(uri)) t(latLon)
+$wrap$ LANGUAGE SQL IMMUTABLE;
