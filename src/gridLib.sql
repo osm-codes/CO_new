@@ -265,20 +265,21 @@ CREATE TABLE libgrid_co.de_para (
   subprefix text,
   prefix text NOT NULL,
   subcells text[],
+  is_subdiv_default boolean DEFAULT false,
   geom geometry
 );
 
-INSERT INTO libgrid_co.de_para(isolabel_ext,subprefix,prefix,subcells,geom) VALUES
-('CO-ANT-Itagui'  ,'C','8UR',null,null),
-('CO-ANT-Itagui'  ,'O','8UQ',null,null),
-('CO-ANT-Medellin','C','8U' ,null,null),
-('CO-ANT-Medellin','E','9J' ,null,null),
-('CO-ANT-Medellin','N','8V' ,null,null),
-('CO-DC-Bogota'   ,'C','H'  ,null,null),
-('CO-BOY-Busbanza','C','B57','{H,G,C,B}'::text[],null),
-('CO-BOY-Busbanza','C','B5L','{J,5,7,4,6,1,3,0,2}'::text[],null),
-('CO-BOY-Busbanza','C','B55','{X,Z,W,Y,V}'::text[],null),
-('CO-BOY-Busbanza','C','B5J','{P,R,N,Q,K}'::text[],null)
+INSERT INTO libgrid_co.de_para(isolabel_ext,subprefix,prefix,subcells,is_subdiv_default,geom) VALUES
+('CO-ANT-Itagui'  ,'C','8UR',null,true,null),
+('CO-ANT-Itagui'  ,'O','8UQ',null,false,null),
+('CO-ANT-Medellin','C','8U' ,null,true,null),
+('CO-ANT-Medellin','E','9J' ,null,false,null),
+('CO-ANT-Medellin','N','8V' ,null,false,null),
+('CO-DC-Bogota'   ,'C','H'  ,null,true,null),
+('CO-BOY-Busbanza','C','B57','{H,G,C,B}'::text[],false,null),
+('CO-BOY-Busbanza','C','B5L','{J,5,7,4,6,1,3,0,2}'::text[],true,null),
+('CO-BOY-Busbanza','C','B55','{X,Z,W,Y,V}'::text[],false,null),
+('CO-BOY-Busbanza','C','B5J','{P,R,N,Q,K}'::text[],false,null)
 ;
 
 CREATE or replace FUNCTION libgrid_co.update_de_para(
@@ -297,16 +298,16 @@ CREATE or replace FUNCTION libgrid_co.update_de_para(
   )
   WHERE prefix= p_prefix AND isolabel_ext = p_isolabel_ext
 $f$ LANGUAGE SQL VOLATILE;
---SELECT libgrid_co.update_de_para('CO-ANT-Itagui','8UR');
---SELECT libgrid_co.update_de_para('CO-ANT-Itagui','8UQ');
---SELECT libgrid_co.update_de_para('CO-ANT-Medellin','8U');
---SELECT libgrid_co.update_de_para('CO-ANT-Medellin','9J');
---SELECT libgrid_co.update_de_para('CO-ANT-Medellin','8V');
---SELECT libgrid_co.update_de_para('CO-DC-Bogota','H');
---SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B57');
---SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B5L');
---SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B55');
---SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B5J');
+SELECT libgrid_co.update_de_para('CO-ANT-Itagui','8UR');
+SELECT libgrid_co.update_de_para('CO-ANT-Itagui','8UQ');
+SELECT libgrid_co.update_de_para('CO-ANT-Medellin','8U');
+SELECT libgrid_co.update_de_para('CO-ANT-Medellin','9J');
+SELECT libgrid_co.update_de_para('CO-ANT-Medellin','8V');
+SELECT libgrid_co.update_de_para('CO-DC-Bogota','H');
+SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B57');
+SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B5L');
+SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B55');
+SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B5J');
 
 CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
    p_geom     geometry(POINT),
@@ -314,7 +315,7 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
    view_child boolean   default false,
    use_hex    boolean   default false
 ) RETURNS jsonb AS $f$
-SELECT 
+SELECT
     CASE
     WHEN (code_size-1) = 0
     THEN
@@ -323,7 +324,7 @@ SELECT
             'type', 'FeatureCollection',
             'features',
                 (
-                    CASE 
+                    CASE
                     WHEN view_child IS FAlSE
                     THEN ST_AsGeoJSONb(
                         str_ggeohash_draw_cell_bybox((t2.bbox),true,9377),
@@ -333,7 +334,7 @@ SELECT
                             'area', ST_Area(str_ggeohash_draw_cell_bybox((t2.bbox),false,9377)),
                             'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox((t2.bbox),false,9377)))
                             )
-                        )::jsonb 
+                        )::jsonb
                     ELSE (
                         SELECT ST_AsGeoJSONb(
                         str_ggeohash_draw_cell_bybox((t2.bbox),true,9377),
@@ -371,7 +372,7 @@ SELECT
             'type', 'FeatureCollection',
             'features',
                 (
-                    CASE 
+                    CASE
                     WHEN view_child IS FAlSE
                     THEN ST_AsGeoJSONb(
                         str_ggeohash_draw_cell_bybox(
@@ -383,7 +384,7 @@ SELECT
                                 'area', ST_Area(str_ggeohash_draw_cell_bybox((jsonb_array_to_floats(j->'box')),false,9377)),
                                 'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox((jsonb_array_to_floats(j->'box')),false,9377)))
                                 ))
-                            )::jsonb 
+                            )::jsonb
                     ELSE (
                         SELECT ST_AsGeoJSONb(
                         str_ggeohash_draw_cell_bybox(
@@ -452,19 +453,19 @@ COMMENT ON FUNCTION libgrid_co.osmcode_encode2(float,float,int,boolean)
   IS 'Encodes LatLon as the standard Colombia-OSMcode. Wrap for osmcode_encode2_ptgeom(geometry)'
 ;
 
-CREATE FUNCTION libgrid_co.uncertain_to_code_size(
+CREATE or replace FUNCTION libgrid_co.uncertain_to_code_size(
   u int
 ) RETURNS int AS $f$
   -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
   SELECT CASE -- discretization by "snap to size-levels"
-     WHEN s < 2          THEN 8
-     WHEN s < 64         THEN 7
-     WHEN s < 2048       THEN 6
-     WHEN s < 65536      THEN 5
-     WHEN s < 2097152    THEN 4
-     WHEN s < 67108864   THEN 3
-     WHEN s < 2147483648 THEN 2
-     ELSE                     1
+     WHEN s < 5      THEN 8
+     WHEN s < 27     THEN 7
+     WHEN s < 151    THEN 6
+     WHEN s < 852    THEN 5
+     WHEN s < 4820   THEN 4
+     WHEN s < 27266  THEN 3
+     WHEN s < 154242 THEN 2
+     ELSE                 1
      END
   FROM (SELECT u*2) t(s)
 $f$ LANGUAGE SQL IMMUTABLE;
@@ -510,7 +511,7 @@ CREATE or replace FUNCTION libgrid_co.decode_geojson(
   SELECT  jsonb_build_object(
     'type' , 'FeatureCollection',
     'features', ARRAY[ ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,jsonb_build_object('code', upper(p_code), 'area', ST_Area(geom),
-    'side', SQRT(ST_Area(geom))    
+    'side', SQRT(ST_Area(geom))
     ))::jsonb ]  )
     FROM (SELECT str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox(upper(p_code)),false,9377)) t(geom)
 $f$ LANGUAGE SQL IMMUTABLE;
@@ -547,11 +548,11 @@ CREATE or replace FUNCTION libgrid_co.isolabel_geojson(
                         'area', ST_Area(geom,true),
                         'jurisd_base_id', jurisd_base_id
                         )
-                    )::jsonb 
+                    )::jsonb
             )
         )
     FROM vw01full_jurisdiction_geom g
-    WHERE ( (lower(g.isolabel_ext) = lower(p_isolabel_ext) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower( split_part(p_isolabel_ext,'-',2) ))) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(p_isolabel_ext))) ) ) AND jurisd_base_id = 170
+    WHERE ( (lower(g.isolabel_ext) = lower(p_isolabel_ext) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower( split_part(p_isolabel_ext,'-',2) ))) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(p_isolabel_ext))) ) ) /*AND jurisd_base_id = 170*/
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.isolabel_geojson(text)
   IS 'Return geojson of jurisdiction.'
@@ -584,7 +585,7 @@ CREATE or replace FUNCTION libgrid_co.decode_geojson2(
             FROM libgrid_co.de_para
             WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode(p_code))[1])
                 AND lower(subprefix)  = lower((str_geocodeuri_decode(p_code))[2])
-                AND 
+                AND
                     CASE
                     WHEN subcells IS NOT NULL
                     THEN (subcells @> array[substr((str_geocodeuri_decode(p_code))[3],1,1)]::text[])
@@ -605,7 +606,7 @@ RETURNS text[] as $f$
   SELECT
     CASE
       WHEN cardinality(a)=4 THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || array[a[3]] || a[4]
-      WHEN cardinality(a)=3 THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || array['C']::text[] || a[3]
+      WHEN cardinality(a)=3 THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || array['~']::text[] || a[3]
       ELSE NULL
     END
   FROM (
@@ -622,8 +623,12 @@ CREATE or replace FUNCTION libgrid_co.decode_geojson_isolevel1_only(
             SELECT  prefix || (str_geocodeuri_decode_isolevel1_only(p_code))[3]
             FROM libgrid_co.de_para
             WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode_isolevel1_only(p_code))[1])
-                AND lower(subprefix)  = lower((str_geocodeuri_decode_isolevel1_only(p_code))[2])
-                AND 
+                AND
+                    CASE
+                    WHEN (str_geocodeuri_decode_isolevel1_only(p_code))[2] = '~' THEN is_subdiv_default IS TRUE
+                    ELSE lower(subprefix)  = lower((str_geocodeuri_decode_isolevel1_only(p_code))[2])
+                    END
+                AND
                     CASE
                     WHEN subcells IS NOT NULL
                     THEN (subcells @> array[substr((str_geocodeuri_decode_isolevel1_only(p_code))[3],1,1)]::text[])
@@ -638,7 +643,7 @@ RETURNS text[] as $f$
   SELECT
     CASE
       WHEN cardinality(a)=5 THEN (SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ) || array[a[4]] || a[5]
-      WHEN cardinality(a)=4 THEN (SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ) || array['C']::text[] || a[4]
+      WHEN cardinality(a)=4 THEN (SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ) || array['~']::text[] || a[4]
       ELSE NULL
     END
   FROM (
@@ -655,8 +660,12 @@ CREATE or replace FUNCTION libgrid_co.decode_geojson_isolevel2_abbrev(
             SELECT  prefix || (str_geocodeuri_decode_isolevel2_abbrev(p_code))[3]
             FROM libgrid_co.de_para
             WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode_isolevel2_abbrev(p_code))[1])
-                AND lower(subprefix)  = lower((str_geocodeuri_decode_isolevel2_abbrev(p_code))[2])
-                AND 
+                AND
+                    CASE
+                    WHEN (str_geocodeuri_decode_isolevel2_abbrev(p_code))[2] = '~' THEN is_subdiv_default IS TRUE
+                    ELSE lower(subprefix)  = lower((str_geocodeuri_decode_isolevel2_abbrev(p_code))[2])
+                    END
+                AND
                     CASE
                     WHEN subcells IS NOT NULL
                     THEN (subcells @> array[substr((str_geocodeuri_decode_isolevel2_abbrev(p_code))[3],1,1)]::text[])
@@ -672,17 +681,22 @@ CREATE or replace FUNCTION str_geocodeuri_decode_de_para(uri text)
 RETURNS text[] as $f$
   SELECT
     CASE
-      WHEN cardinality(a)=4 THEN COALESCE((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ),a[1] || '-' ||  a[2] || '-' || a[3]) || array[a[4]]
-      WHEN cardinality(a)=3 THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || array[a[3]]
+      WHEN cardinality(a)=4 AND u IS NULL THEN COALESCE((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ),a[1] || '-' ||  a[2] || '-' || a[3]) || array[a[4]]
+      WHEN cardinality(a)=3 AND u IS NULL THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || array[a[3]]
+      WHEN cardinality(a)=2 AND u IS NOT NULL THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || u
+      WHEN cardinality(a)=3 AND u IS NOT NULL THEN COALESCE((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ),a[1] || '-' ||  a[2] || '-' || a[3]) || u
       ELSE NULL
     END
   FROM (
-    SELECT regexp_split_to_array (uri,'(-)')::text[] AS a
+    SELECT regexp_split_to_array (regexp_replace(uri,'~$','','ig'),'(-)')::text[] AS a, (regexp_match(uri,'(~)')) AS u
   ) t
 $f$ LANGUAGE SQL IMMUTABLE;
 --SELECT str_geocodeuri_decode_de_para('CO-Itagui-O');
 --SELECT str_geocodeuri_decode_de_para('CO-A-Itagui-O');
 --SELECT str_geocodeuri_decode_de_para('CO-ANT-Itagui-O');
+--SELECT str_geocodeuri_decode_de_para('CO-Itagui~');
+--SELECT str_geocodeuri_decode_de_para('CO-A-Itagui~');
+--SELECT str_geocodeuri_decode_de_para('CO-ANT-Itagui~');
 
 CREATE or replace FUNCTION libgrid_co.decode_geojson_de_para(
    p_code text
@@ -690,17 +704,22 @@ CREATE or replace FUNCTION libgrid_co.decode_geojson_de_para(
   SELECT  jsonb_build_object(
     'type' , 'FeatureCollection',
     'features', ARRAY[ ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,jsonb_build_object('code', upper(prefix), 'area', ST_Area(geom),
-    'side', SQRT(ST_Area(geom))    
+    'side', SQRT(ST_Area(geom))
     ))::jsonb ]  )
     FROM libgrid_co.de_para
     WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode_de_para(p_code))[1])
-          AND lower(subprefix)  = lower((str_geocodeuri_decode_de_para(p_code))[2])
+          AND
+        CASE
+          WHEN (str_geocodeuri_decode_de_para(p_code))[2] = '~' THEN is_subdiv_default IS TRUE
+          ELSE lower(subprefix)  = lower((str_geocodeuri_decode_de_para(p_code))[2])
+        END
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.decode_geojson_de_para(text)
   IS 'Decodes Colombia-OSMcode.'
 ;
 --SELECT libgrid_co.decode_geojson_de_para('CO-Itagui-C');
 --SELECT libgrid_co.decode_geojson_de_para('CO-A-Itagui-C');
+--SELECT libgrid_co.decode_geojson_de_para('CO-A-Itagui~');
 --SELECT libgrid_co.decode_geojson_de_para('CO-BOY-Busbanza-C');
 
 --------------------------------------

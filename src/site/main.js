@@ -78,7 +78,7 @@ searchDecode.onAdd = function (map) {
     this.button    = L.DomUtil.create('button','leaflet-control-button',this.container);
     
     this.search.type = 'text';
-    this.search.placeholder = 'geocode, e.g.: 3D5';
+    this.search.placeholder = 'geocode, e.g.: CO~3D5';
     this.search.id = 'textsearchbar';
     this.button.type = 'button';
     this.button.innerHTML= "Decode";
@@ -109,15 +109,15 @@ precision.onAdd = function (map) {
     this.checkbox.type = 'checkbox';
     this.checkbox.value = 1;
     this.search.type = 'text';
-    this.search.placeholder = 'lat,lng, e.g.: 3.5,-72.3';
+    this.search.placeholder = 'lat,lng, e.g.: 3.5,-72.3;u=1';
     this.search.id = 'latlngtextbar';
     this.button.type = 'button';
     this.button.innerHTML= "Encode";
     this.select.id = 'digits_size';
     this.select.name = 'dig';
-    this.select.innerHTML = '<option value="100000">1</option><option value="20000">2</option><option value="10000">3</option><option value="1000">4</option><option value="100">5</option><option value="50">6</option><option value="10">7</option><option value="1">8</option>';
+    this.select.innerHTML = '<option value="100000">1</option><option value="50000">2</option><option value="5000">3</option><option value="1000">4</option><option value="200">5</option><option value="40">6</option><option value="8">7</option><option value="1">8</option>';
     this.label.for= 'dig';
-    this.label.innerHTML= '<br>Precision: ';
+    this.label.innerHTML= '<br>Digits: ';
 
     L.DomEvent.disableScrollPropagation(this.container);
     L.DomEvent.disableClickPropagation(this.container);
@@ -178,11 +178,11 @@ function searchEncode(data)
     {
         let dig = document.getElementById('digits_size').value
         let grid = document.getElementById('grid')
-        var uri = "https://osm.codes/geo:" + input + ";u=" + dig + ".json" + (grid.checked ? '/grid' : '')
+        var uri = "https://osm.codes/geo:" + (input.match(/.*;u=.*/) ? input : input + ";u=" + dig ) + ".json" + (grid.checked ? '/grid' : '')
 
         var popupContent = "latlng: " + input;
         currentFeatureGroup.clearLayers();
-        L.marker(input.split(',')).addTo(currentFeatureGroup).addTo(allFeaturesGroup).bindPopup(popupContent);
+        L.marker(input.split(/[;,]/,2)).addTo(currentFeatureGroup).addTo(allFeaturesGroup).bindPopup(popupContent);
         loadGeojson(uri,style,onEachFeature)
         document.getElementById('latlngtextbar').value = '';
     }
