@@ -9,74 +9,19 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 DROP SCHEMA IF EXISTS libgrid_co CASCADE;
 CREATE SCHEMA libgrid_co;
 
-CREATE EXTENSION IF NOT EXISTS postgres_fdw;
-CREATE SERVER    IF NOT EXISTS foreign_server_dl03
-         FOREIGN DATA WRAPPER postgres_fdw
-         OPTIONS (dbname 'dl03t_main')
-;
-CREATE USER MAPPING FOR PUBLIC SERVER foreign_server_dl03;
-
--------------------
--- :
-
-CREATE FOREIGN TABLE fdw_jurisdiction (
- osm_id          bigint,
- jurisd_base_id  integer,
- jurisd_local_id integer,
- parent_id       bigint,
- admin_level     smallint,
- name            text,
- parent_abbrev   text,
- abbrev          text,
- wikidata_id     bigint,
- lexlabel        text,
- isolabel_ext    text,
- ddd             integer,
- housenumber_system_type text,
- lex_urn         text,
- info            jsonb,
- name_en         text,
- isolevel        text
-) SERVER foreign_server_dl03
-  OPTIONS (schema_name 'optim', table_name 'jurisdiction')
-;
-
-CREATE FOREIGN TABLE fdw_jurisdiction_geom (
- osm_id          bigint,
- isolabel_ext    text,
- geom            geometry(Geometry,4326),
- kx_ghs1_intersects text[],
- kx_ghs2_intersects text[]
-) SERVER foreign_server_dl03
-  OPTIONS (schema_name 'optim', table_name 'jurisdiction_geom')
-;
-
-CREATE VIEW vw01full_jurisdiction_geom AS
-    SELECT j.*, g.geom
-    FROM fdw_jurisdiction j
-    LEFT JOIN fdw_jurisdiction_geom g
-    ON j.osm_id = g.osm_id
-;
-COMMENT ON VIEW vw01full_jurisdiction_geom
-  IS 'Add geom to fdw_jurisdiction.'
-;
 
 CREATE VIEW vwlixo_municipios_unicos AS
   SELECT substring(isolabel_ext,8) as dupname, MAX(isolabel_ext) AS isolabel_ext
-  FROM fdw_jurisdiction j
+  FROM optim.jurisdiction j
   WHERE isolevel::int >2 AND isolabel_ext like 'CO%'
   GROUP BY 1 having count(*)=1 order by 1
 ;
 
 CREATE VIEW vwlixo_municipios_reduced AS
   SELECT  'CO-' || substring(isolabel_ext,4,1) ||'-'|| substring(isolabel_ext,8) as isolabel_reduced, isolabel_ext
-  FROM fdw_jurisdiction j
+  FROM optim.jurisdiction j
   WHERE isolevel::int >2 AND isolabel_ext like 'CO-%' AND name not in ('Sabanalarga', 'Sucre', 'Guamal', 'Riosucio')
 ;
----------------
----------------
----------------
-
 
 -------------------
 -- Helper functions:
@@ -95,113 +40,116 @@ CREATE FUNCTION libgrid_co.cellGeom_to_bbox(r geometry) RETURNS float[] AS $f$
     FROM (SELECT (dp).geom as g  FROM (SELECT ST_DumpPoints(r) AS dp) t1 LIMIT 4) t2
 $f$ LANGUAGE SQL IMMUTABLE;
 
----------------
----------------
----------------
+-------------------
 
-CREATE TABLE libgrid_co.L0_cell262km AS
- WITH grid AS ( -- A grid from Colombian terrestrial box:
-  SELECT size, (ST_SquareGrid(  size, ST_MakeEnvelope(4304477, 1089833, 5685106, 2957996, 9377)  )).*
-  FROM (SELECT 262144 as size) t0
- )
-  SELECT ROW_NUMBER() OVER() as gid,
-         ''::char AS gid_code,
-         ''::text AS gid_code_hex,
-         libgrid_co.cellGeom_to_bbox(geom) AS bbox,
-         geom
-  FROM grid
-  WHERE ST_Intersects(geom, (SELECT ST_Transform(geom,9377) FROM fdw_jurisdiction_geom WHERE isolabel_ext='CO') )
-;
-DELETE FROM libgrid_co.L0_cell262km WHERE gid=3   -- remove island
-;
-UPDATE libgrid_co.L0_cell262km
-SET gid=t.n,
-    gid_code=t.gid_code,
-    gid_code_hex=('{"0": "00", "1": "01", "2": "02", "3": "03", "4": "04", "5": "05", "6": "06", "7": "07", "8": "08", "9": "09", "B": "0a", "C": "0b", "D": "0c", "F": "0d", "G": "0e", "H": "0f", "J": "10", "K": "11", "L": "12", "M": "13", "N": "14", "P": "15", "Q": "16", "R": "17", "S": "18", "T": "19", "U": "1a", "V": "1b", "W": "1c", "X": "1d", "Y": "1e", "Z": "1f"}'::jsonb)->>t.gid_code
-FROM (
-  SELECT *, libgrid_co.digitVal_to_digit(32-n::int) as gid_code
-  FROM (
-    SELECT ROW_NUMBER() OVER(ORDER BY ST_Y(pt), ST_X(pt) DESC) AS n, gid
-    FROM (SELECT gid, st_centroid(geom) as pt FROM libgrid_co.L0_cell262km) t0
-  ) t1
-) t
-WHERE L0_cell262km.gid=t.gid
-;
-
----------------
----------------
----------------
--- Main functions:
-
-CREATE FUNCTION libgrid_co.osmcode_encode_xy(
-   p_geom geometry(Point,9377),
-   code_size int default 8,
-   use_hex boolean default false
-) RETURNS text AS $f$
-  SELECT gid_code || str_ggeohash_encode(
-          ST_X(p_geom),
-          ST_Y(p_geom),
-          code_size,
-          CASE WHEN use_hex THEN 4 ELSE 5 END,
-          CASE WHEN use_hex THEN '0123456789abcdef' ELSE '0123456789BCDFGHJKLMNPQRSTUVWXYZ' END,
-          bbox  -- cover-cell specification
-        )
-  FROM libgrid_co.L0_cell262km
-  WHERE ST_Contains(geom,p_geom)
+CREATE or replace FUNCTION libgrid_co.ij_to_xy(
+  i int,   -- coluna
+  j int,   -- linha
+  x0 int,  -- referencia de inicio do eixo x [x0,y0]
+  y0 int,  -- referencia de inicio do eixo y [x0,y0]
+  side int -- lado da célula
+) RETURNS int[] AS $f$
+  SELECT array[
+    x0 + i*side,
+    y0 + j*side
+  ]
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.osmcode_encode_xy(geometry(Point,9377), int, boolean)
-  IS 'Encodes geometry (of standard Colombia projection) as standard Colembia-OSMcode.'
+COMMENT ON FUNCTION libgrid_co.ij_to_xy(int,int,int,int,int)
+ IS 'Coordenadas a partir da posição da célula na matriz.'
 ;
--- SELECT libgrid_co.osmcode_encode_ptgeom( ST_SetSRID(ST_MakePoint(-76.577,3.461),4326) );
--- SELECT libgrid_co.osmcode_encode_ptgeom( ST_Transform(ST_SetSRID(ST_MakePoint(-76.577,3.461),4326),9377) );
+--SELECT libgrid_co.ij_to_xy(1,1,4180000,1035500,262144);
 
-
-CREATE or replace FUNCTION libgrid_co.osmcode_encode(
-  p_geom geometry(Point, 4326),
-  code_size int default 8
-) RETURNS text AS $wrap$
-  SELECT libgrid_co.osmcode_encode_xy( ST_Transform(p_geom,9377), code_size )
-$wrap$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.osmcode_encode(geometry(Point,4326), int)
-  IS 'Encodes LatLon (WGS84) as the standard Colombia-OSMcode. Wrap for libgrid_co.osmcode_encode(geometry(Point,9377)).'
+CREATE or replace FUNCTION libgrid_co.geom_from_ij(
+  i int,    -- coluna
+  j int,    -- linha
+  x0 int,   -- referencia de inicio do eixo x [x0,y0]
+  y0 int,   -- referencia de inicio do eixo y [x0,y0]
+  side int, -- lado da célula
+  srid int  -- srid
+  ) RETURNS geometry AS $f$
+  SELECT str_ggeohash_draw_cell_bycenter(v[1]+side/2,v[2]+side/2,side/2,false,srid)
+  FROM
+  (
+    SELECT libgrid_co.ij_to_xy(i,j,x0,y0,side) v
+  ) t
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.geom_from_ij(int,int,int,int,int,int)
+ IS 'Geometria a partir da posição da célula na matriz.'
 ;
+--SELECT libgrid_co.geom_from_ij(0,0,4180000,1035500,262144,9377);
 
-CREATE or replace FUNCTION libgrid_co.osmcode_encode(
-   lat float,
-   lon float,
-   code_size int default 8
-) RETURNS text AS $wrap$
-  SELECT libgrid_co.osmcode_encode(
-      ST_SetSRID(ST_MakePoint(lon,lat),4326),
-      code_size
-    )
+
+
+
+
+CREATE FUNCTION libgrid_co.xyS_collapseTo_ijS(x int, y int, x0 int, y0 int, s int) RETURNS int[] AS $f$
+  SELECT array[ (x-x0)/s, (y-y0)/s, s ]
+$f$ LANGUAGE SQL IMMUTABLE;
+--SELECT libgrid_co.xyS_collapseTo_ijS(4442144,1297644,4180000,1035500,262144);
+
+CREATE or replace  FUNCTION libgrid_co.xyS_collapseTo_ijS(xyS int[]) RETURNS int[] AS $wrap$
+  SELECT libgrid_co.xys_collapseTo_ijs(xyS[1],xyS[2],xyS[3],xyS[4],xyS[5])
 $wrap$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.osmcode_encode(float,float,int)
-  IS 'Encodes LatLon as the standard Colombia-OSMcode. Wrap for osmcode_encode(geometry)'
+--SELECT libgrid_co.xyS_collapseTo_ijS(array[4442144,1297644,4180000,1035500,262144]);
+
+CREATE or replace  FUNCTION libgrid_co.xy_to_quadrante(x int, y int, x0 int, y0 int, s int, columns int) RETURNS int AS $f$
+  SELECT columns*ij[2] + ij[1]
+  FROM ( SELECT libgrid_co.xyS_collapseTo_ijS(x,y,x0,y0,s) ) t(ij)
+$f$ LANGUAGE SQL IMMUTABLE;
+--SELECT libgrid_co.xy_to_quadrante(4442144,1297644,4180000,1035500,262144,6);
+
+CREATE or replace  FUNCTION libgrid_co.xy_to_quadrante(xyd int[]) RETURNS int AS $wrap$
+  SELECT libgrid_co.xy_to_quadrante(xyd[1],xyd[2],xyd[3],xyd[4],xyd[5],xyd[6])
+$wrap$ LANGUAGE SQL IMMUTABLE;
+--SELECT libgrid_co.xy_to_quadrante(array[4442144,1297644,4180000,1035500,262144,6]);
+
+
+CREATE FUNCTION libgrid_co.quadrantes() RETURNS int[] AS $f$
+  SELECT array[45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.quadrantes IS 'List of official quadrants.';
+
+---------------
+
+
+DROP TABLE libgrid_co.L0_cell262km;
+CREATE TABLE libgrid_co.L0_cell262km AS
+SELECT r.gid,
+       r.index,
+       s.gid_code,
+       ('{"0": "00", "1": "01", "2": "02", "3": "03", "4": "04", "5": "05", "6": "06", "7": "07", "8": "08", "9": "09", "B": "0a", "C": "0b", "D": "0c", "F": "0d", "G": "0e", "H": "0f", "J": "10", "K": "11", "L": "12", "M": "13", "N": "14", "P": "15", "Q": "16", "R": "17", "S": "18", "T": "19", "U": "1a", "V": "1b", "W": "1c", "X": "1d", "Y": "1e", "Z": "1f"}'::jsonb)->>s.gid_code AS gid_code_hex,
+       r.bbox,
+       r.geom
+FROM
+(
+  SELECT ROW_NUMBER() OVER(ORDER BY index/6 DESC, index%6 ASC) as gid,
+         libgrid_co.cellGeom_to_bbox(geom) AS bbox,
+         index,
+         geom
+  FROM 
+  (
+    SELECT index, libgrid_co.geom_from_ij(index%6,index/6,4180000,1035500,262144,9377) AS geom
+    FROM generate_series(0,47) AS index
+  ) t
+  WHERE ST_Intersects(geom, (SELECT ST_Transform(geom,9377) FROM optim.jurisdiction_geom WHERE isolabel_ext='CO') )
+       AND index <> 42   -- remove island
+) r, LATERAL (SELECT libgrid_co.digitVal_to_digit(gid::int) AS gid_code) AS s
 ;
-
-CREATE FUNCTION libgrid_co.osmcode_encode(uri text) RETURNS text AS $wrap$
-   -- pending add parameter to enforce size
-  SELECT libgrid_co.osmcode_encode(latLon[1],latLon[2]) -- pending uncertain_to_size
-  FROM (SELECT str_geouri_decode(uri)) t(latLon)
-$wrap$ LANGUAGE SQL IMMUTABLE;
-
 
 ------------------
 ------------------
 
-CREATE FUNCTION libgrid_co.osmcode_decode_XYbox(
+CREATE or replace FUNCTION libgrid_co.osmcode_decode_XYbox(
    p_code text
 ) RETURNS float[] AS $f$
   SELECT str_ggeohash_decode_box(  -- returns codeBox
-           c.code,
+           substr(p_code,2),
            5, -- code_digit_bits
            '{"0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "b":10, "c":11, "d":12, "f":13, "g":14, "h":15, "j":16, "k":17, "l":18, "m":19, "n":20, "p":21, "q":22, "r":23, "s":24, "t":25, "u":26, "v":27, "w":28, "x":29, "y":30, "z":31}'::jsonb,
            l.bbox  -- cover-cell specification
          ) AS codebox
-  FROM libgrid_co.L0_cell262km l INNER JOIN
-      ( SELECT substr(p_code,1,1) AS gid_code, substr(p_code,2) as code) c
-      ON l.gid_code=c.gid_code
+  FROM libgrid_co.L0_cell262km l
+  WHERE l.gid_code = substr(p_code,1,1)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.osmcode_decode_XYbox(text)
   IS 'Decodes Colombia-OSMcode geocode into a bounding box of its cell.'
@@ -292,7 +240,7 @@ CREATE or replace FUNCTION libgrid_co.update_de_para(
       SELECT ST_Intersection(
           (str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox(p_prefix),true,9377)),
           (SELECT geom
-          FROM vw01full_jurisdiction_geom g
+          FROM optim.vw01full_jurisdiction_geom g
           WHERE lower(g.isolabel_ext) = lower(p_isolabel_ext) AND jurisd_base_id = 170)
       )
   )
@@ -315,122 +263,73 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
    view_child boolean   default false,
    use_hex    boolean   default false
 ) RETURNS jsonb AS $f$
-SELECT
-    CASE
-    WHEN (code_size-1) = 0
-    THEN
-    (
-        SELECT jsonb_build_object(
-            'type', 'FeatureCollection',
-            'features',
-                (
-                    CASE
-                    WHEN view_child IS FAlSE
-                    THEN ST_AsGeoJSONb(
-                        str_ggeohash_draw_cell_bybox((t2.bbox),true,9377),
-                        6,0,null,
-                        jsonb_build_object(
-                            'code', gid_code,
-                            'area', ST_Area(str_ggeohash_draw_cell_bybox((t2.bbox),false,9377)),
-                            'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox((t2.bbox),false,9377)))
-                            )
-                        )::jsonb
-                    ELSE (
-                        SELECT ST_AsGeoJSONb(
-                        str_ggeohash_draw_cell_bybox((t2.bbox),true,9377),
-                        6,0,null,
-                        jsonb_build_object(
-                            'code', gid_code,
-                            'area', ST_Area(str_ggeohash_draw_cell_bybox((t2.bbox),false,9377)),
-                            'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox((t2.bbox),false,9377)))
-                            )
-                        )::jsonb || jsonb_agg(
-                            ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
-                                jsonb_build_object(
-                                    'code', ghs ,
-                                    'code_subcell', substr(ghs,length(gid_code)+1,length(ghs)) ,
-                                    'prefix', gid_code,
-                                    'area', ST_Area(geom),
-                                    'side', SQRT(ST_Area(geom))
-                                    )
-                                )::jsonb ) AS gj FROM libgrid_co.ggeohash_GeomsFromPrefix(gid_code,false,9377)
-                        )
-                    END
-                )
+    SELECT jsonb_build_object(
+        'type', 'FeatureCollection',
+        'features',
+            (
+                ST_AsGeoJSONb(
+                str_ggeohash_draw_cell_bybox(bbox,true,9377),
+                    6,0,null,
+                    jsonb_strip_nulls(jsonb_build_object(
+                        'code', code_end,
+                        'short_code', short_code,
+                        'area', ST_Area(str_ggeohash_draw_cell_bybox(bbox,false,9377)),
+                        'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox(bbox,false,9377)))
+                        ))
+                )::jsonb ||
+                CASE
+                WHEN view_child IS TRUE
+                THEN 
+                    (
+                    SELECT jsonb_agg(
+                        ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
+                            jsonb_build_object(
+                                'code', ghs ,
+                                'code_subcell', substr(ghs,length(code_end)+1,length(ghs)) ,
+                                'prefix', code_end,
+                                'area', ST_Area(geom),
+                                'side', SQRT(ST_Area(geom))
+                                )
+                            )::jsonb ) AS gj FROM libgrid_co.ggeohash_GeomsFromPrefix(code_end,false,9377)
+                    )
+                ELSE '{}'::jsonb
+                END
             )
-        FROM (
-            SELECT CASE WHEN use_hex THEN l0.gid_code_hex ELSE l0.gid_code END as gid_code,
-                    l0.bbox
-            FROM libgrid_co.L0_cell262km l0,
-                (SELECT CASE WHEN ST_SRID(p_geom)=9377 THEN p_geom ELSE ST_Transform(p_geom,9377) END) t(geom)
-            WHERE ST_Contains(l0.geom,t.geom)
-        ) t2
-    )
-    ELSE
+        )
+    FROM
     (
-        SELECT jsonb_build_object(
-            'type', 'FeatureCollection',
-            'features',
-                (
-                    CASE
-                    WHEN view_child IS FAlSE
-                    THEN ST_AsGeoJSONb(
-                        str_ggeohash_draw_cell_bybox(
-                            (jsonb_array_to_floats(j->'box')),true,9377),
-                            6,0,null,
-                            jsonb_strip_nulls(jsonb_build_object(
-                                'code', gid_code||(j->>'code'),
-                                'short_code', short_code,
-                                'area', ST_Area(str_ggeohash_draw_cell_bybox((jsonb_array_to_floats(j->'box')),false,9377)),
-                                'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox((jsonb_array_to_floats(j->'box')),false,9377)))
-                                ))
-                            )::jsonb
-                    ELSE (
-                        SELECT ST_AsGeoJSONb(
-                        str_ggeohash_draw_cell_bybox(
-                            (jsonb_array_to_floats(j->'box')),true,9377),
-                            6,0,null,
-                            jsonb_strip_nulls(jsonb_build_object(
-                                'code', gid_code||(j->>'code'),
-                                'short_code', short_code,
-                                'area', ST_Area(str_ggeohash_draw_cell_bybox((jsonb_array_to_floats(j->'box')),false,9377)),
-                                'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox((jsonb_array_to_floats(j->'box')),false,9377)))
-                                ))
-                            )::jsonb || jsonb_agg(
-                            ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
-                                jsonb_build_object(
-                                    'code', ghs ,
-                                    'code_subcell', substr(ghs,length(gid_code||(j->>'code'))+1,length(ghs)) ,
-                                    'prefix', gid_code||(j->>'code'),
-                                    'area', ST_Area(geom),
-                                    'side', SQRT(ST_Area(geom))
-                                    )
-                                )::jsonb ) AS gj FROM libgrid_co.ggeohash_GeomsFromPrefix(gid_code||(j->>'code'),false,9377)
-                        )
-                    END
-                )
-            )
-        FROM (
-            SELECT CASE WHEN use_hex THEN l0.gid_code_hex ELSE l0.gid_code END as gid_code,
-                str_ggeohash_encode2(
-                    ST_X(t.geom), ST_Y(t.geom),
-                    (code_size-1),
-                    CASE WHEN use_hex THEN 4 ELSE 5 END,
-                    CASE WHEN use_hex THEN '0123456789abcdef' ELSE '0123456789BCDFGHJKLMNPQRSTUVWXYZ' END,
-                    l0.bbox  -- cover-cell specification
-                    ) AS j
-            FROM libgrid_co.L0_cell262km l0,
-                (SELECT CASE WHEN ST_SRID(p_geom)=9377 THEN p_geom ELSE ST_Transform(p_geom,9377) END) t(geom)
-            WHERE ST_Contains(l0.geom,t.geom)
-        ) t2
-        LEFT JOIN LATERAL (
-                SELECT (isolabel_ext|| CASE WHEN subcells IS NULL THEN '-' || subprefix ELSE '' END || (CASE WHEN length((t2.j->>'code')) +1  = length(prefix) THEN '' ELSE   '~' || substr((t2.j->>'code'),length(prefix),length((t2.j->>'code'))) END) ) AS short_code
-                FROM libgrid_co.de_para r
-                WHERE ST_Contains(r.geom,p_geom) AND prefix = substr(gid_code||(j->>'code'),1,length(prefix))
-                ) t3
-        ON TRUE
-    )
-    END
+        SELECT r.*, 
+        CASE WHEN (code_size-1) = 0 THEN r.l0bbox ELSE (jsonb_array_to_floats(j->'box')) END as bbox,
+        CASE WHEN (code_size-1) = 0 THEN gid_code ELSE gid_code||(j->>'code') END as code_end
+        FROM
+        (
+          SELECT
+          CASE WHEN use_hex THEN l0.gid_code_hex ELSE l0.gid_code END as gid_code,
+          CASE
+          WHEN (code_size-1) = 0
+          THEN '{}'::jsonb
+          ELSE
+              str_ggeohash_encode2(
+                  ST_X(t.geom), ST_Y(t.geom),
+                  (code_size-1),
+                  CASE WHEN use_hex THEN 4 ELSE 5 END,
+                  CASE WHEN use_hex THEN '0123456789abcdef' ELSE '0123456789BCDFGHJKLMNPQRSTUVWXYZ' END,
+                  l0.bbox  -- cover-cell specification
+                  )
+          END AS j,
+          l0.bbox AS l0bbox
+          FROM libgrid_co.L0_cell262km l0,
+              (SELECT CASE WHEN ST_SRID(p_geom)=9377 THEN p_geom ELSE ST_Transform(p_geom,9377) END) t(geom)
+          WHERE ST_Contains(l0.geom,t.geom)
+        ) r
+    ) s
+    LEFT JOIN LATERAL
+    (
+            SELECT (isolabel_ext|| CASE WHEN subcells IS NULL THEN '-' || subprefix ELSE '' END || (CASE WHEN length((s.j->>'code')) +1  = length(prefix) THEN '' ELSE   '~' || substr((s.j->>'code'),length(prefix),length((s.j->>'code'))) END) ) AS short_code
+            FROM libgrid_co.de_para r
+            WHERE ST_Contains(r.geom,p_geom) AND prefix = substr(gid_code||(j->>'code'),1,length(prefix))
+    ) t
+    ON TRUE
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.osmcode_encode2_ptgeom(geometry(POINT),int,boolean,boolean)
   IS 'Encodes geometry (of standard Colombia projection) as standard Colombia-OSMcode.'
@@ -551,7 +450,7 @@ CREATE or replace FUNCTION libgrid_co.isolabel_geojson(
                     )::jsonb
             )
         )
-    FROM vw01full_jurisdiction_geom g
+    FROM optim.vw01full_jurisdiction_geom g
     WHERE ( (lower(g.isolabel_ext) = lower(p_isolabel_ext) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower( split_part(p_isolabel_ext,'-',2) ))) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(p_isolabel_ext))) ) ) /*AND jurisd_base_id = 170*/
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.isolabel_geojson(text)
@@ -721,6 +620,75 @@ COMMENT ON FUNCTION libgrid_co.decode_geojson_de_para(text)
 --SELECT libgrid_co.decode_geojson_de_para('CO-A-Itagui-C');
 --SELECT libgrid_co.decode_geojson_de_para('CO-A-Itagui~');
 --SELECT libgrid_co.decode_geojson_de_para('CO-BOY-Busbanza-C');
+
+
+
+
+
+
+
+
+
+
+---------------
+---------------
+---------------
+-- Main functions:
+/*
+CREATE FUNCTION libgrid_co.osmcode_encode_xy(
+   p_geom geometry(Point,9377),
+   code_size int default 8,
+   use_hex boolean default false
+) RETURNS text AS $f$
+  SELECT gid_code || str_ggeohash_encode(
+          ST_X(p_geom),
+          ST_Y(p_geom),
+          code_size,
+          CASE WHEN use_hex THEN 4 ELSE 5 END,
+          CASE WHEN use_hex THEN '0123456789abcdef' ELSE '0123456789BCDFGHJKLMNPQRSTUVWXYZ' END,
+          bbox  -- cover-cell specification
+        )
+  FROM libgrid_co.L0_cell262km
+  WHERE ST_Contains(geom,p_geom)
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.osmcode_encode_xy(geometry(Point,9377), int, boolean)
+  IS 'Encodes geometry (of standard Colombia projection) as standard Colembia-OSMcode.'
+;
+-- SELECT libgrid_co.osmcode_encode_ptgeom( ST_SetSRID(ST_MakePoint(-76.577,3.461),4326) );
+-- SELECT libgrid_co.osmcode_encode_ptgeom( ST_Transform(ST_SetSRID(ST_MakePoint(-76.577,3.461),4326),9377) );
+
+
+CREATE or replace FUNCTION libgrid_co.osmcode_encode(
+  p_geom geometry(Point, 4326),
+  code_size int default 8
+) RETURNS text AS $wrap$
+  SELECT libgrid_co.osmcode_encode_xy( ST_Transform(p_geom,9377), code_size )
+$wrap$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.osmcode_encode(geometry(Point,4326), int)
+  IS 'Encodes LatLon (WGS84) as the standard Colombia-OSMcode. Wrap for libgrid_co.osmcode_encode(geometry(Point,9377)).'
+;
+
+CREATE or replace FUNCTION libgrid_co.osmcode_encode(
+   lat float,
+   lon float,
+   code_size int default 8
+) RETURNS text AS $wrap$
+  SELECT libgrid_co.osmcode_encode(
+      ST_SetSRID(ST_MakePoint(lon,lat),4326),
+      code_size
+    )
+$wrap$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.osmcode_encode(float,float,int)
+  IS 'Encodes LatLon as the standard Colombia-OSMcode. Wrap for osmcode_encode(geometry)'
+;
+
+CREATE FUNCTION libgrid_co.osmcode_encode(uri text) RETURNS text AS $wrap$
+   -- pending add parameter to enforce size
+  SELECT libgrid_co.osmcode_encode(latLon[1],latLon[2]) -- pending uncertain_to_size
+  FROM (SELECT str_geouri_decode(uri)) t(latLon)
+$wrap$ LANGUAGE SQL IMMUTABLE;
+*/
+
 
 --------------------------------------
 --------------------------------------

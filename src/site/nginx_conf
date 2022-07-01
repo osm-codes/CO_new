@@ -5,6 +5,19 @@
 server {
     listen              80;
     listen              443 ssl;
+    server_name test.osm.codes;
+    include /etc/nginx/ssl.conf;
+    root /var/www/test.osm.codes/;
+    index index.php index.html index.htm;
+    access_log /var/log/nginx/test.osm.codes.access_log;
+
+    return 302 http://osm.codes$request_uri;
+
+} # \server
+
+server {
+    listen              80;
+    listen              443 ssl;
     server_name docs.osm.codes;
     include /etc/nginx/ssl.conf;
     root /var/www/docs.osm.codes/;
@@ -21,6 +34,7 @@ server {
           fastcgi_pass unix:/run/php/php8.0-fpm.sock;
     }
 } # \server
+
 
 server { ## OSM.CODES
         listen              80;
@@ -48,7 +62,7 @@ server { ## OSM.CODES
           rewrite ^/_sql/(.*) /$1 break;
 
           proxy_pass http://127.0.0.1:3103;
-        }
+        }   
 
         # ibge
         location /geo:br-ibge2020: {
@@ -184,8 +198,13 @@ server { ## OSM.CODES
 
         location ~* "^/(geo:iso_ext:)?([A-Z]{2}([\-][A-Z]+)?([\-][A-Z]+)?)$" {
           rewrite "(?i)^/(geo:iso_ext:)?([A-Z]{2}([\-][A-Z]+)?([\-][A-Z]+)?)$" /view/ break;
+          
         }
 
+        ### (urn|geo):lex
+        location ~* "^/(urn|geo):lex:([a-z]{2}(;[a-z\.]+)?(;[a-z\.]+)?)$" {
+          rewrite "^/(urn|geo):lex:([a-z]{2}(;[a-z\.]+)?(;[a-z\.]+)?)$" /view/ break;
+        }
 
         location /_doc {
           rewrite ^/_doc/(.*) /$1 break;

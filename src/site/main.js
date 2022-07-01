@@ -117,7 +117,7 @@ precision.onAdd = function (map) {
     this.select.name = 'dig';
     this.select.innerHTML = '<option value="100000">1</option><option value="50000">2</option><option value="5000">3</option><option value="1000">4</option><option value="200">5</option><option value="40">6</option><option value="8">7</option><option value="1">8</option>';
     this.label.for= 'dig';
-    this.label.innerHTML= '<br>Digits: ';
+    this.label.innerHTML= '<br>Precision: ';
 
     L.DomEvent.disableScrollPropagation(this.container);
     L.DomEvent.disableClickPropagation(this.container);
@@ -214,8 +214,8 @@ function onEachFeature(feature,layer)
     }
     else
     {
-        sufix_area =(feature.properties.area<10000)? 'm2': 'km2';
-        value_area =(feature.properties.area<10000)? feature.properties.area: Math.round((feature.properties.area*100/10000))/100;
+        sufix_area =(feature.properties.area<1000000)? 'm2': 'km2';
+        value_area =(feature.properties.area<1000000)? feature.properties.area: Math.round((feature.properties.area*100/1000000))/100;
         sufix_side =(feature.properties.side<1000)? 'm': 'km';
         value_side =(feature.properties.side<1000)? Math.round(feature.properties.side*100.0)/100 : Math.round(feature.properties.side*100.0/1000)/100;
 
