@@ -421,7 +421,7 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                                   'side', SQRT(ST_Area(geom))
                                   )
                               )::jsonb ) AS gj
-                      FROM libgrid_co.ggeohash_GeomsFromVarbit(s.gid_code,s.bit_string,false,9377,p_base)
+                      FROM libgrid_co.ggeohash_GeomsFromVarbit(upper(s.gid_code),s.bit_string,false,9377,p_base)
                     )
                     ELSE
                     (
