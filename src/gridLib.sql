@@ -2,57 +2,6 @@
 --  Grade Estatistica de Colombia.
 --
 
-/*
-CREATE EXTENSION IF NOT EXISTS postgres_fdw;
-CREATE SERVER    IF NOT EXISTS foreign_server_dl03
-         FOREIGN DATA WRAPPER postgres_fdw
-         OPTIONS (dbname 'dl03t_main')
-;
-CREATE USER MAPPING FOR PUBLIC SERVER foreign_server_dl03;
-
-CREATE FOREIGN TABLE fdw_jurisdiction (
- osm_id          bigint,
- jurisd_base_id  integer,
- jurisd_local_id integer,
- parent_id       bigint,
- admin_level     smallint,
- name            text,
- parent_abbrev   text,
- abbrev          text,
- wikidata_id     bigint,
- lexlabel        text,
- isolabel_ext    text,
- ddd             integer,
- housenumber_system_type text,
- lex_urn         text,
- info            jsonb,
- name_en         text,
- isolevel        text
-) SERVER foreign_server_dl03
-  OPTIONS (schema_name 'optim', table_name 'jurisdiction')
-;
-
-CREATE FOREIGN TABLE fdw_jurisdiction_geom (
- osm_id          bigint,
- isolabel_ext    text,
- geom            geometry(Geometry,4326),
- kx_ghs1_intersects text[],
- kx_ghs2_intersects text[]
-) SERVER foreign_server_dl03
-  OPTIONS (schema_name 'optim', table_name 'jurisdiction_geom')
-;
-
-CREATE VIEW vw01full_jurisdiction_geom AS
-    SELECT j.*, g.geom
-    FROM fdw_jurisdiction j
-    LEFT JOIN fdw_jurisdiction_geom g
-    ON j.osm_id = g.osm_id
-;
-COMMENT ON VIEW vw01full_jurisdiction_geom
-  IS 'Add geom to fdw_jurisdiction.'
-;
-*/
-
 CREATE EXTENSION IF NOT EXISTS postgis;
 DROP SCHEMA IF EXISTS libgrid_co CASCADE;
 CREATE SCHEMA libgrid_co;
@@ -60,8 +9,7 @@ CREATE SCHEMA libgrid_co;
 
 CREATE VIEW vwlixo_municipios_unicos AS
   SELECT substring(isolabel_ext,8) as dupname, MAX(isolabel_ext) AS isolabel_ext
-  --FROM optim.jurisdiction j
-  FROM fdw_jurisdiction j
+  FROM optim.jurisdiction j
   WHERE isolevel::int >2 AND isolabel_ext like 'CO%'
   GROUP BY 1 having count(*)=1 order by 1
 ;
@@ -71,8 +19,7 @@ COMMENT ON VIEW vwlixo_municipios_unicos
 
 CREATE VIEW vwlixo_municipios_reduced AS
   SELECT  'CO-' || substring(isolabel_ext,4,1) ||'-'|| substring(isolabel_ext,8) as isolabel_reduced, isolabel_ext
-  --FROM optim.jurisdiction j
-  FROM fdw_jurisdiction j
+  FROM optim.jurisdiction j
   WHERE isolevel::int >2 AND isolabel_ext like 'CO-%' AND name not in ('Sabanalarga', 'Sucre', 'Guamal', 'Riosucio')
 ;
 COMMENT ON VIEW vwlixo_municipios_reduced
@@ -329,57 +276,70 @@ COMMENT ON FUNCTION libgrid_co.ggeohash_GeomsFromVarbit
 
 CREATE TABLE libgrid_co.de_para (
   isolabel_ext text NOT NULL,
-  subprefix text,
-  prefix text NOT NULL,
-  subcells text[],
-  is_subdiv_default boolean DEFAULT false,
+  prefix       text NOT NULL,
+  index        text NOT NULL,
+  base       int,
   geom geometry
 );
 
-INSERT INTO libgrid_co.de_para(isolabel_ext,subprefix,prefix,subcells,is_subdiv_default,geom) VALUES
-('CO-ANT-Itagui'  ,'C','8UR',null,true,null),
-('CO-ANT-Itagui'  ,'O','8UQ',null,false,null),
-('CO-ANT-Medellin','C','8U' ,null,true,null),
-('CO-ANT-Medellin','E','9J' ,null,false,null),
-('CO-ANT-Medellin','N','8V' ,null,false,null),
-('CO-DC-Bogota'   ,'C','H'  ,null,true,null),
-('CO-BOY-Busbanza','C','B57','{H,G,C,B}'::text[],false,null),
-('CO-BOY-Busbanza','C','B5L','{J,5,7,4,6,1,3,0,2}'::text[],true,null),
-('CO-BOY-Busbanza','C','B55','{X,Z,W,Y,V}'::text[],false,null),
-('CO-BOY-Busbanza','C','B5J','{P,R,N,Q,K}'::text[],false,null)
+INSERT INTO libgrid_co.de_para(isolabel_ext,prefix,index,base,geom) VALUES
+('CO-ANT-Medellin','8UZ','0',32,null),
+('CO-ANT-Medellin','8VP','1',32,null),
+('CO-ANT-Medellin','8VR','2',32,null),
+('CO-ANT-Medellin','9JC','3',32,null),
+('CO-ANT-Medellin','9JG','4',32,null),
+('CO-ANT-Medellin','9K1','5',32,null),
+('CO-ANT-Medellin','9K2','6',32,null),
+('CO-ANT-Medellin','9K4','7',32,null),
+('CO-CUN-Narino','HQD','0',32,null),
+('CO-CUN-Narino','HQF','1',32,null),
+('CO-CUN-Narino','HQH','2',32,null),
+('CO-CUN-Narino','HRJ','3',32,null),
+('CO-CUN-Narino','HQU','4',32,null),
+('CO-DC-Bogota','HS' ,'0',32,null),
+('CO-DC-Bogota','HT' ,'1',32,null),
+('CO-DC-Bogota','98J','2',32,null),
+('CO-DC-Bogota','98K','3',32,null),
+('CO-DC-Bogota','98M','4',32,null),
+('CO-DC-Bogota','98N','5',32,null),
+('CO-DC-Bogota','HW5','6',32,null),
+('CO-DC-Bogota','HW7','7',32,null),
+('CO-DC-Bogota','HWF','8',32,null),
+('CO-DC-Bogota','HWH','9',32,null),
+('CO-DC-Bogota','HWJ','B',32,null),
+('CO-DC-Bogota','HWK','C',32,null),
+('CO-DC-Bogota','HWL','D',32,null),
+('CO-DC-Bogota','HWS','F',32,null),
+('CO-DC-Bogota','HWT','G',32,null),
+('CO-DC-Bogota','HWU','H',32,null),
+('CO-DC-Bogota','HWV','J',32,null),
+('CO-DC-Bogota','HX5','K',32,null),
+('CO-DC-Bogota','HX7','L',32,null),
+('CO-DC-Bogota','HXF','M',32,null),
+('CO-DC-Bogota','HXJ','N',32,null),
+('CO-DC-Bogota','HXK','P',32,null),
+('CO-DC-Bogota','HXL','Q',32,null),
+('CO-DC-Bogota','HXM','R',32,null),
+('CO-DC-Bogota','HXN','S',32,null),
+('CO-DC-Bogota','HXS','T',32,null),
+('CO-DC-Bogota','HXT','U',32,null),
+('CO-DC-Bogota','HXU','V',32,null),
+('CO-DC-Bogota','HXV','W',32,null),
+('CO-DC-Bogota','HXW','X',32,null),
+('CO-DC-Bogota','HXY','Y',32,null),
+('CO-GUV-Calamar','PH','0',32,null),
+('CO-GUV-Calamar','PU','1',32,null),
+('CO-GUV-Calamar','PV','2',32,null),
+('CO-GUV-Calamar','PY','3',32,null),
+('CO-GUV-Calamar','Q5','4',32,null),
+('CO-GUV-Calamar','QJ','5',32,null),
+('CO-GUV-Calamar','QK','6',32,null),
+('CO-GUV-Calamar','QL','7',32,null),
+('CO-GUV-Calamar','QM','8',32,null),
+('CO-GUV-Calamar','QN','9',32,null),
+('CO-GUV-Calamar','QP','B',32,null),
+('CO-GUV-Calamar','QR','C',32,null)
 ;
-
-CREATE or replace FUNCTION libgrid_co.update_de_para(
-  p_isolabel_ext text DEFAULT '',
-  p_prefix text DEFAULT '',
-  p_base   int DEFAULT 32
-) RETURNS void AS $f$
-  UPDATE libgrid_co.de_para
-  SET geom =
-  (
-      SELECT ST_Intersection(
-          (str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox(p_prefix,p_base),true,9377)),
-          (SELECT geom
-          --FROM optim.vw01full_jurisdiction_geom g
-          FROM vw01full_jurisdiction_geom g
-          WHERE lower(g.isolabel_ext) = lower(p_isolabel_ext) AND jurisd_base_id = 170)
-      )
-  )
-  WHERE prefix= p_prefix AND isolabel_ext = p_isolabel_ext
-$f$ LANGUAGE SQL VOLATILE;
-
-/*
-SELECT libgrid_co.update_de_para('CO-ANT-Itagui','8UR');
-SELECT libgrid_co.update_de_para('CO-ANT-Itagui','8UQ');
-SELECT libgrid_co.update_de_para('CO-ANT-Medellin','8U');
-SELECT libgrid_co.update_de_para('CO-ANT-Medellin','9J');
-SELECT libgrid_co.update_de_para('CO-ANT-Medellin','8V');
-SELECT libgrid_co.update_de_para('CO-DC-Bogota','H');
-SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B57');
-SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B5L');
-SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B55');
-SELECT libgrid_co.update_de_para('CO-BOY-Busbanza','B5J');
-*/
 
 ------------------
 -- Encode:
@@ -486,9 +446,9 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
     ) s
     LEFT JOIN LATERAL
     (
-            SELECT (isolabel_ext|| CASE WHEN subcells IS NULL THEN '-' || subprefix ELSE '' END || (CASE WHEN length(s.j) +1  = length(prefix) THEN '' ELSE   '~' || substr(s.j,length(prefix),length(s.j)) END) ) AS short_code
+            SELECT (isolabel_ext|| (CASE WHEN length(s.j) +1  = length(prefix) THEN '~' || index ELSE '~' || index || substr(s.j,length(prefix),length(s.j)) END) ) AS short_code
             FROM libgrid_co.de_para r
-            WHERE ST_Contains(r.geom,p_geom) AND prefix = substr(s.code_end,1,length(prefix))
+            WHERE /*ST_Contains(r.geom,p_geom) AND*/ prefix = substr(s.code_end,1,length(prefix))
     ) t
     ON TRUE
 $f$ LANGUAGE SQL IMMUTABLE;
@@ -514,7 +474,6 @@ $wrap$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.osmcode_encode2(float,float,int,int,boolean)
   IS 'Encodes LatLon as the standard Colombia-OSMcode. Wrap for osmcode_encode2_ptgeom(geometry)'
 ;
-
 
 CREATE or replace FUNCTION libgrid_co.uncertain_base32(u int) RETURNS int AS $f$
   -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
@@ -654,182 +613,122 @@ CREATE or replace FUNCTION libgrid_co.isolabel_geojson(
                     )::jsonb
             )
         )
-    --FROM optim.vw01full_jurisdiction_geom g
-    FROM vw01full_jurisdiction_geom g
+    FROM optim.vw01full_jurisdiction_geom g
     WHERE ( (lower(g.isolabel_ext) = lower(p_isolabel_ext) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower( split_part(p_isolabel_ext,'-',2) ))) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(p_isolabel_ext))) ) ) /*AND jurisd_base_id = 170*/
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.isolabel_geojson(text)
   IS 'Return geojson of jurisdiction.'
 ;
---SELECT libgrid_co.isolabel_geojson('CO-A-Itagui');
+/*
+SELECT libgrid_co.isolabel_geojson('CO-ANT-Itagui');
+SELECT libgrid_co.isolabel_geojson('CO-A-Itagui');
+SELECT libgrid_co.isolabel_geojson('CO-Itagui');
+*/
 
 CREATE or replace FUNCTION str_geocodeuri_decode(uri text)
 RETURNS text[] as $f$
   SELECT
     CASE
-      WHEN cardinality(a)=5 THEN array[a[1] || '-' ||  a[2] || '-' || a[3]]::text[] || array[a[4]] || a[5]
-      WHEN cardinality(a)=4 THEN a[1] || '-' ||  a[2] || '-' || a[3] || array['C']::text[] || a[4]
+      WHEN cardinality(i)=3 AND i[2] ~ '[a-zA-Z]{2,}' THEN array[i[1] ||'-'|| i[2] ||'-'|| i[3]]::text[] || array[u[2]]
+      WHEN cardinality(i)=3 AND i[2] ~ '[a-zA-Z]'     THEN (SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(i[1]||'-'||i[2]||'-'||i[3])) || array[u[2]]
+      WHEN cardinality(i)=2                           THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(i[2])) || array[u[2]]
       ELSE NULL
     END
-  FROM (
-    SELECT regexp_split_to_array (uri,'(-|~)')::text[] AS a
-  ) t
+  FROM
+  (
+    SELECT regexp_split_to_array (u[1],'(-)')::text[] AS i, u
+    FROM
+    (
+      SELECT regexp_split_to_array (uri,'(~)')::text[] AS u
+    ) r
+  ) s
 $f$ LANGUAGE SQL IMMUTABLE;
 --COMMENT ON FUNCTION str_geocodeuri_decode(text)
   --IS 'Decodes standard GeoURI of latitude and longitude into float array.'
 --;
---SELECT str_geocodeuri_decode('co-ant-itagui~12345');
+/*
+SELECT str_geocodeuri_decode('CO-ANT-Itagui~0JKRPV');
+SELECT str_geocodeuri_decode('CO-A-Itagui~0JKRPV');
+SELECT str_geocodeuri_decode('CO-Itagui~0JKRPV');
+*/
 
-CREATE or replace FUNCTION libgrid_co.decode_geojson2(
+CREATE or replace FUNCTION libgrid_co.decode_geojson_reduced(
    p_code text
 ) RETURNS jsonb AS $f$
     SELECT libgrid_co.decode_geojson(
         (
-            SELECT  prefix || (str_geocodeuri_decode(p_code))[3]
+            SELECT  prefix || substring((str_geocodeuri_decode(p_code))[2],2)
             FROM libgrid_co.de_para
             WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode(p_code))[1])
-                AND lower(subprefix)  = lower((str_geocodeuri_decode(p_code))[2])
-                AND
-                    CASE
-                    WHEN subcells IS NOT NULL
-                    THEN (subcells @> array[substr((str_geocodeuri_decode(p_code))[3],1,1)]::text[])
-                    ELSE TRUE
-                    END
+                AND lower(index)  = lower(substring((str_geocodeuri_decode(p_code))[2],1,1))
         )
     )
 $f$ LANGUAGE SQL IMMUTABLE;
 --COMMENT ON FUNCTION libgrid_co.decode_geojson2(text)
   --IS 'Decodes Colombia-OSMcode.'
 --;
---SELECT libgrid_co.decode_geojson2('CO-ANT-Itagui-O~UWCFR');
---SELECT libgrid_co.decode_geojson2('CO-ANT-Itagui-C~JKRPV');
---SELECT libgrid_co.decode_geojson2('CO-ANT-Itagui~JKRPV');
-
-CREATE or replace FUNCTION str_geocodeuri_decode_isolevel1_only(uri text)
-RETURNS text[] as $f$
-  SELECT
-    CASE
-      WHEN cardinality(a)=4 THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || array[a[3]] || a[4]
-      WHEN cardinality(a)=3 THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || array['~']::text[] || a[3]
-      ELSE NULL
-    END
-  FROM (
-    SELECT regexp_split_to_array (uri,'(-|~)')::text[] AS a
-  ) t
-$f$ LANGUAGE SQL IMMUTABLE;
---SELECT str_geocodeuri_decode_isolevel1_only('CO-Itagui-O~UWCFR');
-
-CREATE or replace FUNCTION libgrid_co.decode_geojson_isolevel1_only(
-   p_code text
-) RETURNS jsonb AS $f$
-    SELECT libgrid_co.decode_geojson(
-        (
-            SELECT  prefix || (str_geocodeuri_decode_isolevel1_only(p_code))[3]
-            FROM libgrid_co.de_para
-            WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode_isolevel1_only(p_code))[1])
-                AND
-                    CASE
-                    WHEN (str_geocodeuri_decode_isolevel1_only(p_code))[2] = '~' THEN is_subdiv_default IS TRUE
-                    ELSE lower(subprefix)  = lower((str_geocodeuri_decode_isolevel1_only(p_code))[2])
-                    END
-                AND
-                    CASE
-                    WHEN subcells IS NOT NULL
-                    THEN (subcells @> array[substr((str_geocodeuri_decode_isolevel1_only(p_code))[3],1,1)]::text[])
-                    ELSE TRUE
-                    END
-        )
-    )
-$f$ LANGUAGE SQL IMMUTABLE;
-
-CREATE or replace FUNCTION str_geocodeuri_decode_isolevel2_abbrev(uri text)
-RETURNS text[] as $f$
-  SELECT
-    CASE
-      WHEN cardinality(a)=5 THEN (SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ) || array[a[4]] || a[5]
-      WHEN cardinality(a)=4 THEN (SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ) || array['~']::text[] || a[4]
-      ELSE NULL
-    END
-  FROM (
-    SELECT regexp_split_to_array (uri,'(-|~)')::text[] AS a
-  ) t
-$f$ LANGUAGE SQL IMMUTABLE;
---SELECT str_geocodeuri_decode_isolevel2_abbrev('CO-A-Itagui-O~UWCFR');
-
-CREATE or replace FUNCTION libgrid_co.decode_geojson_isolevel2_abbrev(
-   p_code text
-) RETURNS jsonb AS $f$
-    SELECT libgrid_co.decode_geojson(
-        (
-            SELECT  prefix || (str_geocodeuri_decode_isolevel2_abbrev(p_code))[3]
-            FROM libgrid_co.de_para
-            WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode_isolevel2_abbrev(p_code))[1])
-                AND
-                    CASE
-                    WHEN (str_geocodeuri_decode_isolevel2_abbrev(p_code))[2] = '~' THEN is_subdiv_default IS TRUE
-                    ELSE lower(subprefix)  = lower((str_geocodeuri_decode_isolevel2_abbrev(p_code))[2])
-                    END
-                AND
-                    CASE
-                    WHEN subcells IS NOT NULL
-                    THEN (subcells @> array[substr((str_geocodeuri_decode_isolevel2_abbrev(p_code))[3],1,1)]::text[])
-                    ELSE TRUE
-                    END
-        )
-    )
-$f$ LANGUAGE SQL IMMUTABLE;
---SELECT libgrid_co.decode_geojson_isolevel2_abbrev('CO-A-Itagui-O~UWCFR');
+/*
+SELECT libgrid_co.decode_geojson_reduced('CO-ANT-Itagui~1UWCFR');
+SELECT libgrid_co.decode_geojson_reduced('CO-A-Itagui~0JKRPV');
+SELECT libgrid_co.decode_geojson_reduced('CO-Itagui~0JKRPV');
+*/
 
 
-CREATE or replace FUNCTION str_geocodeuri_decode_de_para(uri text)
-RETURNS text[] as $f$
-  SELECT
-    CASE
-      WHEN cardinality(a)=4 AND u IS NULL THEN COALESCE((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ),a[1] || '-' ||  a[2] || '-' || a[3]) || array[a[4]]
-      WHEN cardinality(a)=3 AND u IS NULL THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || array[a[3]]
-      WHEN cardinality(a)=2 AND u IS NOT NULL THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(a[2]) ) || u
-      WHEN cardinality(a)=3 AND u IS NOT NULL THEN COALESCE((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(a[1] ||'-'|| a[2] ||'-'|| a[3]) ),a[1] || '-' ||  a[2] || '-' || a[3]) || u
-      ELSE NULL
-    END
-  FROM (
-    SELECT regexp_split_to_array (regexp_replace(uri,'~$','','ig'),'(-)')::text[] AS a, (regexp_match(uri,'(~)')) AS u
-  ) t
-$f$ LANGUAGE SQL IMMUTABLE;
---SELECT str_geocodeuri_decode_de_para('CO-Itagui-O');
---SELECT str_geocodeuri_decode_de_para('CO-A-Itagui-O');
---SELECT str_geocodeuri_decode_de_para('CO-ANT-Itagui-O');
---SELECT str_geocodeuri_decode_de_para('CO-Itagui~');
---SELECT str_geocodeuri_decode_de_para('CO-A-Itagui~');
---SELECT str_geocodeuri_decode_de_para('CO-ANT-Itagui~');
 
-CREATE or replace FUNCTION libgrid_co.decode_geojson_de_para(
-   p_code text
-) RETURNS jsonb AS $f$
-  SELECT  jsonb_build_object(
-    'type' , 'FeatureCollection',
-    'features', ARRAY[ ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,jsonb_build_object('code', upper(prefix), 'area', ST_Area(geom),
-    'side', SQRT(ST_Area(geom))
-    ))::jsonb ]  )
-    FROM libgrid_co.de_para
-    WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode_de_para(p_code))[1])
-          AND
-        CASE
-          WHEN (str_geocodeuri_decode_de_para(p_code))[2] = '~' THEN is_subdiv_default IS TRUE
-          ELSE lower(subprefix)  = lower((str_geocodeuri_decode_de_para(p_code))[2])
-        END
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.decode_geojson_de_para(text)
-  IS 'Decodes Colombia-OSMcode.'
+
+
+
+
+/*
+CREATE EXTENSION IF NOT EXISTS postgres_fdw;
+CREATE SERVER    IF NOT EXISTS foreign_server_dl03
+         FOREIGN DATA WRAPPER postgres_fdw
+         OPTIONS (dbname 'dl03t_main')
 ;
---SELECT libgrid_co.decode_geojson_de_para('CO-Itagui-C');
---SELECT libgrid_co.decode_geojson_de_para('CO-A-Itagui-C');
---SELECT libgrid_co.decode_geojson_de_para('CO-A-Itagui~');
---SELECT libgrid_co.decode_geojson_de_para('CO-BOY-Busbanza-C');
+CREATE USER MAPPING FOR PUBLIC SERVER foreign_server_dl03;
 
+CREATE FOREIGN TABLE fdw_jurisdiction (
+ osm_id          bigint,
+ jurisd_base_id  integer,
+ jurisd_local_id integer,
+ parent_id       bigint,
+ admin_level     smallint,
+ name            text,
+ parent_abbrev   text,
+ abbrev          text,
+ wikidata_id     bigint,
+ lexlabel        text,
+ isolabel_ext    text,
+ ddd             integer,
+ housenumber_system_type text,
+ lex_urn         text,
+ info            jsonb,
+ name_en         text,
+ isolevel        text
+) SERVER foreign_server_dl03
+  OPTIONS (schema_name 'optim', table_name 'jurisdiction')
+;
 
+CREATE FOREIGN TABLE fdw_jurisdiction_geom (
+ osm_id          bigint,
+ isolabel_ext    text,
+ geom            geometry(Geometry,4326),
+ kx_ghs1_intersects text[],
+ kx_ghs2_intersects text[]
+) SERVER foreign_server_dl03
+  OPTIONS (schema_name 'optim', table_name 'jurisdiction_geom')
+;
 
-
-
+CREATE VIEW vw01full_jurisdiction_geom AS
+    SELECT j.*, g.geom
+    FROM fdw_jurisdiction j
+    LEFT JOIN fdw_jurisdiction_geom g
+    ON j.osm_id = g.osm_id
+;
+COMMENT ON VIEW vw01full_jurisdiction_geom
+  IS 'Add geom to fdw_jurisdiction.'
+;
+*/
 /*
 -- cobertura L0 da colombia
 DROP TABLE libgrid_co.L0_cell262km;
@@ -856,30 +755,29 @@ FROM
 ) r, LATERAL (SELECT libgrid_co.digitVal_to_digit(gid::int) AS gid_code) AS s
 ;
 */
+/*
+CREATE FUNCTION libgrid_co.gridGeoms_fromGeom(
+  reference_geom geometry,
+  code_size int DEFAULT 5,
+  npoints integer DEFAULT 600
+) RETURNS TABLE (gid int, code text, geom geometry(POLYGON,9377))
+AS $f$
+    SELECT ROW_NUMBER() OVER() as gid, -- ou bigint geocode_to_binary(j->>'code')
+           j->>'code' AS code,
+           str_ggeohash_draw_cell_bybox(jsonb_array_to_floats(j->'box'),false,9377) AS geom
+    FROM (
+      SELECT  distinct libgrid_co.osmcode_encode2_ptgeom(geom,code_size) as j
+      FROM ST_DumpPoints(  ST_GeneratePoints(reference_geom,npoints)  ) t1(d)
+    ) t2
+    ORDER BY j->>'code'
+$f$ LANGUAGE SQL IMMUTABLE;
+SELECT libgrid_co.gridGeoms_fromGeom( ST_SetSRID( ST_GeomFromText('POLYGON((-76.57770034945 3.46103000261,-76.57391243547 3.46103208489,-76.57390575999 3.45834677198,-76.57770076667 3.45834677198,-76.57770034945 3.46103000261))')  ,4326)  );
 
-
---CREATE FUNCTION libgrid_co.gridGeoms_fromGeom(
-  --reference_geom geometry,
-  --code_size int DEFAULT 5,
-  --npoints integer DEFAULT 600
---) RETURNS TABLE (gid int, code text, geom geometry(POLYGON,9377))
---AS $f$
-    --SELECT ROW_NUMBER() OVER() as gid, -- ou bigint geocode_to_binary(j->>'code')
-           --j->>'code' AS code,
-           --str_ggeohash_draw_cell_bybox(jsonb_array_to_floats(j->'box'),false,9377) AS geom
-    --FROM (
-      --SELECT  distinct libgrid_co.osmcode_encode2_ptgeom(geom,code_size) as j
-      --FROM ST_DumpPoints(  ST_GeneratePoints(reference_geom,npoints)  ) t1(d)
-    --) t2
-    --ORDER BY j->>'code'
---$f$ LANGUAGE SQL IMMUTABLE;
--- SELECT libgrid_co.gridGeoms_fromGeom( ST_SetSRID( ST_GeomFromText('POLYGON((-76.57770034945 3.46103000261,-76.57391243547 3.46103208489,-76.57390575999 3.45834677198,-76.57770076667 3.45834677198,-76.57770034945 3.46103000261))')  ,4326)  );
-
---CREATE FUNCTION libgrid_co.cellGeom_to_bbox(r geometry) RETURNS float[] AS $f$
-    --SELECT array[min(st_X(g)), min(st_Y(g)), max(st_X(g)), max(st_Y(g))]
-    --FROM (SELECT (dp).geom as g  FROM (SELECT ST_DumpPoints(r) AS dp) t1 LIMIT 4) t2
---$f$ LANGUAGE SQL IMMUTABLE;
-
+CREATE FUNCTION libgrid_co.cellGeom_to_bbox(r geometry) RETURNS float[] AS $f$
+    SELECT array[min(st_X(g)), min(st_Y(g)), max(st_X(g)), max(st_Y(g))]
+    FROM (SELECT (dp).geom as g  FROM (SELECT ST_DumpPoints(r) AS dp) t1 LIMIT 4) t2
+$f$ LANGUAGE SQL IMMUTABLE;
+*/
 
 ---------------
 ---------------
