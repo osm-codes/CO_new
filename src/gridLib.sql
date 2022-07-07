@@ -401,7 +401,8 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                         'code', code_end,
                         'short_code', short_code,
                         'area', ST_Area(str_ggeohash_draw_cell_bybox(bbox,false,9377)),
-                        'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox(bbox,false,9377)))
+                        'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox(bbox,false,9377))),
+                        'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
                         ))
                 )::jsonb ||
                 CASE
@@ -414,11 +415,12 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                       SELECT jsonb_agg(
                           ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
                               jsonb_build_object(
-                                  'code', ghs ,
+                                  'code', upper(ghs) ,
                                   'code_subcell', substr(ghs,length(code_end)+1,length(ghs)) ,
                                   'prefix', code_end,
                                   'area', ST_Area(geom),
-                                  'side', SQRT(ST_Area(geom))
+                                  'side', SQRT(ST_Area(geom)),
+                                  'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
                                   )
                               )::jsonb ) AS gj
                       FROM libgrid_co.ggeohash_GeomsFromVarbit(upper(s.gid_code),s.bit_string,false,9377,p_base)
@@ -428,11 +430,12 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                       SELECT jsonb_agg(
                           ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
                               jsonb_build_object(
-                                  'code', ghs ,
+                                  'code', upper(ghs) ,
                                   'code_subcell', substr(ghs,length(code_end)+1,length(ghs)) ,
                                   'prefix', code_end,
                                   'area', ST_Area(geom),
-                                  'side', SQRT(ST_Area(geom))
+                                  'side', SQRT(ST_Area(geom)),
+                                  'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
                                   )
                               )::jsonb ) AS gj
                       FROM libgrid_co.ggeohash_GeomsFromPrefix(code_end,false,9377,p_base)
@@ -611,7 +614,7 @@ CREATE or replace FUNCTION libgrid_co.decode_geojson(
   SELECT  jsonb_build_object(
     'type' , 'FeatureCollection',
     'features', ARRAY[ ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,jsonb_build_object('code', upper(p_code), 'area', ST_Area(geom),
-    'side', SQRT(ST_Area(geom))
+    'side', SQRT(ST_Area(geom)), 'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
     ))::jsonb ]  )
     FROM (SELECT str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox(upper(p_code),p_base),false,9377)) t(geom)
 $f$ LANGUAGE SQL IMMUTABLE;
