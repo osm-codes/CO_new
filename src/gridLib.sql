@@ -158,7 +158,6 @@ CREATE or replace  FUNCTION libgrid_co.xy_to_quadrante(xyd int[]) RETURNS int AS
 $wrap$ LANGUAGE SQL IMMUTABLE;
 --SELECT libgrid_co.xy_to_quadrante(array[4442144,1297644,4180000,1035500,262144,6]);
 
-
 CREATE or replace FUNCTION libgrid_co.xy_to_l0code(
   x int,
   y int,
@@ -209,14 +208,18 @@ COMMENT ON FUNCTION libgrid_co.osmcode_decode_xybox(text,int)
 -- SELECT libgrid_co.osmcode_encode2('geo:3.461,-76.577');
 
 CREATE or replace FUNCTION libgrid_co.osmcode_decode_xybox2(
-   p_code_l0 text,
-   p_code varbit,
-   p_base int DEFAULT 32
+  p_code_l0 text,
+  p_code    varbit,
+  p_base    int     DEFAULT 32,
+  x0        int     DEFAULT 4180000,   -- referencia de inicio do eixo x [x0,y0]
+  y0        int     DEFAULT 1035500,   -- referencia de inicio do eixo y [x0,y0]
+  s         int     DEFAULT 262144,
+  columns   int     DEFAULT 6
 ) RETURNS float[] AS $f$
-  SELECT str_ggeohash_decode_box2(p_code,libgrid_co.ij_to_bbox(b%6,b/6,4180000,1035500,262144)) AS codebox
+  SELECT str_ggeohash_decode_box2(p_code,libgrid_co.ij_to_bbox(b%columns,b/columns,x0,y0,s)) AS codebox
   FROM  ( SELECT libgrid_co.l0code_to_quadrante(p_code_l0,p_base) ) l(b)
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.osmcode_decode_xybox2(text,varbit,int)
+COMMENT ON FUNCTION libgrid_co.osmcode_decode_xybox2(text,varbit,int,int,int,int,int)
   IS 'Decodes Colombia-OSMcode geocode into a bounding box of its cell.'
 ;
 
@@ -260,29 +263,28 @@ COMMENT ON FUNCTION libgrid_co.osmcode_decode(text,int)
   IS 'Decodes Colombia-OSM_code into WGS84 LatLon coordinates.'
 ;
 
-CREATE or replace FUNCTION libgrid_co.ggeohash_GeomsFromPrefix(
-  prefix text DEFAULT '',
-  p_translate boolean DEFAULT false, -- true para converter em LatLong (WGS84 sem projeção)
-  p_srid      int DEFAULT 4326,      -- WGS84
-  p_base      int DEFAULT 32
-) RETURNS TABLE(ghs text, geom geometry) AS $f$
-  SELECT prefix||x, str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox(prefix||x,p_base),p_translate,p_srid)
-  FROM unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[]) t(x)
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.ggeohash_GeomsFromPrefix
-  IS 'Return grid child-cell of Colombia-OSMcode. The parameter is the ggeohash the parent-cell, that will be a prefix for all child-cells.'
-;
---SELECT libgrid_co.ggeohash_GeomsFromPrefix('HX7VGYKPW',true,9377);
-
 CREATE or replace FUNCTION libgrid_co.ggeohash_GeomsFromVarbit(
   p_code_l0 text,
   p_code varbit,
   p_translate boolean DEFAULT false, -- true para converter em LatLong (WGS84 sem projeção)
   p_srid      int DEFAULT 4326,      -- WGS84
-  p_base      int DEFAULT 16
+  p_base      int DEFAULT 16,
+  p_grid_size int DEFAULT 2,
+  x0          int DEFAULT 4180000,   -- referencia de inicio do eixo x [x0,y0]
+  y0          int DEFAULT 1035500,   -- referencia de inicio do eixo y [x0,y0]
+  s           int DEFAULT 262144,
+  columns     int DEFAULT 6
 ) RETURNS TABLE(ghs text, geom geometry) AS $f$
-  SELECT p_code_l0 || vbit_to_baseh(p_code || x,p_base,0), str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox2(p_code_l0, p_code || x,p_base),p_translate,p_srid)
-  FROM unnest('{0,1}'::bit[]) t(x)
+  SELECT p_code_l0 || vbit_to_baseh(p_code || x,p_base,0), str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox2(p_code_l0, p_code || x,p_base,x0,y0,s,columns),p_translate,p_srid)
+  FROM 
+  unnest(
+  CASE
+  WHEN p_base = 16 AND p_grid_size = 2  THEN '{0,1}'::bit[]
+  WHEN p_base = 16 AND p_grid_size = 4  THEN '{00,01,11,10}'::varbit[]
+  WHEN p_base = 16 AND p_grid_size = 8  THEN '{000,001,010,011,100,101,110,111}'::varbit[]
+  WHEN p_base = 32 AND p_grid_size = 32 THEN '{00000,00001,00010,00011,00100,00101,00110,00111,01000,01001,01010,01011,01100,01101,01110,01111,10000,10001,10010,10011,10100,10101,10110,10111,11000,11001,11010,11011,11100,11101,11110,11111}'::varbit[]
+  END
+  ) t(x)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.ggeohash_GeomsFromVarbit
   IS 'Return grid child-cell of Colombia-OSMcode. The parameter is the ggeohash the parent-cell, that will be a prefix for all child-cells.'
@@ -293,6 +295,7 @@ COMMENT ON FUNCTION libgrid_co.ggeohash_GeomsFromVarbit
 -- de-para:
 
 CREATE TABLE libgrid_co.de_para (
+  id bigint NOT NULL,
   isolabel_ext text NOT NULL,
   prefix       text NOT NULL,
   index        text NOT NULL,
@@ -300,15 +303,25 @@ CREATE TABLE libgrid_co.de_para (
   geom geometry
 );
 
-INSERT INTO libgrid_co.de_para(isolabel_ext,prefix,index,base,geom) VALUES
-('CO-ANT-Medellin','8UZ','0',32,null),
-('CO-ANT-Medellin','8VP','1',32,null),
-('CO-ANT-Medellin','8VR','2',32,null),
-('CO-ANT-Medellin','9JC','3',32,null),
-('CO-ANT-Medellin','9JG','4',32,null),
-('CO-ANT-Medellin','9K1','5',32,null),
-('CO-ANT-Medellin','9K2','6',32,null),
-('CO-ANT-Medellin','9K4','7',32,null),
+SELECT jurisd_base_id::bit(10), gid::bit(14), t.*
+FROM(
+select ROW_NUMBER() OVER(ORDER BY jurisd_local_id ASC) as gid, jurisd_base_id, jurisd_local_id, isolabel_ext
+from fdw_jurisdiction
+where jurisd_base_id=170 and isolevel::int >2
+order by jurisd_local_id
+) t
+;
+
+INSERT INTO libgrid_co.de_para(id,isolabel_ext,prefix,index,base,geom) VALUES
+(b'0010101010000000000000010110100011010111110000000000000000000000'::bigint,'CO-ANT-Medellin','8UZ','0',32,null),
+(b'0010101010000000000000010110100011011101010000000000000000000000'::bigint,'CO-ANT-Medellin','8VP','1',32,null),
+(b'0010101010000000000000010110100011011101110000000000000000000000'::bigint,'CO-ANT-Medellin','8VR','2',32,null),
+(b'0010101010000000000000010110100110000010110000000000000000000000'::bigint,'CO-ANT-Medellin','9JC','3',32,null),
+(b'0010101010000000000000010110100110000011100000000000000000000000'::bigint,'CO-ANT-Medellin','9JG','4',32,null),
+(b'0010101010000000000000010110100110001000010000000000000000000000'::bigint,'CO-ANT-Medellin','9K1','5',32,null),
+(b'0010101010000000000000010110100110001000100000000000000000000000'::bigint,'CO-ANT-Medellin','9K2','6',32,null),
+(b'0010101010000000000000010110100110001001000000000000000000000000'::bigint,'CO-ANT-Medellin','9K4','7',32,null);
+/*
 ('CO-CUN-Narino','HQD','0',32,null),
 ('CO-CUN-Narino','HQF','1',32,null),
 ('CO-CUN-Narino','HQH','2',32,null),
@@ -359,6 +372,7 @@ INSERT INTO libgrid_co.de_para(isolabel_ext,prefix,index,base,geom) VALUES
 ('CO-GUV-Calamar','QP','B',32,null),
 ('CO-GUV-Calamar','QR','C',32,null)
 ;
+*/
 
 CREATE or replace FUNCTION libgrid_co.update_geom_de_para(
   p_isolabel_ext text DEFAULT '',
@@ -450,10 +464,14 @@ SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QR',32);
 -- Encode:
 
 CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
-   p_geom       geometry(POINT),
-   p_base       int     DEFAULT 32,
-   p_bit_length int     DEFAULT 40,
-   view_child   boolean DEFAULT false
+  p_geom       geometry(POINT),
+  p_base       int     DEFAULT 32,
+  p_bit_length int     DEFAULT 40,
+  x0           int     DEFAULT 4180000,   -- referencia de inicio do eixo x [x0,y0]
+  y0           int     DEFAULT 1035500,   -- referencia de inicio do eixo y [x0,y0]
+  s            int     DEFAULT 262144,
+  columns      int     DEFAULT 6,
+  p_grid_size  int     DEFAULT 32
 ) RETURNS jsonb AS $f$
     SELECT jsonb_build_object(
         'type', 'FeatureCollection',
@@ -471,12 +489,9 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                         ))
                 )::jsonb ||
                 CASE
-                WHEN view_child IS TRUE
+                WHEN p_grid_size > 0
                 THEN
                     (
-                    CASE
-                    WHEN p_base = 16 THEN
-                    (
                       SELECT jsonb_agg(
                           ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
                               jsonb_build_object(
@@ -488,24 +503,7 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                                   'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
                                   )
                               )::jsonb ) AS gj
-                      FROM libgrid_co.ggeohash_GeomsFromVarbit(upper(s.l0code),s.bit_string,false,9377,p_base)
-                    )
-                    ELSE
-                    (
-                      SELECT jsonb_agg(
-                          ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
-                              jsonb_build_object(
-                                  'code', upper(ghs) ,
-                                  'code_subcell', substr(ghs,length(code_end)+1,length(ghs)) ,
-                                  'prefix', code_end,
-                                  'area', ST_Area(geom),
-                                  'side', SQRT(ST_Area(geom)),
-                                  'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
-                                  )
-                              )::jsonb ) AS gj
-                      FROM libgrid_co.ggeohash_GeomsFromPrefix(code_end,false,9377,p_base)
-                    )
-                    END
+                      FROM libgrid_co.ggeohash_GeomsFromVarbit(upper(m.l0code),m.bit_string,false,9377,p_base,p_grid_size,x0,y0,s,columns)
                     )
                 ELSE '{}'::jsonb
                 END
@@ -531,8 +529,8 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
             FROM
             (
               SELECT t.*,
-                    libgrid_co.xy_to_bbox(a::int,b::int,4180000,1035500,262144)  AS bbbox,
-                    libgrid_co.xy_to_l0code(a::int,b::int,4180000,1035500,262144,6,p_base) AS l0code
+                    libgrid_co.xy_to_bbox(a::int,b::int,x0,y0,s)  AS bbbox,
+                    libgrid_co.xy_to_l0code(a::int,b::int,x0,y0,s,columns,p_base) AS l0code
               FROM
               (
                   SELECT geom, ST_X(a.geom) AS a , ST_Y(a.geom) AS b
@@ -545,40 +543,46 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
             WHERE u.l0code IS NOT NULL
           ) v
         ) r
-    ) s
+    ) m
     LEFT JOIN LATERAL
     (
-            SELECT (isolabel_ext|| (CASE WHEN length(s.j) +1  = length(prefix) THEN '~' || index ELSE '~' || index || substr(s.j,length(prefix),length(s.j)) END) ) AS short_code
+            SELECT (isolabel_ext|| (CASE WHEN length(m.code_end) = length(prefix) THEN '~' || index ELSE '~' || index || substr(m.j,length(prefix),length(m.j)) END) ) AS short_code
             FROM libgrid_co.de_para r
-            WHERE prefix = substr(s.code_end,1,length(prefix))
+            WHERE prefix = substr(m.code_end,1,length(prefix))
                 AND
                     CASE
-                    WHEN geom IS NOT NULL THEN ST_Contains(r.geom,p_geom)
+                    --WHEN get_bit(id::bit(64),26) = 1 THEN ST_Contains(r.geom,p_geom)
+                    WHEN id & 137438953472 = 137438953472 THEN ST_Contains(r.geom,p_geom)
                     ELSE TRUE
                     END
     ) t
     ON TRUE
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.osmcode_encode2_ptgeom(geometry(POINT),int,int,boolean)
+COMMENT ON FUNCTION libgrid_co.osmcode_encode2_ptgeom(geometry(POINT),int,int,int,int,int,int,int)
   IS 'Encodes geometry (of standard Colombia projection) as standard Colombia-OSMcode.'
 ;
 -- SELECT libgrid_co.osmcode_encode2_ptgeom( ST_SetSRID(ST_MakePoint(-76.577,3.461),4326),32,35,false );
 
 CREATE or replace FUNCTION libgrid_co.osmcode_encode2(
-   lat          float,
-   lon          float,
-   p_base       int     DEFAULT 32,
-   p_bit_length int     DEFAULT 40,
-   view_child   boolean DEFAULT false
+  lat          float,
+  lon          float,
+  p_base       int     DEFAULT 32,
+  p_bit_length int     DEFAULT 40,
+  x0           int     DEFAULT 4180000,   -- referencia de inicio do eixo x [x0,y0]
+  y0           int     DEFAULT 1035500,   -- referencia de inicio do eixo y [x0,y0]
+  s            int     DEFAULT 262144,
+  columns      int     DEFAULT 6,
+  p_grid_size  int     DEFAULT 32
 ) RETURNS jsonb AS $wrap$
   SELECT libgrid_co.osmcode_encode2_ptgeom(
       ST_SetSRID(ST_MakePoint(lon,lat),4326),
       p_base,
       p_bit_length,
-      view_child
+      x0,y0,s,columns,
+      p_grid_size
     )
 $wrap$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.osmcode_encode2(float,float,int,int,boolean)
+COMMENT ON FUNCTION libgrid_co.osmcode_encode2(float,float,int,int,int,int,int,int,int)
   IS 'Encodes LatLon as the standard Colombia-OSMcode. Wrap for osmcode_encode2_ptgeom(geometry)'
 ;
 
@@ -660,7 +664,8 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2(
       END
     ELSE 35
     END,
-    view_child
+    4180000,1035500,262144,6,
+    CASE WHEN view_child IS TRUE AND p_base = 16 THEN 2  WHEN view_child IS TRUE AND p_base = 32 THEN 32 ELSE 0 END
     )
   FROM (SELECT str_geouri_decode(uri)) t(latLon)
 $wrap$ LANGUAGE SQL IMMUTABLE;
@@ -848,6 +853,21 @@ FROM
 ;
 */
 /*
+
+CREATE or replace FUNCTION libgrid_co.ggeohash_GeomsFromPrefix(
+  prefix text DEFAULT '',
+  p_translate boolean DEFAULT false, -- true para converter em LatLong (WGS84 sem projeção)
+  p_srid      int DEFAULT 4326,      -- WGS84
+  p_base      int DEFAULT 32
+) RETURNS TABLE(ghs text, geom geometry) AS $f$
+  SELECT prefix||x, str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox(prefix||x,p_base),p_translate,p_srid)
+  FROM unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[]) t(x)
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.ggeohash_GeomsFromPrefix
+  IS 'Return grid child-cell of Colombia-OSMcode. The parameter is the ggeohash the parent-cell, that will be a prefix for all child-cells.'
+;
+--SELECT libgrid_co.ggeohash_GeomsFromPrefix('HX7VGYKPW',true,9377);
+
 CREATE or replace FUNCTION jsonb_array_to_floats(j_numbers jsonb) RETURNS float[] AS $f$
   select array_agg(x::float) from jsonb_array_elements(j_numbers) t(x)
 $f$ LANGUAGE SQL IMMUTABLE;
