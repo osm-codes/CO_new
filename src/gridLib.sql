@@ -35,13 +35,35 @@ CREATE FUNCTION libgrid_co.quadrantes() RETURNS int[] AS $f$
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.quadrantes IS 'List of official quadrants.';
 
-CREATE or replace FUNCTION jsonb_array_to_floats(j_numbers jsonb) RETURNS float[] AS $f$
-  select array_agg(x::float) from jsonb_array_elements(j_numbers) t(x)
+CREATE or replace FUNCTION libgrid_co.l0code(p_base int DEFAULT 32) RETURNS text[] as $f$
+  SELECT
+    CASE
+    WHEN p_base = 16 THEN '{00,01,02,03,04,05,06,07,08,09,0A,0B,0C,0D,0E,0F,10,11,12,13,14,15,16,17,18,19,1A,1B,1C,1D,1E,1F}'::text[]
+    ELSE '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[]
+    END
 $f$ LANGUAGE SQL IMMUTABLE;
 
-CREATE or replace FUNCTION libgrid_co.digitVal_to_digit(v int) RETURNS char as $f$
+CREATE or replace FUNCTION libgrid_co.l0code_to_quadrante(
+  p_l0code text,
+  p_base int DEFAULT 32
+  ) RETURNS int AS $f$
+  SELECT
+    CASE WHEN p_base = 16
+    THEN (('{"00": "0", "01": 45, "02": 37, "03": 38, "04": 39, "05": 31, "06": 32, "07": 33, "08": 25, "09": 26, "0A": 27, "0B": 28, "0C": 29, "0D": 18, "0E": 19, "0F": 20, "10": 21, "11": 22, "12": 23, "13": 12, "14": 13, "15": 14, "16": 15, "17": 16, "18": 17, "19": 8, "1A": 9, "1B": 10, "1C": 3, "1D": 4, "1E": 0, "1F": 0}'::jsonb)->(p_l0code))::int
+    ELSE (('{"0":0, "1": 45, "2": 37, "3": 38, "4": 39, "5": 31, "6": 32, "7": 33, "8": 25, "9": 26, "B": 27, "C": 28, "D": 29, "F": 18, "G": 19, "H": 20, "J": 21, "K": 22, "L": 23, "M": 12, "N": 13, "P": 14, "Q": 15, "R": 16, "S": 17, "T": 8, "U": 9, "V": 10, "W": 3, "X": 4, "Y": 0, "Z": 0}'::jsonb)->(p_l0code))::int
+    END
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libgrid_co.l0code_to_quadrante(text,int)
+ IS 'Retorna quadrante da célula L0.'
+;
+
+CREATE or replace FUNCTION libgrid_co.digitVal_to_digit(v int, p_base int DEFAULT 32) RETURNS char as $f$
   -- v from 0 to 31.
-  SELECT substr('0123456789BCDFGHJKLMNPQRSTUVWXYZ', v+1, 1)
+  SELECT
+    CASE
+    WHEN p_base = 16 THEN substr('000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F', v*2+1, 2)
+    ELSE substr('0123456789BCDFGHJKLMNPQRSTUVWXYZ', v+1, 1)
+    END
 $f$ LANGUAGE SQL IMMUTABLE;
 
 CREATE or replace FUNCTION libgrid_co.ij_to_xy(
@@ -136,17 +158,19 @@ CREATE or replace  FUNCTION libgrid_co.xy_to_quadrante(xyd int[]) RETURNS int AS
 $wrap$ LANGUAGE SQL IMMUTABLE;
 --SELECT libgrid_co.xy_to_quadrante(array[4442144,1297644,4180000,1035500,262144,6]);
 
-CREATE or replace FUNCTION libgrid_co.xy_to_gid(
+
+CREATE or replace FUNCTION libgrid_co.xy_to_l0code(
   x int,
   y int,
   x0 int,   -- referencia de inicio do eixo x [x0,y0]
   y0 int,   -- referencia de inicio do eixo y [x0,y0]
   s int,
-  columns int
+  columns int,
+  p_base int DEFAULT 32
   ) RETURNS text AS $f$
-  SELECT libgrid_co.digitVal_to_digit(array_position(libgrid_co.quadrantes(),libgrid_co.xy_to_quadrante(x,y,x0,y0,s,columns)))
+  SELECT libgrid_co.digitVal_to_digit(array_position(libgrid_co.quadrantes(),libgrid_co.xy_to_quadrante(x,y,x0,y0,s,columns)),p_base)
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.xy_to_gid(int,int,int,int,int,int)
+COMMENT ON FUNCTION libgrid_co.xy_to_l0code(int,int,int,int,int,int,int)
  IS 'Retorna gid_code da célula L0 que contém xy.'
 ;
 
@@ -173,8 +197,8 @@ CREATE or replace FUNCTION libgrid_co.osmcode_decode_xybox(
   (
     SELECT
       CASE WHEN p_base = 16
-      THEN (('{"00": "0", "01": 45, "02": 37, "03": 38, "04": 39, "05": 31, "06": 32, "07": 33, "08": 25, "09": 26, "0A": 27, "0B": 28, "0C": 29, "0D": 18, "0E": 19, "0F": 20, "10": 21, "11": 22, "12": 23, "13": 12, "14": 13, "15": 14, "16": 15, "17": 16, "18": 17, "19": 8, "1A": 9, "1B": 10, "1C": 3, "1D": 4, "1E": 0, "1F": 0}'::jsonb)->(substr(p_code,1,2)))::int
-      ELSE (('{"0":0, "1": 45, "2": 37, "3": 38, "4": 39, "5": 31, "6": 32, "7": 33, "8": 25, "9": 26, "B": 27, "C": 28, "D": 29, "F": 18, "G": 19, "H": 20, "J": 21, "K": 22, "L": 23, "M": 12, "N": 13, "P": 14, "Q": 15, "R": 16, "S": 17, "T": 8, "U": 9, "V": 10, "W": 3, "X": 4, "Y": 0, "Z": 0}'::jsonb)->(substr(p_code,1,1)))::int
+      THEN ( SELECT libgrid_co.l0code_to_quadrante((substr(p_code,1,2)),p_base) )
+      ELSE ( SELECT libgrid_co.l0code_to_quadrante((substr(p_code,1,1)),p_base) )
       END AS giid
   ) l(b)
 $f$ LANGUAGE SQL IMMUTABLE;
@@ -190,14 +214,7 @@ CREATE or replace FUNCTION libgrid_co.osmcode_decode_xybox2(
    p_base int DEFAULT 32
 ) RETURNS float[] AS $f$
   SELECT str_ggeohash_decode_box2(p_code,libgrid_co.ij_to_bbox(b%6,b/6,4180000,1035500,262144)) AS codebox
-  FROM
-  (
-    SELECT
-      CASE WHEN p_base = 16
-      THEN (('{"00": "0", "01": 45, "02": 37, "03": 38, "04": 39, "05": 31, "06": 32, "07": 33, "08": 25, "09": 26, "0A": 27, "0B": 28, "0C": 29, "0D": 18, "0E": 19, "0F": 20, "10": 21, "11": 22, "12": 23, "13": 12, "14": 13, "15": 14, "16": 15, "17": 16, "18": 17, "19": 8, "1A": 9, "1B": 10, "1C": 3, "1D": 4, "1E": 0, "1F": 0}'::jsonb)->(p_code_l0))::int
-      ELSE (('{"0":0, "1": 45, "2": 37, "3": 38, "4": 39, "5": 31, "6": 32, "7": 33, "8": 25, "9": 26, "B": 27, "C": 28, "D": 29, "F": 18, "G": 19, "H": 20, "J": 21, "K": 22, "L": 23, "M": 12, "N": 13, "P": 14, "Q": 15, "R": 16, "S": 17, "T": 8, "U": 9, "V": 10, "W": 3, "X": 4, "Y": 0, "Z": 0}'::jsonb)->(p_code_l0))::int
-      END AS giid
-  ) l(b)
+  FROM  ( SELECT libgrid_co.l0code_to_quadrante(p_code_l0,p_base) ) l(b)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.osmcode_decode_xybox2(text,varbit,int)
   IS 'Decodes Colombia-OSMcode geocode into a bounding box of its cell.'
@@ -322,12 +339,13 @@ INSERT INTO libgrid_co.de_para(isolabel_ext,prefix,index,base,geom) VALUES
 ('CO-DC-Bogota','HXL','Q',32,null),
 ('CO-DC-Bogota','HXM','R',32,null),
 ('CO-DC-Bogota','HXN','S',32,null),
-('CO-DC-Bogota','HXS','T',32,null),
-('CO-DC-Bogota','HXT','U',32,null),
-('CO-DC-Bogota','HXU','V',32,null),
-('CO-DC-Bogota','HXV','W',32,null),
-('CO-DC-Bogota','HXW','X',32,null),
-('CO-DC-Bogota','HXY','Y',32,null),
+('CO-DC-Bogota','HXQ','T',32,null),
+('CO-DC-Bogota','HXS','U',32,null),
+('CO-DC-Bogota','HXT','V',32,null),
+('CO-DC-Bogota','HXU','W',32,null),
+('CO-DC-Bogota','HXV','X',32,null),
+('CO-DC-Bogota','HXW','Y',32,null),
+('CO-DC-Bogota','HXY','Z',32,null),
 ('CO-GUV-Calamar','PH','0',32,null),
 ('CO-GUV-Calamar','PU','1',32,null),
 ('CO-GUV-Calamar','PV','2',32,null),
@@ -341,6 +359,92 @@ INSERT INTO libgrid_co.de_para(isolabel_ext,prefix,index,base,geom) VALUES
 ('CO-GUV-Calamar','QP','B',32,null),
 ('CO-GUV-Calamar','QR','C',32,null)
 ;
+
+CREATE or replace FUNCTION libgrid_co.update_geom_de_para(
+  p_isolabel_ext text DEFAULT '',
+  p_prefix text DEFAULT '',
+  p_base   int DEFAULT 32
+) RETURNS void AS $f$
+  UPDATE libgrid_co.de_para
+  SET geom =
+  (
+      SELECT ST_Intersection(geom,jgeom)
+      FROM
+      (
+        SELECT str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox(p_prefix,p_base),true,9377)
+      ) t(geom),
+      (
+      SELECT geom
+      --FROM optim.vw01full_jurisdiction_geom g
+      FROM vw01full_jurisdiction_geom g
+      WHERE lower(g.isolabel_ext) = lower(p_isolabel_ext) AND jurisd_base_id = 170
+      ) r(jgeom)
+      WHERE ST_Intersects(geom,jgeom)
+  )
+  WHERE prefix = p_prefix AND isolabel_ext = p_isolabel_ext
+$f$ LANGUAGE SQL VOLATILE;
+COMMENT ON FUNCTION libgrid_co.update_geom_de_para(text)
+  IS 'Geom intersection of cell and jurisdiction.'
+;
+/*
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','8UZ',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','8VP',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','8VR',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9JC',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9JG',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9K1',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9K2',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9K4',32);
+SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQD',32);
+SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQF',32);
+SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQH',32);
+SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HRJ',32);
+SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQU',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HS' ,32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HT' ,32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','98J',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','98K',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','98M',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','98N',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HW5',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HW7',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWF',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWH',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWJ',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWK',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWL',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWS',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWT',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWU',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWV',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HX5',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HX7',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXF',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXJ',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXK',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXL',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXM',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXN',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXQ',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXS',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXT',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXU',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXV',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXW',32);
+SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXY',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','PH',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','PU',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','PV',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','PY',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','Q5',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QJ',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QK',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QL',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QM',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QN',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QP',32);
+SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QR',32);
+*/
 
 ------------------
 -- Encode:
@@ -384,7 +488,7 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                                   'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
                                   )
                               )::jsonb ) AS gj
-                      FROM libgrid_co.ggeohash_GeomsFromVarbit(upper(s.gid_code),s.bit_string,false,9377,p_base)
+                      FROM libgrid_co.ggeohash_GeomsFromVarbit(upper(s.l0code),s.bit_string,false,9377,p_base)
                     )
                     ELSE
                     (
@@ -410,8 +514,8 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
     FROM
     (
         SELECT r.*,
-        CASE WHEN p_bit_length = 0 THEN r.bbbox           ELSE libgrid_co.osmcode_decode_xybox(upper(r.gid_code||j),p_base) END AS bbox,
-        CASE WHEN p_bit_length = 0 THEN upper(r.gid_code) ELSE upper(r.gid_code||j)                                         END AS code_end
+        CASE WHEN p_bit_length = 0 THEN r.bbbox         ELSE libgrid_co.osmcode_decode_xybox(upper(r.l0code||j),p_base) END AS bbox,
+        CASE WHEN p_bit_length = 0 THEN upper(r.l0code) ELSE upper(r.l0code||j)                                         END AS code_end
         FROM
         (
           SELECT v.*, CASE
@@ -421,17 +525,14 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
           FROM
           (
             SELECT
-            CASE
-            WHEN p_base = 16 THEN ('{"0": "00", "1": "01", "2": "02", "3": "03", "4": "04", "5": "05", "6": "06", "7": "07", "8": "08", "9": "09", "B": "0a", "C": "0b", "D": "0c", "F": "0d", "G": "0e", "H": "0f", "J": "10", "K": "11", "L": "12", "M": "13", "N": "14", "P": "15", "Q": "16", "R": "17", "S": "18", "T": "19", "U": "1a", "V": "1b", "W": "1c", "X": "1d", "Y": "1e", "Z": "1f"}'::jsonb)->>u.gid_code
-            ELSE u.gid_code
-            END AS gid_code,
+            l0code,
             str_ggeohash_encode3(u.a,u.b,bbbox::float[],p_bit_length) AS bit_string,
             bbbox
             FROM
             (
               SELECT t.*,
                     libgrid_co.xy_to_bbox(a::int,b::int,4180000,1035500,262144)  AS bbbox,
-                    libgrid_co.xy_to_gid(a::int,b::int,4180000,1035500,262144,6) AS gid_code
+                    libgrid_co.xy_to_l0code(a::int,b::int,4180000,1035500,262144,6,p_base) AS l0code
               FROM
               (
                   SELECT geom, ST_X(a.geom) AS a , ST_Y(a.geom) AS b
@@ -441,7 +542,7 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                   ) a(geom)
               ) t
             ) u
-            WHERE u.gid_code IS NOT NULL
+            WHERE u.l0code IS NOT NULL
           ) v
         ) r
     ) s
@@ -449,7 +550,12 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
     (
             SELECT (isolabel_ext|| (CASE WHEN length(s.j) +1  = length(prefix) THEN '~' || index ELSE '~' || index || substr(s.j,length(prefix),length(s.j)) END) ) AS short_code
             FROM libgrid_co.de_para r
-            WHERE /*ST_Contains(r.geom,p_geom) AND*/ prefix = substr(s.code_end,1,length(prefix))
+            WHERE prefix = substr(s.code_end,1,length(prefix))
+                AND
+                    CASE
+                    WHEN geom IS NOT NULL THEN ST_Contains(r.geom,p_geom)
+                    ELSE TRUE
+                    END
     ) t
     ON TRUE
 $f$ LANGUAGE SQL IMMUTABLE;
@@ -583,6 +689,44 @@ COMMENT ON FUNCTION libgrid_co.decode_geojson(text,int)
 ;
 --SELECT libgrid_co.decode_geojson('HX7VgYKPW');
 
+CREATE or replace FUNCTION str_geocodeuri_decode(uri text)
+RETURNS text[] as $f$
+  SELECT
+    CASE
+      WHEN cardinality(i)=3 AND i[2] ~ '[a-zA-Z]{2,}' THEN u
+      ELSE ( SELECT isolabel_ext FROM vwisolabel_reduced WHERE lower(isolabel_reduced) = lower(u[1]) ) || array[u[2]]
+    END
+  FROM
+  (
+    SELECT regexp_split_to_array (u[1],'(-)')::text[] AS i, u
+    FROM
+    (
+      SELECT regexp_split_to_array (uri,'(~)')::text[] AS u
+    ) r
+  ) s
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION str_geocodeuri_decode(text)
+  IS 'Decodes abbrev isolabel_ext.'
+;
+--SELECT str_geocodeuri_decode('CO-Itagui~0JKRPV');
+
+CREATE or replace FUNCTION libgrid_co.decode_geojson_reduced(
+   p_code text
+) RETURNS jsonb AS $f$
+    SELECT libgrid_co.decode_geojson(
+        (
+            SELECT  prefix || substring((str_geocodeuri_decode(p_code))[2],2)
+            FROM libgrid_co.de_para
+            WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode(p_code))[1])
+                AND lower(index)  = lower(substring((str_geocodeuri_decode(p_code))[2],1,1))
+        )
+    )
+$f$ LANGUAGE SQL IMMUTABLE;
+--COMMENT ON FUNCTION libgrid_co.decode_geojson_reduced(text)
+  --IS 'Decodes Colombia-OSMcode.'
+--;
+--SELECT libgrid_co.decode_geojson_reduced('CO-Itagui~0JKRPV');
+
 CREATE or replace FUNCTION libgrid_co.isolabel_geojson(
    p_isolabel_ext text
 ) RETURNS jsonb AS $f$
@@ -625,57 +769,6 @@ SELECT libgrid_co.isolabel_geojson('CO-ANT-Itagui');
 SELECT libgrid_co.isolabel_geojson('CO-A-Itagui');
 SELECT libgrid_co.isolabel_geojson('CO-Itagui');
 */
-
-CREATE or replace FUNCTION str_geocodeuri_decode(uri text)
-RETURNS text[] as $f$
-  SELECT
-    CASE
-      WHEN cardinality(i)=3 AND i[2] ~ '[a-zA-Z]{2,}' THEN u
-      ELSE ( SELECT isolabel_ext FROM vwisolabel_reduced WHERE lower(isolabel_reduced) = lower(u[1]) ) || array[u[2]]
-    END
-  FROM
-  (
-    SELECT regexp_split_to_array (u[1],'(-)')::text[] AS i, u
-    FROM
-    (
-      SELECT regexp_split_to_array (uri,'(~)')::text[] AS u
-    ) r
-  ) s
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION str_geocodeuri_decode(text)
-  IS 'Decodes abbrev isolabel_ext.'
-;
-/*
-SELECT str_geocodeuri_decode('CO-ANT-Itagui~0JKRPV');
-SELECT str_geocodeuri_decode('CO-A-Itagui~0JKRPV');
-SELECT str_geocodeuri_decode('CO-Itagui~0JKRPV');
-*/
-
-CREATE or replace FUNCTION libgrid_co.decode_geojson_reduced(
-   p_code text
-) RETURNS jsonb AS $f$
-    SELECT libgrid_co.decode_geojson(
-        (
-            SELECT  prefix || substring((str_geocodeuri_decode(p_code))[2],2)
-            FROM libgrid_co.de_para
-            WHERE lower(isolabel_ext) = lower((str_geocodeuri_decode(p_code))[1])
-                AND lower(index)  = lower(substring((str_geocodeuri_decode(p_code))[2],1,1))
-        )
-    )
-$f$ LANGUAGE SQL IMMUTABLE;
---COMMENT ON FUNCTION libgrid_co.decode_geojson_reduced(text)
-  --IS 'Decodes Colombia-OSMcode.'
---;
-/*
-SELECT libgrid_co.decode_geojson_reduced('CO-ANT-Itagui~1UWCFR');
-SELECT libgrid_co.decode_geojson_reduced('CO-A-Itagui~0JKRPV');
-SELECT libgrid_co.decode_geojson_reduced('CO-Itagui~0JKRPV');
-*/
-
-
-
-
-
 
 
 /*
@@ -755,6 +848,10 @@ FROM
 ;
 */
 /*
+CREATE or replace FUNCTION jsonb_array_to_floats(j_numbers jsonb) RETURNS float[] AS $f$
+  select array_agg(x::float) from jsonb_array_elements(j_numbers) t(x)
+$f$ LANGUAGE SQL IMMUTABLE;
+
 CREATE FUNCTION libgrid_co.gridGeoms_fromGeom(
   reference_geom geometry,
   code_size int DEFAULT 5,
