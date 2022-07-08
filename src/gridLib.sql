@@ -303,15 +303,6 @@ CREATE TABLE libgrid_co.de_para (
   geom geometry
 );
 
-SELECT jurisd_base_id::bit(10), gid::bit(14), t.*
-FROM(
-select ROW_NUMBER() OVER(ORDER BY jurisd_local_id ASC) as gid, jurisd_base_id, jurisd_local_id, isolabel_ext
-from fdw_jurisdiction
-where jurisd_base_id=170 and isolevel::int >2
-order by jurisd_local_id
-) t
-;
-
 INSERT INTO libgrid_co.de_para(id,isolabel_ext,prefix,index,base,geom) VALUES
 (b'0010101010000000000000010110100011010111110000000000000000000000'::bigint,'CO-ANT-Medellin','8UZ','0',32,null),
 (b'0010101010000000000000010110100011011101010000000000000000000000'::bigint,'CO-ANT-Medellin','8VP','1',32,null),
@@ -320,7 +311,27 @@ INSERT INTO libgrid_co.de_para(id,isolabel_ext,prefix,index,base,geom) VALUES
 (b'0010101010000000000000010110100110000011100000000000000000000000'::bigint,'CO-ANT-Medellin','9JG','4',32,null),
 (b'0010101010000000000000010110100110001000010000000000000000000000'::bigint,'CO-ANT-Medellin','9K1','5',32,null),
 (b'0010101010000000000000010110100110001000100000000000000000000000'::bigint,'CO-ANT-Medellin','9K2','6',32,null),
-(b'0010101010000000000000010110100110001001000000000000000000000000'::bigint,'CO-ANT-Medellin','9K4','7',32,null);
+(b'0010101010000000000000010110100110001001000000000000000000000000'::bigint,'CO-ANT-Medellin','9K4','7',32,null),
+(b'0010101010000000001110100110100110000010001011100000000000000000'::bigint,'CO-ANT-Itagui','9J8R','0',32,null),
+(b'0010101010000000001110100110100110000010001110000000000000000000'::bigint,'CO-ANT-Itagui','9J8W','1',32,null),
+(b'0010101010000000001110100110100110000010001110100000000000000000'::bigint,'CO-ANT-Itagui','9J8X','2',32,null),
+(b'0010101010000000001110100110100110000010001111100000000000000000'::bigint,'CO-ANT-Itagui','9J8Z','3',32,null),
+(b'0010101010000000001110100110100110000010100001000000000000000000'::bigint,'CO-ANT-Itagui','9JB2','4',32,null),
+(b'0010101010000000001110100110100110000010100001100000000000000000'::bigint,'CO-ANT-Itagui','9JB3','5',32,null),
+(b'0010101010000000001110100110100110000010100011000000000000000000'::bigint,'CO-ANT-Itagui','9JB6','6',32,null),
+(b'0010101010000000001110100110100110000010100011100000000000000000'::bigint,'CO-ANT-Itagui','9JB7','7',32,null),
+(b'0010101010000000001110100110100110000010100100000000000000000000'::bigint,'CO-ANT-Itagui','9JB8','8',32,null),
+(b'0010101010000000001110100110100110000010100100100000000000000000'::bigint,'CO-ANT-Itagui','9JB9','9',32,null),
+(b'0010101010000000001110100110100110000010100101000000000000000000'::bigint,'CO-ANT-Itagui','9JBB','B',32,null),
+(b'0010101010000000001110100110100110000010100101100000000000000000'::bigint,'CO-ANT-Itagui','9JBC','C',32,null),
+(b'0010101010000000001110100110100110000010100110000000000000000000'::bigint,'CO-ANT-Itagui','9JBD','D',32,null),
+(b'0010101010000000001110100110100110000010100110100000000000000000'::bigint,'CO-ANT-Itagui','9JBF','F',32,null),
+(b'0010101010000000001110100110100110000010100111000000000000000000'::bigint,'CO-ANT-Itagui','9JBG','G',32,null),
+(b'0010101010000000001110100110100110000010100111100000000000000000'::bigint,'CO-ANT-Itagui','9JBH','H',32,null),
+(b'0010101010000000001110100110100110000010110000100000000000000000'::bigint,'CO-ANT-Itagui','9JC1','J',32,null),
+(b'0010101010000000001110100110100110000010110010000000000000000000'::bigint,'CO-ANT-Itagui','9JC4','K',32,null),
+(b'0010101010000000001110100110100110000010110010100000000000000000'::bigint,'CO-ANT-Itagui','9JC5','L',32,null);
+
 /*
 ('CO-CUN-Narino','HQD','0',32,null),
 ('CO-CUN-Narino','HQF','1',32,null),
@@ -409,6 +420,25 @@ SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9JG',32);
 SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9K1',32);
 SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9K2',32);
 SELECT libgrid_co.update_geom_de_para('CO-ANT-Medellin','9K4',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9J8R',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9J8W',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9J8X',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9J8Z',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JB2',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JB3',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JB6',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JB7',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JB8',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JB9',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JBB',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JBC',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JBD',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JBF',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JBG',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JBH',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JC1',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JC4',32);
+SELECT libgrid_co.update_geom_de_para('CO-ANT-Itagui','9JC5',32);
 SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQD',32);
 SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQF',32);
 SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQH',32);
@@ -503,7 +533,7 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
                                   'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
                                   )
                               )::jsonb ) AS gj
-                      FROM libgrid_co.ggeohash_GeomsFromVarbit(upper(m.l0code),m.bit_string,false,9377,p_base,p_grid_size,x0,y0,s,columns)
+                      FROM libgrid_co.ggeohash_GeomsFromVarbit(m.l0code,m.bit_string,false,9377,p_base,p_grid_size,x0,y0,s,columns)
                     )
                 ELSE '{}'::jsonb
                 END
@@ -512,18 +542,19 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
     FROM
     (
         SELECT r.*,
-        CASE WHEN p_bit_length = 0 THEN r.bbbox         ELSE libgrid_co.osmcode_decode_xybox(upper(r.l0code||j),p_base) END AS bbox,
-        CASE WHEN p_bit_length = 0 THEN upper(r.l0code) ELSE upper(r.l0code||j)                                         END AS code_end
+        CASE WHEN p_bit_length = 0 THEN r.bbbox  ELSE libgrid_co.osmcode_decode_xybox((r.l0code||j),p_base) END AS bbox,
+        CASE WHEN p_bit_length = 0 THEN r.l0code ELSE (r.l0code||j)                                         END AS code_end,
+        (('{"0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "B":10, "C":11, "D":12, "F":13, "G":14, "H":15, "J":16, "K":17, "L":18, "M":19, "N":20, "P":21, "Q":22, "R":23, "S":24, "T":25, "U":26, "V":27, "W":28, "X":29, "Y":30, "Z":31}'::jsonb)->(r.l0code))::int::bit(5) || bit_string AS code_end_bits
         FROM
         (
-          SELECT v.*, CASE
+          SELECT v.*, upper(CASE
             WHEN p_bit_length = 0 THEN ''
             ELSE vbit_to_baseh(bit_string,p_base,0)
-            END AS j
+            END) AS j
           FROM
           (
             SELECT
-            l0code,
+            upper(l0code) AS l0code,
             str_ggeohash_encode3(u.a,u.b,bbbox::float[],p_bit_length) AS bit_string,
             bbbox
             FROM
@@ -548,13 +579,12 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2_ptgeom(
     (
             SELECT (isolabel_ext|| (CASE WHEN length(m.code_end) = length(prefix) THEN '~' || index ELSE '~' || index || substr(m.j,length(prefix),length(m.j)) END) ) AS short_code
             FROM libgrid_co.de_para r
-            WHERE prefix = substr(m.code_end,1,length(prefix))
-                AND
-                    CASE
-                    --WHEN get_bit(id::bit(64),26) = 1 THEN ST_Contains(r.geom,p_geom)
-                    WHEN id & 137438953472 = 137438953472 THEN ST_Contains(r.geom,p_geom)
-                    ELSE TRUE
-                    END
+            WHERE
+            (
+              (    (id::bit(64)<<27)::bit(20) # code_end_bits::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(15))::bit(20) ) = 0::bit(20)
+              OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(10))::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(5))::bit(20)  ) = 0::bit(20)
+            )
+            AND CASE WHEN (id::bit(64)<<26)::bit(1) <> b'0' THEN ST_Contains(r.geom,p_geom) ELSE TRUE  END
     ) t
     ON TRUE
 $f$ LANGUAGE SQL IMMUTABLE;
@@ -646,9 +676,9 @@ CREATE or replace FUNCTION libgrid_co.uncertain_base16h(u int) RETURNS int AS $f
 $f$ LANGUAGE SQL IMMUTABLE;
 
 CREATE or replace FUNCTION libgrid_co.osmcode_encode2(
-  uri        text,
-  p_base     int     DEFAULT 32,
-  view_child boolean DEFAULT false
+  uri    text,
+  p_base int DEFAULT 32,
+  grid   int DEFAULT 0
 ) RETURNS jsonb AS $wrap$
   SELECT libgrid_co.osmcode_encode2(
     latLon[1],
@@ -665,11 +695,11 @@ CREATE or replace FUNCTION libgrid_co.osmcode_encode2(
     ELSE 35
     END,
     4180000,1035500,262144,6,
-    CASE WHEN view_child IS TRUE AND p_base = 16 THEN 2  WHEN view_child IS TRUE AND p_base = 32 THEN 32 ELSE 0 END
+    grid
     )
   FROM (SELECT str_geouri_decode(uri)) t(latLon)
 $wrap$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libgrid_co.osmcode_encode2(text,int,boolean)
+COMMENT ON FUNCTION libgrid_co.osmcode_encode2(text,int,int)
   IS 'Encodes Geo URI to a standard Colombia-OSMcode. Wrap for osmcode_encode2(lat,lon)'
 ;
 -- SELECT libgrid_co.osmcode_encode2('geo:3.461,-76.577');
