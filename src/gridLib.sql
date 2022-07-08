@@ -7,23 +7,24 @@ DROP SCHEMA IF EXISTS libgrid_co CASCADE;
 CREATE SCHEMA libgrid_co;
 
 
-CREATE VIEW vwlixo_municipios_unicos AS
-  SELECT substring(isolabel_ext,8) as dupname, MAX(isolabel_ext) AS isolabel_ext
+CREATE VIEW vwisolabel_reduced AS
+  -- co unique names
+  (
+  SELECT 'CO-' || substring(isolabel_ext,8) as isolabel_reduced, MAX(isolabel_ext) AS isolabel_ext
   FROM optim.jurisdiction j
   WHERE isolevel::int >2 AND isolabel_ext like 'CO%'
   GROUP BY 1 having count(*)=1 order by 1
-;
-COMMENT ON VIEW vwlixo_municipios_unicos
- IS 'Municípios colombianos com nomes únicos.'
-;
-
-CREATE VIEW vwlixo_municipios_reduced AS
+  )
+  UNION ALL
+  (
+  -- co state abbrev.
   SELECT  'CO-' || substring(isolabel_ext,4,1) ||'-'|| substring(isolabel_ext,8) as isolabel_reduced, isolabel_ext
   FROM optim.jurisdiction j
   WHERE isolevel::int >2 AND isolabel_ext like 'CO-%' AND name not in ('Sabanalarga', 'Sucre', 'Guamal', 'Riosucio')
+  )
 ;
-COMMENT ON VIEW vwlixo_municipios_reduced
- IS 'Municípios colombianos que podem ter suprimido o nome do estado.'
+COMMENT ON VIEW vwisolabel_reduced
+ IS ''
 ;
 
 ------------------
@@ -614,7 +615,7 @@ CREATE or replace FUNCTION libgrid_co.isolabel_geojson(
             )
         )
     FROM optim.vw01full_jurisdiction_geom g
-    WHERE ( (lower(g.isolabel_ext) = lower(p_isolabel_ext) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower( split_part(p_isolabel_ext,'-',2) ))) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(p_isolabel_ext))) ) ) /*AND jurisd_base_id = 170*/
+    WHERE ( (lower(g.isolabel_ext) = lower(p_isolabel_ext) ) OR ( lower(g.isolabel_ext) = lower((SELECT isolabel_ext FROM vwisolabel_reduced WHERE lower(isolabel_reduced) = lower(p_isolabel_ext))) ) ) /*AND jurisd_base_id = 170*/
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.isolabel_geojson(text)
   IS 'Return geojson of jurisdiction.'
@@ -629,10 +630,8 @@ CREATE or replace FUNCTION str_geocodeuri_decode(uri text)
 RETURNS text[] as $f$
   SELECT
     CASE
-      WHEN cardinality(i)=3 AND i[2] ~ '[a-zA-Z]{2,}' THEN array[i[1] ||'-'|| i[2] ||'-'|| i[3]]::text[] || array[u[2]]
-      WHEN cardinality(i)=3 AND i[2] ~ '[a-zA-Z]'     THEN (SELECT isolabel_ext FROM vwlixo_municipios_reduced WHERE lower(isolabel_reduced) = lower(i[1]||'-'||i[2]||'-'||i[3])) || array[u[2]]
-      WHEN cardinality(i)=2                           THEN (SELECT isolabel_ext FROM vwlixo_municipios_unicos WHERE lower(dupname) = lower(i[2])) || array[u[2]]
-      ELSE NULL
+      WHEN cardinality(i)=3 AND i[2] ~ '[a-zA-Z]{2,}' THEN u
+      ELSE ( SELECT isolabel_ext FROM vwisolabel_reduced WHERE lower(isolabel_reduced) = lower(u[1]) ) || array[u[2]]
     END
   FROM
   (
@@ -643,9 +642,9 @@ RETURNS text[] as $f$
     ) r
   ) s
 $f$ LANGUAGE SQL IMMUTABLE;
---COMMENT ON FUNCTION str_geocodeuri_decode(text)
-  --IS 'Decodes standard GeoURI of latitude and longitude into float array.'
---;
+COMMENT ON FUNCTION str_geocodeuri_decode(text)
+  IS 'Decodes abbrev isolabel_ext.'
+;
 /*
 SELECT str_geocodeuri_decode('CO-ANT-Itagui~0JKRPV');
 SELECT str_geocodeuri_decode('CO-A-Itagui~0JKRPV');
@@ -664,7 +663,7 @@ CREATE or replace FUNCTION libgrid_co.decode_geojson_reduced(
         )
     )
 $f$ LANGUAGE SQL IMMUTABLE;
---COMMENT ON FUNCTION libgrid_co.decode_geojson2(text)
+--COMMENT ON FUNCTION libgrid_co.decode_geojson_reduced(text)
   --IS 'Decodes Colombia-OSMcode.'
 --;
 /*
