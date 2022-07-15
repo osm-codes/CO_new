@@ -103,67 +103,105 @@ $wrap$ LANGUAGE SQL IMMUTABLE;
 
 
 ------------------
--- Country defaults:
-
-CREATE or replace FUNCTION libosmcodes.uncertain_base32(u int) RETURNS int AS $f$
-  -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
-  SELECT CASE -- discretization by "snap to size-levels bits"
-     WHEN s < 5      THEN 35
-     WHEN s < 27     THEN 30
-     WHEN s < 151    THEN 25
-     WHEN s < 852    THEN 20
-     WHEN s < 4820   THEN 15
-     WHEN s < 27266  THEN 10
-     WHEN s < 154242 THEN 5
-     ELSE                 0
-     END
-  FROM (SELECT u*2) t(s)
-$f$ LANGUAGE SQL IMMUTABLE;
+-- Uncertain level defaults:
 
 CREATE or replace FUNCTION libosmcodes.uncertain_base16h(u int) RETURNS int AS $f$
   -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
   SELECT CASE -- discretization by "snap to size-levels bits"
-     WHEN s < 2      THEN 36
-     WHEN s < 4      THEN 35
-     WHEN s < 6      THEN 34
-     WHEN s < 8      THEN 33
-     WHEN s < 12     THEN 32
-     WHEN s < 16     THEN 31
-     WHEN s < 23     THEN 30
-     WHEN s < 32     THEN 29
-     WHEN s < 45     THEN 28
-     WHEN s < 64     THEN 27
-     WHEN s < 90     THEN 26
-     WHEN s < 128    THEN 25
-     WHEN s < 181    THEN 24
-     WHEN s < 256    THEN 23
-     WHEN s < 362    THEN 22
-     WHEN s < 512    THEN 21
-     WHEN s < 724    THEN 20
-     WHEN s < 1024   THEN 19
-     WHEN s < 1448   THEN 18
-     WHEN s < 2048   THEN 17
-     WHEN s < 2896   THEN 16
-     WHEN s < 4096   THEN 15
-     WHEN s < 5792   THEN 14
-     WHEN s < 8192   THEN 13
-     WHEN s < 11585  THEN 12
-     WHEN s < 16384  THEN 11
-     WHEN s < 23170  THEN 10
-     WHEN s < 32768  THEN 9
-     WHEN s < 46341  THEN 8
-     WHEN s < 65536  THEN 7
-     WHEN s < 92682  THEN 6
-     WHEN s < 131072 THEN 5
-     WHEN s < 185363 THEN 4
-     WHEN s < 262144 THEN 3
-     WHEN s < 370727 THEN 2
-     WHEN s < 524288 THEN 1
-     ELSE                 0
+     WHEN s < 1 THEN 36
+     WHEN s < 2 THEN 35
+     WHEN s < 3 THEN 34
+     WHEN s < 4 THEN 33
+     WHEN s < 6 THEN 32
+     WHEN s < 8 THEN 31
+     WHEN s < 11 THEN 30
+     WHEN s < 16 THEN 29
+     WHEN s < 23 THEN 28
+     WHEN s < 32 THEN 27
+     WHEN s < 45 THEN 26
+     WHEN s < 64 THEN 25
+     WHEN s < 91 THEN 24
+     WHEN s < 128 THEN 23
+     WHEN s < 181 THEN 22
+     WHEN s < 256 THEN 21
+     WHEN s < 362 THEN 20
+     WHEN s < 512 THEN 19
+     WHEN s < 724 THEN 18
+     WHEN s < 1024 THEN 17
+     WHEN s < 1448 THEN 16
+     WHEN s < 2048 THEN 15
+     WHEN s < 2896 THEN 14
+     WHEN s < 4096 THEN 13
+     WHEN s < 5793 THEN 12
+     WHEN s < 8192 THEN 11
+     WHEN s < 11585 THEN 10
+     WHEN s < 16384 THEN 9
+     WHEN s < 23170 THEN 8
+     WHEN s < 32768 THEN 7
+     WHEN s < 46341 THEN 6
+     WHEN s < 65536 THEN 5
+     WHEN s < 92682 THEN 4
+     WHEN s < 131072 THEN 3
+     WHEN s < 185364 THEN 2
+     WHEN s < 262144 THEN 1
+     ELSE 0
      END
   FROM (SELECT u*2) t(s)
 $f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libosmcodes.uncertain_base16h(int)
+  IS 'Uncertain base16h and base32 for L0 262km'
+;
 
+CREATE or replace FUNCTION libosmcodes.uncertain_base16hL01048km(u int) RETURNS int AS $f$
+  -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
+  SELECT CASE -- discretization by "snap to size-levels bits"
+     WHEN s < 1 THEN 40
+     WHEN s < 2 THEN 39
+     WHEN s < 3 THEN 38
+     WHEN s < 4 THEN 37
+     WHEN s < 6 THEN 36
+     WHEN s < 8 THEN 35
+     WHEN s < 11 THEN 34
+     WHEN s < 16 THEN 33
+     WHEN s < 23 THEN 32
+     WHEN s < 32 THEN 31
+     WHEN s < 45 THEN 30
+     WHEN s < 64 THEN 29
+     WHEN s < 91 THEN 28
+     WHEN s < 128 THEN 27
+     WHEN s < 181 THEN 26
+     WHEN s < 256 THEN 25
+     WHEN s < 362 THEN 24
+     WHEN s < 512 THEN 23
+     WHEN s < 724 THEN 22
+     WHEN s < 1024 THEN 21
+     WHEN s < 1448 THEN 20
+     WHEN s < 2048 THEN 19
+     WHEN s < 2896 THEN 18
+     WHEN s < 4096 THEN 17
+     WHEN s < 5793 THEN 16
+     WHEN s < 8192 THEN 15
+     WHEN s < 11585 THEN 14
+     WHEN s < 16384 THEN 13
+     WHEN s < 23170 THEN 12
+     WHEN s < 32768 THEN 11
+     WHEN s < 46341 THEN 10
+     WHEN s < 65536 THEN 9
+     WHEN s < 92682 THEN 8
+     WHEN s < 131072 THEN 7
+     WHEN s < 185364 THEN 6
+     WHEN s < 262144 THEN 5
+     WHEN s < 370728 THEN 4
+     WHEN s < 524288 THEN 3
+     WHEN s < 741455 THEN 2
+     WHEN s < 1048576 THEN 1
+     ELSE 0
+     END
+  FROM (SELECT u*2) t(s)
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libosmcodes.uncertain_base16hL01048km(int)
+  IS 'Uncertain base16h and base32 for L0 1048km'
+;
 
 ------------------
 -- Others helper functions::
@@ -527,7 +565,6 @@ COMMENT ON FUNCTION libosmcodes.osmcode_encode(float,float,int,int,int,int,int[]
   IS 'Encodes LatLon to OSMcode. Wrap for osmcode_encode(geometry)'
 ;
 
-
 CREATE or replace FUNCTION api.osmcode_encode(
   uri    text,
   p_base int DEFAULT 32,
@@ -541,9 +578,10 @@ CREATE or replace FUNCTION api.osmcode_encode(
     WHEN latLon[4] IS NOT NULL
     THEN
       CASE
-      WHEN p_base = 16
-      THEN libosmcodes.uncertain_base16h(latLon[4]::int)
-      ELSE libosmcodes.uncertain_base32(latLon[4]::int)
+      WHEN isolabel_ext = 'CO' AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/5)*5
+      WHEN isolabel_ext = 'CO' AND p_base = 16 THEN libosmcodes.uncertain_base16h(latLon[4]::int)
+      WHEN isolabel_ext = 'BR' AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL01048km(latLon[4]::int))/5)*5
+      WHEN isolabel_ext = 'BR' AND p_base = 16 THEN libosmcodes.uncertain_base16hL01048km(latLon[4]::int)
       END
     ELSE 35
     END,
@@ -558,7 +596,7 @@ CREATE or replace FUNCTION api.osmcode_encode(
   ) t(latLon),
   LATERAL
   (
-    SELECT CASE WHEN p_base = 16 THEN base16h ELSE base32 END AS l0code, bbox, jurisd_base_id::text
+    SELECT CASE WHEN p_base = 16 THEN base16h ELSE base32 END AS l0code, bbox, jurisd_base_id::text, isolabel_ext
     FROM libosmcodes.l0cover
     WHERE ST_Contains(geom,ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326))
   ) u
@@ -598,6 +636,44 @@ COMMENT ON FUNCTION api.osmcode_decode(text,text,int)
   IS 'Decodes OSMcode.'
 ;
 --SELECT api.osmcode_decode('HX7VgYKPW','CO');
+
+CREATE or replace FUNCTION api.osmcode_decode_list(
+   p_code_list text,
+   p_iso  text,
+   p_base int     DEFAULT 32
+) RETURNS jsonb AS $f$
+  SELECT jsonb_build_object(
+      'type', 'FeatureCollection',
+      'features',
+          (
+            SELECT jsonb_agg(
+                ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
+                    jsonb_build_object(
+                        'code', upper(code) ,
+                        'area', ST_Area(geom),
+                        'side', SQRT(ST_Area(geom)),
+                        'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
+                        )
+                    )::jsonb) AS gj
+            FROM
+            (
+              SELECT c.code, str_ggeohash_draw_cell_bybox(
+                libosmcodes.osmcode_decode_xybox(
+                  upper(code),
+                  p_base,
+                  (SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN base16h = upper(substr(code,1,2)) ELSE base32 = upper(substr(code,1,1)) END))),
+                false,
+                (('{"BR": 952019, "CO": 9377}'::jsonb)->(upper(p_iso)))::int
+                )
+              FROM (SELECT DISTINCT code FROM regexp_split_to_table(p_code_list,',') code ) c
+            ) t(code,geom)
+          )
+      )
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION api.osmcode_decode_list(text,text,int)
+  IS 'Decodes list of OSMcode.'
+;
+-- SELECT api.osmcode_decode_list('1,2,d3,2','CO',32);
 
 CREATE or replace FUNCTION api.osmcode_decode_reduced(
    p_code text
