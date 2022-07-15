@@ -210,25 +210,18 @@ CREATE or replace FUNCTION str_geocodeuri_decode(uri text)
 RETURNS text[] as $f$
   SELECT
     CASE
-      WHEN cardinality(i)=3 AND i[2] ~ '[a-zA-Z]{2,}' THEN u || array[upper(i[1])]
+      WHEN cardinality(u)=3 AND uri ~ '[a-zA-Z]{2,}' THEN u || array[upper(u[1])]
       ELSE (
         SELECT isolabel_ext
         FROM vwisolabel_reduced
-        WHERE lower(isolabel_reduced) = lower(u[1]) ) || array[u[2]] || array[upper(i[1])]
+        WHERE lower(isolabel_reduced) = lower(uri) ) || array[upper(u[1])]
     END
-  FROM
-  (
-    SELECT regexp_split_to_array (u[1],'(-)')::text[] AS i, u
-    FROM
-    (
-      SELECT regexp_split_to_array (uri,'(~)')::text[] AS u
-    ) r
-  ) s
+  FROM ( SELECT regexp_split_to_array (uri,'(-)')::text[] AS u ) r
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION str_geocodeuri_decode(text)
   IS 'Decodes abbrev isolabel_ext.'
 ;
---SELECT str_geocodeuri_decode('CO-Itagui~0JKRPV');
+--SELECT str_geocodeuri_decode('CO-Itagui');
 
 CREATE or replace FUNCTION libosmcodes.osmcode_decode_xybox(
   p_code text,
@@ -676,23 +669,24 @@ COMMENT ON FUNCTION api.osmcode_decode_list(text,text,int)
 -- SELECT api.osmcode_decode_list('1,2,d3,2','CO',32);
 
 CREATE or replace FUNCTION api.osmcode_decode_reduced(
-   p_code text
+   p_code text,
+   p_iso  text
 ) RETURNS jsonb AS $f$
     SELECT api.osmcode_decode(
         (
-            SELECT  prefix || substring(x[2],2)
+            SELECT  prefix || substring(upper(p_code),2)
             FROM libosmcodes.de_para
             WHERE lower(isolabel_ext) = lower(x[1])
-                AND lower(index)  = lower(substring(x[2],1,1))
+                AND lower(index)  = lower(substring(upper(p_code),1,1))
         ),
-        x[3]
+        x[2]
     )
-    FROM (SELECT str_geocodeuri_decode(p_code)) t(x)
+    FROM (SELECT str_geocodeuri_decode(p_iso)) t(x)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_decode_reduced(text)
-  IS 'Decodes OSMcode reduced. Wrap for osmcode_decode.'
+  IS 'Decodes OSMcode reduced (base32). Wrap for osmcode_decode.'
 ;
---SELECT api.osmcode_decode_reduced('CO-Itagui~0JKRPV');
+--SELECT api.osmcode_decode_reduced('0JKRPV','CO-Itagui');
 
 
 
