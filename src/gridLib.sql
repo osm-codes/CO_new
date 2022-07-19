@@ -376,7 +376,7 @@ FROM
 (
   SELECT j_id_bit, l_id_bit, '01' AS mun_princ,
 
-  CASE 
+  CASE
   WHEN ST_ContainsProperly(r.geom_transformed,str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(cell,32,( SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = split_part(p.isolabel_ext,'-',1) AND ( prefix_l032 = (substr(cell,1,1))   ))),false,9377)) IS FALSE
   THEN '1'
   ELSE '0'
@@ -385,8 +385,8 @@ FROM
   rpad(sufix_bits, 37, '0000000000000000000000000000000000000') AS sufix_bits,
 
   q.isolabel_ext, cell, ordered_cover,
-  
-  CASE 
+
+  CASE
   WHEN ST_ContainsProperly(r.geom_transformed,str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(cell,32,( SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = split_part(p.isolabel_ext,'-',1) AND ( prefix_l032 = (substr(cell,1,1))   ))),false,9377)) IS FALSE
   THEN ST_Intersection(r.geom_transformed,str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(cell,32,( SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = split_part(p.isolabel_ext,'-',1) AND ( prefix_l032 = (substr(cell,1,1))   ))),false,9377))
   ELSE NULL
@@ -411,7 +411,7 @@ FROM
   ) q
   ON lower(p.isolabel_ext) = lower(q.isolabel_ext)
   LEFT JOIN
-  ( 
+  (
     SELECT isolabel_ext, ST_Transform(geom,9377) AS geom_transformed, geom
     FROM optim.vw01full_jurisdiction_geom g
   ) r
