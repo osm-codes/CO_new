@@ -210,7 +210,7 @@ CREATE or replace FUNCTION str_geocodeuri_decode(uri text)
 RETURNS text[] as $f$
   SELECT
     CASE
-      WHEN cardinality(u)=3 AND uri ~ '[a-zA-Z]{2,}' THEN u || array[upper(u[1])]
+      WHEN cardinality(u)=3 AND uri ~ '[a-zA-Z]{2,}' THEN uri || array[upper(u[1])]
       ELSE (
         SELECT isolabel_ext
         FROM vwisolabel_reduced
@@ -288,36 +288,31 @@ COMMENT ON FUNCTION libosmcodes.ggeohash_GeomsFromVarbit
 -- Table l0cover:
 
 CREATE TABLE libosmcodes.l0cover (
-  isolabel_ext text  NOT NULL,
+  isolabel_ext   text  NOT NULL,
   jurisd_base_id int NOT NULL,
-  base32       text  NOT NULL,
-  base16h      text  NOT NULL,
-  quadrant     text  NOT NULL,
-  bbox         int[] NOT NULL,
-  geom         geometry
+  prefix_l032    text  NOT NULL,
+  prefix_l016h   text  NOT NULL,
+  quadrant       text  NOT NULL,
+  bbox           int[] NOT NULL,
+  geom           geometry,
+  geom_srid4326  geometry
 );
-INSERT INTO libosmcodes.l0cover(isolabel_ext,jurisd_base_id,base32,base16h,quadrant,bbox,geom)
+INSERT INTO libosmcodes.l0cover(isolabel_ext,jurisd_base_id,prefix_l032,prefix_l016h,quadrant,bbox,geom,geom_srid4326)
 (
   SELECT
     'CO' AS isolabel_ext,
     170 AS jurisd_base_id,
-    base32, base16h, quadrant, bbox,
-    (
-      SELECT ST_Intersection(
-        ( SELECT str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(base32,32,bbox),true,9377) ),
-        ( SELECT geom
-          FROM optim.vw01full_jurisdiction_geom g
-          WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170
-        )
-      )
-    ) AS geom
+    prefix_l032, prefix_l016h, quadrant, bbox,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),false,9377),ST_Transform(geom,9377)) AS geom,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),true, 9377),geom) AS geom_srid4326
   FROM unnest
       (
       '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
       '{00,01,02,03,04,05,06,07,08,09,0A,0B,0C,0D,0E,0F,10,11,12,13,14,15,16,17,18,19,1A,1B,1C,1D,1E,1F}'::text[],
       array[0,45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
-      ) t(base32,base16h,quadrant),
-      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000,1035500,262144)) u(bbox)
+      ) t(prefix_l032,prefix_l016h,quadrant),
+      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000,1035500,262144)) u(bbox),
+      LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom)
   WHERE quadrant IS NOT NULL
 )
 UNION
@@ -325,123 +320,106 @@ UNION
   SELECT 
     'BR' AS isolabel_ext,
     76 AS jurisd_base_id,
-    base32, base16h, quadrant, bbox,
-    (
-      SELECT ST_Intersection(
-        ( SELECT str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(base32,32,bbox),true,952019) ),
-        ( SELECT geom
-          FROM optim.vw01full_jurisdiction_geom g
-          WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76
-        )
-      )
-    ) AS geom
+    prefix_l032, prefix_l016h, quadrant, bbox,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),false,952019),ST_Transform(geom,952019)) AS geom,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),true, 952019),geom) AS geom_srid4326
   FROM unnest
       (
       '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
       '{00,01,02,03,04,05,06,07,08,09,0A,0B,0C,0D,0E,0F,10,11,12,13,14,15,16,17,18,19,1A,1B,1C,1D,1E,1F}'::text[],
       array[20,21,22,23,24,15,16,17,18,19,11,12,13,14,6,7,8,2]
-      ) t(base32,base16h,quadrant),
-      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000,6727000,1048576)) u(bbox)
+      ) t(prefix_l032,prefix_l016h,quadrant),
+      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000,6727000,1048576)) u(bbox),
+      LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom)
   WHERE quadrant IS NOT NULL
 )
 ORDER BY 1,3
 ;
 
 ------------------
--- Table de-para:
+-- Table de-para (cover):
+CREATE TABLE libosmcodes.tmpcover (
+  isolabel_ext text  NOT NULL,
+  cover        text[] NOT NULL
+);
+INSERT INTO libosmcodes.tmpcover(isolabel_ext,cover) VALUES
+('CO-AMA-Leticia','{X3T,X3U,X3V,X5,X65,X66,X67,X6C,X6D,X6F,X6G,X6H,X6J,X6K,X6L,X6M,X6S,X6T,X6U,X6V,X6W,X6Y,X7,XJ,XL,XM,XT}'::text[]),
+('CO-ANT-Itagui','{9J8R,9J8W,9J8X,9J8Z,9JB2,9JB3,9JB6,9JB7,9JB8,9JB9,9JBB,9JBC,9JBD,9JBF,9JBG,9JBH,9JC1,9JC4,9JC5}'::text[]),
+('CO-ANT-Medellin','{8UXZ,8UZ,8VP,8VR,9JB,9JC,9JG,9K0,9K1,9K2,9K3,9K4}'::text[]),
+('CO-ATL-Soledad','{3LF,3LH,3LS,3LTP,3LU0,3LU1,3LU2,3LU3,3LU4,3LU6,3LU7,3LU8,3LU9,3LUB,3LUC,3LUD,3LUF,3LUG,3LV0,3LV1}'::text[]),
+('CO-CAQ-Solano','{P1,P2,P3,P4,P5,P6,P7,P8,PB,PC,PG,PH,Q0,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,QB,QD,TR,TW,TX,TY,TZ,U}'::text[]),
+('CO-CAU-Florencia','{NMFC,NMFG,NMFH,NMFU,NMS,NMTN,NMTP,NMTQ,NMTR,NMU,NMV}'::text[]),
+('CO-CUN-Narino','{HQH4,HQD,HQF,HQH0,HQH1,HQH2,HQH3,HQH6,HQH7,HQH8,HQH9,HQHB,HQHC,HQHD,HQHF,HQHG,HQHH,HQHL,HQHM,HQHQ,HQHS,HQHT,HQHU,HQHV,HQU,HRJ}'::text[]),
+('CO-DC-Bogota','{HS, HT, HWH, HWU, HWV, HWF, HWS, HWT, HW7, HWL, HW5, HWJ, HWK, HXU, HXV, HXY, HXF, HXS, HXT, HXW, HX7, HXL, HXM, HXJ, HXK, HXN, 98M, 98J, 98K, 98N, HXQ, HWM}'::text[]),
+('CO-GUA-Barrancominas','{K0,K1,K2,K3,K6,K74,K75,K76,K77,K7J,K7K,K7L,K7M,K7N,K7P,K7Q,K7R,K7T,K7W,K7X,K7Y,K7Z,K9,KD,KF,KG,KH,KS,KU,L5,RP}'::text[]),
+('CO-GUV-Calamar','{PH,PU,PV,PY,Q4,Q5,Q7BP,QJ,QK,QL,QM,QN,QP,QQ,QR}'::text[]),
+('CO-GUV-SanJoseGuaviare','{HB,J0,J2,J3,J8,J9,JB,JC,K0,K1,PY,PZ,QN,QP,QR,QX,QZ,RP}'::text[]),
+('CO-NSA-PuertoSantander','{77H,77U,7L58,7L59,7L5B,7L5C,7L5D,7L5F,7L5G,7L5H,7L5S,7L5T,7L5U,7L5V,7L5Y,7LJ0,7LJ1,7LJ2,7LJ3,7LJ4,7LJ5,7LJ6,7LJJ,7LJK, 7LJN}'::text[]),
+('CO-RIS-Dosquebradas','{8BPQ,8BPR,8BPV,8BPW,8BPX,8BPY,8BPZ,8BR2,8BR3,8BR6,8BR7,8BR8,8BR9,8BRB,8BRC,8BRD,8BRF,8BRG,8BRH,8BRL,8BRS,8BRT,8BRU,8BRV,8BRW,900,902}'::text[]),
+('CO-RIS-Pereira','{8BJ,8BK,8BL,8BM,8BN,8BP,8BQ,8BR,8BTB,8BW0,900,905,GZU,GZV,GZY,GZZ,HPB,HPC,HPD,HPG,HPH}'::text[]),
+('CO-RIS-Virginia','{8BLZ,8BMM,8BMN,8BMP,8BMQ,8BMR,8BMS,8BMT,8BMW,8BMX,8BMY,8BMZ,8BSB,8BT0,8BT1,8BT2,8BT3,8BT6,8BT7,8BT8,8BT9,8BTB,8BTC,8BTD,8BTF,8BTG,8BW0}'::text[]),
+('CO-VAC-Ulloa','{GZV,GZXP,GZXR,GZY,GZZ0,GZZ1,GZZ2,GZZ3,GZZ4,GZZ5,GZZ6,GZZ7}'::text[]),
+('CO-SUC-Since','{6NX,6NY,6NZ,6PN,6PP,6PQ,6PR,6PX,6Q8,6QB,6QC,6R0,6R1,6R2,6R3,6R4}'::text[]);
 
 CREATE TABLE libosmcodes.de_para (
   id bigint NOT NULL,
   isolabel_ext text NOT NULL,
   prefix       text NOT NULL,
   index        text NOT NULL,
-  base       int,
-  geom geometry
+  base         int,
+  geom         geometry -- in default srid
 );
 
-INSERT INTO libosmcodes.de_para(id,isolabel_ext,prefix,index,base,geom) VALUES
-(b'0010101010000000000000010110100011010111110000000000000000000000'::bigint,'CO-ANT-Medellin','8UZ','0',32,null),
-(b'0010101010000000000000010110100011011101010000000000000000000000'::bigint,'CO-ANT-Medellin','8VP','1',32,null),
-(b'0010101010000000000000010110100011011101110000000000000000000000'::bigint,'CO-ANT-Medellin','8VR','2',32,null),
-(b'0010101010000000000000010110100110000010110000000000000000000000'::bigint,'CO-ANT-Medellin','9JC','3',32,null),
-(b'0010101010000000000000010110100110000011100000000000000000000000'::bigint,'CO-ANT-Medellin','9JG','4',32,null),
-(b'0010101010000000000000010110100110001000010000000000000000000000'::bigint,'CO-ANT-Medellin','9K1','5',32,null),
-(b'0010101010000000000000010110100110001000100000000000000000000000'::bigint,'CO-ANT-Medellin','9K2','6',32,null),
-(b'0010101010000000000000010110100110001001000000000000000000000000'::bigint,'CO-ANT-Medellin','9K4','7',32,null),
-(b'0010101010000000001110100110100110000010001011100000000000000000'::bigint,'CO-ANT-Itagui','9J8R','0',32,null),
-(b'0010101010000000001110100110100110000010001110000000000000000000'::bigint,'CO-ANT-Itagui','9J8W','1',32,null),
-(b'0010101010000000001110100110100110000010001110100000000000000000'::bigint,'CO-ANT-Itagui','9J8X','2',32,null),
-(b'0010101010000000001110100110100110000010001111100000000000000000'::bigint,'CO-ANT-Itagui','9J8Z','3',32,null),
-(b'0010101010000000001110100110100110000010100001000000000000000000'::bigint,'CO-ANT-Itagui','9JB2','4',32,null),
-(b'0010101010000000001110100110100110000010100001100000000000000000'::bigint,'CO-ANT-Itagui','9JB3','5',32,null),
-(b'0010101010000000001110100110100110000010100011000000000000000000'::bigint,'CO-ANT-Itagui','9JB6','6',32,null),
-(b'0010101010000000001110100110100110000010100011100000000000000000'::bigint,'CO-ANT-Itagui','9JB7','7',32,null),
-(b'0010101010000000001110100110100110000010100100000000000000000000'::bigint,'CO-ANT-Itagui','9JB8','8',32,null),
-(b'0010101010000000001110100110100110000010100100100000000000000000'::bigint,'CO-ANT-Itagui','9JB9','9',32,null),
-(b'0010101010000000001110100110100110000010100101000000000000000000'::bigint,'CO-ANT-Itagui','9JBB','B',32,null),
-(b'0010101010000000001110100110100110000010100101100000000000000000'::bigint,'CO-ANT-Itagui','9JBC','C',32,null),
-(b'0010101010000000001110100110100110000010100110000000000000000000'::bigint,'CO-ANT-Itagui','9JBD','D',32,null),
-(b'0010101010000000001110100110100110000010100110100000000000000000'::bigint,'CO-ANT-Itagui','9JBF','F',32,null),
-(b'0010101010000000001110100110100110000010100111000000000000000000'::bigint,'CO-ANT-Itagui','9JBG','G',32,null),
-(b'0010101010000000001110100110100110000010100111100000000000000000'::bigint,'CO-ANT-Itagui','9JBH','H',32,null),
-(b'0010101010000000001110100110100110000010110000100000000000000000'::bigint,'CO-ANT-Itagui','9JC1','J',32,null),
-(b'0010101010000000001110100110100110000010110010000000000000000000'::bigint,'CO-ANT-Itagui','9JC4','K',32,null),
-(b'0010101010000000001110100110100110000010110010100000000000000000'::bigint,'CO-ANT-Itagui','9JC5','L',32,null);
+INSERT INTO libosmcodes.de_para(id,isolabel_ext,prefix,index,base,geom)
+SELECT ((j_id_bit || l_id_bit || mun_princ || cover_parcial ||  sufix_bits)::bit(64))::bigint , isolabel_ext, cell, ordered_cover, 32, geom
+FROM
+(
+  SELECT j_id_bit, l_id_bit, '01' AS mun_princ,
 
-CREATE or replace FUNCTION libosmcodes.update_geom_de_para(
-  p_isolabel_ext text DEFAULT '',
-  p_prefix text DEFAULT '',
-  p_base   int DEFAULT 32,
-  p_srid      int DEFAULT 9377
-) RETURNS void AS $f$
-  UPDATE libosmcodes.de_para
-  SET geom =
+  CASE 
+  WHEN ST_ContainsProperly(r.geom_transformed,str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(cell,32,( SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = split_part(p.isolabel_ext,'-',1) AND ( prefix_l032 = (substr(cell,1,1))   ))),false,9377)) IS FALSE
+  THEN '1'
+  ELSE '0'
+  END AS cover_parcial,
+
+  rpad(sufix_bits, 37, '0000000000000000000000000000000000000') AS sufix_bits,
+
+  q.isolabel_ext, cell, ordered_cover,
+  
+  CASE 
+  WHEN ST_ContainsProperly(r.geom_transformed,str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(cell,32,( SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = split_part(p.isolabel_ext,'-',1) AND ( prefix_l032 = (substr(cell,1,1))   ))),false,9377)) IS FALSE
+  THEN ST_Intersection(r.geom_transformed,str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(cell,32,( SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = split_part(p.isolabel_ext,'-',1) AND ( prefix_l032 = (substr(cell,1,1))   ))),false,9377))
+  ELSE NULL
+  END AS geom
+
+  FROM
   (
-      SELECT ST_Intersection(geom,jgeom)
-      FROM
-      (
-        SELECT str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(p_prefix,p_base,( SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = split_part(p_isolabel_ext,'-',1) AND ( CASE WHEN p_base = 16 THEN base16h = (substr(p_prefix,1,2)) ELSE base32 = (substr(p_prefix,1,1)) END ) )),true,p_srid)
-      ) t(geom),
-      ( 
-      SELECT geom
-      FROM optim.vw01full_jurisdiction_geom g
-      WHERE lower(g.isolabel_ext) = lower(p_isolabel_ext) AND jurisd_base_id = 170
-      ) r(jgeom)
-      WHERE ST_Intersects(geom,jgeom)
-  )
-  WHERE prefix = p_prefix AND isolabel_ext = p_isolabel_ext
-$f$ LANGUAGE SQL VOLATILE;
-COMMENT ON FUNCTION libosmcodes.update_geom_de_para(text,text,int,int)
-  IS 'Geom intersection of cell and jurisdiction.'
-;
+    SELECT isolabel_ext, c AS cell, i  AS ordered_cover, g.*, array_to_string(arr_bit,'') AS sufix_bits
+    FROM libosmcodes.tmpcover tc, unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],(ARRAY(SELECT i FROM unnest(cover) t(i) ORDER BY length(i), 1 ASC))) td(i,c),
+    LATERAL ((SELECT array_agg(l), array_agg((('{"0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "B":10, "C":11, "D":12, "F":13, "G":14, "H":15, "J":16, "K":17, "L":18, "M":19, "N":20, "P":21, "Q":22, "R":23, "S":24, "T":25, "U":26, "V":27, "W":28, "X":29, "Y":30, "Z":31}'::jsonb)->(upper(l)))::int::bit(5)) AS arr_bit FROM regexp_split_to_table(c,'') l)) g
+    WHERE c IS NOT NULL
+  ) p
+  LEFT JOIN
+  (
+    SELECT jurisd_base_id::bit(10) AS j_id_bit, gid::bit(14) AS l_id_bit, t.*
+    FROM(
+        SELECT ROW_NUMBER() OVER(ORDER BY jurisd_local_id ASC) as gid, jurisd_base_id, jurisd_local_id, isolabel_ext
+        FROM optim.jurisdiction
+        WHERE jurisd_base_id=170 and isolevel::int >2
+        ORDER BY jurisd_local_id
+    ) t
+  ) q
+  ON lower(p.isolabel_ext) = lower(q.isolabel_ext)
+  LEFT JOIN
+  ( 
+    SELECT isolabel_ext, ST_Transform(geom,9377) AS geom_transformed, geom
+    FROM optim.vw01full_jurisdiction_geom g
+  ) r
+  ON lower(r.isolabel_ext) = lower(q.isolabel_ext) AND jurisd_base_id = 170
 
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Medellin','8UZ',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Medellin','8VP',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Medellin','8VR',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Medellin','9JC',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Medellin','9JG',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Medellin','9K1',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Medellin','9K2',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Medellin','9K4',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9J8R',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9J8W',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9J8X',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9J8Z',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JB2',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JB3',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JB6',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JB7',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JB8',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JB9',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JBB',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JBC',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JBD',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JBF',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JBG',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JBH',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JC1',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JC4',32,9377);
-SELECT libosmcodes.update_geom_de_para('CO-ANT-Itagui','9JC5',32,9377);
+  ORDER BY q.isolabel_ext, ordered_cover
+) x
+;
 
 ------------------
 -- osmcode encode:
@@ -461,7 +439,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
             (
                 ST_AsGeoJSONb(
                 str_ggeohash_draw_cell_bybox(bbox,true,p_srid),
-                    6,0,null,
+                    8,0,null,
                     jsonb_strip_nulls(jsonb_build_object(
                         'code', code_end,
                         'short_code', short_code,
@@ -475,7 +453,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
                 THEN
                     (
                       SELECT jsonb_agg(
-                          ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
+                          ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,
                               jsonb_build_object(
                                   'code', upper(ghs) ,
                                   'code_subcell', substr(ghs,length(code_end)+1,length(ghs)) ,
@@ -503,18 +481,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
             WHEN p_bit_length = 0 THEN ''
             ELSE vbit_to_baseh(bit_string,p_base,0)
             END) AS j
-          FROM
-          (
-            SELECT t.*, str_ggeohash_encode3(t.a,t.b,p_bbox,p_bit_length) AS bit_string
-            FROM
-            (
-                SELECT geom, ST_X(a.geom) AS a , ST_Y(a.geom) AS b
-                FROM
-                (
-                    SELECT CASE WHEN ST_SRID(p_geom)=p_srid THEN p_geom ELSE ST_Transform(p_geom,p_srid) END
-                ) a(geom)
-            ) t
-          ) v
+          FROM ( SELECT  str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length) AS bit_string ) v
         ) r
     ) m
     LEFT JOIN LATERAL
@@ -564,8 +531,7 @@ CREATE or replace FUNCTION api.osmcode_encode(
   grid   int DEFAULT 0
 ) RETURNS jsonb AS $wrap$
   SELECT libosmcodes.osmcode_encode(
-    latLon[1],
-    latLon[2],
+    ST_Transform(ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326),(('{"76": 952019, "170": 9377}'::jsonb)->u.jurisd_base_id)::int),
     p_base,
     CASE
     WHEN latLon[4] IS NOT NULL
@@ -589,13 +555,13 @@ CREATE or replace FUNCTION api.osmcode_encode(
   ) t(latLon),
   LATERAL
   (
-    SELECT CASE WHEN p_base = 16 THEN base16h ELSE base32 END AS l0code, bbox, jurisd_base_id::text, isolabel_ext
+    SELECT CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END AS l0code, bbox, jurisd_base_id::text, isolabel_ext
     FROM libosmcodes.l0cover
-    WHERE ST_Contains(geom,ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326))
+    WHERE ST_Contains(geom_srid4326,ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326))
   ) u
 $wrap$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_encode(text,int,int)
-  IS 'Encodes Geo URI to OSMcode. Wrap for osmcode_encode(latLon)'
+  IS 'Encodes Geo URI to OSMcode. Wrap for osmcode_encode(geometry)'
 ;
 -- SELECT api.osmcode_encode('geo:3.461,-76.577');
 -- SELECT api.osmcode_encode('geo:-1.7,-63.8');
@@ -610,7 +576,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
 ) RETURNS jsonb AS $f$
   SELECT  jsonb_build_object(
     'type' , 'FeatureCollection',
-    'features', ARRAY[ ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,jsonb_build_object('code', upper(p_code), 'area', ST_Area(geom),
+    'features', ARRAY[ ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,jsonb_build_object('code', upper(p_code), 'area', ST_Area(geom),
     'side', SQRT(ST_Area(geom)), 'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
     ))::jsonb ]  )
     FROM
@@ -619,7 +585,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
         libosmcodes.osmcode_decode_xybox(
           upper(p_code),
           p_base,
-          (SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN base16h = upper(substr(p_code,1,2)) ELSE base32 = upper(substr(p_code,1,1)) END))),
+          (SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN prefix_l016h = upper(substr(p_code,1,2)) ELSE prefix_l032 = upper(substr(p_code,1,1)) END))),
         false,
         (('{"BR": 952019, "CO": 9377}'::jsonb)->(upper(p_iso)))::int
         )
@@ -640,7 +606,7 @@ CREATE or replace FUNCTION api.osmcode_decode_list(
       'features',
           (
             SELECT jsonb_agg(
-                ST_AsGeoJSONb(ST_Transform(geom,4326),6,0,null,
+                ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,
                     jsonb_build_object(
                         'code', upper(code) ,
                         'area', ST_Area(geom),
@@ -654,7 +620,7 @@ CREATE or replace FUNCTION api.osmcode_decode_list(
                 libosmcodes.osmcode_decode_xybox(
                   upper(code),
                   p_base,
-                  (SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN base16h = upper(substr(code,1,2)) ELSE base32 = upper(substr(code,1,1)) END))),
+                  (SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN prefix_l016h = upper(substr(code,1,2)) ELSE prefix_l032 = upper(substr(code,1,1)) END))),
                 false,
                 (('{"BR": 952019, "CO": 9377}'::jsonb)->(upper(p_iso)))::int
                 )
@@ -688,112 +654,6 @@ COMMENT ON FUNCTION api.osmcode_decode_reduced(text)
 ;
 --SELECT api.osmcode_decode_reduced('0JKRPV','CO-Itagui');
 
-
-
-
-
-/*
-('CO-CUN-Narino','HQD','0',32,null),
-('CO-CUN-Narino','HQF','1',32,null),
-('CO-CUN-Narino','HQH','2',32,null),
-('CO-CUN-Narino','HRJ','3',32,null),
-('CO-CUN-Narino','HQU','4',32,null),
-('CO-DC-Bogota','HS' ,'0',32,null),
-('CO-DC-Bogota','HT' ,'1',32,null),
-('CO-DC-Bogota','98J','2',32,null),
-('CO-DC-Bogota','98K','3',32,null),
-('CO-DC-Bogota','98M','4',32,null),
-('CO-DC-Bogota','98N','5',32,null),
-('CO-DC-Bogota','HW5','6',32,null),
-('CO-DC-Bogota','HW7','7',32,null),
-('CO-DC-Bogota','HWF','8',32,null),
-('CO-DC-Bogota','HWH','9',32,null),
-('CO-DC-Bogota','HWJ','B',32,null),
-('CO-DC-Bogota','HWK','C',32,null),
-('CO-DC-Bogota','HWL','D',32,null),
-('CO-DC-Bogota','HWS','F',32,null),
-('CO-DC-Bogota','HWT','G',32,null),
-('CO-DC-Bogota','HWU','H',32,null),
-('CO-DC-Bogota','HWV','J',32,null),
-('CO-DC-Bogota','HX5','K',32,null),
-('CO-DC-Bogota','HX7','L',32,null),
-('CO-DC-Bogota','HXF','M',32,null),
-('CO-DC-Bogota','HXJ','N',32,null),
-('CO-DC-Bogota','HXK','P',32,null),
-('CO-DC-Bogota','HXL','Q',32,null),
-('CO-DC-Bogota','HXM','R',32,null),
-('CO-DC-Bogota','HXN','S',32,null),
-('CO-DC-Bogota','HXQ','T',32,null),
-('CO-DC-Bogota','HXS','U',32,null),
-('CO-DC-Bogota','HXT','V',32,null),
-('CO-DC-Bogota','HXU','W',32,null),
-('CO-DC-Bogota','HXV','X',32,null),
-('CO-DC-Bogota','HXW','Y',32,null),
-('CO-DC-Bogota','HXY','Z',32,null),
-('CO-GUV-Calamar','PH','0',32,null),
-('CO-GUV-Calamar','PU','1',32,null),
-('CO-GUV-Calamar','PV','2',32,null),
-('CO-GUV-Calamar','PY','3',32,null),
-('CO-GUV-Calamar','Q5','4',32,null),
-('CO-GUV-Calamar','QJ','5',32,null),
-('CO-GUV-Calamar','QK','6',32,null),
-('CO-GUV-Calamar','QL','7',32,null),
-('CO-GUV-Calamar','QM','8',32,null),
-('CO-GUV-Calamar','QN','9',32,null),
-('CO-GUV-Calamar','QP','B',32,null),
-('CO-GUV-Calamar','QR','C',32,null)
-;
-
-SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQD',32);
-SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQF',32);
-SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQH',32);
-SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HRJ',32);
-SELECT libgrid_co.update_geom_de_para('CO-CUN-Narino','HQU',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HS' ,32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HT' ,32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','98J',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','98K',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','98M',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','98N',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HW5',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HW7',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWF',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWH',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWJ',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWK',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWL',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWS',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWT',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWU',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HWV',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HX5',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HX7',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXF',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXJ',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXK',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXL',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXM',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXN',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXQ',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXS',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXT',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXU',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXV',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXW',32);
-SELECT libgrid_co.update_geom_de_para('CO-DC-Bogota','HXY',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','PH',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','PU',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','PV',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','PY',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','Q5',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QJ',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QK',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QL',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QM',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QN',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QP',32);
-SELECT libgrid_co.update_geom_de_para('CO-GUV-Calamar','QR',32);
-*/
 
 /*
 CREATE or replace FUNCTION libgrid_co.xy_to_l0code(
@@ -910,56 +770,7 @@ COMMENT ON FUNCTION libgrid_co.osmcode_decode(text,int,int,int,int,int,int)
 ;
 */
 
-/*
-CREATE EXTENSION IF NOT EXISTS postgres_fdw;
-CREATE SERVER    IF NOT EXISTS foreign_server_dl03
-         FOREIGN DATA WRAPPER postgres_fdw
-         OPTIONS (dbname 'dl03t_main')
-;
-CREATE USER MAPPING FOR PUBLIC SERVER foreign_server_dl03;
 
-CREATE FOREIGN TABLE fdw_jurisdiction (
- osm_id          bigint,
- jurisd_base_id  integer,
- jurisd_local_id integer,
- parent_id       bigint,
- admin_level     smallint,
- name            text,
- parent_abbrev   text,
- abbrev          text,
- wikidata_id     bigint,
- lexlabel        text,
- isolabel_ext    text,
- ddd             integer,
- housenumber_system_type text,
- lex_urn         text,
- info            jsonb,
- name_en         text,
- isolevel        text
-) SERVER foreign_server_dl03
-  OPTIONS (schema_name 'optim', table_name 'jurisdiction')
-;
-
-CREATE FOREIGN TABLE fdw_jurisdiction_geom (
- osm_id          bigint,
- isolabel_ext    text,
- geom            geometry(Geometry,4326),
- kx_ghs1_intersects text[],
- kx_ghs2_intersects text[]
-) SERVER foreign_server_dl03
-  OPTIONS (schema_name 'optim', table_name 'jurisdiction_geom')
-;
-
-CREATE VIEW vw01full_jurisdiction_geom AS
-    SELECT j.*, g.geom
-    FROM fdw_jurisdiction j
-    LEFT JOIN fdw_jurisdiction_geom g
-    ON j.osm_id = g.osm_id
-;
-COMMENT ON VIEW vw01full_jurisdiction_geom
-  IS 'Add geom to fdw_jurisdiction.'
-;
-*/
 /*
 -- cobertura L0 da colombia
 DROP TABLE libgrid_co.L0_cell262km;
