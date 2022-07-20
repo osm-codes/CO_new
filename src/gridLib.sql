@@ -289,7 +289,8 @@ COMMENT ON FUNCTION libosmcodes.ggeohash_GeomsFromVarbit
 
 CREATE TABLE libosmcodes.l0cover (
   isolabel_ext   text  NOT NULL,
-  jurisd_base_id int NOT NULL,
+  jurisd_base_id int   NOT NULL,
+  srid           int   NOT NULL,
   prefix_l032    text  NOT NULL,
   prefix_l016h   text  NOT NULL,
   quadrant       text  NOT NULL,
@@ -297,11 +298,12 @@ CREATE TABLE libosmcodes.l0cover (
   geom           geometry,
   geom_srid4326  geometry
 );
-INSERT INTO libosmcodes.l0cover(isolabel_ext,jurisd_base_id,prefix_l032,prefix_l016h,quadrant,bbox,geom,geom_srid4326)
+INSERT INTO libosmcodes.l0cover(isolabel_ext,jurisd_base_id,srid,prefix_l032,prefix_l016h,quadrant,bbox,geom,geom_srid4326)
 (
   SELECT
     'CO' AS isolabel_ext,
     170 AS jurisd_base_id,
+    9377 AS srid,
     prefix_l032, prefix_l016h, quadrant, bbox,
     ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),false,9377),ST_Transform(geom,9377)) AS geom,
     ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),true, 9377),geom) AS geom_srid4326
@@ -320,6 +322,7 @@ UNION
   SELECT 
     'BR' AS isolabel_ext,
     76 AS jurisd_base_id,
+    952019 AS srid,
     prefix_l032, prefix_l016h, quadrant, bbox,
     ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),false,952019),ST_Transform(geom,952019)) AS geom,
     ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),true, 952019),geom) AS geom_srid4326
@@ -431,21 +434,20 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
   p_srid       int     DEFAULT 9377,
   p_grid_size  int     DEFAULT 32,
   p_bbox       int[]   DEFAULT array[0,0,0,0],
-  p_l0code     text    DEFAULT '0'
+  p_l0code     text    DEFAULT '0',
+  p_jurisd_base_id int DEFAULT 170
 ) RETURNS jsonb AS $f$
     SELECT jsonb_build_object(
         'type', 'FeatureCollection',
         'features',
             (
-                ST_AsGeoJSONb(
-                str_ggeohash_draw_cell_bybox(bbox,true,p_srid),
-                    8,0,null,
+                ST_AsGeoJSONb(ST_Transform(geom_cell,4326),8,0,null,
                     jsonb_strip_nulls(jsonb_build_object(
                         'code', code_end,
                         'short_code', short_code,
-                        'area', ST_Area(str_ggeohash_draw_cell_bybox(bbox,false,p_srid)),
-                        'side', SQRT(ST_Area(str_ggeohash_draw_cell_bybox(bbox,false,p_srid))),
-                        'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
+                        'area', ST_Area(geom_cell),
+                        'side', SQRT(ST_Area(geom_cell)),
+                        'base', base
                         ))
                 )::jsonb ||
                 CASE
@@ -460,7 +462,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
                                   'prefix', code_end,
                                   'area', ST_Area(geom),
                                   'side', SQRT(ST_Area(geom)),
-                                  'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
+                                  'base', base
                                   )
                               )::jsonb) AS gj
                       FROM libosmcodes.ggeohash_GeomsFromVarbit(p_l0code,m.bit_string,false,p_srid,p_base,p_grid_size,p_bbox)
@@ -472,8 +474,12 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
     FROM
     (
         SELECT r.*,
-        CASE WHEN p_bit_length = 0 THEN p_bbox  ELSE libosmcodes.osmcode_decode_xybox((p_l0code||j),p_base,p_bbox) END AS bbox,
-        CASE WHEN p_bit_length = 0 THEN p_l0code ELSE (p_l0code||j)                                         END AS code_end,
+        CASE WHEN p_bit_length = 0
+        THEN str_ggeohash_draw_cell_bybox(p_bbox,false,p_srid)
+        ELSE str_ggeohash_draw_cell_bybox((libosmcodes.osmcode_decode_xybox((p_l0code||j),p_base,p_bbox)),false,p_srid)
+        END AS geom_cell,
+        CASE WHEN p_bit_length = 0 THEN p_l0code ELSE (p_l0code||j) END AS code_end,
+        CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END AS base,
         (('{"0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "B":10, "C":11, "D":12, "F":13, "G":14, "H":15, "J":16, "K":17, "L":18, "M":19, "N":20, "P":21, "Q":22, "R":23, "S":24, "T":25, "U":26, "V":27, "W":28, "X":29, "Y":30, "Z":31}'::jsonb)->(p_l0code))::int::bit(5) || bit_string AS code_end_bits
         FROM
         (
@@ -493,11 +499,12 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
               (    (id::bit(64)<<27)::bit(20) # code_end_bits::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(15))::bit(20) ) = 0::bit(20)
               OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(10))::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(5))::bit(20)  ) = 0::bit(20)
             )
+            AND  (id::bit(64))::bit(10) = p_jurisd_base_id::bit(10)
             AND CASE WHEN (id::bit(64)<<26)::bit(1) <> b'0' THEN ST_Contains(r.geom,p_geom) ELSE TRUE  END
     ) t
     ON TRUE
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libosmcodes.osmcode_encode(geometry(POINT),int,int,int,int,int[],text)
+COMMENT ON FUNCTION libosmcodes.osmcode_encode(geometry(POINT),int,int,int,int,int[],text,int)
   IS 'Encodes geometry to OSMcode.'
 ;
 
@@ -509,7 +516,8 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
   p_srid       int     DEFAULT 9377,
   p_grid_size  int     DEFAULT 32,
   p_bbox       int[]   DEFAULT array[0,0,0,0],
-  p_l0code     text    DEFAULT '0'
+  p_l0code     text    DEFAULT '0',
+  p_jurisd_base_id int DEFAULT 170
 ) RETURNS jsonb AS $wrap$
   SELECT libosmcodes.osmcode_encode(
       ST_SetSRID(ST_MakePoint(lon,lat),4326),
@@ -518,10 +526,11 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
       p_srid,
       p_grid_size,
       p_bbox,
-      p_l0code
+      p_l0code,
+      p_jurisd_base_id
     )
 $wrap$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libosmcodes.osmcode_encode(float,float,int,int,int,int,int[],text)
+COMMENT ON FUNCTION libosmcodes.osmcode_encode(float,float,int,int,int,int,int[],text,int)
   IS 'Encodes LatLon to OSMcode. Wrap for osmcode_encode(geometry)'
 ;
 
@@ -531,7 +540,7 @@ CREATE or replace FUNCTION api.osmcode_encode(
   grid   int DEFAULT 0
 ) RETURNS jsonb AS $wrap$
   SELECT libosmcodes.osmcode_encode(
-    ST_Transform(ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326),(('{"76": 952019, "170": 9377}'::jsonb)->u.jurisd_base_id)::int),
+    ST_Transform(v.geom,u.srid),
     p_base,
     CASE
     WHEN latLon[4] IS NOT NULL
@@ -544,20 +553,19 @@ CREATE or replace FUNCTION api.osmcode_encode(
       END
     ELSE 35
     END,
-    (('{"76": 952019, "170": 9377}'::jsonb)->u.jurisd_base_id)::int,
+    u.srid,
     grid,
     u.bbox,
-    u.l0code
+    u.l0code,
+    u.jurisd_base_id
     )
-  FROM
-  (
-    SELECT str_geouri_decode(uri)
-  ) t(latLon),
+  FROM ( SELECT str_geouri_decode(uri) ) t(latLon),
+  LATERAL ( SELECT ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326) ) v(geom),
   LATERAL
   (
-    SELECT CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END AS l0code, bbox, jurisd_base_id::text, isolabel_ext
+    SELECT CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END AS l0code, bbox, jurisd_base_id, srid, isolabel_ext
     FROM libosmcodes.l0cover
-    WHERE ST_Contains(geom_srid4326,ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326))
+    WHERE ST_Contains(geom_srid4326,v.geom)
   ) u
 $wrap$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_encode(text,int,int)
@@ -581,14 +589,19 @@ CREATE or replace FUNCTION api.osmcode_decode(
     ))::jsonb ]  )
     FROM
     (
-      SELECT str_ggeohash_draw_cell_bybox(
-        libosmcodes.osmcode_decode_xybox(
-          upper(p_code),
-          p_base,
-          (SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN prefix_l016h = upper(substr(p_code,1,2)) ELSE prefix_l032 = upper(substr(p_code,1,1)) END))),
-        false,
-        (('{"BR": 952019, "CO": 9377}'::jsonb)->(upper(p_iso)))::int
-        )
+      SELECT str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(upper(p_code),p_base,bbox),false,srid)
+      FROM
+      (
+        SELECT bbox, srid
+        FROM libosmcodes.l0cover
+        WHERE isolabel_ext = upper(p_iso)
+          AND (
+                CASE
+                WHEN p_base = 16 THEN prefix_l016h = upper(substr(p_code,1,2))
+                ELSE prefix_l032 = upper(substr(p_code,1,1))
+                END
+              )
+      ) v
     ) t(geom)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_decode(text,text,int)
@@ -608,7 +621,7 @@ CREATE or replace FUNCTION api.osmcode_decode_list(
             SELECT jsonb_agg(
                 ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,
                     jsonb_build_object(
-                        'code', upper(code) ,
+                        'code', code,
                         'area', ST_Area(geom),
                         'side', SQRT(ST_Area(geom)),
                         'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
@@ -616,15 +629,12 @@ CREATE or replace FUNCTION api.osmcode_decode_list(
                     )::jsonb) AS gj
             FROM
             (
-              SELECT c.code, str_ggeohash_draw_cell_bybox(
-                libosmcodes.osmcode_decode_xybox(
-                  upper(code),
-                  p_base,
-                  (SELECT bbox FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN prefix_l016h = upper(substr(code,1,2)) ELSE prefix_l032 = upper(substr(code,1,1)) END))),
-                false,
-                (('{"BR": 952019, "CO": 9377}'::jsonb)->(upper(p_iso)))::int
-                )
-              FROM (SELECT DISTINCT code FROM regexp_split_to_table(p_code_list,',') code ) c
+              SELECT c.code, str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(c.code,p_base,bbox),false,srid)
+              FROM
+              (
+                SELECT DISTINCT upper(cd) AS code FROM regexp_split_to_table(p_code_list,',') cd
+              ) c,
+              LATERAL ( SELECT bbox, srid FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN prefix_l016h = substr(c.code,1,2) ELSE prefix_l032 = substr(c.code,1,1) END))  v
             ) t(code,geom)
           )
       )
