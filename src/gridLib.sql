@@ -213,8 +213,8 @@ RETURNS text[] as $f$
       WHEN cardinality(u)=3 AND uri ~ '[a-zA-Z]{2,}' THEN uri || array[upper(u[1])]
       ELSE (
         SELECT isolabel_ext
-        FROM vwisolabel_reduced
-        WHERE lower(isolabel_reduced) = lower(uri) ) || array[upper(u[1])]
+        FROM mvwjurisdiction_synonym
+        WHERE lower(synonym) = lower(uri) ) || array[upper(u[1])]
     END
   FROM ( SELECT regexp_split_to_array (uri,'(-)')::text[] AS u ) r
 $f$ LANGUAGE SQL IMMUTABLE;
