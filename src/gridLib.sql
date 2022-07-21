@@ -572,45 +572,12 @@ COMMENT ON FUNCTION api.osmcode_encode(text,int,int)
   IS 'Encodes Geo URI to OSMcode. Wrap for osmcode_encode(geometry)'
 ;
 -- SELECT api.osmcode_encode('geo:3.461,-76.577');
--- SELECT api.osmcode_encode('geo:-1.7,-63.8');
 
 ------------------
 -- osmcode decode:
 
 CREATE or replace FUNCTION api.osmcode_decode(
    p_code text,
-   p_iso  text,
-   p_base int     DEFAULT 32
-) RETURNS jsonb AS $f$
-  SELECT  jsonb_build_object(
-    'type' , 'FeatureCollection',
-    'features', ARRAY[ ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,jsonb_build_object('code', upper(p_code), 'area', ST_Area(geom),
-    'side', SQRT(ST_Area(geom)), 'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
-    ))::jsonb ]  )
-    FROM
-    (
-      SELECT str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(upper(p_code),p_base,bbox),false,srid)
-      FROM
-      (
-        SELECT bbox, srid
-        FROM libosmcodes.l0cover
-        WHERE isolabel_ext = upper(p_iso)
-          AND (
-                CASE
-                WHEN p_base = 16 THEN prefix_l016h = upper(substr(p_code,1,2))
-                ELSE prefix_l032 = upper(substr(p_code,1,1))
-                END
-              )
-      ) v
-    ) t(geom)
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION api.osmcode_decode(text,text,int)
-  IS 'Decodes OSMcode.'
-;
---SELECT api.osmcode_decode('HX7VgYKPW','CO');
-
-CREATE or replace FUNCTION api.osmcode_decode_list(
-   p_code_list text,
    p_iso  text,
    p_base int     DEFAULT 32
 ) RETURNS jsonb AS $f$
@@ -632,17 +599,29 @@ CREATE or replace FUNCTION api.osmcode_decode_list(
               SELECT c.code, str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(c.code,p_base,bbox),false,srid)
               FROM
               (
-                SELECT DISTINCT upper(cd) AS code FROM regexp_split_to_table(p_code_list,',') cd
+                SELECT DISTINCT upper(cd) AS code FROM regexp_split_to_table(p_code,',') cd
               ) c,
-              LATERAL ( SELECT bbox, srid FROM libosmcodes.l0cover WHERE isolabel_ext = upper(p_iso) AND (CASE WHEN p_base = 16 THEN prefix_l016h = substr(c.code,1,2) ELSE prefix_l032 = substr(c.code,1,1) END))  v
+              LATERAL
+              (
+                SELECT bbox, srid
+                FROM libosmcodes.l0cover
+                WHERE isolabel_ext = upper(p_iso)
+                  AND (
+                        CASE
+                        WHEN p_base = 16 THEN prefix_l016h = upper(substr(c.code,1,2))
+                        ELSE prefix_l032 = upper(substr(c.code,1,1))
+                        END
+                      )
+              ) v
             ) t(code,geom)
           )
       )
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION api.osmcode_decode_list(text,text,int)
-  IS 'Decodes list of OSMcode.'
+COMMENT ON FUNCTION api.osmcode_decode(text,text,int)
+  IS 'Decodes OSMcode.'
 ;
--- SELECT api.osmcode_decode_list('1,2,d3,2','CO',32);
+--SELECT api.osmcode_decode('HX7VgYKPW','CO');
+--SELECT api.osmcode_decode('1,2,d3,2','CO',32);
 
 CREATE or replace FUNCTION api.osmcode_decode_reduced(
    p_code text,
@@ -663,6 +642,55 @@ COMMENT ON FUNCTION api.osmcode_decode_reduced(text)
   IS 'Decodes OSMcode reduced (base32). Wrap for osmcode_decode.'
 ;
 --SELECT api.osmcode_decode_reduced('0JKRPV','CO-Itagui');
+
+------------------
+-- jurisdiction l0cover:
+
+CREATE or replace FUNCTION api.jurisdiction_l0cover(
+   p_iso  text,
+   p_base int     DEFAULT 32
+) RETURNS jsonb AS $f$
+  SELECT jsonb_build_object(
+      'type', 'FeatureCollection',
+      'features',
+          (
+            SELECT (api.jurisdiction_geojson_from_isolabel(p_iso))->'features' ||
+            (
+              SELECT jsonb_agg(
+                  ST_AsGeoJSONb(geom_srid4326,8,0,null,
+                      jsonb_build_object(
+                          'code', code,
+                          'area', ST_Area(geom),
+                          'side', SQRT(ST_Area(geom)),
+                          'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
+                          )
+                      )::jsonb) AS gj
+              FROM
+              (
+                (
+                  SELECT geom_srid4326, geom,
+                      CASE
+                      WHEN p_base = 16 THEN prefix_l016h
+                      ELSE prefix_l032
+                      END AS code
+                    FROM libosmcodes.l0cover
+                    WHERE isolabel_ext = upper(p_iso)
+                )
+                UNION ALL
+                (
+                  SELECT CASE WHEN geom IS NULL THEN ELSE ST_Transform(geom,4326) END AS geom_srid4326, AS geom, prefix AS code
+                    FROM libosmcodes.de_para
+                    WHERE ( lower(isolabel_ext) = lower(p_iso) ) OR ( isolabel_ext = ( SELECT isolabel_ext FROM mvwjurisdiction_synonym WHERE lower(synonym) = lower(p_iso) ))
+                )
+              ) t
+            )
+          )
+      )
+$f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION api.jurisdiction_l0cover(text,int)
+  IS 'Return l0cover.'
+;
+--SELECT api.jurisdiction_l0cover('CO-ANT-Itagui');
 
 
 /*
