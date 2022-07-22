@@ -347,9 +347,10 @@ CREATE TABLE libosmcodes.tmpcover (
   jurisd_base_id int NOT NULL,
   cover        text[] NOT NULL
 );
+--DELETE FROM libosmcodes.tmpcover;
 INSERT INTO libosmcodes.tmpcover(isolabel_ext,srid,jurisd_base_id,cover) VALUES
 ('CO-AMA-Leticia',9377,170,'{X3T,X3U,X3V,X5,X65,X66,X67,X6C,X6D,X6F,X6G,X6H,X6J,X6K,X6L,X6M,X6S,X6T,X6U,X6V,X6W,X6Y,X7,XJ,XL,XM,XT}'::text[]),
-('CO-ANT-Itagui',9377,170,'{9J8R,9J8W,9J8X,9J8Z,9JB2,9JB3,9JB6,9JB7,9JB8,9JB9,9JBB,9JBC,9JBD,9JBF,9JBG,9JBH,9JC1,9JC4,9JC5}'::text[]),
+('CO-ANT-Itagui',9377,170,'{9J8W,9J8X,9J8Z,9JB2,9JB3,9JB8,9JB9,9JBB,9JBC,9JBD,9JBF,9JBG,9JBH,9JC1,9JC4,9JC5}'::text[]),
 ('CO-ANT-Medellin',9377,170,'{8UXZ,8UZ,8VP,8VR,9JB,9JC,9JG,9K0,9K1,9K2,9K3,9K4}'::text[]),
 ('CO-ATL-Soledad',9377,170,'{3LF,3LH,3LS,3LTP,3LU0,3LU1,3LU2,3LU3,3LU4,3LU6,3LU7,3LU8,3LU9,3LUB,3LUC,3LUD,3LUF,3LUG,3LV0,3LV1}'::text[]),
 ('CO-CAQ-Solano',9377,170,'{P1,P2,P3,P4,P5,P6,P7,P8,PB,PC,PG,PH,Q0,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,QB,QD,TR,TW,TX,TY,TZ,U}'::text[]),
@@ -405,6 +406,7 @@ CREATE TABLE libosmcodes.de_para (
   base         int,
   geom         geometry -- in default srid
 );
+--DELETE FROM libosmcodes.de_para;
 INSERT INTO libosmcodes.de_para(id,isolabel_ext,prefix,index,base,geom)
 SELECT ((j_id_bit || l_id_bit || mun_princ || cover_parcial ||  sufix_bits)::bit(64))::bigint , isolabel_ext, cell, ordered_cover, 32, geom
 FROM
