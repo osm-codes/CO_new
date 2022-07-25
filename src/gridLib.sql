@@ -229,7 +229,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_decode_xybox(
   bbox   int[] DEFAULT array[0,0,0,0]
 ) RETURNS float[] AS $f$
   SELECT str_ggeohash_decode_box(  -- returns codeBox
-           CASE WHEN p_base = 16 THEN substr(p_code,3) ELSE substr(p_code,2) END,
+           p_code, -- without l0 prefix
            CASE WHEN p_base = 16 THEN 4 ELSE 5 END, -- code_digit_bits
            CASE WHEN p_base = 16
            THEN
@@ -295,18 +295,20 @@ CREATE TABLE libosmcodes.l0cover (
   prefix_l016h   text  NOT NULL,
   quadrant       text  NOT NULL,
   bbox           int[] NOT NULL,
+  subcells_l032  text[],
+  subcells_l016h text[],
   geom           geometry,
   geom_srid4326  geometry
 );
-INSERT INTO libosmcodes.l0cover(isolabel_ext,jurisd_base_id,srid,prefix_l032,prefix_l016h,quadrant,bbox,geom,geom_srid4326)
+INSERT INTO libosmcodes.l0cover(isolabel_ext,jurisd_base_id,srid,prefix_l032,prefix_l016h,quadrant,bbox,subcells_l032,subcells_l016h,geom,geom_srid4326)
 (
   SELECT
     'CO' AS isolabel_ext,
     170 AS jurisd_base_id,
     9377 AS srid,
-    prefix_l032, prefix_l016h, quadrant, bbox,
-    ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),false,9377),ST_Transform(geom,9377)) AS geom,
-    ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),true, 9377),geom) AS geom_srid4326
+    prefix_l032, prefix_l016h, quadrant, bbox, null::text[], null::text[],
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,9377),ST_Transform(geom,9377)) AS geom,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 9377),geom) AS geom_srid4326
   FROM unnest
       (
       '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
@@ -323,18 +325,34 @@ UNION
     'BR' AS isolabel_ext,
     76 AS jurisd_base_id,
     952019 AS srid,
-    prefix_l032, prefix_l016h, quadrant, bbox,
-    ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),false,952019),ST_Transform(geom,952019)) AS geom,
-    ST_Intersection(str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(prefix_l032,32,bbox),true, 952019),geom) AS geom_srid4326
+    prefix_l032, prefix_l016h, quadrant, bbox, (CASE WHEN quadrant=2 THEN '{P,R,N,Q}'::text[] ELSE null::text[] END), (CASE WHEN quadrant=2 THEN '{A,B,T}'::text[] ELSE null::text[] END),
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom,952019)) AS geom,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom) AS geom_srid4326
   FROM unnest
       (
       '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
-      '{00,01,02,03,04,05,06,07,08,09,0A,0B,0C,0D,0E,0F,10,11,12,13,14,15,16,17,18,19,1A,1B,1C,1D,1E,1F}'::text[],
-      array[20,21,22,23,24,15,16,17,18,19,11,12,13,14,6,7,8,2]
+      '{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F}'::text[],
+      array[20,21,22,23,15,16,17,18,19,11,12,13,6,7,8,2]
       ) t(prefix_l032,prefix_l016h,quadrant),
       LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000,6727000,1048576)) u(bbox),
       LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom)
   WHERE quadrant IS NOT NULL
+)
+UNION
+(
+  SELECT 'BR',76,952019,'H','F',24, bbox, '{H,G}'::text[], '{7,R}'::text[],
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom,952019)) AS geom,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom) AS geom_srid4326
+  FROM
+  (SELECT libosmcodes.ij_to_bbox(24%5,24/5,2715000,6727000,1048576) AS bbox, geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r
+)
+UNION
+(
+  SELECT 'BR',76,952019,'H','F',14, bbox, '{8,9,B,C}'::text[], '{4,5,Q}'::text[],
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom,952019)) AS geom,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom) AS geom_srid4326
+  FROM
+  (SELECT libosmcodes.ij_to_bbox(14%5,14/5,2715000,6727000,1048576) AS bbox, geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r
 )
 ORDER BY 1,3
 ;
@@ -515,7 +533,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
         SELECT r.*,
         CASE WHEN p_bit_length = 0
         THEN str_ggeohash_draw_cell_bybox(p_bbox,false,p_srid)
-        ELSE str_ggeohash_draw_cell_bybox((libosmcodes.osmcode_decode_xybox((p_l0code||j),p_base,p_bbox)),false,p_srid)
+        ELSE str_ggeohash_draw_cell_bybox((libosmcodes.osmcode_decode_xybox(j,p_base,p_bbox)),false,p_srid)
         END AS geom_cell,
         CASE WHEN p_bit_length = 0 THEN p_l0code ELSE (p_l0code||j) END AS code_end,
         CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END AS base,
@@ -635,22 +653,31 @@ CREATE or replace FUNCTION api.osmcode_decode(
                     )::jsonb) AS gj
             FROM
             (
-              SELECT c.code, str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(c.code,p_base,bbox),false,srid)
+              SELECT c.code, str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(substr(c.code,length(prefix)+1,length(c.code)),p_base,bbox),false,srid)
               FROM
               (
                 SELECT DISTINCT upper(cd) AS code FROM regexp_split_to_table(p_code,',') cd
               ) c,
               LATERAL
               (
-                SELECT bbox, srid
+                SELECT bbox, srid, CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END AS prefix
                 FROM libosmcodes.l0cover
                 WHERE isolabel_ext = upper(p_iso)
                   AND (
                         CASE
-                        WHEN p_base = 16 THEN prefix_l016h = upper(substr(c.code,1,2))
+                        WHEN p_base = 16 AND upper(p_iso) = 'CO' THEN prefix_l016h = upper(substr(c.code,1,2))
+                        WHEN p_base = 16 AND upper(p_iso) = 'BR' THEN prefix_l016h = upper(substr(c.code,1,1))
                         ELSE prefix_l032 = upper(substr(c.code,1,1))
                         END
                       )
+                  AND
+                      CASE
+                      WHEN subcells_l032 IS NOT NULL AND upper(p_iso) = 'BR' AND p_base = 32 THEN (subcells_l032 @> array[substr(p_code,2,1)]::text[])
+                      WHEN subcells_l016h IS NOT NULL AND upper(p_iso) = 'BR' AND p_base = 16 THEN (subcells_l016h @> array[substr(p_code,2,1)]::text[])
+                      WHEN subcells_l032 IS NOT NULL AND upper(p_iso) = 'CO' AND p_base = 32 THEN (subcells_l032 @> array[substr(p_code,2,1)]::text[])
+                      WHEN subcells_l016h IS NOT NULL AND upper(p_iso) = 'CO' AND p_base = 16 THEN (subcells_l016h @> array[substr(p_code,1,2)]::text[])
+                      ELSE TRUE
+                      END
               ) v
             ) t(code,geom)
           )
