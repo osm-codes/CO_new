@@ -733,12 +733,13 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
             (
               SELECT jsonb_agg(
                   ST_AsGeoJSONb(geom_srid4326,8,0,null,
-                      jsonb_build_object(
+                      jsonb_strip_nulls(jsonb_build_object(
                           'code', code,
                           'area', ST_Area(geom),
                           'side', SQRT(ST_Area(geom)),
-                          'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
-                          )
+                          'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END,
+                          'index', index
+                          ))
                       )::jsonb) AS gj
               FROM
               (
@@ -747,13 +748,13 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                       CASE
                       WHEN p_base = 16 THEN prefix_l016h
                       ELSE prefix_l032
-                      END AS code
+                      END AS code, null AS index
                     FROM libosmcodes.l0cover
                     WHERE isolabel_ext = upper(p_iso)
                 )
                 UNION ALL
                 (
-                  SELECT ST_Transform(geom,4326) AS geom_srid4326, geom, prefix AS code
+                  SELECT ST_Transform(geom,4326) AS geom_srid4326, geom, prefix AS code, index
                     FROM libosmcodes.de_para
                     WHERE ( lower(isolabel_ext) = lower(p_iso) ) OR ( isolabel_ext = ( SELECT isolabel_ext FROM mvwjurisdiction_synonym WHERE lower(synonym) = lower(p_iso) ))
                 )
