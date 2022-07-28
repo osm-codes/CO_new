@@ -1,5 +1,5 @@
 --
---  Grade Estatistica
+--  Grade Estatistica/Postal
 --
 
 CREATE EXTENSION IF NOT EXISTS postgis;
@@ -242,7 +242,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_decode_xybox(
          ) AS codebox
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.osmcode_decode_xybox(text,int,int[])
-  IS 'Decodes Colombia-OSMcode geocode into a bounding box of its cell.'
+  IS 'Decodes OSMcode geocode into a bounding box of its cell.'
 ;
 -- SELECT libosmcodes.osmcode_decode_xybox('0EG',16);
 -- SELECT libosmcodes.osmcode_encode('geo:3.461,-76.577');
@@ -254,7 +254,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_decode_xybox2(
   SELECT str_ggeohash_decode_box2(p_code,p_bbox) AS codebox
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.osmcode_decode_xybox2(varbit,int[])
-  IS 'Decodes Colombia-OSMcode geocode into a bounding box of its cell.'
+  IS 'Decodes OSMcode geocode into a bounding box of its cell.'
 ;
 
 CREATE or replace FUNCTION libosmcodes.ggeohash_GeomsFromVarbit(
@@ -279,7 +279,7 @@ CREATE or replace FUNCTION libosmcodes.ggeohash_GeomsFromVarbit(
   ) t(x)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.ggeohash_GeomsFromVarbit
-  IS 'Return grid child-cell of Colombia-OSMcode. The parameter is the ggeohash the parent-cell, that will be a prefix for all child-cells.'
+  IS 'Return grid child-cell of OSMcode. The parameter is the ggeohash the parent-cell, that will be a prefix for all child-cells.'
 ;
 --SELECT libosmcodes.ggeohash_GeomsFromVarbit('0D',b'1',true,9377,16,16);
 
@@ -542,23 +542,16 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
         SELECT r.*,
         CASE WHEN p_bit_length = 0
         THEN str_ggeohash_draw_cell_bybox(p_bbox,false,p_srid)
-        ELSE str_ggeohash_draw_cell_bybox((libosmcodes.osmcode_decode_xybox(j,p_base,p_bbox)),false,p_srid)
+        ELSE str_ggeohash_draw_cell_bybox((libosmcodes.osmcode_decode_xybox2(bit_string,p_bbox)),false,p_srid)
         END AS geom_cell,
-        CASE WHEN p_bit_length = 0 THEN p_l0code ELSE (p_l0code||j) END AS code_end,
         CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END AS base,
+        upper(CASE WHEN p_bit_length = 0 THEN p_l0code ELSE (p_l0code||vbit_to_baseh(bit_string,p_base,0)) END) AS code_end,
         (('{"0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "B":10, "C":11, "D":12, "F":13, "G":14, "H":15, "J":16, "K":17, "L":18, "M":19, "N":20, "P":21, "Q":22, "R":23, "S":24, "T":25, "U":26, "V":27, "W":28, "X":29, "Y":30, "Z":31}'::jsonb)->(p_l0code))::int::bit(5) || bit_string AS code_end_bits
-        FROM
-        (
-          SELECT v.*, upper(CASE
-            WHEN p_bit_length = 0 THEN ''
-            ELSE vbit_to_baseh(bit_string,p_base,0)
-            END) AS j
-          FROM ( SELECT  str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length) AS bit_string ) v
-        ) r
+        FROM ( SELECT str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length) AS bit_string ) r
     ) m
     LEFT JOIN LATERAL
     (
-            SELECT (isolabel_ext|| (CASE WHEN length(m.code_end) = length(prefix) THEN '~' || index ELSE '~' || index || substr(m.j,length(prefix),length(m.j)) END) ) AS short_code
+            SELECT (isolabel_ext|| (CASE WHEN length(m.code_end) = length(prefix) THEN '~' || index ELSE '~' || index || substr(m.code_end,length(prefix)+1,length(m.code_end)) END) ) AS short_code
             FROM libosmcodes.de_para r
             WHERE
             (
