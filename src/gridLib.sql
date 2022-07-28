@@ -311,7 +311,7 @@ INSERT INTO libosmcodes.l0cover(isolabel_ext,jurisd_base_id,srid,prefix_l032,pre
     ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 9377),geom) AS geom_srid4326
   FROM unnest
       (
-      '{0,1,2,3,4,5,6,7,8,9,B,C,C,F,G,H,J,H,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
+      '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
       '{00,01,02,03,04,05,06,07,08,09,0A,0B,0C,0D,0E,0F,10,11,12,13,14,15,16,17,18,19,1A,1B,1C,1D,1E,1F}'::text[],
       array[0,45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
       ) t(prefix_l032,prefix_l016h,quadrant),
@@ -330,8 +330,8 @@ UNION
     ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom) AS geom_srid4326
   FROM unnest
       (
-      '{0,1,2,3,4,5,6,7,8,9,B,C,C,F,G,H,J,H,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
-      '{0,1,2,3,4,5,6,7,8,9,A,B,C,C,E,F}'::text[],
+      '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
+      '{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F}'::text[],
       array[20,21,22,23,15,16,17,18,19,11,12,13,6,7,8,2]
       ) t(prefix_l032,prefix_l016h,quadrant),
       LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000,6727000,1048576)) u(bbox),
@@ -452,7 +452,7 @@ FROM
     SELECT isolabel_ext, srid, jurisd_base_id, c AS cell, i  AS ordered_cover, g.*, array_to_string(arr_bit,'') AS sufix_bits,
     upper(substr(c,2)) AS cell_without_l0prefix,
     upper(substr(c,1,1)) AS l0prefix
-    FROM libosmcodes.tmpcover tc, unnest('{0,1,2,3,4,5,6,7,8,9,B,C,C,F,G,H,J,H,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],(ARRAY(SELECT i FROM unnest(cover) t(i) ORDER BY length(i), 1 ASC))) td(i,c),
+    FROM libosmcodes.tmpcover tc, unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],(ARRAY(SELECT i FROM unnest(cover) t(i) ORDER BY length(i), 1 ASC))) td(i,c),
     LATERAL ((SELECT array_agg(l), array_agg((('{"0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "B":10, "C":11, "D":12, "F":13, "G":14, "H":15, "J":16, "K":17, "L":18, "M":19, "N":20, "P":21, "Q":22, "R":23, "S":24, "T":25, "U":26, "V":27, "W":28, "X":29, "Y":30, "Z":31}'::jsonb)->(upper(l)))::int::bit(5)) AS arr_bit FROM regexp_split_to_table(c,'') l)) g
     WHERE c IS NOT NULL
   ) p
@@ -920,7 +920,7 @@ CREATE or replace FUNCTION libgrid_co.ggeohash_GeomsFromPrefix(
   p_base      int DEFAULT 32
 ) RETURNS TABLE(ghs text, geom geometry) AS $f$
   SELECT prefix||x, str_ggeohash_draw_cell_bybox(libgrid_co.osmcode_decode_xybox(prefix||x,p_base),p_translate,p_srid)
-  FROM unnest('{0,1,2,3,4,5,6,7,8,9,B,C,C,F,G,H,J,H,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[]) t(x)
+  FROM unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[]) t(x)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libgrid_co.ggeohash_GeomsFromPrefix
   IS 'Return grid child-cell of Colombia-OSMcode. The parameter is the ggeohash the parent-cell, that will be a prefix for all child-cells.'
