@@ -10,97 +10,130 @@ CREATE SCHEMA libosmcodes;
 -- Helper functions:
 
 CREATE or replace FUNCTION libosmcodes.ij_to_xy(
-  i int,   -- coluna
-  j int,   -- linha
-  x0 int,  -- referencia de inicio do eixo x [x0,y0]
-  y0 int,  -- referencia de inicio do eixo y [x0,y0]
-  side int -- lado da célula
+  i  int, -- coluna
+  j  int, -- linha
+  x0 int, -- referencia de inicio do eixo x [x0,y0]
+  y0 int, -- referencia de inicio do eixo y [x0,y0]
+  s  int  -- lado da célula
 ) RETURNS int[] AS $f$
   SELECT array[
-    x0 + i*side,
-    y0 + j*side
+    x0 + i*s,
+    y0 + j*s
   ]
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.ij_to_xy(int,int,int,int,int)
- IS 'Coordenadas a partir da posição da célula na matriz.'
+ IS 'Retorna canto inferior esquerdo de célula na matriz.'
 ;
 --SELECT libosmcodes.ij_to_xy(1,1,4180000,1035500,262144);
 
 CREATE or replace FUNCTION libosmcodes.ij_to_geom(
-  i int,    -- coluna
-  j int,    -- linha
-  x0 int,   -- referencia de inicio do eixo x [x0,y0]
-  y0 int,   -- referencia de inicio do eixo y [x0,y0]
-  side int, -- lado da célula
-  srid int  -- srid
-  ) RETURNS geometry AS $f$
-  SELECT str_ggeohash_draw_cell_bycenter(v[1]+side/2,v[2]+side/2,side/2,false,srid)
+  i  int, -- coluna
+  j  int, -- linha
+  x0 int, -- referencia de inicio do eixo x [x0,y0]
+  y0 int, -- referencia de inicio do eixo y [x0,y0]
+  s  int, -- lado da célula
+  sr int  -- srid
+) RETURNS geometry AS $f$
+  SELECT str_ggeohash_draw_cell_bycenter(v[1]+s/2,v[2]+s/2,s/2,false,sr)
   FROM
   (
-    SELECT libosmcodes.ij_to_xy(i,j,x0,y0,side) v
+    SELECT libosmcodes.ij_to_xy(i,j,x0,y0,s) v
   ) t
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.ij_to_geom(int,int,int,int,int,int)
- IS 'Geometria a partir da posição da célula na matriz.'
+ IS 'Retorna geometria de célula na matriz.'
 ;
 --SELECT libosmcodes.ij_to_geom(0,0,4180000,1035500,262144,9377);
 
 CREATE or replace FUNCTION libosmcodes.ij_to_bbox(
-  i int,
-  j int,
-  x0 int,   -- referencia de inicio do eixo x [x0,y0]
-  y0 int,   -- referencia de inicio do eixo y [x0,y0]
-  s int
-  ) RETURNS int[] AS $f$
+  i  int, -- coluna
+  j  int, -- linha
+  x0 int, -- referencia de inicio do eixo x [x0,y0]
+  y0 int, -- referencia de inicio do eixo y [x0,y0]
+  s  int  -- lado da célula
+) RETURNS int[] AS $f$
   SELECT array[ x0+i*s, y0+j*s, x0+i*s+s, y0+j*s+s ]
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.ij_to_bbox(int,int,int,int,int)
- IS 'Retorna bbox da célula da matriz.'
+ IS 'Retorna bbox de célula da matriz.'
 ;
 -- SELECT libosmcodes.ij_to_bbox(0,0,4180000,1035500,262144);
 
-CREATE or replace FUNCTION libosmcodes.ij_to_bbox(a int[]) RETURNS int[] AS $f$
+CREATE or replace FUNCTION libosmcodes.ij_to_bbox(
+  a int[]
+)RETURNS int[] AS $wrap$
   SELECT libosmcodes.ij_to_bbox(a[1],a[2],a[3],a[4],a[5])
-$f$ LANGUAGE SQL IMMUTABLE;
+$wrap$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libosmcodes.ij_to_bbox(int[])
+ IS 'Retorna bbox de célula da matriz.'
+;
 -- SELECT libosmcodes.ij_to_bbox(array[0,0,4180000,1035500,262144]);
 
-CREATE or replace FUNCTION libosmcodes.xy_to_ij(x int, y int, x0 int, y0 int, s int) RETURNS int[] AS $f$
+CREATE or replace FUNCTION libosmcodes.xy_to_ij(
+  x  int,
+  y  int,
+  x0 int, -- referencia de inicio do eixo x [x0,y0]
+  y0 int, -- referencia de inicio do eixo y [x0,y0]
+  s  int  -- lado da célula
+) RETURNS int[] AS $f$
   SELECT array[ (x-x0)/s, (y-y0)/s, x0, y0, s ]
   WHERE (x-x0) >= 0 AND (y-y0) >= 0
 $f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libosmcodes.xy_to_ij(int,int,int,int,int,int)
+ IS 'Retorna célula da matriz que contem x,y.'
+;
 --SELECT libosmcodes.xy_to_ij(4442144,1297644,4180000,1035500,262144);
 
-CREATE or replace  FUNCTION libosmcodes.xy_to_ij(a int[]) RETURNS int[] AS $wrap$
+CREATE or replace  FUNCTION libosmcodes.xy_to_ij(
+  a int[]
+) RETURNS int[] AS $wrap$
   SELECT libosmcodes.xy_to_ij(a[1],a[2],a[3],a[4],a[5])
 $wrap$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libosmcodes.xy_to_ij(int[])
+ IS 'Retorna célula da matriz que contem x,y.'
+;
 --SELECT libosmcodes.xy_to_ij(array[4442144,1297644,4180000,1035500,262144]);
 
 CREATE or replace FUNCTION libosmcodes.xy_to_bbox(
-  x int,
-  y int,
-  x0 int,   -- referencia de inicio do eixo x [x0,y0]
-  y0 int,   -- referencia de inicio do eixo y [x0,y0]
-  s int
+  x  int,
+  y  int,
+  x0 int, -- referencia de inicio do eixo x [x0,y0]
+  y0 int, -- referencia de inicio do eixo y [x0,y0]
+  s  int  -- lado da célula
   ) RETURNS int[] AS $f$
   SELECT libosmcodes.ij_to_bbox(libosmcodes.xy_to_ij(x,y,x0,y0,s))
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.xy_to_bbox(int,int,int,int,int)
- IS 'Retorna bbox da célula que contém xy.'
+ IS 'Retorna bbox da célula que contém x,y.'
 ;
 -- SELECT libosmcodes.xy_to_bbox(4704288,1559788,4180000,1035500,262144);
 
-CREATE or replace  FUNCTION libosmcodes.xy_to_quadrant(x int, y int, x0 int, y0 int, s int, columns int) RETURNS int AS $f$
-  SELECT columns*ij[2] + ij[1]
+CREATE or replace  FUNCTION libosmcodes.xy_to_quadrant(
+  x  int,
+  y  int,
+  x0 int, -- referencia de inicio do eixo x [x0,y0]
+  y0 int, -- referencia de inicio do eixo y [x0,y0]
+  s  int, -- lado da célula
+  cl int  -- número de colunas da matriz
+) RETURNS int AS $f$
+  SELECT cl*ij[2] + ij[1]
   FROM ( SELECT libosmcodes.xy_to_ij(x,y,x0,y0,s) ) t(ij)
-  WHERE ij[1] < columns
+  WHERE ij[1] < cl
 $f$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libosmcodes.xy_to_quadrant(int,int,int,int,int,int)
+ IS 'Retorna número do quandrante que contém x,y.'
+;
 --SELECT libosmcodes.xy_to_quadrant(4442144,1297644,4180000,1035500,262144,6);
 
-CREATE or replace  FUNCTION libosmcodes.xy_to_quadrant(a int[]) RETURNS int AS $wrap$
+CREATE or replace  FUNCTION libosmcodes.xy_to_quadrant(
+  a int[]
+) RETURNS int AS $wrap$
   SELECT libosmcodes.xy_to_quadrant(a[1],a[2],a[3],a[4],a[5],a[6])
 $wrap$ LANGUAGE SQL IMMUTABLE;
+COMMENT ON FUNCTION libosmcodes.xy_to_quadrant(int[])
+ IS 'Retorna número do quandrante que contém x,y.'
+;
 --SELECT libosmcodes.xy_to_quadrant(array[4442144,1297644,4180000,1035500,262144,6]);
-
 
 ------------------
 -- Uncertain level defaults:
@@ -206,22 +239,22 @@ COMMENT ON FUNCTION libosmcodes.uncertain_base16hL01048km(int)
 ------------------
 -- Others helper functions::
 
-CREATE or replace FUNCTION str_geocodeuri_decode(uri text)
+CREATE or replace FUNCTION str_geocodeiso_decode(iso text)
 RETURNS text[] as $f$
   SELECT
     CASE
-      WHEN cardinality(u)=3 AND uri ~ '[a-zA-Z]{2,}' THEN uri || array[upper(u[1])]
+      WHEN cardinality(u)=3 AND iso ~ '[a-zA-Z]{2,}' THEN iso || array[upper(u[1])]
       ELSE (
         SELECT isolabel_ext
         FROM mvwjurisdiction_synonym
-        WHERE lower(synonym) = lower(uri) ) || array[upper(u[1])]
+        WHERE lower(synonym) = lower(iso) ) || array[upper(u[1])]
     END
-  FROM ( SELECT regexp_split_to_array (uri,'(-)')::text[] AS u ) r
+  FROM ( SELECT regexp_split_to_array (iso,'(-)')::text[] AS u ) r
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION str_geocodeuri_decode(text)
-  IS 'Decodes abbrev isolabel_ext.'
+COMMENT ON FUNCTION str_geocodeiso_decode(text)
+  IS 'Decode abbrev isolabel_ext.'
 ;
---SELECT str_geocodeuri_decode('CO-Itagui');
+--SELECT str_geocodeiso_decode('CO-Itagui');
 
 CREATE or replace FUNCTION libosmcodes.osmcode_decode_xybox(
   p_code text,
@@ -245,9 +278,6 @@ $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.osmcode_decode_xybox(text,int,int[])
   IS 'Decodes OSMcode geocode into a bounding box of its cell.'
 ;
--- SELECT libosmcodes.osmcode_decode_xybox('0EG',16);
--- SELECT libosmcodes.osmcode_encode('geo:3.461,-76.577');
-
 
 CREATE or replace FUNCTION libosmcodes.ggeohash_GeomsFromVarbit(
   p_code varbit,
@@ -272,7 +302,6 @@ $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.ggeohash_GeomsFromVarbit
   IS 'Return grid child-cell of OSMcode. The parameter is the ggeohash the parent-cell, that will be a prefix for all child-cells.'
 ;
---SELECT libosmcodes.ggeohash_GeomsFromVarbit('0D',b'1',true,9377,16,16);
 
 ------------------
 -- Table cover:
@@ -292,7 +321,7 @@ CREATE TABLE libosmcodes.l0cover (
 
 -- de-para:
 CREATE TABLE libosmcodes.de_para (
-  id bigint NOT NULL,
+  id bigint    NOT NULL,
   isolabel_ext text NOT NULL,
   prefix       text NOT NULL,
   index        text NOT NULL,
@@ -431,7 +460,7 @@ CREATE or replace FUNCTION api.osmcode_encode(
   LATERAL ( SELECT ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326) ) v(geom),
   LATERAL
   (
-    SELECT CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END AS l0code, jurisd_base_id, bbox, srid
+    SELECT CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END AS l0code, jurisd_base_id, bbox, ST_SRID(geom) AS srid
     FROM libosmcodes.l0cover
     WHERE ST_Contains(geom_srid4326,v.geom)
   ) u
@@ -439,7 +468,8 @@ $wrap$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_encode(text,int,int)
   IS 'Encodes Geo URI to OSMcode. Wrap for osmcode_encode(geometry)'
 ;
--- SELECT api.osmcode_encode('geo:3.461,-76.577');
+-- EXPLAIN ANALYZE SELECT api.osmcode_encode('geo:3.461,-76.577');
+-- EXPLAIN ANALYZE SELECT api.osmcode_encode('geo:-15.5,-47.8');
 
 ------------------
 -- osmcode decode:
@@ -454,50 +484,48 @@ CREATE or replace FUNCTION api.osmcode_decode(
       'features',
           (
             SELECT jsonb_agg(
-                ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,
+                ST_AsGeoJSONb(ST_Transform(v.geom,4326),8,0,null,
                     jsonb_build_object(
-                        'code', code,
-                        'area', ST_Area(geom),
-                        'side', SQRT(ST_Area(geom)),
+                        'code', c.code,
+                        'area', ST_Area(v.geom),
+                        'side', SQRT(ST_Area(v.geom)),
                         'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
                         )
                     )::jsonb) AS gj
             FROM
             (
-              SELECT c.code, str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(substr(c.code,length(prefix)+1,length(c.code)),p_base,bbox),false,srid)
-              FROM
-              (
-                SELECT DISTINCT upper(cd) AS code FROM regexp_split_to_table(p_code,',') cd
-              ) c,
-              LATERAL
-              (
-                SELECT bbox, srid, CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END AS prefix
-                FROM libosmcodes.l0cover
-                WHERE jurisd_base_id = (('{"CO":170, "BR":76}'::jsonb)->(upper(p_iso)))::int
-                  AND (
-                        CASE
-                        WHEN p_base = 16 AND upper(p_iso) = 'CO' THEN prefix_l016h = substr(c.code,1,2)
-                        ELSE prefix_l032 = substr(c.code,1,1)
-                        END
-                      )
-                  AND
+              SELECT DISTINCT code FROM regexp_split_to_table(upper(p_code),',') code
+            ) c,
+            LATERAL
+            (
+              --SELECT str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(substr(c.code,length(CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END)+1),p_base,bbox),false,srid) AS geom
+              SELECT str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(baseh_to_vbit(substr(c.code,length(CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END)+1),p_base),bbox),false,srid) AS geom
+              FROM libosmcodes.l0cover
+              WHERE jurisd_base_id = (('{"CO":170, "BR":76}'::jsonb)->(upper(p_iso)))::int
+                AND (
                       CASE
-                      WHEN subcells_l032 IS NOT NULL AND upper(p_iso) = 'BR' AND p_base = 32 THEN (subcells_l032 @> array[substr(p_code,2,1)]::text[])
-                      WHEN subcells_l016h IS NOT NULL AND upper(p_iso) = 'BR' AND p_base = 16 THEN (subcells_l016h @> array[substr(p_code,2,1)]::text[])
-                      WHEN subcells_l032 IS NOT NULL AND upper(p_iso) = 'CO' AND p_base = 32 THEN (subcells_l032 @> array[substr(p_code,2,1)]::text[])
-                      WHEN subcells_l016h IS NOT NULL AND upper(p_iso) = 'CO' AND p_base = 16 THEN (subcells_l016h @> array[substr(p_code,1,2)]::text[])
-                      ELSE TRUE
+                      WHEN p_base = 16 AND upper(p_iso) = 'CO' THEN prefix_l016h = substr(c.code,1,2)
+                      WHEN p_base = 16 AND upper(p_iso) = 'BR' THEN prefix_l016h = upper(substr(c.code,1,1))
+                      ELSE prefix_l032 = substr(c.code,1,1)
                       END
-              ) v
-            ) t(code,geom)
+                    )
+                AND
+                    CASE
+                    WHEN subcells_l032 IS NOT NULL AND upper(p_iso) = 'BR' AND p_base = 32 THEN (subcells_l032 @> array[substr(p_code,2,1)]::text[])
+                    WHEN subcells_l016h IS NOT NULL AND upper(p_iso) = 'BR' AND p_base = 16 THEN (subcells_l016h @> array[substr(p_code,2,1)]::text[])
+                    WHEN subcells_l032 IS NOT NULL AND upper(p_iso) = 'CO' AND p_base = 32 THEN (subcells_l032 @> array[substr(p_code,2,1)]::text[])
+                    WHEN subcells_l016h IS NOT NULL AND upper(p_iso) = 'CO' AND p_base = 16 THEN (subcells_l016h @> array[substr(p_code,1,2)]::text[])
+                    ELSE TRUE
+                    END
+            ) v
           )
       )
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_decode(text,text,int)
   IS 'Decodes OSMcode.'
 ;
---SELECT api.osmcode_decode('HX7VgYKPW','CO');
---SELECT api.osmcode_decode('1,2,d3,2','CO',32);
+-- EXPLAIN ANALYZE SELECT api.osmcode_decode('HX7VgYKPW','CO');
+-- EXPLAIN ANALYZE SELECT api.osmcode_decode('1,2,d3,2','CO',32);
 
 CREATE or replace FUNCTION api.osmcode_decode_reduced(
    p_code text,
@@ -512,12 +540,12 @@ CREATE or replace FUNCTION api.osmcode_decode_reduced(
         ),
         x[2]
     )
-    FROM (SELECT str_geocodeuri_decode(p_iso)) t(x)
+    FROM (SELECT str_geocodeiso_decode(p_iso)) t(x)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_decode_reduced(text)
   IS 'Decodes OSMcode reduced (base32). Wrap for osmcode_decode.'
 ;
---SELECT api.osmcode_decode_reduced('0JKRPV','CO-Itagui');
+-- EXPLAIN ANALYZE SELECT api.osmcode_decode_reduced('0JKRPV','CO-Itagui');
 
 ------------------
 -- jurisdiction l0cover:
@@ -527,47 +555,44 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
    p_base int     DEFAULT 32
 ) RETURNS jsonb AS $f$
   SELECT jsonb_build_object(
-      'type', 'FeatureCollection',
-      'features',
+    'type', 'FeatureCollection',
+    'features',
+      (
+        SELECT jsonb_agg(
+          ST_AsGeoJSONb(geom_srid4326,8,0,null,
+              jsonb_strip_nulls(jsonb_build_object(
+                  'code', prefix,
+                  'area', ST_Area(geom),
+                  'side', SQRT(ST_Area(geom)),
+                  'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END,
+                  'index', index
+                  ))
+              )::jsonb) || (SELECT (api.jurisdiction_geojson_from_isolabel(p_iso))->'features')
+        FROM
+        (
           (
-            SELECT
-            (
-              SELECT jsonb_agg(
-                  ST_AsGeoJSONb(geom_srid4326,8,0,null,
-                      jsonb_strip_nulls(jsonb_build_object(
-                          'code', code,
-                          'area', ST_Area(geom),
-                          'side', SQRT(ST_Area(geom)),
-                          'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END,
-                          'index', index
-                          ))
-                      )::jsonb) AS gj
-              FROM
-              (
-                (
-                  SELECT geom_srid4326, geom,
-                      CASE
-                      WHEN p_base = 16 THEN prefix_l016h
-                      ELSE prefix_l032
-                      END AS code, null AS index
-                    FROM libosmcodes.l0cover
-                    WHERE jurisd_base_id = (('{"CO":170, "BR":76}'::jsonb)->(upper(p_iso)))::int
-                )
-                UNION ALL
-                (
-                  SELECT ST_Transform(geom,4326) AS geom_srid4326, geom, prefix AS code, index
-                    FROM libosmcodes.de_para
-                    WHERE ( lower(isolabel_ext) = lower(p_iso) ) OR ( isolabel_ext = ( SELECT isolabel_ext FROM mvwjurisdiction_synonym WHERE lower(synonym) = lower(p_iso) ))
-                )
-              ) t
-            ) || ( SELECT (api.jurisdiction_geojson_from_isolabel(p_iso))->'features')
+            SELECT geom_srid4326, geom,
+                CASE
+                WHEN p_base = 16 THEN prefix_l016h
+                ELSE prefix_l032
+                END AS prefix, null AS index
+              FROM libosmcodes.l0cover
+              WHERE jurisd_base_id = (('{"CO":170, "BR":76}'::jsonb)->(upper(p_iso)))::int
           )
+          UNION ALL
+          (
+            SELECT ST_Transform(geom,4326) AS geom_srid4326, geom, prefix, index
+              FROM libosmcodes.de_para
+              WHERE lower(isolabel_ext) = lower((str_geocodeiso_decode(p_iso))[1])
+          )
+        ) t
       )
+    )
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.jurisdiction_l0cover(text,int)
   IS 'Return l0cover.'
 ;
---SELECT api.jurisdiction_l0cover('CO-ANT-Itagui');
+-- EXPLAIN ANALYZE SELECT api.jurisdiction_l0cover('CO-ANT-Itagui');
 
 
 /*
