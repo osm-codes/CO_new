@@ -498,8 +498,8 @@ CREATE or replace FUNCTION api.osmcode_decode(
             ) c,
             LATERAL
             (
-              --SELECT str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(substr(c.code,length(CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END)+1),p_base,bbox),false,srid) AS geom
-              SELECT str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(baseh_to_vbit(substr(c.code,length(CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END)+1),p_base),bbox),false,srid) AS geom
+              --SELECT str_ggeohash_draw_cell_bybox(libosmcodes.osmcode_decode_xybox(substr(c.code,length(CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END)+1),p_base,bbox),false,ST_SRID(geom)) AS geom
+              SELECT str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(baseh_to_vbit(substr(c.code,length(CASE WHEN p_base = 16 THEN prefix_l016h ELSE prefix_l032 END)+1),p_base),bbox),false,ST_SRID(geom)) AS geom
               FROM libosmcodes.l0cover
               WHERE jurisd_base_id = (('{"CO":170, "BR":76}'::jsonb)->(upper(p_iso)))::int
                 AND (
