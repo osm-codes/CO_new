@@ -1,84 +1,15 @@
 ------------------
--- Table l0cover:
-/*
-CREATE TABLE libosmcodes.l0cover (
-  jurisd_base_id int   NOT NULL,
-  srid           int   NOT NULL,
-  prefix_l032    text  NOT NULL,
-  prefix_l016h   text  NOT NULL,
-  bbox           int[] NOT NULL,
-  subcells_l032  text[],
-  subcells_l016h text[],
-  geom           geometry,
-  geom_srid4326  geometry
-);
-*/
-INSERT INTO libosmcodes.l0cover(jurisd_base_id,srid,prefix_l032,prefix_l016h,bbox,subcells_l032,subcells_l016h,geom,geom_srid4326)
-(
-  SELECT
-    170 AS jurisd_base_id,
-    9377 AS srid,
-    prefix_l032, prefix_l016h,  bbox, null::text[], null::text[],
-    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,9377),ST_Transform(geom,9377)) AS geom,
-    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 9377),geom) AS geom_srid4326
-  FROM unnest
-      (
-      '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
-      '{00,01,02,03,04,05,06,07,08,09,0A,0B,0C,0D,0E,0F,10,11,12,13,14,15,16,17,18,19,1A,1B,1C,1D,1E,1F}'::text[],
-      array[0,45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
-      ) t(prefix_l032,prefix_l016h,quadrant),
-      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000,1035500,262144)) u(bbox),
-      LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom)
-  WHERE quadrant IS NOT NULL AND quadrant > 0
-)
-UNION
-(
-  SELECT 
-    76 AS jurisd_base_id,
-    952019 AS srid,
-    prefix_l032, prefix_l016h, bbox, (CASE WHEN quadrant=2 THEN '{P,R,N,Q}'::text[] ELSE null::text[] END), (CASE WHEN quadrant=2 THEN '{A,B,T}'::text[] ELSE null::text[] END),
-    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom,952019)) AS geom,
-    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom) AS geom_srid4326
-  FROM unnest
-      (
-      '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
-      '{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F}'::text[],
-      array[20,21,22,23,15,16,17,18,19,11,12,13,6,7,8,2]
-      ) t(prefix_l032,prefix_l016h,quadrant),
-      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000,6727000,1048576)) u(bbox),
-      LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom)
-  WHERE quadrant IS NOT NULL
-)
-UNION
-(
-  SELECT 76,952019,'H','F', bbox, '{H,G}'::text[], '{7,R}'::text[],
-    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom,952019)) AS geom,
-    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom) AS geom_srid4326
-  FROM
-  (SELECT libosmcodes.ij_to_bbox(24%5,24/5,2715000,6727000,1048576) AS bbox, geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r
-)
-UNION
-(
-  SELECT 76,952019,'H','F', bbox, '{8,9,B,C}'::text[], '{4,5,Q}'::text[],
-    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom,952019)) AS geom,
-    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom) AS geom_srid4326
-  FROM
-  (SELECT libosmcodes.ij_to_bbox(14%5,14/5,2715000,6727000,1048576) AS bbox, geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r
-)
-ORDER BY 1,3
-;
+-- coverage city (temp table):
 
-------------------
--- Table de-para (cover):
-
-CREATE TABLE libosmcodes.tmpcover (
+--DROP TABLE libosmcodes.tmp_coverage_city;
+CREATE TABLE libosmcodes.tmp_coverage_city (
   isolabel_ext text   NOT NULL,
   srid         int    NOT NULL,
   jurisd_base_id int NOT NULL,
   cover        text[] NOT NULL
 );
---DELETE FROM libosmcodes.tmpcover;
-INSERT INTO libosmcodes.tmpcover(isolabel_ext,srid,jurisd_base_id,cover) VALUES
+--DELETE FROM libosmcodes.tmp_coverage_city;
+INSERT INTO libosmcodes.tmp_coverage_city(isolabel_ext,srid,jurisd_base_id,cover) VALUES
 ('CO-AMA-Leticia',9377,170,'{X3T,X3U,X3V,X5,X65,X66,X67,X6C,X6D,X6F,X6G,X6H,X6J,X6K,X6L,X6M,X6S,X6T,X6U,X6V,X6W,X6Y,X7,XJ,XL,XM,XT}'::text[]),
 ('CO-ANT-Itagui',9377,170,'{9J8W,9J8X,9J8Z,9JB2,9JB3,9JB8,9JB9,9JBB,9JBC,9JBD,9JBF,9JBG,9JBH,9JC1,9JC4,9JC5}'::text[]),
 ('CO-ANT-Medellin',9377,170,'{8UXZ,8UZ,8VP,8VR,9JB,9JC,9JG,9K0,9K1,9K2,9K3,9K4}'::text[]),
@@ -129,17 +60,96 @@ INSERT INTO libosmcodes.tmpcover(isolabel_ext,srid,jurisd_base_id,cover) VALUES
 ('BR-RJ-RioJaneiro',952019,76,'{GPT,GPW,GPQ,GPX5,GPX4,GPX1,GPX0,GPRP,GPRN,GPX7,GPX6,GPX3,GPX2,GPRR,GPRQ,GPXD,GPX9,GPX8,GPRX,GPRW}'::text[]),
 ('BR-RS-SantaVitoriaPalmar',952019,76,'{HNZ,HQB,HPP,HR0,HR1,HPR,HR2,HR3,HR6,HR8,HR9,HRD}'::text[]);
 
+------------------
+-- Table coverage:
 /*
-CREATE TABLE libosmcodes.de_para (
-  id bigint NOT NULL,
-  isolabel_ext text NOT NULL,
-  prefix       text NOT NULL,
-  index        text NOT NULL,
-  geom         geometry -- in default srid
+CREATE TABLE libosmcodes.coverage (
+  id            bigint NOT NULL,
+  isolabel_ext  text, -- used only in de-para, replace with 14bit in id
+  prefix        text, -- used only in de-para, cache
+  index         text, -- used only in de-para, not in id
+  bbox          int[],-- used only in l0cover
+  geom          geometry,
+  geom_srid4326 geometry -- used only in l0cover
 );
 */
---DELETE FROM libosmcodes.de_para;
-INSERT INTO libosmcodes.de_para(id,isolabel_ext,prefix,index,geom)
+-- L0cover, country cover
+--DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2);
+INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
+SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
+        (CASE WHEN ST_ContainsProperly(geom_country_tr,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
+        rpad((baseh_to_vbit(prefix_l032,32))::text, 37, '0000000000000000000000000000000000000'))::bit(64)::bigint,
+        bbox,geom,geom_srid4326
+FROM
+(
+  (
+    SELECT 170 AS jurisd_base_id,prefix_l032,bbox,geom_country,
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,9377),ST_Transform(geom_country,9377)) AS geom,
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 9377),geom_country) AS geom_srid4326,
+      str_ggeohash_draw_cell_bybox(bbox,false,9377) AS geom_cell,
+      ST_Transform(geom_country,9377) AS geom_country_tr
+    FROM unnest
+        (
+        '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
+        '{00,01,02,03,04,05,06,07,08,09,0A,0B,0C,0D,0E,0F,10,11,12,13,14,15,16,17,18,19,1A,1B,1C,1D,1E,1F}'::text[],
+        array[0,45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
+        ) t(prefix_l032,prefix_l016h,quadrant),
+        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000,1035500,262144)) u(bbox),
+        LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom_country)
+    WHERE quadrant IS NOT NULL AND quadrant > 0
+  )
+  UNION
+  (
+    SELECT 76 AS jurisd_base_id, prefix_l032, bbox,geom_country,
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom_country,952019)) AS geom,
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom_country) AS geom_srid4326,
+      str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell,
+      ST_Transform(geom_country,952019) AS geom_country_tr
+    FROM unnest
+        (
+        '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
+        '{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F}'::text[],
+        array[20,21,22,23,15,16,17,18,19,11,12,13,6,7,8,2]
+        ) t(prefix_l032,prefix_l016h,quadrant),
+        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000,6727000,1048576)) u(bbox),
+        LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
+    WHERE quadrant IS NOT NULL AND quadrant <> 2
+  )
+  UNION
+  (
+      SELECT 76 AS jurisd_base_id, 'H'||x AS prefix_l032, bbox,geom_country,
+          --'H'||x,baseh_to_vbit('H'||x,32), vbit_to_baseh((baseh_to_vbit('H'||x,32)<<1)::bit(9),16)
+          ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom_country,952019)) AS geom,
+          ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom_country) AS geom_srid4326,
+      str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell,
+      ST_Transform(geom_country,952019) AS geom_country_tr
+      FROM
+      (
+          (
+              --SELECT x, 'H'||x,baseh_to_vbit('H'||x,32),baseh_to_vbit(x,32)
+              SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(14%5,14/5,2715000,6727000,1048576)) AS bbox
+              FROM unnest('{8,9}'::text[]) t(x)
+          )
+          UNION
+          (
+              SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(24%5,24/5,2715000,6727000,1048576)) AS bbox
+              FROM unnest('{H,G}'::text[]) t(x)
+          )
+          UNION
+          (
+              SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(2%5,2/5,2715000,6727000,1048576)) AS bbox
+              FROM unnest('{P,R,N,Q}'::text[]) t(x)
+          )
+      ) s,
+      (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
+  )
+) y
+ORDER BY 1
+;
+
+-- de_para cover
+--DELETE FROM libosmcodes.coverage WHERE (id::bit(64)<<24)::bit(2) <> 0::bit(2);
+INSERT INTO libosmcodes.coverage(id,isolabel_ext,prefix,index,geom)
 SELECT ((j_id_bit || l_id_bit || mun_princ || cover_parcial ||  sufix_bits)::bit(64))::bigint , isolabel_ext, cell, ordered_cover, geom
 FROM
 (
@@ -155,7 +165,7 @@ FROM
   (
     SELECT isolabel_ext, srid, jurisd_base_id, cell, ordered_cover, baseh_to_vbit(cell,32) AS cell_bits,
     upper(substr(cell,1,1)) AS l0prefix
-    FROM libosmcodes.tmpcover tc, unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],(ARRAY(SELECT i FROM unnest(cover) t(i) ORDER BY length(i), 1 ASC))) td(ordered_cover,cell)
+    FROM libosmcodes.tmp_coverage_city tc, unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],(ARRAY(SELECT i FROM unnest(cover) t(i) ORDER BY length(i), 1 ASC))) td(ordered_cover,cell)
     WHERE cell IS NOT NULL
   ) p
   LEFT JOIN LATERAL
@@ -191,5 +201,3 @@ FROM
   ORDER BY q.isolabel_ext, ordered_cover
 ) x
 ;
-
-DROP TABLE libosmcodes.tmpcover;
