@@ -79,13 +79,12 @@ INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
 SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
         (CASE WHEN ST_ContainsProperly(geom_country_tr,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
         rpad((baseh_to_vbit(prefix_l032,32))::text, 37, '0000000000000000000000000000000000000'))::bit(64)::bigint,
-        bbox,geom,geom_srid4326
+        bbox, geom, ST_Transform(geom,4326)
 FROM
 (
   (
     SELECT 170 AS jurisd_base_id,prefix_l032,bbox,geom_country,
       ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,9377),ST_Transform(geom_country,9377)) AS geom,
-      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 9377),geom_country) AS geom_srid4326,
       str_ggeohash_draw_cell_bybox(bbox,false,9377) AS geom_cell,
       ST_Transform(geom_country,9377) AS geom_country_tr
     FROM unnest
@@ -102,7 +101,6 @@ FROM
   (
     SELECT 76 AS jurisd_base_id, prefix_l032, bbox,geom_country,
       ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom_country,952019)) AS geom,
-      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom_country) AS geom_srid4326,
       str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell,
       ST_Transform(geom_country,952019) AS geom_country_tr
     FROM unnest
@@ -120,7 +118,6 @@ FROM
       SELECT 76 AS jurisd_base_id, 'H'||x AS prefix_l032, bbox,geom_country,
           --'H'||x,baseh_to_vbit('H'||x,32), vbit_to_baseh((baseh_to_vbit('H'||x,32)<<1)::bit(9),16)
           ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom_country,952019)) AS geom,
-          ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,true, 952019),geom_country) AS geom_srid4326,
       str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell,
       ST_Transform(geom_country,952019) AS geom_country_tr
       FROM
