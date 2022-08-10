@@ -385,8 +385,8 @@ CREATE or replace FUNCTION api.osmcode_encode(
     WHEN latLon[4] IS NOT NULL
     THEN
       CASE
-      WHEN jurisd_base_id = 170 AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/5)*5
-      WHEN jurisd_base_id = 170 AND p_base = 16 THEN libosmcodes.uncertain_base16h(latLon[4]::int)
+      WHEN (jurisd_base_id = 170 OR jurisd_base_id = 858  OR jurisd_base_id = 218 ) AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/5)*5
+      WHEN (jurisd_base_id = 170 OR jurisd_base_id = 858  OR jurisd_base_id = 218 ) AND p_base = 16 THEN libosmcodes.uncertain_base16h(latLon[4]::int)
       WHEN jurisd_base_id = 76  AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL01048km(latLon[4]::int))/5)*5
       WHEN jurisd_base_id = 76  AND p_base = 16 THEN libosmcodes.uncertain_base16hL01048km(latLon[4]::int)
       END
@@ -407,7 +407,7 @@ CREATE or replace FUNCTION api.osmcode_encode(
         WHEN p_base = 32
         THEN
         (
-          CASE --se for H e 'BR' pega 10 bits, caso contrario, pega 5.
+          CASE -- se for H e 'BR' pega 10 bits, caso contrario, pega 5.
           WHEN (id::bit(64)<<27)::bit(5) = b'01111' AND ((id::bit(64))::bit(10))::int = 76 THEN (id::bit(64)<<27)::bit(10)
           ELSE (id::bit(64)<<27)::bit(5)
           END
@@ -415,9 +415,11 @@ CREATE or replace FUNCTION api.osmcode_encode(
         WHEN p_base = 16
         THEN
         (
-          CASE
-          WHEN (id::bit(64)<<28)::bit(4) = b'1111' AND ((id::bit(64))::bit(10))::int = 76 THEN ((id::bit(64)<<28)::bit(9))
-          WHEN ((id::bit(64))::bit(10))::int = 170 THEN ((id::bit(64)<<27)::bit(8))>>3
+          CASE -- se for H e 'BR' pega 9 bits.
+               -- se for 'CO' ou 'EC' pega 8 bits e shift >>3
+               -- caso contrario, pega 4.
+          WHEN (id::bit(64)<<28)::bit(4) = b'1111' AND ((id::bit(64))::bit(10))::int = 76  THEN ((id::bit(64)<<28)::bit(9))
+          WHEN ((id::bit(64))::bit(10))::int = 170 OR  ((id::bit(64))::bit(10))::int = 218 THEN ((id::bit(64)<<27)::bit(8))>>3
           ELSE (id::bit(64)<<28)::bit(4)
           END
         )
@@ -483,7 +485,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
                     ,false,ST_SRID(geom)
                     ) AS geom
               FROM libosmcodes.coverage
-              WHERE ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76}'::jsonb)->(upper(p_iso)))::int)::bit(10) ) AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
+              WHERE ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper(p_iso)))::int)::bit(10) ) AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
                 AND
                 (
                   CASE
@@ -495,15 +497,15 @@ CREATE or replace FUNCTION api.osmcode_decode(
                     THEN
                         (
                           CASE
-                          WHEN codebits::bit(4) <> b'1111' THEN ((id::bit(64)<<28)::bit(9) # (codebits::bit(4))::bit(9)) = 0::bit(9)
-                          ELSE ( (id::bit(64)<<28)::bit(9) # codebits::bit(9) ) = 0::bit(9)
+                          WHEN codebits::bit(4) <> b'1111' THEN ((id::bit(64)<<28)::bit(9) # (codebits::bit(4))::bit(9)) = 0::bit(9) -- 1 digito base16h
+                          ELSE ( (id::bit(64)<<28)::bit(9) # codebits::bit(9) ) = 0::bit(9) -- 2 digitos base16h
                           END
                         )
                     ELSE
                         (
                           CASE
-                          WHEN codebits::bit(5) <> b'01111' THEN ((id::bit(64)<<27)::bit(10) # (codebits::bit(5))::bit(10)) = 0::bit(10)
-                          ELSE ( (id::bit(64)<<27)::bit(10) # codebits::bit(10) ) = 0::bit(10)
+                          WHEN codebits::bit(5) <> b'01111' THEN ((id::bit(64)<<27)::bit(10) # (codebits::bit(5))::bit(10)) = 0::bit(10) -- 1 digito base32
+                          ELSE ( (id::bit(64)<<27)::bit(10) # codebits::bit(10) ) = 0::bit(10) -- 2 digitos base32
                           END
                         )
                     END
@@ -515,6 +517,15 @@ CREATE or replace FUNCTION api.osmcode_decode(
                     WHEN p_base = 16
                     THEN ( ( (id::bit(64)<<29)::bit(8)  # codebits::bit(8)  ) = 0::bit(8)  )
                     ELSE ( ( (id::bit(64)<<27)::bit(5) # codebits::bit(5) ) = 0::bit(5) )
+                    END
+                  )
+                  WHEN upper(p_iso) = 'UY' --Colômbia usa 1 dígito na base16h e 1 na base32
+                  THEN
+                  (
+                    CASE
+                    WHEN p_base = 16
+                    THEN ( ( (id::bit(64)<<29)::bit(8) # codebits::bit(8)  ) = 0::bit(8)  )
+                    ELSE ( ( (id::bit(64)<<27)::bit(5) # codebits::bit(5) ) = 0::bit(5) ) -- 1 digito base32
                     END
                   )
                   END
@@ -597,7 +608,7 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                 END,p_base) AS prefix,
                 null AS index
               FROM libosmcodes.coverage
-              WHERE   ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76}'::jsonb)->(upper(p_iso)))::int)::bit(10) )
+              WHERE   ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper(p_iso)))::int)::bit(10) )
                   AND (id::bit(64)<<24)::bit(2) = 0::bit(2) -- country cover
           )
           UNION ALL

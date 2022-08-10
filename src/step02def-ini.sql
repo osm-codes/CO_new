@@ -77,71 +77,106 @@ CREATE TABLE libosmcodes.coverage (
 --DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2);
 INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
 SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
-        (CASE WHEN ST_ContainsProperly(geom_country_tr,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
+        (CASE WHEN ST_ContainsProperly(geom_country,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
         rpad((baseh_to_vbit(prefix_l032,32))::text, 37, '0000000000000000000000000000000000000'))::bit(64)::bigint,
         bbox, geom, ST_Transform(geom,4326)
 FROM
 (
   (
     SELECT 170 AS jurisd_base_id,prefix_l032,bbox,geom_country,
-      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,9377),ST_Transform(geom_country,9377)) AS geom,
-      str_ggeohash_draw_cell_bybox(bbox,false,9377) AS geom_cell,
-      ST_Transform(geom_country,9377) AS geom_country_tr
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,9377),geom_country) AS geom,
+      str_ggeohash_draw_cell_bybox(bbox,false,9377) AS geom_cell
     FROM unnest
         (
         '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
-        '{00,01,02,03,04,05,06,07,08,09,0A,0B,0C,0D,0E,0F,10,11,12,13,14,15,16,17,18,19,1A,1B,1C,1D,1E,1F}'::text[],
         array[0,45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
-        ) t(prefix_l032,prefix_l016h,quadrant),
+        ) t(prefix_l032,quadrant),
         LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000,1035500,262144)) u(bbox),
-        LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom_country)
+        LATERAL (SELECT ST_Transform(geom,9377) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom_country)
     WHERE quadrant IS NOT NULL AND quadrant > 0
   )
   UNION
   (
+    SELECT 858 AS jurisd_base_id,prefix_l032,bbox,geom_country,
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
+      str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
+    FROM unnest
+        (
+        --'{0,1,2,3,4,5,6,7,8,9}'::text[],
+        --array[40,41,30,31,20,21,10,11,0,1]
+        '{0,1,2,3,4,5}'::text[],
+        array[20,21,10,11,0,1]
+        ) t(prefix_l032,quadrant),
+        --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(262144/2), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(262144/2)+262144/2 ]) u(bbox),
+        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%2,quadrant/10,353000,6028000,262144)) u(bbox),
+        LATERAL (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
+    WHERE quadrant IS NOT NULL
+  )
+  UNION
+  (
     SELECT 76 AS jurisd_base_id, prefix_l032, bbox,geom_country,
-      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom_country,952019)) AS geom,
-      str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell,
-      ST_Transform(geom_country,952019) AS geom_country_tr
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),geom_country) AS geom,
+      str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell
     FROM unnest
         (
         '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
-        '{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F}'::text[],
         array[20,21,22,23,15,16,17,18,19,11,12,13,6,7,8,2]
-        ) t(prefix_l032,prefix_l016h,quadrant),
+        ) t(prefix_l032,quadrant),
         LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000,6727000,1048576)) u(bbox),
-        LATERAL (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
+        LATERAL (SELECT ST_Transform(geom,952019) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
     WHERE quadrant IS NOT NULL AND quadrant <> 2
   )
   UNION
   (
-      SELECT 76 AS jurisd_base_id, 'H'||x AS prefix_l032, bbox,geom_country,
-          --'H'||x,baseh_to_vbit('H'||x,32), vbit_to_baseh((baseh_to_vbit('H'||x,32)<<1)::bit(9),16)
-          ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),ST_Transform(geom_country,952019)) AS geom,
-      str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell,
-      ST_Transform(geom_country,952019) AS geom_country_tr
-      FROM
+    SELECT 76 AS jurisd_base_id, 'H'||x AS prefix_l032, bbox,geom_country,
+        ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),geom_country) AS geom,
+    str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell
+    FROM
+    (
       (
-          (
-              --SELECT x, 'H'||x,baseh_to_vbit('H'||x,32),baseh_to_vbit(x,32)
-              SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(14%5,14/5,2715000,6727000,1048576)) AS bbox
-              FROM unnest('{8,9}'::text[]) t(x)
-          )
-          UNION
-          (
-              SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(24%5,24/5,2715000,6727000,1048576)) AS bbox
-              FROM unnest('{H,G}'::text[]) t(x)
-          )
-          UNION
-          (
-              SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(2%5,2/5,2715000,6727000,1048576)) AS bbox
-              FROM unnest('{P,R,N,Q}'::text[]) t(x)
-          )
-      ) s,
-      (SELECT geom FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(14%5,14/5,2715000,6727000,1048576)) AS bbox
+        FROM unnest('{8,9}'::text[]) t(x)
+      )
+      UNION
+      (
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(24%5,24/5,2715000,6727000,1048576)) AS bbox
+        FROM unnest('{H,G}'::text[]) t(x)
+      )
+      UNION
+      (
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(2%5,2/5,2715000,6727000,1048576)) AS bbox
+        FROM unnest('{P,R,N,Q}'::text[]) t(x)
+      )
+    ) s,
+    (SELECT ST_Transform(geom,952019) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
   )
 ) y
 ORDER BY 1
+;
+
+--DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) = 218::bit(10);
+INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
+SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
+        (CASE WHEN ST_ContainsProperly(geom_country,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
+        rpad((baseh_to_vbit(prefix_l032,32))::text, 37, '0000000000000000000000000000000000000'))::bit(64)::bigint,
+        bbox, geom, ST_Transform(geom,4326)
+FROM
+(
+  (
+    SELECT 218 AS jurisd_base_id,prefix_l032,bbox,geom_country,
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32717),geom_country) AS geom,
+      str_ggeohash_draw_cell_bybox(bbox,false,32717) AS geom_cell
+    FROM unnest
+        (
+        '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P}'::text[],
+        array[60,50,51,55,56,40,41,45,46,47,30,31,35,36,37,25,26,27,15,16,5,6]
+        ) t(prefix_l032,quadrant),
+        LATERAL (SELECT ARRAY[ -870000 + (quadrant%10)*262144, 9401072 + (quadrant/10)*(262144/2), -870000 + (quadrant%10)*262144+262144, 9401072 + (quadrant/10)*(262144/2)+262144/2 ]) u(bbox),
+       --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(262144/2), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(262144/2)+262144/2 ]) u(bbox),
+        LATERAL (SELECT ST_Transform(geom,32717) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('EC') AND jurisd_base_id = 218) r(geom_country)
+    WHERE quadrant IS NOT NULL
+  )
+) z
 ;
 
 -- de_para cover
