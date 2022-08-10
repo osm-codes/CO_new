@@ -74,7 +74,7 @@ CREATE TABLE libosmcodes.coverage (
 );
 */
 -- L0cover, country cover
---DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2);
+--DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) <> 218::bit(10);
 INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
 SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
         (CASE WHEN ST_ContainsProperly(geom_country,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
@@ -91,7 +91,7 @@ FROM
         '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
         array[0,45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
         ) t(prefix_l032,quadrant),
-        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000,1035500,262144)) u(bbox),
+        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000.0,1035500.0,262144.0)) u(bbox),
         LATERAL (SELECT ST_Transform(geom,9377) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom_country)
     WHERE quadrant IS NOT NULL AND quadrant > 0
   )
@@ -107,8 +107,8 @@ FROM
         '{0,1,2,3,4,5}'::text[],
         array[20,21,10,11,0,1]
         ) t(prefix_l032,quadrant),
-        --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(262144/2), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(262144/2)+262144/2 ]) u(bbox),
-        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%2,quadrant/10,353000,6028000,262144)) u(bbox),
+        --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(131072), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(131072)+131072 ]) u(bbox),
+        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%2,quadrant/10,353000.0,6028000.0,262144.0)) u(bbox),
         LATERAL (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
     WHERE quadrant IS NOT NULL
   )
@@ -122,7 +122,7 @@ FROM
         '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
         array[20,21,22,23,15,16,17,18,19,11,12,13,6,7,8,2]
         ) t(prefix_l032,quadrant),
-        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000,6727000,1048576)) u(bbox),
+        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000.0,6727000.0,1048576.0)) u(bbox),
         LATERAL (SELECT ST_Transform(geom,952019) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
     WHERE quadrant IS NOT NULL AND quadrant <> 2
   )
@@ -134,17 +134,17 @@ FROM
     FROM
     (
       (
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(14%5,14/5,2715000,6727000,1048576)) AS bbox
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(14%5,14/5,2715000.0,6727000.0,1048576.0))) AS bbox
         FROM unnest('{8,9}'::text[]) t(x)
       )
       UNION
       (
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(24%5,24/5,2715000,6727000,1048576)) AS bbox
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(24%5,24/5,2715000.0,6727000.0,1048576.0))) AS bbox
         FROM unnest('{H,G}'::text[]) t(x)
       )
       UNION
       (
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),libosmcodes.ij_to_bbox(2%5,2/5,2715000,6727000,1048576)) AS bbox
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(2%5,2/5,2715000.0,6727000.0,1048576.0))) AS bbox
         FROM unnest('{P,R,N,Q}'::text[]) t(x)
       )
     ) s,
@@ -171,8 +171,8 @@ FROM
         '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P}'::text[],
         array[60,50,51,55,56,40,41,45,46,47,30,31,35,36,37,25,26,27,15,16,5,6]
         ) t(prefix_l032,quadrant),
-        LATERAL (SELECT ARRAY[ -870000 + (quadrant%10)*262144, 9401072 + (quadrant/10)*(262144/2), -870000 + (quadrant%10)*262144+262144, 9401072 + (quadrant/10)*(262144/2)+262144/2 ]) u(bbox),
-       --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(262144/2), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(262144/2)+262144/2 ]) u(bbox),
+        LATERAL (SELECT ARRAY[ -870000 + (quadrant%10)*262144, 9401072 + (quadrant/10)*(131072), -870000 + (quadrant%10)*262144+262144, 9401072 + (quadrant/10)*(131072)+131072 ]) u(bbox),
+       --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(131072), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(131072)+131072 ]) u(bbox),
         LATERAL (SELECT ST_Transform(geom,32717) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('EC') AND jurisd_base_id = 218) r(geom_country)
     WHERE quadrant IS NOT NULL
   )
@@ -220,13 +220,23 @@ FROM
   LEFT JOIN LATERAL
   (
     SELECT (CASE WHEN length(p.cell)>1 THEN str_ggeohash_decode_box2(substring(p.cell_bits from 6),bbox) ELSE bbox END) AS bbox
-    FROM libosmcodes.l0cover
-    WHERE jurisd_base_id = (('{"CO":170, "BR":76}'::jsonb)->(upper(split_part(p.isolabel_ext,'-',1))))::int AND ( prefix_l032 = (substr(p.cell,1,1))   )
-    AND
-        CASE
-        WHEN subcells_l032 IS NOT NULL THEN (subcells_l032 @> array[substr(p.cell,2,1)]::text[])
-        ELSE TRUE
-        END
+    FROM libosmcodes.coverage
+    WHERE ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper(upper(split_part(p.isolabel_ext,'-',1)))))::int)::bit(10) )
+        AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
+        AND
+        (
+          CASE
+          WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'BR' -- Brasil usa 2 digitos na base32
+          THEN
+          (
+                  CASE
+                  WHEN cell_bits::bit(5) <> b'01111' THEN ((id::bit(64)<<27)::bit(10) # (cell_bits::bit(5))::bit(10)) = 0::bit(10) -- 1 digito base32
+                  ELSE ( (id::bit(64)<<27)::bit(10) # cell_bits::bit(10) ) = 0::bit(10) -- 2 digitos base32
+                  END
+          )
+          ELSE ( ( (id::bit(64)<<27)::bit(5) # cell_bits::bit(5) ) = 0::bit(5) ) -- outros paises usam 1 digito na base32
+          END
+        )
   ) s
   ON TRUE
  

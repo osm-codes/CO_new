@@ -48,26 +48,17 @@ COMMENT ON FUNCTION libosmcodes.ij_to_geom(int,int,int,int,int,int)
 CREATE or replace FUNCTION libosmcodes.ij_to_bbox(
   i  int, -- coluna
   j  int, -- linha
-  x0 int, -- referencia de inicio do eixo x [x0,y0]
-  y0 int, -- referencia de inicio do eixo y [x0,y0]
-  s  int  -- lado da célula
-) RETURNS int[] AS $f$
-  SELECT array[ x0+i*s, y0+j*s, x0+i*s+s, y0+j*s+s ]
+  x0 float, -- referencia de inicio do eixo x [x0,y0]
+  y0 float, -- referencia de inicio do eixo y [x0,y0]
+  s  float  -- lado da célula
+) RETURNS float[] AS $f$
+  SELECT array[ x0+i::float*s, y0+j::float*s, x0+i::float*s+s, y0+j::float*s+s ]
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libosmcodes.ij_to_bbox(int,int,int,int,int)
+COMMENT ON FUNCTION libosmcodes.ij_to_bbox(int,int,float,float,float)
  IS 'Retorna bbox de célula da matriz.'
 ;
 -- SELECT libosmcodes.ij_to_bbox(0,0,4180000,1035500,262144);
 
-CREATE or replace FUNCTION libosmcodes.ij_to_bbox(
-  a int[]
-)RETURNS int[] AS $wrap$
-  SELECT libosmcodes.ij_to_bbox(a[1],a[2],a[3],a[4],a[5])
-$wrap$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libosmcodes.ij_to_bbox(int[])
- IS 'Retorna bbox de célula da matriz.'
-;
--- SELECT libosmcodes.ij_to_bbox(array[0,0,4180000,1035500,262144]);
 
 CREATE or replace FUNCTION libosmcodes.xy_to_ij(
   x  int,
@@ -264,7 +255,7 @@ CREATE or replace FUNCTION libosmcodes.ggeohash_GeomsFromVarbit(
   p_srid      int DEFAULT 4326,      -- WGS84
   p_base      int DEFAULT 16,
   p_grid_size int DEFAULT 2,
-  p_bbox      int[] DEFAULT  array[0,0,0,0]
+  p_bbox      float[] DEFAULT  array[0.,0.,0.,0.]
 ) RETURNS TABLE(ghs text, geom geometry) AS $f$
   SELECT vbit_to_baseh(p_l0code || p_code || x,p_base,0), str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(p_code || x,p_bbox),p_translate,p_srid)
   FROM
@@ -290,7 +281,7 @@ CREATE TABLE libosmcodes.coverage (
   isolabel_ext  text, -- used only in de-para, replace with 14bit in id
   prefix        text, -- used only in de-para, cache
   index         text, -- used only in de-para, not in id
-  bbox          int[],-- used only in l0cover
+  bbox          float[],-- used only in l0cover
   geom          geometry,
   geom_srid4326 geometry -- used only in l0cover
 );
@@ -304,7 +295,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
   p_bit_length int     DEFAULT 40,
   p_srid       int     DEFAULT 9377,
   p_grid_size  int     DEFAULT 32,
-  p_bbox       int[]   DEFAULT array[0,0,0,0],
+  p_bbox       float[]   DEFAULT array[0.,0.,0.,0.],
   p_l0code     varbit  DEFAULT b'0',
   p_jurisd_base_id int DEFAULT 170
 ) RETURNS jsonb AS $f$
@@ -369,7 +360,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
     ) t
     ON TRUE
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libosmcodes.osmcode_encode(geometry(POINT),int,int,int,int,int[],varbit,int)
+COMMENT ON FUNCTION libosmcodes.osmcode_encode(geometry(POINT),int,int,int,int,float[],varbit,int)
   IS 'Encodes geometry to OSMcode.'
 ;
 
