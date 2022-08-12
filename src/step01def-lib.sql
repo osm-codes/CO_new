@@ -563,8 +563,8 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
     'type', 'FeatureCollection',
     'features',
       (
-        SELECT jsonb_agg(
-          ST_AsGeoJSONb(geom_srid4326,8,0,null,
+        SELECT coalesce(jsonb_agg(
+          ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,
               jsonb_strip_nulls(jsonb_build_object(
                   'code', upper(prefix),
                   'area', ST_Area(geom),
@@ -572,11 +572,11 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                   'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END,
                   'index', index
                   ))
-              )::jsonb) || (SELECT (api.jurisdiction_geojson_from_isolabel(p_iso))->'features')
+              )::jsonb),'[]'::jsonb) || (SELECT (api.jurisdiction_geojson_from_isolabel(p_iso))->'features')
         FROM
         (
           (
-            SELECT geom_srid4326, geom,
+            SELECT geom,
             vbit_to_baseh(
                 CASE
                 WHEN p_base = 32
@@ -599,12 +599,12 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                 END,p_base) AS prefix,
                 null AS index
               FROM libosmcodes.coverage
-              WHERE   ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper(p_iso)))::int)::bit(10) )
+              WHERE ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper(p_iso)))::int)::bit(10) )
                   AND (id::bit(64)<<24)::bit(2) = 0::bit(2) -- country cover
           )
           UNION ALL
           (
-            SELECT ST_Transform(geom,4326) AS geom_srid4326, geom, prefix, index
+            SELECT geom, prefix, index
               FROM libosmcodes.coverage
               WHERE lower(isolabel_ext) = lower((str_geocodeiso_decode(p_iso))[1])
           )
