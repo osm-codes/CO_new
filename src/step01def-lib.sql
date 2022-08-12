@@ -255,9 +255,10 @@ CREATE or replace FUNCTION libosmcodes.ggeohash_GeomsFromVarbit(
   p_srid      int DEFAULT 4326,      -- WGS84
   p_base      int DEFAULT 16,
   p_grid_size int DEFAULT 2,
-  p_bbox      float[] DEFAULT  array[0.,0.,0.,0.]
+  p_bbox      float[] DEFAULT  array[0.,0.,0.,0.],
+  p_lonlat    boolean default false  -- false: latLon, true: lonLat
 ) RETURNS TABLE(ghs text, geom geometry) AS $f$
-  SELECT vbit_to_baseh(p_l0code || p_code || x,p_base,0), str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(p_code || x,p_bbox),p_translate,p_srid)
+  SELECT vbit_to_baseh(p_l0code || p_code || x,p_base,0), str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(p_code || x,p_bbox,p_lonlat),p_translate,p_srid)
   FROM
   unnest(
   CASE
@@ -327,7 +328,21 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
                           'base', base
                           )
                       )::jsonb) AS gj
-              FROM libosmcodes.ggeohash_GeomsFromVarbit(m.bit_string,p_l0code,false,p_srid,p_base,CASE WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1 ELSE p_grid_size END,p_bbox)
+              FROM libosmcodes.ggeohash_GeomsFromVarbit(
+                    m.bit_string,
+                    p_l0code,
+                    false,
+                    p_srid,
+                    p_base,
+                    CASE
+                    WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1
+                    ELSE p_grid_size
+                    END,
+                    p_bbox,
+                    CASE
+                    WHEN p_jurisd_base_id=218 THEN TRUE
+                    ELSE FALSE
+                    END)
             )
           ELSE '{}'::jsonb
           END
@@ -336,13 +351,13 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
     FROM
     (
       SELECT bit_string,
-      str_ggeohash_draw_cell_bybox((CASE WHEN p_bit_length = 0 THEN p_bbox ELSE str_ggeohash_decode_box2(bit_string,p_bbox) END),false,p_srid) AS geom_cell,
+      str_ggeohash_draw_cell_bybox((CASE WHEN p_bit_length = 0 THEN p_bbox ELSE str_ggeohash_decode_box2(bit_string,p_bbox, CASE WHEN p_jurisd_base_id=218 THEN TRUE ELSE FALSE END) END),false,p_srid) AS geom_cell,
       CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END AS base,
       upper(CASE WHEN p_bit_length = 0 THEN (vbit_to_baseh(p_l0code,p_base,0)) ELSE (vbit_to_baseh(p_l0code||bit_string,p_base,0)) END) AS code_end,
       p_l0code || bit_string AS code_end_bits
       FROM
       (
-        SELECT str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length) AS bit_string
+        SELECT str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length, CASE WHEN p_jurisd_base_id=218 THEN TRUE ELSE FALSE END) AS bit_string
       ) r
     ) m
     LEFT JOIN LATERAL
@@ -472,7 +487,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
                             END
                           )
                           END
-                        ,bbox)
+                        ,bbox, CASE WHEN upper(p_iso)='EC' THEN TRUE ELSE FALSE END)
                     ,false,ST_SRID(geom)
                     ) AS geom
               FROM libosmcodes.coverage
