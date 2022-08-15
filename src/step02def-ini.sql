@@ -171,8 +171,7 @@ FROM
         '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P}'::text[],
         array[60,50,51,55,56,40,41,45,46,47,30,31,35,36,37,25,26,27,15,16,5,6]
         ) t(prefix_l032,quadrant),
-        LATERAL (SELECT ARRAY[ -870000 + (quadrant%10)*262144, 9401072 + (quadrant/10)*(131072), -870000 + (quadrant%10)*262144+262144, 9401072 + (quadrant/10)*(131072)+131072 ]) u(bbox),
-       --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(131072), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(131072)+131072 ]) u(bbox),
+        LATERAL (SELECT ARRAY[ -870000 + (quadrant%10)*262144, 9401000 + (quadrant/10)*(131072), -870000 + (quadrant%10)*262144+262144, 9401000 + (quadrant/10)*(131072)+131072 ]) u(bbox),
         LATERAL (SELECT ST_Transform(geom,32717) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('EC') AND jurisd_base_id = 218) r(geom_country)
     WHERE quadrant IS NOT NULL
   )
