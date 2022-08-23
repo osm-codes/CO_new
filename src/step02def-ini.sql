@@ -58,7 +58,8 @@ INSERT INTO libosmcodes.tmp_coverage_city(isolabel_ext,srid,jurisd_base_id,cover
 ('BR-SP-Campinas',952019,76,'{FZD,FZF,FZH,FZS,FZ7}'::text[]),
 ('BR-SP-SaoPaulo',952019,76,'{FYS,FYU,FZJ,FZKN,FZKK,FZKJ,FZK5,FZK4,FZK1,FZK0,FYVP,FZK7,FZK6,FZK3,FZK2,FYVR,FZKF,FZKD,FZK9,FZK8,FYVX}'::text[]),
 ('BR-RJ-RioJaneiro',952019,76,'{GPT,GPW,GPQ,GPX5,GPX4,GPX1,GPX0,GPRP,GPRN,GPX7,GPX6,GPX3,GPX2,GPRR,GPRQ,GPXD,GPX9,GPX8,GPRX,GPRW}'::text[]),
-('BR-RS-SantaVitoriaPalmar',952019,76,'{HNZ,HQB,HPP,HR0,HR1,HPR,HR2,HR3,HR6,HR8,HR9,HRD}'::text[]);
+('BR-RS-SantaVitoriaPalmar',952019,76,'{HNZ,HQB,HPP,HR0,HR1,HPR,HR2,HR3,HR6,HR8,HR9,HRD}'::text[])
+;
 
 ------------------
 -- Table coverage:
@@ -242,3 +243,69 @@ FROM
   ORDER BY q.isolabel_ext, ordered_cover
 ) x
 ;
+
+/*
+--DROP TABLE libosmcodes.tmp_coverage_cityUY;
+CREATE TABLE libosmcodes.tmp_coverage_cityUY (
+  isolabel_ext text   NOT NULL,
+  srid         int    NOT NULL,
+  jurisd_base_id int NOT NULL,
+  cover        text[] NOT NULL,
+  cover_replace text[] NOT NULL,
+);
+INSERT INTO libosmcodes.tmp_coverage_cityUY(isolabel_ext,srid,jurisd_base_id,cover) VALUES
+('UY-CO-ColoniaSacramento',32721,858,'{492,487F}'::text[],'{492,492F}'::text[])
+;
+
+INSERT INTO libosmcodes.coverage(id,isolabel_ext,prefix,index,geom)
+SELECT ((j_id_bit || l_id_bit || mun_princ || cover_parcial ||  sufix_bits)::bit(64))::bigint , isolabel_ext, cell, ordered_cover, geom
+FROM
+(
+  SELECT j_id_bit, l_id_bit, '01' AS mun_princ,
+  CASE
+  WHEN ST_ContainsProperly(r.geom_transformed,str_ggeohash_draw_cell_bybox(bbox,false,p.srid)) IS FALSE
+  THEN '1'
+  ELSE '0'
+  END AS cover_parcial,
+  rpad(cell_bits::text, 37, '0000000000000000000000000000000000000') AS sufix_bits, q.isolabel_ext, cell, ordered_cover,
+  ST_Intersection(r.geom_transformed,str_ggeohash_draw_cell_bybox(bbox,false,p.srid)) AS geom
+  FROM
+  (
+    SELECT isolabel_ext, srid, jurisd_base_id, cell, ordered_cover, baseh_to_vbit(cell,32) AS cell_bits,
+    upper(substr(cell,1,1)) AS l0prefix
+    FROM libosmcodes.tmp_coverage_cityUY tc, unnest(cover) td(ordered_cover,cell)
+    WHERE cell IS NOT NULL
+  ) p
+  LEFT JOIN LATERAL
+  (
+    SELECT jurisd_base_id::bit(10) AS j_id_bit, gid::bit(14) AS l_id_bit, t.*
+    FROM(
+        SELECT ROW_NUMBER() OVER(ORDER BY jurisd_local_id ASC) AS gid, jurisd_base_id, jurisd_local_id, isolabel_ext
+        FROM optim.jurisdiction
+        WHERE jurisd_base_id=p.jurisd_base_id AND isolevel::int >2
+        ORDER BY jurisd_local_id
+    ) t
+  ) q
+  ON lower(p.isolabel_ext) = lower(q.isolabel_ext)
+  LEFT JOIN LATERAL
+  (
+    SELECT isolabel_ext, jurisd_base_id, ST_Transform(geom,p.srid) AS geom_transformed, geom
+    FROM optim.vw01full_jurisdiction_geom g
+  ) r
+  ON lower(r.isolabel_ext) = lower(q.isolabel_ext) AND r.jurisd_base_id = p.jurisd_base_id
+  LEFT JOIN LATERAL
+  (
+    SELECT (CASE WHEN length(p.cell)>1 THEN str_ggeohash_decode_box2(substring(p.cell_bits from 6),bbox) ELSE bbox END) AS bbox
+    FROM libosmcodes.coverage
+    WHERE ( (id::bit(64))::bit(10) = ((('{"UY":858}'::jsonb)->(upper(upper(split_part(p.isolabel_ext,'-',1)))))::int)::bit(10) )
+        AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
+        AND
+        (
+          ( ( (id::bit(64)<<27)::bit(5) # cell_bits::bit(5) ) = 0::bit(5) ) -- outros paises usam 1 digito na base32
+        )
+  ) s
+  ON TRUE
+ 
+  ORDER BY q.isolabel_ext, ordered_cover
+) x
+;*/

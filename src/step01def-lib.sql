@@ -391,8 +391,8 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
     (
       SELECT bit_string,
       str_ggeohash_draw_cell_bybox((CASE WHEN p_bit_length = 0 THEN p_bbox ELSE str_ggeohash_decode_box2(bit_string,p_bbox,p_lonlat) END),false,p_srid) AS geom_cell,
-      CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END AS base,
-      upper(CASE WHEN p_bit_length = 0 THEN (vbit_to_baseh(p_l0code,p_base,0)) ELSE (vbit_to_baseh(p_l0code||bit_string,p_base,0)) END) AS code_end,
+      CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END AS base,
+      upper(CASE WHEN p_bit_length = 0 THEN (vbit_to_baseh(p_l0code,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) ELSE (vbit_to_baseh(p_l0code||bit_string,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) END) AS code_end,
       p_l0code || bit_string AS code_end_bits
       FROM
       (
@@ -431,6 +431,8 @@ CREATE or replace FUNCTION api.osmcode_encode(
     THEN
       CASE
       WHEN (jurisd_base_id = 170 OR jurisd_base_id = 858) AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/5)*5
+      WHEN jurisd_base_id = 170 AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/5)*5
+      WHEN jurisd_base_id = 858 AND p_base = 17 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/4)*4
       WHEN (jurisd_base_id = 170 OR jurisd_base_id = 858) AND p_base = 16 THEN libosmcodes.uncertain_base16h(latLon[4]::int)
       WHEN (jurisd_base_id = 218 ) AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL0185km(latLon[4]::int))/5)*5
       WHEN (jurisd_base_id = 218 ) AND p_base = 16 THEN libosmcodes.uncertain_base16hL0185km(latLon[4]::int)
@@ -460,7 +462,7 @@ CREATE or replace FUNCTION api.osmcode_encode(
           ELSE (id::bit(64)<<27)::bit(5)
           END
         )
-        WHEN p_base = 16
+        WHEN p_base = 16 OR p_base = 17
         THEN
         (
           CASE -- se for H e 'BR' pega 9 bits.
@@ -501,12 +503,12 @@ CREATE or replace FUNCTION api.osmcode_decode(
                         'code', c.code,
                         'area', ST_Area(v.geom),
                         'side', SQRT(ST_Area(v.geom)),
-                        'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END
+                        'base', CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END
                         )
                     )::jsonb) AS gj
             FROM
             (
-              SELECT DISTINCT upper(p_iso) AS upper_p_iso, code, baseh_to_vbit(code,p_base) AS codebits FROM regexp_split_to_table(upper(p_code),',') code
+              SELECT DISTINCT upper(p_iso) AS upper_p_iso, code, baseh_to_vbit(code,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END) AS codebits FROM regexp_split_to_table(upper(p_code),',') code
             ) c,
             LATERAL
             (
@@ -521,7 +523,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
                             ELSE substring(codebits from 6)
                             END
                           )
-                          WHEN p_base = 16
+                          WHEN p_base = 16 OR p_base = 17
                           THEN
                           (
                             CASE
@@ -580,7 +582,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
                   THEN
                   (
                     CASE
-                    WHEN p_base = 16
+                    WHEN p_base = 16 OR p_base = 17
                     THEN ( ( (id::bit(64)<<28)::bit(4) # codebits::bit(4) ) = 0::bit(4) ) -- 1 digito base16h
                     ELSE ( ( (id::bit(64)<<27)::bit(5) # codebits::bit(5) ) = 0::bit(5) ) -- 1 digito base32
                     END
@@ -635,7 +637,7 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                   'code', upper(prefix),
                   'area', ST_Area(geom),
                   'side', SQRT(ST_Area(geom)),
-                  'base', CASE WHEN p_base = 16 THEN 'base16h' ELSE 'base32' END,
+                  'base', CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END,
                   'index', index
                   ))
               )::jsonb),'[]'::jsonb) || (SELECT (api.jurisdiction_geojson_from_isolabel(p_iso))->'features')
@@ -653,7 +655,7 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                   ELSE (id::bit(64)<<27)::bit(5)
                   END
                 )
-                WHEN p_base = 16
+                WHEN p_base = 16 OR p_base = 17
                 THEN
                 (
                   CASE --se for F ou 'CO' pega 8 bits, caso contrario, pega 4.
@@ -662,7 +664,8 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                   ELSE (id::bit(64)<<28)::bit(4)
                   END
                 )
-                END,p_base) AS prefix,
+                END,
+                CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END) AS prefix,
                 null AS index
               FROM libosmcodes.coverage
               WHERE ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper(p_iso)))::int)::bit(10) )
