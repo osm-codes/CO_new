@@ -376,7 +376,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
                           )
                       )::jsonb) AS gj
               FROM libosmcodes.ggeohash_GeomsFromVarbit(
-                    m.bit_string,p_l0code,false,p_srid,p_base,
+                    m.bit_string,p_l0code,false,p_srid,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,
                     CASE
                     WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1
                     ELSE p_grid_size
@@ -399,14 +399,27 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
         SELECT str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length,p_lonlat) AS bit_string
       ) r
     ) m
+    -- responsável pelo código curto na grade postal
     LEFT JOIN LATERAL
     (
       SELECT (isolabel_ext|| (CASE WHEN length(m.code_end) = length(prefix) THEN '~' || index ELSE '~' || index || substr(m.code_end,length(prefix)+1,length(m.code_end)) END) ) AS short_code
       FROM libosmcodes.coverage r
       WHERE
       (
-        ( (id::bit(64)<<27)::bit(20) # code_end_bits::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(15))::bit(20) ) = 0::bit(20)
+        -- Uruguai usa grade postal base16, demais usam base32
+        CASE
+        WHEN p_jurisd_base_id = 858
+        THEN
+        (
+          ( (id::bit(64)<<27)::bit(16) # code_end_bits::bit(16) ) = 0::bit(16) OR ( (id::bit(64)<<27)::bit(16) # (code_end_bits::bit(15))::bit(16) ) = 0::bit(16)
+        OR ( (id::bit(64)<<27)::bit(16) # (code_end_bits::bit(10))::bit(16) ) = 0::bit(16) OR ( (id::bit(64)<<27)::bit(16) # (code_end_bits::bit(5))::bit(16) ) = 0::bit(16)
+        )
+        ELSE
+        (
+          ( (id::bit(64)<<27)::bit(20) # code_end_bits::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(15))::bit(20) ) = 0::bit(20)
         OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(10))::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(5))::bit(20) ) = 0::bit(20)
+        )
+        END
       )
       AND (id::bit(64))::bit(10) = p_jurisd_base_id::bit(10)
       AND ( (id::bit(64)<<24)::bit(2) ) <> 0::bit(2)
@@ -467,7 +480,7 @@ CREATE or replace FUNCTION api.osmcode_encode(
         (
           CASE -- se for H e 'BR' pega 9 bits.
                -- se for 'CO' ou 'EC' pega 8 bits e shift >>3
-               -- caso contrario, pega 4.
+               -- caso contrario, pega 4 (UY).
           WHEN (id::bit(64)<<28)::bit(4) = b'1111' AND ((id::bit(64))::bit(10))::int = 76  THEN ((id::bit(64)<<28)::bit(9))
           WHEN ((id::bit(64))::bit(10))::int = 170 OR  ((id::bit(64))::bit(10))::int = 218 THEN ((id::bit(64)<<27)::bit(8))>>3
           ELSE (id::bit(64)<<28)::bit(4)
@@ -508,7 +521,8 @@ CREATE or replace FUNCTION api.osmcode_decode(
                     )::jsonb) AS gj
             FROM
             (
-              SELECT DISTINCT upper(p_iso) AS upper_p_iso, code, baseh_to_vbit(code,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END) AS codebits FROM regexp_split_to_table(upper(p_code),',') code
+              SELECT DISTINCT upper(p_iso) AS upper_p_iso, code, baseh_to_vbit(code,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END) AS codebits
+              FROM regexp_split_to_table(upper(p_code),',') code
             ) c,
             LATERAL
             (
@@ -536,8 +550,11 @@ CREATE or replace FUNCTION api.osmcode_decode(
                     ,false,ST_SRID(geom)
                     ) AS geom
               FROM libosmcodes.coverage
-              WHERE ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper_p_iso))::int)::bit(10) )
+              WHERE
+                -- busca em coberturas nacionais
+                ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper_p_iso))::int)::bit(10) )
                 AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
+                -- prefixo conforme país
                 AND
                 (
                   CASE
@@ -578,12 +595,12 @@ CREATE or replace FUNCTION api.osmcode_decode(
                     END
                   )
                   WHEN upper_p_iso = 'UY'
-                  -- Uruguai usa 1 dígito na base16h e 1 na base32
+                  -- Uruguai usa 1 dígito na base16h, na base16 e na base32
                   THEN
                   (
                     CASE
                     WHEN p_base = 16 OR p_base = 17
-                    THEN ( ( (id::bit(64)<<28)::bit(4) # codebits::bit(4) ) = 0::bit(4) ) -- 1 digito base16h
+                    THEN ( ( (id::bit(64)<<28)::bit(4) # codebits::bit(4) ) = 0::bit(4) ) -- 1 digito base16h ou base16
                     ELSE ( ( (id::bit(64)<<27)::bit(5) # codebits::bit(5) ) = 0::bit(5) ) -- 1 digito base32
                     END
                   )
@@ -601,22 +618,28 @@ COMMENT ON FUNCTION api.osmcode_decode(text,text,int)
 
 CREATE or replace FUNCTION api.osmcode_decode_reduced(
    p_code text,
-   p_iso  text
+   p_iso  text,
+   p_base int     DEFAULT 32
 ) RETURNS jsonb AS $f$
     SELECT api.osmcode_decode(
         (
             SELECT  prefix || substring(upper(p_code),2)
             FROM libosmcodes.coverage
-            -- usar os 14bits do id na busca
+            -- possível usar os 14bits do id na busca
             WHERE lower(isolabel_ext) = lower(x[1])
                 AND index = substring(upper(p_code),1,1)
         ),
-        x[2]
+        x[2],
+        p_base
     )
-    FROM (SELECT str_geocodeiso_decode(p_iso)) t(x)
+    FROM
+    (
+      -- resolve iso reduzido
+      SELECT str_geocodeiso_decode(p_iso)
+    ) t(x)
 $f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION api.osmcode_decode_reduced(text)
-  IS 'Decodes OSMcode reduced (base32). Wrap for osmcode_decode.'
+COMMENT ON FUNCTION api.osmcode_decode_reduced(text,text,int)
+  IS 'Decodes OSMcode reduced. Wrap for osmcode_decode.'
 ;
 -- EXPLAIN ANALYZE SELECT api.osmcode_decode_reduced('0JKRPV','CO-Itagui');
 
