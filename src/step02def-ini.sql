@@ -60,7 +60,7 @@ INSERT INTO libosmcodes.tmp_coverage_city(isolabel_ext,srid,jurisd_base_id,base,
 ('BR-SP-SaoPaulo',952019,76,32,'{FYS,FYU,FZJ,FZKN,FZKK,FZKJ,FZK5,FZK4,FZK1,FZK0,FYVP,FZK7,FZK6,FZK3,FZK2,FYVR,FZKF,FZKD,FZK9,FZK8,FYVX}'::text[]),
 ('BR-RJ-RioJaneiro',952019,76,32,'{GPT,GPW,GPQ,GPX5,GPX4,GPX1,GPX0,GPRP,GPRN,GPX7,GPX6,GPX3,GPX2,GPRR,GPRQ,GPXD,GPX9,GPX8,GPRX,GPRW}'::text[]),
 ('BR-RS-SantaVitoriaPalmar',952019,76,32,'{HNZ,HQB,HPP,HR0,HR1,HPR,HR2,HR3,HR6,HR8,HR9,HRD}'::text[]),
-('UY-CO-ColoniaSacramento',32721,858,16,'{487F,4928,4929,492A,492B,492E}'::text[])
+('UY-CO-ColoniaSacramento',32721,858,32,'{B3Z,B98,B99,B9B,B9C,B9D,B9G}'::text[])
 ;
 
 
@@ -98,23 +98,6 @@ FROM
         LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000.0,1035500.0,262144.0)) u(bbox),
         LATERAL (SELECT ST_Transform(geom,9377) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom_country)
     WHERE quadrant IS NOT NULL AND quadrant > 0
-  )
-  UNION
-  (
-    SELECT 858 AS jurisd_base_id,prefix_l032,bbox,geom_country,
-      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
-      str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
-    FROM unnest
-        (
-        --'{0,1,2,3,4,5,6,7,8,9}'::text[],
-        --array[40,41,30,31,20,21,10,11,0,1]
-        '{0,1,2,3,4,5}'::text[],
-        array[20,21,10,11,0,1]
-        ) t(prefix_l032,quadrant),
-        --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(131072), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(131072)+131072 ]) u(bbox),
-        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%2,quadrant/10,353000.0,6028000.0,262144.0)) u(bbox),
-        LATERAL (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
-    WHERE quadrant IS NOT NULL
   )
   UNION
   (
@@ -156,6 +139,119 @@ FROM
   )
 ) y
 ORDER BY 1
+;
+
+
+--DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) = 858::bit(10);
+INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
+SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
+        (CASE WHEN ST_ContainsProperly(geom_country,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
+        rpad((baseh_to_vbit(prefix_l032,32))::text, 37, '0000000000000000000000000000000000000'))::bit(64)::bigint,
+        bbox, geom, ST_Transform(geom,4326)
+FROM
+/*-- Cobertura antiga
+(
+  SELECT 858 AS jurisd_base_id,prefix_l032,bbox,geom_country,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
+    str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
+  FROM unnest
+      (
+      --'{0,1,2,3,4,5,6,7,8,9}'::text[],
+      --array[40,41,30,31,20,21,10,11,0,1]
+      '{0,1,2,3,4,5}'::text[],
+      array[20,21,10,11,0,1]
+      ) t(prefix_l032,quadrant),
+      --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(131072), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(131072)+131072 ]) u(bbox),
+      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%2,quadrant/10,353000.0,6028000.0,262144.0)) u(bbox),
+      LATERAL (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
+  WHERE quadrant IS NOT NULL
+)
+*/
+-- Nova cobertura: https://github.com/osm-codes/UY_new/issues/1
+(
+  -- células L0 de 131072m
+  (
+    SELECT 858 AS jurisd_base_id,prefix_l032,bbox,geom_country,
+      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
+      str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
+    FROM unnest
+        (
+        '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H}'::text[],
+        array[40,41,30,31,32,33,20,21,22,23,10,11,12,13,1,2]
+        ) t(prefix_l032,quadrant),
+        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%10,quadrant/10,353000.0,6028000.0,131072.0)) u(bbox),
+        LATERAL (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
+    -- não insere as células L0 que participam da realocação, mas as mantém na ordenação
+    WHERE quadrant IS NOT NULL AND quadrant <> 40 AND quadrant <> 41 AND quadrant <> 1
+  )
+  -- Células L0 de 23170,5m
+  UNION
+  (
+    -- realocando o quadrante 42 no 1
+    SELECT 858 AS jurisd_base_id, 'G'||x AS prefix_l032, bbox,geom_country,
+        ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
+    str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
+    FROM
+    (
+      (
+        -- células usadas por 42
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(42%4,42/10,353000.0,6028000.0,131072.0))) AS bbox
+        FROM unnest('{0,1,2,3,4}'::text[]) t(x)
+      )
+      UNION
+      (
+        -- células que sobram em 1
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(1%4,1/10,353000.0,6028000.0,131072.0))) AS bbox
+        FROM unnest('{7,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[]) t(x)
+      )
+    ) s,
+    (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
+  )
+  UNION
+  (
+    -- realocando o quadrante 0 no 41
+    SELECT 858 AS jurisd_base_id, '1'||x AS prefix_l032, bbox,geom_country,
+        ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
+    str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
+    FROM
+    (
+      (
+        -- células usadas por 0
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(0,0,353000.0,6028000.0,131072.0))) AS bbox
+        FROM unnest('{V,X,Y,Z}'::text[]) t(x)
+      )
+      UNION
+      (
+      -- células que sobram em 41
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(41%4,41/10,353000.0,6028000.0,131072.0))) AS bbox
+        FROM unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T}'::text[]) t(x)
+      )
+    ) s,
+    (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
+  )
+  UNION
+  (
+    -- realocando o quadrante 3 no 40
+    SELECT 858 AS jurisd_base_id, '0'||x AS prefix_l032, bbox,geom_country,
+        ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
+    str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
+    FROM
+    (
+      (
+        -- células usadas por 3
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(3%4,3/10,353000.0,6028000.0,131072.0))) AS bbox
+        FROM unnest('{N,P,R}'::text[]) t(x)
+      )
+      UNION
+      (
+        -- células que sobram em 40
+        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(40%4,40/10,353000.0,6028000.0,131072.0))) AS bbox
+        FROM unnest('{2,3,7,8,9,B,C,D,F,G,H,L,S,T,U,V,W,Y}'::text[]) t(x)
+      )
+    ) s,
+    (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
+  )
+) z
 ;
 
 --DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) = 218::bit(10);
@@ -229,7 +325,7 @@ FROM
         AND
         (
           CASE
-          WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'BR' -- Brasil usa 2 digitos na base32
+          WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'BR' -- Brasil usa 2 dígitos na base32
           THEN
           (
             CASE
@@ -237,11 +333,19 @@ FROM
             ELSE ( (id::bit(64)<<27)::bit(10) # cell_bits::bit(10) ) = 0::bit(10) -- 2 digitos base32
             END
           )
-          WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'UY' -- Uruguai usa base16 com grade postal
+          WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'UY' -- Uruguai usa 2 dígitos na base32
           THEN
           (
-            ( (id::bit(64)<<28)::bit(4) # cell_bits::bit(4) ) = 0::bit(4)
+            CASE
+            WHEN (cell_bits::bit(5) <> b'00000' OR cell_bits::bit(5) <> b'00001' OR cell_bits::bit(5) <> b'01110') THEN ((id::bit(64)<<27)::bit(10) # (cell_bits::bit(5))::bit(10)) = 0::bit(10) -- 1 digito base32
+            ELSE ( (id::bit(64)<<27)::bit(10) # cell_bits::bit(10) ) = 0::bit(10) -- 2 digitos base32
+            END
           )
+          --WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'UY' -- Uruguai usa base16 com grade postal
+          --THEN
+          --(
+            --( (id::bit(64)<<28)::bit(4) # cell_bits::bit(4) ) = 0::bit(4)
+          --)
           ELSE ( ( (id::bit(64)<<27)::bit(5) # cell_bits::bit(5) ) = 0::bit(5) ) -- outros paises usam 1 digito na base32
           END
         )
