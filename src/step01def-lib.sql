@@ -391,15 +391,34 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
       'type', 'FeatureCollection',
       'features',
         (
-          ST_AsGeoJSONb(ST_Transform(geom_cell,4326),8,0,null,
+          (ST_AsGeoJSONb(ST_Transform(geom_cell,4326),8,0,null,
               jsonb_strip_nulls(jsonb_build_object(
-                  'code', code_end,
+                  'code', code,
                   'short_code', short_code,
                   'area', ST_Area(geom_cell),
                   'side', SQRT(ST_Area(geom_cell)),
-                  'base', base
+                  'base', base,
+                  'jurisd_local_id', jurisd_local_id
                   ))
-          )::jsonb ||
+          )::jsonb) || m.subcells
+        )
+      )
+    FROM
+    (
+      SELECT bit_string,
+      str_ggeohash_draw_cell_bybox((CASE WHEN p_bit_length = 0 THEN p_bbox ELSE str_ggeohash_decode_box2(bit_string,p_bbox,p_lonlat) END),false,p_srid) AS geom_cell,
+      CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END AS base,
+      upper(CASE WHEN p_bit_length = 0 THEN (vbit_to_baseh(p_l0code,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) ELSE (vbit_to_baseh(p_l0code||bit_string,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) END) AS code,
+      p_l0code || bit_string AS codebits
+      FROM
+      (
+        SELECT str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length,p_lonlat) AS bit_string
+      ) r
+    ) c
+    -- responsável por subcélulas
+    LEFT JOIN LATERAL
+    (
+      SELECT
           CASE
           WHEN p_grid_size > 0
           THEN
@@ -408,52 +427,48 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
                   ST_AsGeoJSONb(  CASE WHEN p_grid_size % 2 = 1 THEN ST_Centroid(ST_Transform(geom,4326)) ELSE ST_Transform(geom,4326) END ,8,0,null,
                       jsonb_build_object(
                           'code', upper(ghs) ,
-                          'code_subcell', substr(ghs,length(code_end)+1,length(ghs)) ,
-                          'prefix', code_end,
+                          'code_subcell', substr(ghs,length(code)+1,length(ghs)) ,
+                          'prefix', code,
                           'area', ST_Area(geom),
                           'side', SQRT(ST_Area(geom)),
                           'base', base
                           )
-                      )::jsonb) AS gj
+                      )::jsonb)
               FROM libosmcodes.ggeohash_GeomsFromVarbit(
-                    m.bit_string,p_l0code,false,p_srid,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,
+                    c.bit_string,p_l0code,false,p_srid,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,
                     CASE
                     WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1
                     ELSE p_grid_size
                     END,
                     p_bbox,p_lonlat)
             )
-          ELSE '{}'::jsonb
-          END
-        )
-      )
-    FROM
-    (
-      SELECT bit_string,
-      str_ggeohash_draw_cell_bybox((CASE WHEN p_bit_length = 0 THEN p_bbox ELSE str_ggeohash_decode_box2(bit_string,p_bbox,p_lonlat) END),false,p_srid) AS geom_cell,
-      CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END AS base,
-      upper(CASE WHEN p_bit_length = 0 THEN (vbit_to_baseh(p_l0code,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) ELSE (vbit_to_baseh(p_l0code||bit_string,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) END) AS code_end,
-      p_l0code || bit_string AS code_end_bits
-      FROM
-      (
-        SELECT str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length,p_lonlat) AS bit_string
-      ) r
+          ELSE '[]'::jsonb
+          END AS subcells
     ) m
+    ON TRUE
     -- responsável pelo código curto na grade postal
     LEFT JOIN LATERAL
     (
-      SELECT (isolabel_ext|| (CASE WHEN length(m.code_end) = length(prefix) THEN '~' || index ELSE '~' || index || substr(m.code_end,length(prefix)+1,length(m.code_end)) END) ) AS short_code
+      SELECT isolabel_ext, (isolabel_ext|| (CASE WHEN length(c.code) = length(prefix) THEN '~' || index ELSE '~' || index || substr(c.code,length(prefix)+1,length(c.code)) END) ) AS short_code
       FROM libosmcodes.coverage r
       WHERE
-      (   ( (id::bit(64)<<27)::bit(20) #  code_end_bits::bit(20)           ) = 0::bit(20)
-       OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(15))::bit(20) ) = 0::bit(20)
-       OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(10))::bit(20) ) = 0::bit(20)
-       OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(5) )::bit(20) ) = 0::bit(20)
+      (   ( (id::bit(64)<<27)::bit(20) #  codebits::bit(20)           ) = 0::bit(20)
+       OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(15))::bit(20) ) = 0::bit(20)
+       OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(10))::bit(20) ) = 0::bit(20)
+       OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
       )
       AND (id::bit(64))::bit(10) = p_jurisd_base_id::bit(10)
       AND ( (id::bit(64)<<24)::bit(2) ) <> 0::bit(2)
       AND CASE WHEN (id::bit(64)<<26)::bit(1) <> b'0' THEN ST_Contains(r.geom,p_geom) ELSE TRUE  END
     ) t
+    ON TRUE
+    -- infos de jurisdiction
+    LEFT JOIN LATERAL
+    (
+      SELECT jurisd_local_id
+      FROM optim.jurisdiction
+      WHERE isolabel_ext = t.isolabel_ext
+    ) s
     ON TRUE
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.osmcode_encode(geometry(POINT),int,int,int,int,float[],varbit,int,boolean)
@@ -537,12 +552,14 @@ CREATE or replace FUNCTION api.osmcode_decode(
           (
             SELECT jsonb_agg(
                 ST_AsGeoJSONb(ST_Transform(v.geom,4326),8,0,null,
-                    jsonb_build_object(
+                    jsonb_strip_nulls(jsonb_build_object(
                         'code', c.code,
+                        'short_code', short_code,
                         'area', ST_Area(v.geom),
                         'side', SQRT(ST_Area(v.geom)),
-                        'base', CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END
-                        )
+                        'base', CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END,
+                        'jurisd_local_id', jurisd_local_id
+                        ))
                     )::jsonb) AS gj
             FROM
             (
@@ -575,6 +592,30 @@ CREATE or replace FUNCTION api.osmcode_decode(
                     END
                 )
             ) v
+            -- responsável pelo código curto na grade postal
+            LEFT JOIN LATERAL
+            (
+              SELECT isolabel_ext, (isolabel_ext|| (CASE WHEN length(c.code) = length(prefix) THEN '~' || index ELSE '~' || index || substr(c.code,length(prefix)+1,length(c.code)) END) ) AS short_code
+              FROM libosmcodes.coverage r
+              WHERE
+              (  ( (id::bit(64)<<27)::bit(20) #  codebits::bit(20)           ) = 0::bit(20)
+              OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(15))::bit(20) ) = 0::bit(20)
+              OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(10))::bit(20) ) = 0::bit(20)
+              OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
+              )
+              AND ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper_p_iso))::int)::bit(10) )
+              AND ( (id::bit(64)<<24)::bit(2) ) <> 0::bit(2)
+              AND CASE WHEN (id::bit(64)<<26)::bit(1) <> b'0' THEN ST_Contains(r.geom,ST_Centroid(v.geom)) ELSE TRUE  END
+            ) t
+            ON TRUE
+            -- infos de jurisdiction
+            LEFT JOIN LATERAL
+            (
+              SELECT jurisd_local_id
+              FROM optim.jurisdiction
+              WHERE isolabel_ext = t.isolabel_ext
+            ) s
+            ON TRUE
           )
       )
 $f$ LANGUAGE SQL IMMUTABLE;
@@ -582,6 +623,7 @@ COMMENT ON FUNCTION api.osmcode_decode(text,text,int)
   IS 'Decodes OSMcode.'
 ;
 -- EXPLAIN ANALYZE SELECT api.osmcode_decode('HX7VgYKPW','CO');
+-- EXPLAIN ANALYZE SELECT api.osmcode_decode('9025NTJ','CO');
 -- EXPLAIN ANALYZE SELECT api.osmcode_decode('1,2,d3,2','CO',32);
 
 CREATE or replace FUNCTION api.osmcode_decode_reduced(
