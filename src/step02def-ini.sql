@@ -11,10 +11,43 @@ CREATE TABLE libosmcodes.tmp_coverage_city (
 );
 --DELETE FROM libosmcodes.tmp_coverage_city;
 INSERT INTO libosmcodes.tmp_coverage_city(isolabel_ext,srid,jurisd_base_id,base,cover) VALUES
+('BR-AM-Apui',952019,76,32,'{6F8,6F9,7FB,6FC,6FD,6FF,6FG,6FH,6FS,6FT,6FU,6FV,6FW,6FX,6FY,6FY6,6FZ,6L,6M,6S,6T}'::text[]),
+('BR-AM-Barcelos',952019,76,32,'{0C,10,11,12,13,14,15,16,17,1J,1L}'::text[]),
+('BR-AM-Maraa',952019,76,32,'{0CK,0CL,0CM,0CN,0CP,0CQ,0CR,0CS,0CT,0CU,0CV,0CW,0CX,10,11,6P}'::text[]),
+('BR-AM-SaoGabrielCachoeira',952019,76,32,'{06,07,09,0C,0D,0F,0G,0H,0L,0S,0U}'::text[]),
+('BR-AP-LaranjalJari',952019,76,32,'{25Z,26,26F,26LP,26S,27,2JF,2JG,2JH,2JM,2JP,2JQ,2JR,2JS,2JT,2JU,2JV,2JW,2JX,2JY,2JZ,2K4,2K5,2KJ,2KK,2KN,2KP,2L,2M0}'::text[]),
+('BR-BA-CasaNova',952019,76,32,'{86T,86V,86W,86X,86Y,86Z,87K,87N,87P,87Q,87R,87X,8DB,8DC,8F0,8F1,8F2,8F3,8F8}'::text[]),
+('BR-BA-FormosaRioPreto',952019,76,32,'{7CM,7CN,7CP,7CQ,7CR,7CT,7CW,7CX,7CY,7CZ,7GP,810,812,813,816,817,818,819,91B,81C,81D,81F,81G,81H,840,841,842,843,844}'::text[]),
+('BR-MG-SantaCruzMinas',952019,76,32,'{D1J97,D1J9F,D1J9L,D1J9M,D1J9Q,D1J9S,D1J9T,D1J9W}'::text[]),
+('BR-PA-Altamira',952019,76,32,'{22,75,76,77,7J,7K,7L,7M,7N,7P,7Q,7R}'::text[]),
+('BR-PA-Itaituba',952019,76,32,'{1B5,6U,6V,6Y,6Z1,6Z4,6Z5,6Z6,6Z7,6ZD,6ZF,6ZH,6ZJ,6ZK,6ZL,6ZM,6ZN,6ZP,6ZQ,6ZR,6ZS,6ZT,6ZU,6ZW,6ZX,6ZY,6ZZ,7K,7N,7P}'::text[]),
+('BR-PA-Obidos',952019,76,32,'{1C,1G,1H,1UP,1UR,1UX,1UZ,1VP,21,218,24,25,2J,2K0}'::text[]),
+('BR-PA-PortoMoz',952019,76,32,'{21P,21R,22B,22C,22G,22H,22U,230,231,232,233,234,235,236,237,238,239,23D,23F,23G,23H,23J,23L,23S,23U}'::text[]),
+('BR-PB-Cabedelo',952019,76,32,'{9JT7,9JTF,9JTL,9JTS,9JTT,9JTW}'::text[]),
+('BR-PB-Cuitegi',952019,76,32,'{9JH1Z,9JH3,9JH4,9JH60,9JH61,9JH62,9JH63,9JH64,9JH65,9JH66,9JH67,9JH68,9JH69,9JH6B,9JH6C,9JH6D,9JH6F,9JH6G,9JH6H,9JH6J,9JH6K,9JH6L,9JH6M,9JH6N,9JH6Q,9JH6S,9JH6T,9JH6U,9JH74,9JH75,9JH7J}'::text[]),
+('BR-PB-Piloezinhos',952019,76,32,'{9JH4,9JH5,9JH6,9JH7,9JHJ,9JHL0,9JHL1,9JHL2,9JHL3,9JHL4,9JHL5,9JHL6,9JHL7,9JHL8,9JHL9,9JHLD,9JHLF,9JHLJ,9JHLL,9JHLS}'::text[]),
+('BR-PE-FernandoNoronha',952019,76,32,'{BRNQ,9RNR,9RNX}'::text[]),
+('BR-PE-Olinda',952019,76,32,'{95V3,95V4,95V5,95V6,95V7,95VJ,95VL}'::text[]),
+('BR-PI-Urucui',952019,76,32,'{85U,85V,8J5,8J7,8JF,8JH,8JJ,8JK,8JL,8JM,8JN,8JQ,8JS,8JT,8JU,8JV,8JW,8JY,8KK,8KN}'::text[]),
+('BR-RJ-RioJaneiro',952019,76,32,'{JPT,JPW,JPQ,JPX5,JPX4,JPX1,JPX0,JPRP,JPRN,JPX7,JPX6,JPX3,JPX2,JPRR,JPRQ,JPXD,JPX9,JPX8,JPRX,JPRW}'::text[]),
+('BR-RN-Passagem',952019,76,32,'{9K7C,9K7G,9K7H1,9K7H3,9K7H4,9K7H5,9K7H6,9K7H7,9K7HF,9K7HH,9K7HJ,9K7HK,9K7HL,9K7HM,9K7HN,9K7HP,9K7HQ,9K7HR,9K7HS,9K7HT,9K7HU,9K7HV,9K7HW,9K7HX,9K7HY,9K7HZ,9K7UJ,9KL58,9KL5B}'::text[]),
+('BR-RO-PortoVelho',952019,76,32,'{6GF,6GS,6GT,6GU,6GV,6GW,6GX,6GY,6GZ,64,65,67,67B,67C07,67CD,6J,6L}'::text[]),
+('BR-RR-Amajari',952019,76,32,'{1K,1M,1N1,1N2,1N3,1N4,1N5,1N6,1N7,1N8,1NJ,1NK,1NL,1NM,1NN,1NP,1NR,1Q,1QKC}'::text[]),
+('BR-RR-Caroebe',952019,76,32,'{H6,1F7,1F9,1FC,1FD,1FF,1FG,1FH,1FL,1FS,1FU,1S1,1S3,1S4,1S5,1S6,1S7,1SJ,1SL}'::text[]),
+('BR-RS-Esteio',952019,76,32,'{3YJ,H3YK,H3YL,H3YM,H3YS2,H3YS3,H3YS4,H3YS6,H3YS8,H3YS9}'::text[]),
+('BR-RS-SantaVitoriaPalmar',952019,76,32,'{KZ,KB,KP,K0,K1,KR,K2,K3,K6,K8,K9,KD}'::text[]),
+('BR-RS-SaoPedroSerra',952019,76,32,'{H6KP,H6KRB,H6KRC,H6KRG,H6KRH,H6KRS,H6KRT,H6KRU,H6KRV,H6KRW,H6KRX,H6KRY,H6KRZ,H6KX,H6M0,H6M2,H6M8}'::text[]),
+('BR-SC-Bombinhas',952019,76,32,'{HSN3,HSN9,HSND,HSNF}'::text[]),
+('BR-SP-Campinas',952019,76,32,'{HZD,HZF,HZH,HZS,HZ7}'::text[]),
+('BR-SP-Jandira',952019,76,32,'{HZ5CV,HZ5CW,HZ5CX,HZ5CY,HZ5CZ,HZ5GK,HZ5GM,HZ5GN,HZ5GP,HZ5GQ,HZ5GR,HZ5GS,HZ5GT,HZ5GU,HZ5GV,HZ5GW,HZ5GX,HZ5GY,HZ5HJ,HZ5HK,HZJ18,HZJ19,HZJ1B,HZJ1C,HZJ1D,HZJ1G,HZJ40,HZJ41,HZJ44,HZJ45}'::text[]),
+('BR-SP-SaoCaetanoSul',952019,76,32,'{HYUZP,HYUZQ,HYUZR,HYUZW,HYUZX,HYUZY,HYUZZ,HYVP0,HYVP1,HYVP2,HYVP3,HYVP8,HYVP9,HYVPB,HYVPC,HYVPD,HYVPG,HZJBN,HZJBP,HZJBR,HZK00,HZK01,HZK02,HZK03,HZK04,HZK06}'::text[]),
+('BR-SP-SaoPaulo',952019,76,32,'{HYS,HYU,HZJ,HZKN,HZKK,HZKJ,HZK5,HZK4,HZK1,HZK0,HYVP,HZK7,HZK6,HZK3,HZK2,HYVR,HZKF,HZKD,HZK9,HZK8,HYVX}'::text[]),
+
 ('CO-AMA-Leticia',9377,170,32,'{X3T,X3U,X3V,X5,X65,X66,X67,X6C,X6D,X6F,X6G,X6H,X6J,X6K,X6L,X6M,X6S,X6T,X6U,X6V,X6W,X6Y,X7,XJ,XL,XM,XT}'::text[]),
 ('CO-ANT-Itagui',9377,170,32,'{9J8W,9J8X,9J8Z,9JB2,9JB3,9JB8,9JB9,9JBB,9JBC,9JBD,9JBF,9JBG,9JBH,9JC1,9JC4,9JC5}'::text[]),
 ('CO-ANT-Medellin',9377,170,32,'{8UXZ,8UZ,8VP,8VR,9JB,9JC,9JG,9K0,9K1,9K2,9K3,9K4}'::text[]),
 ('CO-ATL-Soledad',9377,170,32,'{3LF,3LH,3LS,3LTP,3LU0,3LU1,3LU2,3LU3,3LU4,3LU6,3LU7,3LU8,3LU9,3LUB,3LUC,3LUD,3LUF,3LUG,3LV0,3LV1}'::text[]),
+('CO-BOY-Tunja',9377,170,32,'{9GQ,9GR,9GW,9GX0,9GX1,9GX2,9GX3,9GX4,9GX5,9GX6,9GX7,9GXD,9GXF,9GXG,9GXH,9GXJ,9GXK,9GXL,9GXM,9GXN,9GXQ,9GXR,9GXS,9GXT,9GXU,9GXV,9GXW,9GXX,9GXY,9GXZ,9GZ2,9GZ8}'::text[]),
 ('CO-CAQ-Solano',9377,170,32,'{P1,P2,P3,P4,P5,P6,P7,P8,PB,PC,PG,PH,Q0,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,QB,QD,TR,TW,TX,TY,TZ,U}'::text[]),
 ('CO-CAU-Florencia',9377,170,32,'{NMFC,NMFG,NMFH,NMFU,NMS,NMTN,NMTP,NMTQ,NMTR,NMU,NMV}'::text[]),
 ('CO-CUN-Narino',9377,170,32,'{HQH4,HQD,HQF,HQH0,HQH1,HQH2,HQH3,HQH6,HQH7,HQH8,HQH9,HQHB,HQHC,HQHD,HQHF,HQHG,HQHH,HQHL,HQHM,HQHQ,HQHS,HQHT,HQHU,HQHV,HQU,HRJ}'::text[]),
@@ -24,43 +57,12 @@ INSERT INTO libosmcodes.tmp_coverage_city(isolabel_ext,srid,jurisd_base_id,base,
 ('CO-GUV-SanJoseGuaviare',9377,170,32,'{HB,J0,J2,J3,J8,J9,JB,JC,H0,H1,PY,PZ,QN,QP,QR,QX,QZ,RP}'::text[]),
 ('CO-NSA-PuertoSantander',9377,170,32,'{77H,77U,7L58,7L59,7L5B,7L5C,7L5D,7L5F,7L5G,7L5H,7L5S,7L5T,7L5U,7L5V,7L5Y,7LJ0,7LJ1,7LJ2,7LJ3,7LJ4,7LJ5,7LJ6,7LJJ,7LJK, 7LJN}'::text[]),
 ('CO-RIS-Dosquebradas',9377,170,32,'{8BPQ,8BPR,8BPV,8BPW,8BPX,8BPY,8BPZ,8BR2,8BR3,8BR6,8BR7,8BR8,8BR9,8BRB,8BRC,8BRD,8BRF,8BRG,8BRH,8BRL,8BRS,8BRT,8BRU,8BRV,8BRW,900,902}'::text[]),
-('CO-RIS-Pereira',9377,170,32,'{8BJ,8BK,8BL,8BM,8BN,8BP,8BQ,8BR,8BTB,8BW0,900,905,GZU,GZV,GZY,GZZ,HPB,HPC,HPD,HPG,HPH}'::text[]),
 ('CO-RIS-LaVirginia',9377,170,32,'{8BLZ,8BMM,8BMN,8BMP,8BMQ,8BMR,8BMS,8BMT,8BMW,8BMX,8BMY,8BMZ,8BSB,8BT0,8BT1,8BT2,8BT3,8BT6,8BT7,8BT8,8BT9,8BTB,8BTC,8BTD,8BTF,8BTG,8BW0}'::text[]),
-('CO-VAC-Ulloa',9377,170,32,'{GZV,GZXP,GZXR,GZY,GZZ0,GZZ1,GZZ2,GZZ3,GZZ4,GZZ5,GZZ6,GZZ7}'::text[]),
+('CO-RIS-Pereira',9377,170,32,'{8BJ,8BK,8BL,8BM,8BN,8BP,8BQ,8BR,8BTB,8BW0,900,905,GZU,GZV,GZY,GZZ,HPB,HPC,HPD,HPG,HPH}'::text[]),
 ('CO-SUC-Since',9377,170,32,'{6NX,6NY,6NZ,6PN,6PP,6PQ,6PR,6PX,6Q8,6QB,6QC,6R0,6R1,6R2,6R3,6R4}'::text[]),
-('CO-BOY-Tunja',9377,170,32,'{9GQ,9GR,9GW,9GX0,9GX1,9GX2,9GX3,9GX4,9GX5,9GX6,9GX7,9GXD,9GXF,9GXG,9GXH,9GXJ,9GXK,9GXL,9GXM,9GXN,9GXQ,9GXR,9GXS,9GXT,9GXU,9GXV,9GXW,9GXX,9GXY,9GXZ,9GZ2,9GZ8}'::text[]),
-('BR-PB-Cuitegi',952019,76,32,'{8JH1Z,8JH3,8JH4,8JH60,8JH61,8JH62,8JH63,8JH64,8JH65,8JH66,8JH67,8JH68,8JH69,8JH6B,8JH6C,8JH6D,8JH6F,8JH6G,8JH6H,8JH6J,8JH6K,8JH6L,8JH6M,8JH6N,8JH6Q,8JH6S,8JH6T,8JH6U,8JH74,8JH75,8JH7J}'::text[]),
-('BR-RN-Passagem',952019,76,32,'{8K7C,8K7G,8K7H1,8K7H3,8K7H4,8K7H5,8K7H6,8K7H7,8K7HF,8K7HH,8K7HJ,8K7HK,8K7HL,8K7HM,8K7HN,8K7HP,8K7HQ,8K7HR,8K7HS,8K7HT,8K7HU,8K7HV,8K7HW,8K7HX,8K7HY,8K7HZ,8K7UJ,8KL58,8KL5B}'::text[]),
-('BR-PB-Piloezinhos',952019,76,32,'{8JH4,8JH5,8JH6,8JH7,8JHJ,8JHL0,8JHL1,8JHL2,8JHL3,8JHL4,8JHL5,8JHL6,8JHL7,8JHL8,8JHL9,9JHLD,8JHLF,8JHLJ,8JHLL,8JHLS}'::text[]),
-('BR-PE-FernandoNoronha',952019,76,32,'{9RNQ,8RNR,8RNX}'::text[]),
-('BR-RS-Esteio',952019,76,32,'{3YJ,F3YK,F3YL,F3YM,F3YS2,F3YS3,F3YS4,F3YS6,F3YS8,F3YS9}'::text[]),
-('BR-PB-Cabedelo',952019,76,32,'{8JT7,8JTF,8JTL,8JTS,8JTT,8JTW}'::text[]),
-('BR-RS-SaoPedroSerra',952019,76,32,'{F6KP,F6KRB,F6KRC,F6KRG,F6KRH,F6KRS,F6KRT,F6KRU,F6KRV,F6KRW,F6KRX,F6KRY,F6KRZ,F6KX,F6M0,F6M2,F6M8}'::text[]),
-('BR-SC-Bombinhas',952019,76,32,'{FSN3,FSN9,FSND,FSNF}'::text[]),
-('BR-PE-Olinda',952019,76,32,'{85V3,85V4,85V5,85V6,85V7,85VJ,85VL}'::text[]),
-('BR-AM-Apui',952019,76,32,'{5F8,5F9,6FB,5FC,5FD,5FF,5FG,5FH,5FS,5FT,5FU,5FV,5FW,5FX,5FY,5FY6,5FZ,5L,5M,5S,5T}'::text[]),
-('BR-PA-PortoMoz',952019,76,32,'{21P,21R,22B,22C,22G,22H,22U,230,231,232,233,234,235,236,237,238,239,23D,23F,23G,23H,23J,23L,23S,23U}'::text[]),
-('BR-BA-FormosaRioPreto',952019,76,32,'{6CM,6CN,6CP,6CQ,6CR,6CT,6CW,6CX,6CY,6CZ,6GP,710,712,713,716,717,718,719,81B,71C,71D,71F,71G,71H,740,741,742,743,744}'::text[]),
-('BR-RR-Caroebe',952019,76,32,'{F6,1F7,1F9,1FC,1FD,1FF,1FG,1FH,1FL,1FS,1FU,1S1,1S3,1S4,1S5,1S6,1S7,1SJ,1SL}'::text[]),
-('BR-BA-CasaNova',952019,76,32,'{76T,76V,76W,76X,76Y,76Z,77K,77N,77P,77Q,77R,77X,7DB,7DC,7F0,7F1,7F2,7F3,7F8}'::text[]),
-('BR-PI-Urucui',952019,76,32,'{75U,75V,7J5,7J7,7JF,7JH,7JJ,7JK,7JL,7JM,7JN,7JQ,7JS,7JT,7JU,7JV,7JW,7JY,7KK,7KN}'::text[]),
-('BR-PA-Itaituba',952019,76,32,'{1B5,5U,5V,5Y,5Z1,5Z4,5Z5,5Z6,5Z7,5ZD,5ZF,5ZH,5ZJ,5ZK,5ZL,5ZM,5ZN,5ZP,5ZQ,5ZR,5ZS,5ZT,5ZU,5ZW,5ZX,5ZY,5ZZ,6K,6N,6P}'::text[]),
-('BR-RO-PortoVelho',952019,76,32,'{5GF,5GS,5GT,5GU,5GV,5GW,5GX,5GY,5GZ,54,55,57,57B,57C07,57CD,5J,5L}'::text[]),
-('BR-AP-LaranjalJari',952019,76,32,'{25Z,26,26F,26LP,26S,27,2JF,2JG,2JH,2JM,2JP,2JQ,2JR,2JS,2JT,2JU,2JV,2JW,2JX,2JY,2JZ,2K4,2K5,2KJ,2KK,2KN,2KP,2L,2M0}'::text[]),
-('BR-RR-Amajari',952019,76,32,'{1K,1M,1N1,1N2,1N3,1N4,1N5,1N6,1N7,1N8,1NJ,1NK,1NL,1NM,1NN,1NP,1NR,1Q,1QKC}'::text[]),
-('BR-PA-Obidos',952019,76,32,'{1C,1G,1H,1UP,1UR,1UX,1UZ,1VP,21,218,24,25,2J,2K0}'::text[]),
-('BR-AM-Maraa',952019,76,32,'{0CK,0CL,0CM,0CN,0CP,0CQ,0CR,0CS,0CT,0CU,0CV,0CW,0CX,10,11,5P}'::text[]),
-('BR-PA-Altamira',952019,76,32,'{22,65,66,67,6J,6K,6L,6M,6N,6P,6Q,6R}'::text[]),
-('BR-AM-Barcelos',952019,76,32,'{0C,10,11,12,13,14,15,16,17,1J,1L}'::text[]),
-('BR-AM-SaoGabrielCachoeira',952019,76,32,'{06,07,09,0C,0D,0F,0G,0H,0L,0S,0U}'::text[]),
-('BR-MG-SantaCruzMinas',952019,76,32,'{C1J97,C1J9F,C1J9L,C1J9M,C1J9Q,C1J9S,C1J9T,C1J9W}'::text[]),
-('BR-SP-SaoCaetanoSul',952019,76,32,'{FYUZP,FYUZQ,FYUZR,FYUZW,FYUZX,FYUZY,FYUZZ,FYVP0,FYVP1,FYVP2,FYVP3,FYVP8,FYVP9,FYVPB,FYVPC,FYVPD,FYVPG,FZJBN,FZJBP,FZJBR,FZK00,FZK01,FZK02,FZK03,FZK04,FZK06}'::text[]),
-('BR-SP-Jandira',952019,76,32,'{FZ5CV,FZ5CW,FZ5CX,FZ5CY,FZ5CZ,FZ5GK,FZ5GM,FZ5GN,FZ5GP,FZ5GQ,FZ5GR,FZ5GS,FZ5GT,FZ5GU,FZ5GV,FZ5GW,FZ5GX,FZ5GY,FZ5HJ,FZ5HK,FZJ18,FZJ19,FZJ1B,FZJ1C,FZJ1D,FZJ1G,FZJ40,FZJ41,FZJ44,FZJ45}'::text[]),
-('BR-SP-Campinas',952019,76,32,'{FZD,FZF,FZH,FZS,FZ7}'::text[]),
-('BR-SP-SaoPaulo',952019,76,32,'{FYS,FYU,FZJ,FZKN,FZKK,FZKJ,FZK5,FZK4,FZK1,FZK0,FYVP,FZK7,FZK6,FZK3,FZK2,FYVR,FZKF,FZKD,FZK9,FZK8,FYVX}'::text[]),
-('BR-RJ-RioJaneiro',952019,76,32,'{GPT,GPW,GPQ,GPX5,GPX4,GPX1,GPX0,GPRP,GPRN,GPX7,GPX6,GPX3,GPX2,GPRR,GPRQ,GPXD,GPX9,GPX8,GPRX,GPRW}'::text[]),
-('BR-RS-SantaVitoriaPalmar',952019,76,32,'{HNZ,HQB,HPP,HR0,HR1,HPR,HR2,HR3,HR6,HR8,HR9,HRD}'::text[]),
-('UY-CO-ColoniaSacramento',32721,858,32,'{B3Z,B98,B99,B9B,B9C,B9D,B9G}'::text[])
+('CO-VAC-Ulloa',9377,170,32,'{GZV,GZXP,GZXR,GZY,GZZ0,GZZ1,GZZ2,GZZ3,GZZ4,GZZ5,GZZ6,GZZ7}'::text[]),
+
+('UY-CO-ColoniaSacramento',32721,858,32,'{C3Z,C98,C99,C9B,C9C,C9D,C9G}'::text[])
 ;
 
 
@@ -78,7 +80,7 @@ CREATE TABLE libosmcodes.coverage (
 );
 */
 -- L0cover, country cover
---DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) <> 218::bit(10);
+--DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) = 170::bit(10);
 INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
 SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
         (CASE WHEN ST_ContainsProperly(geom_country,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
@@ -86,62 +88,46 @@ SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
         bbox, geom, ST_Transform(geom,4326)
 FROM
 (
-  (
-    SELECT 170 AS jurisd_base_id,prefix_l032,bbox,geom_country,
-      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,9377),geom_country) AS geom,
-      str_ggeohash_draw_cell_bybox(bbox,false,9377) AS geom_cell
-    FROM unnest
-        (
-        '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
-        array[0,45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
-        ) t(prefix_l032,quadrant),
-        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000.0,1035500.0,262144.0)) u(bbox),
-        LATERAL (SELECT ST_Transform(geom,9377) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom_country)
-    WHERE quadrant IS NOT NULL AND quadrant > 0
-  )
-  UNION
-  (
+  SELECT 170 AS jurisd_base_id,prefix_l032,bbox,geom_country,
+    ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,9377),geom_country) AS geom,
+    str_ggeohash_draw_cell_bybox(bbox,false,9377) AS geom_cell
+  FROM unnest
+      (
+      '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
+      array[0,45,37,38,39,31,32,33,25,26,27,28,29,18,19,20,21,22,23,12,13,14,15,16,17,8,9,10,3,4]
+      ) t(prefix_l032,quadrant),
+      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%6,quadrant/6,4180000.0,1035500.0,262144.0)) u(bbox),
+      LATERAL (SELECT ST_Transform(geom,9377) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('CO') AND jurisd_base_id = 170) r(geom_country)
+  WHERE quadrant IS NOT NULL AND quadrant > 0
+) y
+ORDER BY 1
+;
+
+-- L0 Brasil
+--DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) = 76::bit(10);
+INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
+SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
+        (CASE WHEN ST_ContainsProperly(geom_country,geom_cell) IS FALSE THEN '1' ELSE '0' END) ||
+        rpad((baseh_to_vbit(prefix_l032,32))::text, 37, '0000000000000000000000000000000000000'))::bit(64)::bigint,
+        bbox, geom, ST_Transform(geom,4326)
+FROM
+(
     SELECT 76 AS jurisd_base_id, prefix_l032, bbox,geom_country,
       ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),geom_country) AS geom,
       str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell
     FROM unnest
         (
         '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[],
-        array[20,21,22,23,15,16,17,18,19,11,12,13,6,7,8,2]
+        array[20,21,22,23,24,15,16,17,18,19,11,12,13,14,6,7,8,2]
         ) t(prefix_l032,quadrant),
         LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%5,quadrant/5,2715000.0,6727000.0,1048576.0)) u(bbox),
         LATERAL (SELECT ST_Transform(geom,952019) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
-    WHERE quadrant IS NOT NULL AND quadrant <> 2
-  )
-  UNION
-  (
-    SELECT 76 AS jurisd_base_id, 'H'||x AS prefix_l032, bbox,geom_country,
-        ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,952019),geom_country) AS geom,
-    str_ggeohash_draw_cell_bybox(bbox,false,952019) AS geom_cell
-    FROM
-    (
-      (
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(14%5,14/5,2715000.0,6727000.0,1048576.0))) AS bbox
-        FROM unnest('{8,9}'::text[]) t(x)
-      )
-      UNION
-      (
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(24%5,24/5,2715000.0,6727000.0,1048576.0))) AS bbox
-        FROM unnest('{H,G}'::text[]) t(x)
-      )
-      UNION
-      (
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(2%5,2/5,2715000.0,6727000.0,1048576.0))) AS bbox
-        FROM unnest('{P,R,N,Q}'::text[]) t(x)
-      )
-    ) s,
-    (SELECT ST_Transform(geom,952019) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('BR') AND jurisd_base_id = 76) r(geom_country)
-  )
+    WHERE quadrant IS NOT NULL
 ) y
 ORDER BY 1
 ;
 
-
+-- L0 Uruguai
 --DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) = 858::bit(10);
 INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
 SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
@@ -149,111 +135,22 @@ SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
         rpad((baseh_to_vbit(prefix_l032,32))::text, 37, '0000000000000000000000000000000000000'))::bit(64)::bigint,
         bbox, geom, ST_Transform(geom,4326)
 FROM
-/*-- Cobertura antiga
 (
   SELECT 858 AS jurisd_base_id,prefix_l032,bbox,geom_country,
     ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
     str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
   FROM unnest
       (
-      --'{0,1,2,3,4,5,6,7,8,9}'::text[],
-      --array[40,41,30,31,20,21,10,11,0,1]
-      '{0,1,2,3,4,5}'::text[],
-      array[20,21,10,11,0,1]
+        '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L}'::text[],
+        array[40,41,42,30,31,32,33,20,21,22,23,10,11,12,13,0,1,2,3]
       ) t(prefix_l032,quadrant),
-      --LATERAL (SELECT ARRAY[ 353000 + (quadrant%2)*262144, 6028000 + (quadrant/10)*(131072), 353000 + (quadrant%2)*262144+262144, 6028000 + (quadrant/10)*(131072)+131072 ]) u(bbox),
-      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%2,quadrant/10,353000.0,6028000.0,262144.0)) u(bbox),
+      LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%10,quadrant/10,353000.0,6028000.0,131072.0)) u(bbox),
       LATERAL (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
   WHERE quadrant IS NOT NULL
-)
-*/
--- Nova cobertura: https://github.com/osm-codes/UY_new/issues/1
-(
-  -- células L0 de 131072m
-  (
-    SELECT 858 AS jurisd_base_id,prefix_l032,bbox,geom_country,
-      ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
-      str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
-    FROM unnest
-        (
-        '{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H}'::text[],
-        array[40,41,30,31,32,33,20,21,22,23,10,11,12,13,1,2]
-        ) t(prefix_l032,quadrant),
-        LATERAL (SELECT libosmcodes.ij_to_bbox(quadrant%10,quadrant/10,353000.0,6028000.0,131072.0)) u(bbox),
-        LATERAL (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
-    -- não insere as células L0 que participam da realocação, mas as mantém na ordenação
-    WHERE quadrant IS NOT NULL AND quadrant <> 40 AND quadrant <> 41 AND quadrant <> 1
-  )
-  -- Células L0 de 23170,5m
-  UNION
-  (
-    -- realocando o quadrante 42 no 1
-    SELECT 858 AS jurisd_base_id, 'G'||x AS prefix_l032, bbox,geom_country,
-        ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
-    str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
-    FROM
-    (
-      (
-        -- células usadas por 42
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(42%4,42/10,353000.0,6028000.0,131072.0))) AS bbox
-        FROM unnest('{0,1,2,3,4}'::text[]) t(x)
-      )
-      UNION
-      (
-        -- células que sobram em 1
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(1%4,1/10,353000.0,6028000.0,131072.0))) AS bbox
-        FROM unnest('{7,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z}'::text[]) t(x)
-      )
-    ) s,
-    (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
-  )
-  UNION
-  (
-    -- realocando o quadrante 0 no 41
-    SELECT 858 AS jurisd_base_id, '1'||x AS prefix_l032, bbox,geom_country,
-        ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
-    str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
-    FROM
-    (
-      (
-        -- células usadas por 0
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(0,0,353000.0,6028000.0,131072.0))) AS bbox
-        FROM unnest('{V,X,Y,Z}'::text[]) t(x)
-      )
-      UNION
-      (
-      -- células que sobram em 41
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(41%4,41/10,353000.0,6028000.0,131072.0))) AS bbox
-        FROM unnest('{0,1,2,3,4,5,6,7,8,9,B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T}'::text[]) t(x)
-      )
-    ) s,
-    (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
-  )
-  UNION
-  (
-    -- realocando o quadrante 3 no 40
-    SELECT 858 AS jurisd_base_id, '0'||x AS prefix_l032, bbox,geom_country,
-        ST_Intersection(str_ggeohash_draw_cell_bybox(bbox,false,32721),geom_country) AS geom,
-    str_ggeohash_draw_cell_bybox(bbox,false,32721) AS geom_cell
-    FROM
-    (
-      (
-        -- células usadas por 3
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(3%4,3/10,353000.0,6028000.0,131072.0))) AS bbox
-        FROM unnest('{N,P,R}'::text[]) t(x)
-      )
-      UNION
-      (
-        -- células que sobram em 40
-        SELECT x, str_ggeohash_decode_box2(baseh_to_vbit(x,32),(libosmcodes.ij_to_bbox(40%4,40/10,353000.0,6028000.0,131072.0))) AS bbox
-        FROM unnest('{2,3,7,8,9,B,C,D,F,G,H,L,S,T,U,V,W,Y}'::text[]) t(x)
-      )
-    ) s,
-    (SELECT ST_Transform(geom,32721) FROM optim.vw01full_jurisdiction_geom g WHERE lower(g.isolabel_ext) = lower('UY') AND jurisd_base_id = 858) r(geom_country)
-  )
 ) z
 ;
 
+-- L0 Ecuador
 --DELETE FROM libosmcodes.coverage  WHERE (id::bit(64)<<24)::bit(2) = 0::bit(2) AND (id::bit(64))::bit(10) = 218::bit(10);
 INSERT INTO libosmcodes.coverage(id,bbox,geom,geom_srid4326)
 SELECT (jurisd_base_id::bit(10) || 0::bit(14) || '00' ||
@@ -323,31 +220,7 @@ FROM
     WHERE ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper(upper(split_part(p.isolabel_ext,'-',1)))))::int)::bit(10) )
         AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
         AND
-        (
-          CASE
-          WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'BR' -- Brasil usa 2 dígitos na base32
-          THEN
-          (
-            CASE
-            WHEN cell_bits::bit(5) <> b'01111' THEN ((id::bit(64)<<27)::bit(10) # (cell_bits::bit(5))::bit(10)) = 0::bit(10) -- 1 digito base32
-            ELSE ( (id::bit(64)<<27)::bit(10) # cell_bits::bit(10) ) = 0::bit(10) -- 2 digitos base32
-            END
-          )
-          WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'UY' -- Uruguai usa 2 dígitos na base32
-          THEN
-          (
-            CASE
-            WHEN (cell_bits::bit(5) <> b'00000' OR cell_bits::bit(5) <> b'00001' OR cell_bits::bit(5) <> b'01110') THEN ((id::bit(64)<<27)::bit(10) # (cell_bits::bit(5))::bit(10)) = 0::bit(10) -- 1 digito base32
-            ELSE ( (id::bit(64)<<27)::bit(10) # cell_bits::bit(10) ) = 0::bit(10) -- 2 digitos base32
-            END
-          )
-          --WHEN upper(split_part(p.isolabel_ext,'-',1)) = 'UY' -- Uruguai usa base16 com grade postal
-          --THEN
-          --(
-            --( (id::bit(64)<<28)::bit(4) # cell_bits::bit(4) ) = 0::bit(4)
-          --)
-          ELSE ( ( (id::bit(64)<<27)::bit(5) # cell_bits::bit(5) ) = 0::bit(5) ) -- outros paises usam 1 digito na base32
-          END
+        ( ( ( (id::bit(64)<<27)::bit(5) # cell_bits::bit(5) ) = 0::bit(5) ) -- usam 1 digito na base32
         )
   ) s
   ON TRUE
@@ -355,70 +228,3 @@ FROM
   ORDER BY q.isolabel_ext, ordered_cover
 ) x
 ;
-
-/*
---DROP TABLE libosmcodes.tmp_coverage_cityUY;
-CREATE TABLE libosmcodes.tmp_coverage_cityUY (
-  isolabel_ext text   NOT NULL,
-  srid         int    NOT NULL,
-  jurisd_base_id int NOT NULL,
-  cover        text[] NOT NULL,
-  cover_replace text[] NOT NULL,
-);
-INSERT INTO libosmcodes.tmp_coverage_cityUY(isolabel_ext,srid,jurisd_base_id,cover) VALUES
-('UY-CO-ColoniaSacramento',32721,858,'{492,487F}'::text[],'{492,492F}'::text[])
-;
-
-INSERT INTO libosmcodes.coverage(id,isolabel_ext,prefix,index,geom)
-SELECT ((j_id_bit || l_id_bit || mun_princ || cover_parcial ||  sufix_bits)::bit(64))::bigint , isolabel_ext, cell, ordered_cover, geom
-FROM
-(
-  SELECT j_id_bit, l_id_bit, '01' AS mun_princ,
-  CASE
-  WHEN ST_ContainsProperly(r.geom_transformed,str_ggeohash_draw_cell_bybox(bbox,false,p.srid)) IS FALSE
-  THEN '1'
-  ELSE '0'
-  END AS cover_parcial,
-  rpad(cell_bits::text, 37, '0000000000000000000000000000000000000') AS sufix_bits, q.isolabel_ext, cell, ordered_cover,
-  ST_Intersection(r.geom_transformed,str_ggeohash_draw_cell_bybox(bbox,false,p.srid)) AS geom
-  FROM
-  (
-    SELECT isolabel_ext, srid, jurisd_base_id, cell, ordered_cover, baseh_to_vbit(cell,32) AS cell_bits,
-    upper(substr(cell,1,1)) AS l0prefix
-    FROM libosmcodes.tmp_coverage_cityUY tc, unnest(cover) td(ordered_cover,cell)
-    WHERE cell IS NOT NULL
-  ) p
-  LEFT JOIN LATERAL
-  (
-    SELECT jurisd_base_id::bit(10) AS j_id_bit, gid::bit(14) AS l_id_bit, t.*
-    FROM(
-        SELECT ROW_NUMBER() OVER(ORDER BY jurisd_local_id ASC) AS gid, jurisd_base_id, jurisd_local_id, isolabel_ext
-        FROM optim.jurisdiction
-        WHERE jurisd_base_id=p.jurisd_base_id AND isolevel::int >2
-        ORDER BY jurisd_local_id
-    ) t
-    
-  ) q
-  ON lower(p.isolabel_ext) = lower(q.isolabel_ext)
-  LEFT JOIN LATERAL
-  (
-    SELECT isolabel_ext, jurisd_base_id, ST_Transform(geom,p.srid) AS geom_transformed, geom
-    FROM optim.vw01full_jurisdiction_geom g
-  ) r
-  ON lower(r.isolabel_ext) = lower(q.isolabel_ext) AND r.jurisd_base_id = p.jurisd_base_id
-  LEFT JOIN LATERAL
-  (
-    SELECT (CASE WHEN length(p.cell)>1 THEN str_ggeohash_decode_box2(substring(p.cell_bits from 6),bbox) ELSE bbox END) AS bbox
-    FROM libosmcodes.coverage
-    WHERE ( (id::bit(64))::bit(10) = ((('{"UY":858}'::jsonb)->(upper(upper(split_part(p.isolabel_ext,'-',1)))))::int)::bit(10) )
-        AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
-        AND
-        (
-          ( ( (id::bit(64)<<27)::bit(5) # cell_bits::bit(5) ) = 0::bit(5) ) -- outros paises usam 1 digito na base32
-        )
-  ) s
-  ON TRUE
- 
-  ORDER BY q.isolabel_ext, ordered_cover
-) x
-;*/

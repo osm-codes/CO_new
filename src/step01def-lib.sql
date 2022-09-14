@@ -327,15 +327,6 @@ RETURNS text[] as $f$
     ( SELECT isolabel_ext
       FROM mvwjurisdiction_synonym
       WHERE lower(synonym) = lower(iso) ) || array[upper(u[1])]
-
-    --CASE
-      ---- Tratar município abreviado com código de 3 letras
-      --WHEN cardinality(u)=3 AND iso ~ '[a-zA-Z]{2,}' THEN iso || array[upper(u[1])]
-      --ELSE (
-        --SELECT isolabel_ext
-        --FROM mvwjurisdiction_synonym
-        --WHERE lower(synonym) = lower(iso) ) || array[upper(u[1])]
-    --END
   FROM ( SELECT regexp_split_to_array (iso,'(-)')::text[] AS u ) r
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION str_geocodeiso_decode(text)
@@ -374,12 +365,12 @@ COMMENT ON FUNCTION libosmcodes.ggeohash_GeomsFromVarbit
 
 CREATE TABLE libosmcodes.coverage (
   id            bigint NOT NULL,
-  isolabel_ext  text, -- used only in de-para, replace with 14bit in id
-  prefix        text, -- used only in de-para, cache
-  index         text, -- used only in de-para, not in id
-  bbox          float[],-- used only in l0cover
-  geom          geometry,
-  geom_srid4326 geometry -- used only in l0cover
+  isolabel_ext  text,     -- used only in de-para, replace with 14bit in id
+  prefix        text,     -- used only in de-para, cache
+  index         text,     -- used only in de-para, not in id
+  bbox          float[],  -- used only in l0cover
+  geom          geometry, -- used      in l0cover and de-para
+  geom_srid4326 geometry  -- used only in l0cover
 );
 
 ------------------
@@ -454,23 +445,10 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
       SELECT (isolabel_ext|| (CASE WHEN length(m.code_end) = length(prefix) THEN '~' || index ELSE '~' || index || substr(m.code_end,length(prefix)+1,length(m.code_end)) END) ) AS short_code
       FROM libosmcodes.coverage r
       WHERE
-      (
-        ---- Uruguai usa grade postal base16, demais usam base32
-        --CASE
-        --WHEN p_jurisd_base_id = 858
-        --THEN
-        --(
-          --( (id::bit(64)<<27)::bit(16) # code_end_bits::bit(16) ) = 0::bit(16) OR ( (id::bit(64)<<27)::bit(16) # (code_end_bits::bit(15))::bit(16) ) = 0::bit(16)
-        --OR ( (id::bit(64)<<27)::bit(16) # (code_end_bits::bit(10))::bit(16) ) = 0::bit(16) OR ( (id::bit(64)<<27)::bit(16) # (code_end_bits::bit(5))::bit(16) ) = 0::bit(16)
-        --)
-        --ELSE
-        --(
-          --( (id::bit(64)<<27)::bit(20) # code_end_bits::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(15))::bit(20) ) = 0::bit(20)
-        --OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(10))::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(5))::bit(20) ) = 0::bit(20)
-        --)
-        --END
-          ( (id::bit(64)<<27)::bit(20) # code_end_bits::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(15))::bit(20) ) = 0::bit(20)
-        OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(10))::bit(20) ) = 0::bit(20) OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(5))::bit(20) ) = 0::bit(20)
+      (   ( (id::bit(64)<<27)::bit(20) #  code_end_bits::bit(20)           ) = 0::bit(20)
+       OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(15))::bit(20) ) = 0::bit(20)
+       OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(10))::bit(20) ) = 0::bit(20)
+       OR ( (id::bit(64)<<27)::bit(20) # (code_end_bits::bit(5) )::bit(20) ) = 0::bit(20)
       )
       AND (id::bit(64))::bit(10) = p_jurisd_base_id::bit(10)
       AND ( (id::bit(64)<<24)::bit(2) ) <> 0::bit(2)
@@ -494,14 +472,15 @@ CREATE or replace FUNCTION api.osmcode_encode(
     WHEN latLon[4] IS NOT NULL
     THEN
       CASE
-      WHEN (jurisd_base_id = 170 OR jurisd_base_id = 858) AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/5)*5
-      WHEN jurisd_base_id = 170 AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/5)*5
-      WHEN jurisd_base_id = 858 AND p_base = 17 THEN ((libosmcodes.uncertain_base16h(latLon[4]::int))/4)*4
-      WHEN (jurisd_base_id = 170 OR jurisd_base_id = 858) AND p_base = 16 THEN libosmcodes.uncertain_base16hL0131km(latLon[4]::int)
-      WHEN (jurisd_base_id = 218 ) AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL0185km(latLon[4]::int))/5)*5
-      WHEN (jurisd_base_id = 218 ) AND p_base = 16 THEN libosmcodes.uncertain_base16hL0185km(latLon[4]::int)
+      WHEN jurisd_base_id = 170 AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(        latLon[4]::int))/5)*5
+      WHEN jurisd_base_id = 170 AND p_base = 16 THEN   libosmcodes.uncertain_base16h(        latLon[4]::int)
+      WHEN jurisd_base_id = 858 AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL0131km( latLon[4]::int))/5)*5
+      WHEN jurisd_base_id = 858 AND p_base = 17 THEN ((libosmcodes.uncertain_base16hL0131km( latLon[4]::int))/4)*4
+      WHEN jurisd_base_id = 858 AND p_base = 16 THEN   libosmcodes.uncertain_base16hL0131km( latLon[4]::int)
+      WHEN jurisd_base_id = 218 AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL0185km( latLon[4]::int))/5)*5
+      WHEN jurisd_base_id = 218 AND p_base = 16 THEN   libosmcodes.uncertain_base16hL0185km( latLon[4]::int)
       WHEN jurisd_base_id = 76  AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL01048km(latLon[4]::int))/5)*5
-      WHEN jurisd_base_id = 76  AND p_base = 16 THEN libosmcodes.uncertain_base16hL01048km(latLon[4]::int)
+      WHEN jurisd_base_id = 76  AND p_base = 16 THEN   libosmcodes.uncertain_base16hL01048km(latLon[4]::int)
       END
     ELSE 35
     END,
@@ -510,7 +489,7 @@ CREATE or replace FUNCTION api.osmcode_encode(
     u.bbox,
     u.l0code,
     u.jurisd_base_id,
-    CASE WHEN u.jurisd_base_id = 218 OR (u.jurisd_base_id = 76 AND length(u.l0code) > 5) THEN TRUE ELSE FALSE END
+    CASE WHEN u.jurisd_base_id = 218 THEN TRUE ELSE FALSE END
   )
   FROM ( SELECT str_geouri_decode(uri) ) t(latLon),
   LATERAL ( SELECT ST_SetSRID(ST_MakePoint(latLon[2],latLon[1]),4326) ) v(geom),
@@ -518,31 +497,24 @@ CREATE or replace FUNCTION api.osmcode_encode(
   (
     SELECT ((id::bit(64))::bit(10))::int AS jurisd_base_id, bbox, ST_SRID(geom) AS srid,
         CASE
-        WHEN p_base = 32
-        THEN
-        (
-          CASE -- se for H e 'BR' pega 10 bits, caso contrario, pega 5.
-          WHEN (id::bit(64)<<27)::bit(5) = b'01111' AND ((id::bit(64))::bit(10))::int = 76 THEN (id::bit(64)<<27)::bit(10)
-          WHEN ((id::bit(64)<<27)::bit(5) = b'00000' OR (id::bit(64)<<27)::bit(5) = b'00001' OR (id::bit(64)<<27)::bit(5) = b'01110') AND ((id::bit(64))::bit(10))::int = 858 THEN (id::bit(64)<<27)::bit(10)
-          ELSE (id::bit(64)<<27)::bit(5)
-          END
-        )
+        WHEN p_base = 32 THEN (id::bit(64)<<27)::bit(5)
         WHEN p_base = 16 OR p_base = 17
         THEN
         (
-          CASE -- se for H e 'BR' pega 9 bits.
-               -- se for 'CO' ou 'EC' pega 8 bits e shift >>3
-               -- caso contrario, pega 4 (UY).
-          WHEN (id::bit(64)<<28)::bit(4) = b'1111' AND ((id::bit(64))::bit(10))::int = 76  THEN ((id::bit(64)<<28)::bit(9))
-          WHEN ( (id::bit(64)<<28)::bit(4) = b'0000' OR (id::bit(64)<<28)::bit(4) = b'0001' OR (id::bit(64)<<28)::bit(4) = b'1110' ) AND ((id::bit(64))::bit(10))::int = 858  THEN ((id::bit(64)<<28)::bit(9))
-          WHEN ((id::bit(64))::bit(10))::int = 170 OR  ((id::bit(64))::bit(10))::int = 218 THEN ((id::bit(64)<<27)::bit(8))>>3
+          CASE -- 8 bits e shift >>3 ou 4 bits
+          WHEN  ((id::bit(64))::bit(10))::int = 170
+             OR ((id::bit(64))::bit(10))::int = 218
+             OR ((id::bit(64))::bit(10))::int = 858
+             OR ((id::bit(64))::bit(10))::int = 76
+             THEN ((id::bit(64)<<27)::bit(8))>>3
           ELSE (id::bit(64)<<28)::bit(4)
           END
         )
         END AS l0code
     FROM libosmcodes.coverage
     WHERE ST_Contains(geom_srid4326,v.geom)
-          AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2) -- busca na cobertura nacional apenas
+          -- cobertura nacional apenas
+          AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
   ) u
 $wrap$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_encode(text,int,int)
@@ -582,105 +554,25 @@ CREATE or replace FUNCTION api.osmcode_decode(
               SELECT str_ggeohash_draw_cell_bybox(
                         str_ggeohash_decode_box2(
                           CASE
-                          WHEN p_base = 32
-                          THEN
-                          (
-                            CASE
-                            WHEN codebits::bit(5) = b'01111' AND upper_p_iso = 'BR' THEN substring(codebits from 11)
-                            WHEN (codebits::bit(5) = b'00000' OR codebits::bit(5) = b'00001' OR codebits::bit(5) = b'01110') AND upper_p_iso = 'UY' THEN substring(codebits from 11)
-                            ELSE substring(codebits from 6)
-                            END
-                          )
-                          WHEN p_base = 16 OR p_base = 17
-                          THEN
-                          (
-                            CASE
-                            WHEN codebits::bit(4) = b'1111' OR upper_p_iso = 'CO' THEN substring(codebits from 9)
-                            WHEN (codebits::bit(4) = b'0000' OR codebits::bit(4) = b'0001' OR codebits::bit(4) = b'1110') AND upper_p_iso = 'UY' THEN substring(codebits from 9)
-                            ELSE substring(codebits from 5)
-                            END
-                          )
+                          WHEN p_base = 32 THEN substring(codebits from 6)
+                          WHEN p_base = 16 OR p_base = 17 THEN substring(codebits from 9)
                           END
-                        ,bbox, CASE WHEN upper_p_iso='EC'  THEN TRUE ELSE FALSE END)
+                        ,bbox, CASE WHEN upper_p_iso='EC' THEN TRUE ELSE FALSE END)
                     ,false,ST_SRID(geom)
                     ) AS geom
               FROM libosmcodes.coverage
               WHERE
-                -- busca em coberturas nacionais
+                -- cobertura nacional apenas
                 ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper_p_iso))::int)::bit(10) )
                 AND ( (id::bit(64)<<24)::bit(2) ) = 0::bit(2)
-                -- prefixo conforme país
+                -- prefixo conforme base
                 AND
                 (
-                  CASE
-                  WHEN upper_p_iso = 'BR'
-                  -- Brasil usa 1 ou 2 dígitos na base32
-                  -- Brasil usa 1, 2 ou 3 dígitos na base16h
-                  -- Brasil usa recodificação
-                  THEN
-                  (
-                    CASE
-                    WHEN p_base = 16
-                    THEN
-                        (
-                          CASE
-                          WHEN codebits::bit(4) <> b'1111'
-                          THEN ( (id::bit(64)<<28)::bit(4) # codebits::bit(4) ) = 0::bit(4) -- 1 digito base16h
-                          ELSE ( (id::bit(64)<<28)::bit(9) # codebits::bit(9) ) = 0::bit(9) -- 2 dígitos base16h
-                          END
-                        )
-                    ELSE
-                        (
-                          CASE
-                          WHEN codebits::bit(5) <> b'01111'
-                          THEN ( (id::bit(64)<<27)::bit(5)  # codebits::bit(5)  ) = 0::bit(5)  -- 1 digito base32
-                          ELSE ( (id::bit(64)<<27)::bit(10) # codebits::bit(10) ) = 0::bit(10) -- 2 dígitos base32
-                          END
-                        )
-                    END
-                  )
-                  WHEN upper_p_iso = 'CO' OR upper_p_iso = 'EC'
-                  -- Colômbia e Equador usam 2 dígitos na base16h e 1 na base32
-                  THEN
-                  (
                     CASE
                     WHEN p_base = 16
                     THEN ( ( (((id::bit(64)<<27)::bit(8))>>3) # codebits::bit(8) ) = 0::bit(8) ) -- 2 dígitos base16h
                     ELSE ( (   (id::bit(64)<<27)::bit(5)      # codebits::bit(5) ) = 0::bit(5) ) -- 1 digito  base32
                     END
-                  )
-                  WHEN upper_p_iso = 'UY'
-                  -- Uruguai usa 1 ou 2 dígitos na base32
-                  -- Uruguai usa 1, 2 ou 3 dígitos na base16h
-                  -- Uruguai usa recodificação
-                  THEN
-                  (
-                    --CASE
-                    --WHEN p_base = 16 OR p_base = 17
-                    --THEN ( ( (id::bit(64)<<28)::bit(4) # codebits::bit(4) ) = 0::bit(4) ) -- 1 digito base16h ou base16
-                    --ELSE ( ( (id::bit(64)<<27)::bit(5) # codebits::bit(5) ) = 0::bit(5) ) -- 1 digito base32
-                    --END
-                    CASE
-                    WHEN p_base = 16
-                    THEN
-                        (
-                          CASE
-                          WHEN codebits::bit(4) <> b'0000' AND codebits::bit(4) <> b'0001' AND codebits::bit(4) <> b'1110'
-                          THEN ( (id::bit(64)<<28)::bit(4) # codebits::bit(4) ) = 0::bit(4) -- 1 digito base16h
-                          ELSE ( (id::bit(64)<<28)::bit(9) # codebits::bit(9) ) = 0::bit(9) -- 2 dígitos base16h
-                          END
-                        )
-                    ELSE
-                        (
-                          CASE
-                          WHEN codebits::bit(5) <> b'00000' AND codebits::bit(5) <> b'00001' AND codebits::bit(5) <> b'01110'
-                          THEN ( (id::bit(64)<<27)::bit(5)  # codebits::bit(5)  ) = 0::bit(5)  -- 1 digito base32
-                          ELSE ( (id::bit(64)<<27)::bit(10) # codebits::bit(10) ) = 0::bit(10) -- 2 dígitos base32
-                          END
-                        )
-                    END
-                  )
-                  END
                 )
             ) v
           )
@@ -746,34 +638,12 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
             SELECT geom,
             vbit_to_baseh(
                 CASE
-                WHEN p_base = 32
-                THEN
-                (
-                  CASE --se for H e 'BR' pega 10 bits
-                  WHEN (id::bit(64)<<27)::bit(5) = b'01111' AND upper(p_iso) = 'BR' THEN (id::bit(64)<<27)::bit(10)
-                       --se for 0, 1 ou G e 'UY' pega 10 bits
-                  WHEN ( (id::bit(64)<<27)::bit(5) = b'00000' 
-                          OR (id::bit(64)<<27)::bit(5) = b'00001' 
-                          OR (id::bit(64)<<27)::bit(5) = b'01110' )
-                          AND upper(p_iso) = 'UY'
-                      THEN (id::bit(64)<<27)::bit(10)
-                      -- caso contrario, pega 5.
-                  ELSE (id::bit(64)<<27)::bit(5)
-                  END
-                )
+                WHEN p_base = 32 THEN (id::bit(64)<<27)::bit(5)
                 WHEN p_base = 16 OR p_base = 17
                 THEN
                 (
-                  CASE --se for F e 'BR' pega 8 bits
-                  WHEN (id::bit(64)<<28)::bit(4) = b'1111' AND upper(p_iso) = 'BR' THEN ((id::bit(64)<<28)::bit(9))
-                       --se for 0,1 ou E e 'UY' pega 8 bits
-                  WHEN ( (id::bit(64)<<28)::bit(4) = b'0000'
-                        OR (id::bit(64)<<28)::bit(4) = b'0001'
-                        OR (id::bit(64)<<28)::bit(4) = b'1110')
-                        AND upper(p_iso) = 'UY' THEN ((id::bit(64)<<28)::bit(9))
-                       --se for 'CO' ou 'EC' pega 8 bits, caso contrario, pega 4.
-                  WHEN upper(p_iso) = 'CO' OR upper(p_iso) = 'EC' THEN ((id::bit(64)<<27)::bit(8))>>3
-                       -- caso contrario, pega 4.
+                  CASE
+                  WHEN upper(p_iso) IN ('CO','EC','UY','BR') THEN ((id::bit(64)<<27)::bit(8))>>3
                   ELSE (id::bit(64)<<28)::bit(4)
                   END
                 )
@@ -782,7 +652,8 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                 null AS index
               FROM libosmcodes.coverage
               WHERE ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper(p_iso)))::int)::bit(10) )
-                  AND (id::bit(64)<<24)::bit(2) = 0::bit(2) -- country cover
+                  -- cobertura nacional apenas
+                  AND (id::bit(64)<<24)::bit(2) = 0::bit(2)
           )
           UNION ALL
           (
