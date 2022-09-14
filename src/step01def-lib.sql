@@ -324,14 +324,18 @@ COMMENT ON FUNCTION libosmcodes.uncertain_base16hL01048km(int)
 CREATE or replace FUNCTION str_geocodeiso_decode(iso text)
 RETURNS text[] as $f$
   SELECT
-    CASE
-      -- Tratar município abreviado com código de 3 letras
-      WHEN cardinality(u)=3 AND iso ~ '[a-zA-Z]{2,}' THEN iso || array[upper(u[1])]
-      ELSE (
-        SELECT isolabel_ext
-        FROM mvwjurisdiction_synonym
-        WHERE lower(synonym) = lower(iso) ) || array[upper(u[1])]
-    END
+    ( SELECT isolabel_ext
+      FROM mvwjurisdiction_synonym
+      WHERE lower(synonym) = lower(iso) ) || array[upper(u[1])]
+
+    --CASE
+      ---- Tratar município abreviado com código de 3 letras
+      --WHEN cardinality(u)=3 AND iso ~ '[a-zA-Z]{2,}' THEN iso || array[upper(u[1])]
+      --ELSE (
+        --SELECT isolabel_ext
+        --FROM mvwjurisdiction_synonym
+        --WHERE lower(synonym) = lower(iso) ) || array[upper(u[1])]
+    --END
   FROM ( SELECT regexp_split_to_array (iso,'(-)')::text[] AS u ) r
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION str_geocodeiso_decode(text)
