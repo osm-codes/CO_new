@@ -132,190 +132,52 @@ COMMENT ON FUNCTION libosmcodes.xy_to_quadrant(int[])
 CREATE or replace FUNCTION libosmcodes.uncertain_base16h(u int) RETURNS int AS $f$
   -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
   SELECT CASE -- discretization by "snap to size-levels bits"
-     WHEN s < 1 THEN 36
-     WHEN s < 2 THEN 35
-     WHEN s < 3 THEN 34
-     WHEN s < 4 THEN 33
-     WHEN s < 6 THEN 32
-     WHEN s < 8 THEN 31
-     WHEN s < 11 THEN 30
-     WHEN s < 16 THEN 29
-     WHEN s < 23 THEN 28
-     WHEN s < 32 THEN 27
-     WHEN s < 45 THEN 26
-     WHEN s < 64 THEN 25
-     WHEN s < 91 THEN 24
-     WHEN s < 128 THEN 23
-     WHEN s < 181 THEN 22
-     WHEN s < 256 THEN 21
-     WHEN s < 362 THEN 20
-     WHEN s < 512 THEN 19
-     WHEN s < 724 THEN 18
-     WHEN s < 1024 THEN 17
-     WHEN s < 1448 THEN 16
-     WHEN s < 2048 THEN 15
-     WHEN s < 2896 THEN 14
-     WHEN s < 4096 THEN 13
-     WHEN s < 5793 THEN 12
-     WHEN s < 8192 THEN 11
-     WHEN s < 11585 THEN 10
-     WHEN s < 16384 THEN 9
-     WHEN s < 23170 THEN 8
-     WHEN s < 32768 THEN 7
-     WHEN s < 46341 THEN 6
-     WHEN s < 65536 THEN 5
-     WHEN s < 92682 THEN 4
-     WHEN s < 131072 THEN 3
-     WHEN s < 185364 THEN 2
-     WHEN s < 262144 THEN 1
-     ELSE 0
-     END
+    WHEN s <       1 THEN 40
+    WHEN s <       2 THEN 39
+    WHEN s <       3 THEN 38
+    WHEN s <       4 THEN 37
+    WHEN s <       6 THEN 36
+    WHEN s <       8 THEN 35
+    WHEN s <      11 THEN 34
+    WHEN s <      16 THEN 33
+    WHEN s <      23 THEN 32
+    WHEN s <      32 THEN 31
+    WHEN s <      45 THEN 30
+    WHEN s <      64 THEN 29
+    WHEN s <      91 THEN 28
+    WHEN s <     128 THEN 27
+    WHEN s <     181 THEN 26
+    WHEN s <     256 THEN 25
+    WHEN s <     362 THEN 24
+    WHEN s <     512 THEN 23
+    WHEN s <     724 THEN 22
+    WHEN s <    1024 THEN 21
+    WHEN s <    1448 THEN 20
+    WHEN s <    2048 THEN 19
+    WHEN s <    2896 THEN 18
+    WHEN s <    4096 THEN 17
+    WHEN s <    5793 THEN 16
+    WHEN s <    8192 THEN 15
+    WHEN s <   11585 THEN 14
+    WHEN s <   16384 THEN 13
+    WHEN s <   23170 THEN 12
+    WHEN s <   32768 THEN 11
+    WHEN s <   46341 THEN 10
+    WHEN s <   65536 THEN  9
+    WHEN s <   92682 THEN  8
+    WHEN s <  131072 THEN  7
+    WHEN s <  185364 THEN  6
+    WHEN s <  262144 THEN  5
+    WHEN s <  370728 THEN  4
+    WHEN s <  524288 THEN  3
+    WHEN s <  741455 THEN  2
+    WHEN s < 1048576 THEN  1
+    ELSE                   0
+    END
   FROM (SELECT u*2) t(s)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.uncertain_base16h(int)
-  IS 'Uncertain base16h and base32 for L0 262km'
-;
-
-CREATE or replace FUNCTION libosmcodes.uncertain_base16hL0185km(u int) RETURNS int AS $f$
-  -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
-  SELECT CASE -- discretization by "snap to size-levels bits"
-    WHEN s < 1 THEN 35
-    WHEN s < 2 THEN 34
-    WHEN s < 3 THEN 33
-    WHEN s < 4 THEN 32
-    WHEN s < 6 THEN 31
-    WHEN s < 8 THEN 30
-    WHEN s < 11 THEN 29
-    WHEN s < 16 THEN 28
-    WHEN s < 23 THEN 27
-    WHEN s < 32 THEN 26
-    WHEN s < 45 THEN 25
-    WHEN s < 64 THEN 24
-    WHEN s < 91 THEN 23
-    WHEN s < 128 THEN 22
-    WHEN s < 181 THEN 21
-    WHEN s < 256 THEN 20
-    WHEN s < 362 THEN 19
-    WHEN s < 512 THEN 18
-    WHEN s < 724 THEN 17
-    WHEN s < 1024 THEN 16
-    WHEN s < 1448 THEN 15
-    WHEN s < 2048 THEN 14
-    WHEN s < 2896 THEN 13
-    WHEN s < 4096 THEN 12
-    WHEN s < 5793 THEN 11
-    WHEN s < 8192 THEN 10
-    WHEN s < 11585 THEN 9
-    WHEN s < 16384 THEN 8
-    WHEN s < 23170 THEN 7
-    WHEN s < 32768 THEN 6
-    WHEN s < 46341 THEN 5
-    WHEN s < 65536 THEN 4
-    WHEN s < 92682 THEN 3
-    WHEN s < 131072 THEN 2
-    WHEN s < 185364 THEN 1
-    ELSE 0
-     END
-  FROM (SELECT u*2) t(s)
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libosmcodes.uncertain_base16hL0185km(int)
-  IS 'Uncertain base16h and base32 for L0 185km'
-;
-
-CREATE or replace FUNCTION libosmcodes.uncertain_base16hL0131km(u int) RETURNS int AS $f$
-  -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
-  SELECT CASE -- discretization by "snap to size-levels bits"
-    WHEN s < 1 THEN 34
-    WHEN s < 2 THEN 33
-    WHEN s < 3 THEN 32
-    WHEN s < 4 THEN 31
-    WHEN s < 6 THEN 30
-    WHEN s < 8 THEN 29
-    WHEN s < 11 THEN 28
-    WHEN s < 16 THEN 27
-    WHEN s < 23 THEN 26
-    WHEN s < 32 THEN 25
-    WHEN s < 45 THEN 24
-    WHEN s < 64 THEN 23
-    WHEN s < 91 THEN 22
-    WHEN s < 128 THEN 21
-    WHEN s < 181 THEN 20
-    WHEN s < 256 THEN 19
-    WHEN s < 362 THEN 18
-    WHEN s < 512 THEN 17
-    WHEN s < 724 THEN 16
-    WHEN s < 1024 THEN 15
-    WHEN s < 1448 THEN 14
-    WHEN s < 2048 THEN 13
-    WHEN s < 2896 THEN 12
-    WHEN s < 4096 THEN 11
-    WHEN s < 5793 THEN 10
-    WHEN s < 8192 THEN 9
-    WHEN s < 11585 THEN 8
-    WHEN s < 16384 THEN 7
-    WHEN s < 23170 THEN 6
-    WHEN s < 32768 THEN 5
-    WHEN s < 46341 THEN 4
-    WHEN s < 65536 THEN 3
-    WHEN s < 92682 THEN 2
-    WHEN s < 131072 THEN 1
-    ELSE 0
-     END
-  FROM (SELECT u*2) t(s)
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libosmcodes.uncertain_base16hL0131km(int)
-  IS 'Uncertain base16h and base32 for L0 131km'
-;
-
-CREATE or replace FUNCTION libosmcodes.uncertain_base16hL01048km(u int) RETURNS int AS $f$
-  -- GeoURI's uncertainty value "is the radius of the disk that represents uncertainty geometrically"
-  SELECT CASE -- discretization by "snap to size-levels bits"
-     WHEN s < 1 THEN 40
-     WHEN s < 2 THEN 39
-     WHEN s < 3 THEN 38
-     WHEN s < 4 THEN 37
-     WHEN s < 6 THEN 36
-     WHEN s < 8 THEN 35
-     WHEN s < 11 THEN 34
-     WHEN s < 16 THEN 33
-     WHEN s < 23 THEN 32
-     WHEN s < 32 THEN 31
-     WHEN s < 45 THEN 30
-     WHEN s < 64 THEN 29
-     WHEN s < 91 THEN 28
-     WHEN s < 128 THEN 27
-     WHEN s < 181 THEN 26
-     WHEN s < 256 THEN 25
-     WHEN s < 362 THEN 24
-     WHEN s < 512 THEN 23
-     WHEN s < 724 THEN 22
-     WHEN s < 1024 THEN 21
-     WHEN s < 1448 THEN 20
-     WHEN s < 2048 THEN 19
-     WHEN s < 2896 THEN 18
-     WHEN s < 4096 THEN 17
-     WHEN s < 5793 THEN 16
-     WHEN s < 8192 THEN 15
-     WHEN s < 11585 THEN 14
-     WHEN s < 16384 THEN 13
-     WHEN s < 23170 THEN 12
-     WHEN s < 32768 THEN 11
-     WHEN s < 46341 THEN 10
-     WHEN s < 65536 THEN 9
-     WHEN s < 92682 THEN 8
-     WHEN s < 131072 THEN 7
-     WHEN s < 185364 THEN 6
-     WHEN s < 262144 THEN 5
-     WHEN s < 370728 THEN 4
-     WHEN s < 524288 THEN 3
-     WHEN s < 741455 THEN 2
-     WHEN s < 1048576 THEN 1
-     ELSE 0
-     END
-  FROM (SELECT u*2) t(s)
-$f$ LANGUAGE SQL IMMUTABLE;
-COMMENT ON FUNCTION libosmcodes.uncertain_base16hL01048km(int)
-  IS 'Uncertain base16h and base32 for L0 1048km'
+  IS 'Uncertain base16h, base32 and base16'
 ;
 
 ------------------
@@ -338,13 +200,17 @@ CREATE or replace FUNCTION libosmcodes.ggeohash_GeomsFromVarbit(
   p_code      varbit,
   p_l0code    varbit,
   p_translate boolean DEFAULT false, -- true para converter em LatLong (WGS84 sem projeção)
-  p_srid      int DEFAULT 4326,      -- WGS84
-  p_base      int DEFAULT 16,
-  p_grid_size int DEFAULT 2,
-  p_bbox      float[] DEFAULT  array[0.,0.,0.,0.],
-  p_lonlat    boolean default false  -- false: latLon, true: lonLat
+  p_srid      int     DEFAULT 4326,  -- WGS84
+  p_base      int     DEFAULT 16,
+  p_grid_size int     DEFAULT 2,
+  p_bbox      float[] DEFAULT array[0.,0.,0.,0.],
+  p_lonlat    boolean DEFAULT false,  -- false: latLon, true: lonLat
+  p_centroid  boolean DEFAULT false
 ) RETURNS TABLE(ghs text, geom geometry) AS $f$
-  SELECT vbit_to_baseh(p_l0code || p_code || x,p_base,0), str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(p_code || x,p_bbox,p_lonlat),p_translate,p_srid)
+  SELECT vbit_to_baseh(p_l0code || p_code || x,p_base,0), 
+      CASE WHEN p_centroid THEN ST_Centroid(str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(p_code || x,p_bbox,p_lonlat),p_translate,p_srid))
+           ELSE str_ggeohash_draw_cell_bybox(str_ggeohash_decode_box2(p_code || x,p_bbox,p_lonlat),p_translate,p_srid)
+      END
   FROM
   unnest(
   CASE
@@ -407,43 +273,47 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
     (
       SELECT bit_string,
       str_ggeohash_draw_cell_bybox((CASE WHEN p_bit_length = 0 THEN p_bbox ELSE str_ggeohash_decode_box2(bit_string,p_bbox,p_lonlat) END),false,p_srid) AS geom_cell,
-      CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END AS base,
-      upper(CASE WHEN p_bit_length = 0 THEN (vbit_to_baseh(p_l0code,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) ELSE (vbit_to_baseh(p_l0code||bit_string,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) END) AS code,
+      CASE WHEN p_base = 16 THEN 'base16h'
+           WHEN p_base = 17 THEN 'base16'
+           WHEN p_base = 18 THEN 'base16h1c'
+           ELSE                  'base32'
+      END AS base,
+      upper(vbit_to_baseh(CASE WHEN p_bit_length = 0 THEN p_l0code ELSE p_l0code||bit_string END,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,0)) AS code,
       p_l0code || bit_string AS codebits
-      FROM
-      (
-        SELECT str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length,p_lonlat) AS bit_string
-      ) r
+      FROM str_ggeohash_encode3(ST_X(p_geom),ST_Y(p_geom),p_bbox,p_bit_length,p_lonlat) r(bit_string)
     ) c
     -- responsável por subcélulas
     LEFT JOIN LATERAL
     (
       SELECT
-          CASE
-          WHEN p_grid_size > 0
-          THEN
-            (
-              SELECT jsonb_agg(
-                  ST_AsGeoJSONb(  CASE WHEN p_grid_size % 2 = 1 THEN ST_Centroid(ST_Transform(geom,4326)) ELSE ST_Transform(geom,4326) END ,8,0,null,
-                      jsonb_build_object(
-                          'code', upper(ghs) ,
-                          'code_subcell', substr(ghs,length(code)+1,length(ghs)) ,
-                          'prefix', code,
-                          'area', ST_Area(geom),
-                          'side', SQRT(ST_Area(geom)),
-                          'base', base
-                          )
-                      )::jsonb)
-              FROM libosmcodes.ggeohash_GeomsFromVarbit(
-                    c.bit_string,p_l0code,false,p_srid,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,
-                    CASE
+        CASE
+        WHEN p_grid_size > 0
+        THEN
+          (
+            SELECT jsonb_agg(
+                ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,
+                    jsonb_build_object(
+                        'code', upper(ghs) ,
+                        'code_subcell', substr(ghs,length(code)+1,length(ghs)) ,
+                        'prefix', code,
+                        'area', ST_Area(geom),
+                        'side', SQRT(ST_Area(geom)),
+                        'base', base
+                        )
+                    )::jsonb)
+            FROM libosmcodes.ggeohash_GeomsFromVarbit(
+                  c.bit_string,p_l0code,false,p_srid,CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END,
+                  CASE
                     WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1
                     ELSE p_grid_size
-                    END,
-                    p_bbox,p_lonlat)
-            )
-          ELSE '[]'::jsonb
-          END AS subcells
+                  END,
+                  p_bbox,
+                  p_lonlat,
+                  CASE WHEN p_grid_size % 2 = 1 THEN TRUE ELSE FALSE END
+                  )
+          )
+        ELSE '[]'::jsonb
+        END AS subcells
     ) m
     ON TRUE
     -- responsável pelo código curto na grade postal
@@ -486,17 +356,22 @@ CREATE or replace FUNCTION api.osmcode_encode(
     CASE
     WHEN latLon[4] IS NOT NULL
     THEN
+    (
+      SELECT
       CASE
-      WHEN jurisd_base_id = 170 AND p_base = 32 THEN ((libosmcodes.uncertain_base16h(        latLon[4]::int))/5)*5
-      WHEN jurisd_base_id = 170 AND p_base = 16 THEN   libosmcodes.uncertain_base16h(        latLon[4]::int)
-      WHEN jurisd_base_id = 858 AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL0131km( latLon[4]::int))/5)*5
-      WHEN jurisd_base_id = 858 AND p_base = 17 THEN ((libosmcodes.uncertain_base16hL0131km( latLon[4]::int))/4)*4
-      WHEN jurisd_base_id = 858 AND p_base = 16 THEN   libosmcodes.uncertain_base16hL0131km( latLon[4]::int)
-      WHEN jurisd_base_id = 218 AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL0185km( latLon[4]::int))/5)*5
-      WHEN jurisd_base_id = 218 AND p_base = 16 THEN   libosmcodes.uncertain_base16hL0185km( latLon[4]::int)
-      WHEN jurisd_base_id = 76  AND p_base = 32 THEN ((libosmcodes.uncertain_base16hL01048km(latLon[4]::int))/5)*5
-      WHEN jurisd_base_id = 76  AND p_base = 16 THEN   libosmcodes.uncertain_base16hL01048km(latLon[4]::int)
+        WHEN jurisd_base_id = 170 AND p_base = 32 AND x > 4 THEN ((x-4)/5)*5
+        WHEN jurisd_base_id = 170 AND p_base = 16 AND x > 4 THEN   x-4
+        WHEN jurisd_base_id = 858 AND p_base = 32 AND x > 6 THEN ((x-6)/5)*5
+        WHEN jurisd_base_id = 858 AND p_base = 17 AND x > 6 THEN ((x-6)/4)*4
+        WHEN jurisd_base_id = 858 AND p_base = 16 AND x > 6 THEN   x-6
+        WHEN jurisd_base_id = 218 AND p_base = 32 AND x > 5 THEN ((x-5)/5)*5
+        WHEN jurisd_base_id = 218 AND p_base = 16 AND x > 5 THEN   x-5
+        WHEN jurisd_base_id = 76  AND p_base = 32           THEN  (x/5)*5
+        WHEN jurisd_base_id = 76  AND p_base = 16           THEN   x
+        ELSE 0
       END
+      FROM libosmcodes.uncertain_base16h(latLon[4]::int) t(x)
+      )
     ELSE 35
     END,
     u.srid,
@@ -513,18 +388,10 @@ CREATE or replace FUNCTION api.osmcode_encode(
     SELECT ((id::bit(64))::bit(10))::int AS jurisd_base_id, bbox, ST_SRID(geom) AS srid,
         CASE
         WHEN p_base = 32 THEN (id::bit(64)<<27)::bit(5)
-        WHEN p_base = 16 OR p_base = 17
-        THEN
-        (
-          CASE -- 8 bits e shift >>3 ou 4 bits
-          WHEN  ((id::bit(64))::bit(10))::int = 170
-             OR ((id::bit(64))::bit(10))::int = 218
-             OR ((id::bit(64))::bit(10))::int = 858
-             OR ((id::bit(64))::bit(10))::int = 76
-             THEN ((id::bit(64)<<27)::bit(8))>>3
-          ELSE (id::bit(64)<<28)::bit(4)
-          END
-        )
+        WHEN p_base = 16
+          OR p_base = 17
+          OR p_base = 18 THEN ((id::bit(64)<<27)::bit(8))>>3
+        ELSE (id::bit(64)<<28)::bit(4)
         END AS l0code
     FROM libosmcodes.coverage
     WHERE ST_Contains(geom_srid4326,v.geom)
@@ -557,7 +424,11 @@ CREATE or replace FUNCTION api.osmcode_decode(
                         'short_code', short_code,
                         'area', ST_Area(v.geom),
                         'side', SQRT(ST_Area(v.geom)),
-                        'base', CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END,
+                        'base', CASE WHEN p_base = 16 THEN 'base16h'
+                                     WHEN p_base = 17 THEN 'base16'
+                                     WHEN p_base = 18 THEN 'base16h1c'
+                                     ELSE                  'base32'
+                                END,
                         'jurisd_local_id', jurisd_local_id
                         ))
                     )::jsonb) AS gj
@@ -572,7 +443,9 @@ CREATE or replace FUNCTION api.osmcode_decode(
                         str_ggeohash_decode_box2(
                           CASE
                           WHEN p_base = 32 THEN substring(codebits from 6)
-                          WHEN p_base = 16 OR p_base = 17 THEN substring(codebits from 9)
+                          WHEN p_base = 16
+                            OR p_base = 17
+                            OR p_base = 18 THEN substring(codebits from 9)
                           END
                         ,bbox, CASE WHEN upper_p_iso='EC' THEN TRUE ELSE FALSE END)
                     ,false,ST_SRID(geom)
@@ -586,7 +459,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
                 AND
                 (
                     CASE
-                    WHEN p_base = 16
+                    WHEN p_base = 16 OR p_base = 17 OR p_base = 18
                     THEN ( ( (((id::bit(64)<<27)::bit(8))>>3) # codebits::bit(8) ) = 0::bit(8) ) -- 2 dígitos base16h
                     ELSE ( (   (id::bit(64)<<27)::bit(5)      # codebits::bit(5) ) = 0::bit(5) ) -- 1 digito  base32
                     END
@@ -604,6 +477,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
               OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
               )
               AND ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper_p_iso))::int)::bit(10) )
+              -- cobertura municipal
               AND ( (id::bit(64)<<24)::bit(2) ) <> 0::bit(2)
               AND CASE WHEN (id::bit(64)<<26)::bit(1) <> b'0' THEN ST_Contains(r.geom,ST_Centroid(v.geom)) ELSE TRUE  END
             ) t
@@ -670,7 +544,11 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
                   'code', upper(prefix),
                   'area', ST_Area(geom),
                   'side', SQRT(ST_Area(geom)),
-                  'base', CASE WHEN p_base = 16 THEN 'base16h' WHEN p_base = 17 THEN 'base16' ELSE 'base32' END,
+                  'base', CASE WHEN p_base = 16 THEN 'base16h'
+                               WHEN p_base = 17 THEN 'base16'
+                               WHEN p_base = 18 THEN 'base16h1c'
+                               ELSE                  'base32'
+                          END,
                   'index', index
                   ))
               )::jsonb),'[]'::jsonb) || (SELECT (api.jurisdiction_geojson_from_isolabel(p_iso))->'features')
@@ -681,14 +559,10 @@ CREATE or replace FUNCTION api.jurisdiction_l0cover(
             vbit_to_baseh(
                 CASE
                 WHEN p_base = 32 THEN (id::bit(64)<<27)::bit(5)
-                WHEN p_base = 16 OR p_base = 17
-                THEN
-                (
-                  CASE
-                  WHEN upper(p_iso) IN ('CO','EC','UY','BR') THEN ((id::bit(64)<<27)::bit(8))>>3
-                  ELSE (id::bit(64)<<28)::bit(4)
-                  END
-                )
+                WHEN p_base = 16
+                  OR p_base = 17
+                  OR p_base = 18 THEN ((id::bit(64)<<27)::bit(8))>>3
+                ELSE (id::bit(64)<<28)::bit(4)
                 END,
                 CASE WHEN p_base % 2 = 1 THEN p_base -1 ELSE p_base END) AS prefix,
                 null AS index
