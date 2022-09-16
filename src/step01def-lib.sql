@@ -185,7 +185,7 @@ COMMENT ON FUNCTION libosmcodes.uncertain_base16h(int)
 
 CREATE or replace FUNCTION str_geocodeiso_decode(iso text)
 RETURNS text[] as $f$
-  SELECT isolabel_ext || array[upper(split_part(iso,'-',1))]
+  SELECT isolabel_ext || array[split_part(isolabel_ext,'-',1)]
   FROM mvwjurisdiction_synonym
   WHERE synonym = lower(iso)
 $f$ LANGUAGE SQL IMMUTABLE;
@@ -534,7 +534,7 @@ CREATE or replace FUNCTION api.osmcode_decode_reduced(
             SELECT  prefix || substring(upper(p_code),2)
             FROM libosmcodes.coverage
             -- possível usar os 14bits do id na busca
-            WHERE lower(isolabel_ext) = lower(x[1])
+            WHERE isolabel_ext = x[1]
                 AND index = substring(upper(p_code),1,1)
         ),
         x[2],
@@ -610,7 +610,7 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
           (
             SELECT geom, prefix AS code, index
               FROM libosmcodes.coverage
-              WHERE lower(isolabel_ext) = lower((str_geocodeiso_decode(p_iso))[1])
+              WHERE isolabel_ext = (str_geocodeiso_decode(p_iso))[1]
           )
         ) t
       )
