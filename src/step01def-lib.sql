@@ -187,7 +187,7 @@ CREATE or replace FUNCTION str_geocodeiso_decode(iso text)
 RETURNS text[] as $f$
   SELECT isolabel_ext || array[upper(split_part(iso,'-',1))]
   FROM mvwjurisdiction_synonym
-  WHERE lower(synonym) = lower(iso)
+  WHERE synonym = lower(iso)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION str_geocodeiso_decode(text)
   IS 'Decode abbrev isolabel_ext.'
