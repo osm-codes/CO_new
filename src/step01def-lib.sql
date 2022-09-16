@@ -185,11 +185,9 @@ COMMENT ON FUNCTION libosmcodes.uncertain_base16h(int)
 
 CREATE or replace FUNCTION str_geocodeiso_decode(iso text)
 RETURNS text[] as $f$
-  SELECT
-    ( SELECT isolabel_ext
-      FROM mvwjurisdiction_synonym
-      WHERE lower(synonym) = lower(iso) ) || array[upper(u[1])]
-  FROM ( SELECT regexp_split_to_array (iso,'(-)')::text[] AS u ) r
+  SELECT isolabel_ext || array[upper(split_part(iso,'-',1))]
+  FROM mvwjurisdiction_synonym
+  WHERE lower(synonym) = lower(iso)
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION str_geocodeiso_decode(text)
   IS 'Decode abbrev isolabel_ext.'
@@ -590,7 +588,7 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
                           END,
                   'index', index
                   ))
-              )::jsonb),'[]'::jsonb) || (SELECT (api.jurisdiction_geojson_from_isolabel(p_iso))->'features')
+              )::jsonb),'[]'::jsonb)
         FROM
         (
           (
