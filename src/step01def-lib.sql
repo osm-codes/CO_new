@@ -398,9 +398,8 @@ CREATE or replace FUNCTION api.osmcode_encode(
   (
     SELECT ((id::bit(64))::bit(10))::int AS jurisd_base_id, bbox, ST_SRID(geom) AS srid,
         CASE
-        WHEN p_base = 32          THEN ( id::bit(64)<<27)::bit(5)
-        WHEN p_base IN (16,17,18) THEN ((id::bit(64)<<27)::bit(8))>>3
-        ELSE (id::bit(64)<<28)::bit(4)
+        WHEN p_base IN (16,17,18) THEN (id::bit(64)<<27)::bit(8) -- 2 dígito  base16h
+        ELSE                           (id::bit(64)<<30)::bit(5) -- 1 dígito  base32
         END AS l0code
     FROM libosmcodes.coverage
     WHERE ST_Contains(geom_srid4326,v.geom)
@@ -467,8 +466,8 @@ CREATE or replace FUNCTION api.osmcode_decode(
               SELECT str_ggeohash_draw_cell_bybox(
                         str_ggeohash_decode_box2(
                           CASE
-                          WHEN p_base = 32          THEN substring(codebits from 6)
-                          WHEN p_base IN (16,17,18) THEN substring(codebits from 9)
+                          WHEN p_base IN (16,17,18) THEN substring(codebits from 9) -- 8 bits base16h
+                          ELSE                           substring(codebits from 6) -- 5 bits base16h
                           END
                         ,bbox, CASE WHEN upper_p_iso='EC' THEN TRUE ELSE FALSE END)
                     ,false,ST_SRID(geom)
@@ -482,9 +481,9 @@ CREATE or replace FUNCTION api.osmcode_decode(
                 AND
                 (
                     CASE
-                    WHEN p_base = 16 OR p_base = 17 OR p_base = 18
-                    THEN ( ( (((id::bit(64)<<27)::bit(8))>>3) # codebits::bit(8) ) = 0::bit(8) ) -- 2 dígitos base16h
-                    ELSE ( (   (id::bit(64)<<27)::bit(5)      # codebits::bit(5) ) = 0::bit(5) ) -- 1 digito  base32
+                    WHEN p_base IN (16,17,18)
+                    THEN ( ( (id::bit(64)<<27)::bit(8) # codebits::bit(8) ) = 0::bit(8) ) -- 2 dígitos base16h
+                    ELSE ( ( (id::bit(64)<<30)::bit(5) # codebits::bit(5) ) = 0::bit(5) ) -- 1 dígito  base32
                     END
                 )
             ) v
@@ -595,9 +594,8 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
             SELECT geom,
             vbit_to_baseh(
                 CASE
-                WHEN p_base = 32          THEN ( id::bit(64)<<27)::bit(5)
-                WHEN p_base IN (16,17,18) THEN ((id::bit(64)<<27)::bit(8))>>3
-                ELSE (id::bit(64)<<28)::bit(4)
+                WHEN p_base IN (16,17,18) THEN (id::bit(64)<<27)::bit(8) -- 2 dígito  base16h
+                ELSE                           (id::bit(64)<<30)::bit(5) -- 1 dígito  base32
                 END,
                 CASE WHEN p_base IN (16,17,18) THEN 16 ELSE 32 END) AS code,
                 null AS index
