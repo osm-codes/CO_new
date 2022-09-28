@@ -231,7 +231,6 @@ CREATE TABLE libosmcodes.coverage (
   id            bigint NOT NULL,
   isolabel_ext  text,     -- used only in de-para, replace with 14bit in id
   prefix        text,     -- used only in de-para, cache
-  index         text,     -- used only in de-para, not in id
   bbox          float[],  -- used only in l0cover
   geom          geometry, -- used      in l0cover and de-para
   geom_srid4326 geometry  -- used only in l0cover
@@ -330,13 +329,24 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
     -- responsável pelo código curto na grade postal
     LEFT JOIN LATERAL
     (
-      SELECT isolabel_ext, (isolabel_ext|| (CASE WHEN length(c.code) = length(prefix) THEN '~' || index ELSE '~' || index || substr(c.code,length(prefix)+1,length(c.code)) END) ) AS short_code
+      SELECT isolabel_ext, (isolabel_ext || '~' ||
+        CASE
+        WHEN p_base IN (16,17,18)
+        THEN vbit_to_baseh(((id::bit(64)<<27)::bit(8))>>3,16)
+        ELSE vbit_to_baseh( (id::bit(64)<<27)::bit(5)    ,32)
+        END
+      || (CASE WHEN length(c.code) = length(vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32)) THEN '' ELSE substr(c.code,length(vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32))+1,length(c.code)) END) ) AS short_code
       FROM libosmcodes.coverage r
       WHERE
-      (   ( (id::bit(64)<<27)::bit(20) #  codebits::bit(20)           ) = 0::bit(20)
-       OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(15))::bit(20) ) = 0::bit(20)
-       OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(10))::bit(20) ) = 0::bit(20)
-       OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
+      -- (   ( (id::bit(64)<<32)::bit(20) #  codebits::bit(20)           ) = 0::bit(20)
+      --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(15))::bit(20) ) = 0::bit(20)
+      --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(10))::bit(20) ) = 0::bit(20)
+      --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
+      -- )
+      (   vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,4)
+       OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,3)
+       OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,2)
+       OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,1)
       )
       AND (id::bit(64))::bit(10) = p_jurisd_base_id::bit(10)
       AND ( (id::bit(64)<<24)::bit(2) ) <> 0::bit(2)
@@ -490,13 +500,24 @@ CREATE or replace FUNCTION api.osmcode_decode(
             -- responsável pelo código curto na grade postal
             LEFT JOIN LATERAL
             (
-              SELECT isolabel_ext, (isolabel_ext|| (CASE WHEN length(c.code) = length(prefix) THEN '~' || index ELSE '~' || index || substr(c.code,length(prefix)+1,length(c.code)) END) ) AS short_code
+              SELECT isolabel_ext, (isolabel_ext || '~' ||
+                CASE
+                WHEN p_base IN (16,17,18)
+                THEN vbit_to_baseh(((id::bit(64)<<27)::bit(8))>>3,16)
+                ELSE vbit_to_baseh( (id::bit(64)<<27)::bit(5)    ,32)
+                END
+              || (CASE WHEN length(c.code) = length(vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32)) THEN '' ELSE substr(c.code,length(vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32))+1,length(c.code)) END) ) AS short_code
               FROM libosmcodes.coverage r
               WHERE
-              (  ( (id::bit(64)<<27)::bit(20) #  codebits::bit(20)           ) = 0::bit(20)
-              OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(15))::bit(20) ) = 0::bit(20)
-              OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(10))::bit(20) ) = 0::bit(20)
-              OR ( (id::bit(64)<<27)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
+              -- (   ( (id::bit(64)<<32)::bit(20) #  codebits::bit(20)           ) = 0::bit(20)
+              --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(15))::bit(20) ) = 0::bit(20)
+              --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(10))::bit(20) ) = 0::bit(20)
+              --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
+              -- )
+              (  vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,4)
+              OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,3)
+              OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,2)
+              OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,1)
               )
               AND ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper_p_iso))::int)::bit(10) )
               -- cobertura municipal
@@ -530,11 +551,11 @@ CREATE or replace FUNCTION api.osmcode_decode_reduced(
 ) RETURNS jsonb AS $f$
     SELECT api.osmcode_decode(
         (
-            SELECT  prefix || substring(upper(p_code),2)
+            SELECT  vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) || substring(upper(p_code),2)
             FROM libosmcodes.coverage
-            -- possível usar os 14bits do id na busca
-            WHERE isolabel_ext = x[1]
-                AND index = substring(upper(p_code),1,1)
+            WHERE isolabel_ext = x[1] -- possível usar os 14bits do id na busca
+                -- AND index = substring(upper(p_code),1,1)
+                AND ( (id::bit(64)<<27)::bit(5) # baseh_to_vbit(substring(upper(p_code),1,1),32) ) = 0::bit(5)
         ),
         x[2],
         p_base
@@ -606,7 +627,12 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
           )
           UNION ALL
           (
-            SELECT geom, prefix AS code, index
+            SELECT geom, prefix AS code,
+                    CASE
+                    WHEN p_base IN (16,17,18)
+                    THEN vbit_to_baseh(((id::bit(64)<<27)::bit(8))>>3,16)
+                    ELSE vbit_to_baseh( (id::bit(64)<<27)::bit(5),32)
+                    END AS index
               FROM libosmcodes.coverage
               WHERE isolabel_ext = (str_geocodeiso_decode(p_iso))[1]
           )
