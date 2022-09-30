@@ -240,7 +240,7 @@ CREATE TABLE libosmcodes.coverage (
   id            bigint NOT NULL,
   isolabel_ext  text,     -- used only in de-para, replace with 14bit in id
   prefix        text,     -- used only in de-para, cache
-  bbox          float[],  -- used only in l0cover
+  bbox          float[],  -- used      in l0cover and de-para
   geom          geometry, -- used      in l0cover and de-para
   geom_srid4326 geometry  -- used only in l0cover
 );
@@ -608,8 +608,8 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
                         ELSE code
                       END
                   ,
-                  'area', ST_Area(geom),
-                  'side', SQRT(ST_Area(geom)),
+                  'area', s.area,
+                  'side', SQRT(s.area),
                   'base', CASE WHEN p_base = 16 THEN 'base16h'
                                WHEN p_base = 17 THEN 'base16'
                                WHEN p_base = 18 THEN 'base16h1c'
@@ -621,7 +621,7 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
         FROM
         (
           (
-            SELECT geom,
+            SELECT geom, bbox,
             vbit_to_baseh(
                 CASE
                 WHEN p_base IN (16,17,18) THEN (id::bit(64)<<27)::bit(8) -- 2 dígito  base16h
@@ -636,7 +636,7 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
           )
           UNION ALL
           (
-            SELECT geom, prefix AS code,
+            SELECT geom, bbox, prefix AS code,
                     CASE
                     WHEN p_base IN (16,17,18)
                     THEN vbit_to_baseh(((id::bit(64)<<27)::bit(8))>>3,16)
@@ -646,6 +646,12 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
               WHERE isolabel_ext = (str_geocodeiso_decode(p_iso))[1]
           )
         ) t
+        -- area geom
+        LEFT JOIN LATERAL
+        (
+          SELECT ST_Area(str_ggeohash_draw_cell_bybox(t.bbox,false,ST_SRID(t.geom))) AS area
+        ) s
+        ON TRUE
       )
     )
 $f$ LANGUAGE SQL IMMUTABLE;

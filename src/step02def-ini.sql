@@ -164,8 +164,8 @@ FROM
 
 -- de_para cover
 --DELETE FROM libosmcodes.coverage WHERE (id::bit(64)<<24)::bit(2) <> 0::bit(2);
-INSERT INTO libosmcodes.coverage(id,isolabel_ext,prefix,geom)
-SELECT ((j_id_bit || l_id_bit || mun_princ || cover_parcial || order_prefix_5bits || prefix_bits_pad32)::bit(64))::bigint , isolabel_ext, prefix, geom
+INSERT INTO libosmcodes.coverage(id,bbox,isolabel_ext,prefix,geom)
+SELECT ((j_id_bit || l_id_bit || mun_princ || cover_parcial || order_prefix_5bits || prefix_bits_pad32)::bit(64))::bigint , bbox, isolabel_ext, prefix, geom
 FROM
 (
   SELECT j_id_bit, l_id_bit, '01' AS mun_princ,
@@ -177,7 +177,8 @@ FROM
   rpad(prefix_bits::text, 32, '00000000000000000000000000000000') AS prefix_bits_pad32,
   (order_prefix::int)::bit(5) AS order_prefix_5bits,
   q.isolabel_ext, prefix,
-  ST_Intersection(r.geom_transformed,str_ggeohash_draw_cell_bybox(bbox,false,p.srid)) AS geom
+  ST_Intersection(r.geom_transformed,str_ggeohash_draw_cell_bybox(bbox,false,p.srid)) AS geom,
+  bbox
   FROM
   (
     SELECT isolabel_ext, srid, jurisd_base_id, prefix,
