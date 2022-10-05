@@ -244,6 +244,8 @@ CREATE TABLE libosmcodes.coverage (
   geom          geometry, -- used      in l0cover and de-para
   geom_srid4326 geometry  -- used only in l0cover
 );
+CREATE INDEX osm_coverage_geom_idx1     ON libosmcodes.coverage USING gist (geom);
+CREATE INDEX osm_coverage_geom4326_idx1 ON libosmcodes.coverage USING gist (geom_srid4326);
 
 ------------------
 -- encode:
