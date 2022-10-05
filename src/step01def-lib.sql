@@ -221,9 +221,9 @@ CREATE or replace FUNCTION libosmcodes.ggeohash_GeomsFromVarbit(
   FROM
   unnest(
   CASE
-  WHEN p_base = 16 AND p_grid_size = 2  THEN '{0,1}'::bit[]
-  WHEN p_base = 16 AND p_grid_size = 4  THEN '{00,01,11,10}'::varbit[]
-  WHEN p_base = 16 AND p_grid_size = 8  THEN '{000,001,010,011,100,101,110,111}'::varbit[]
+  WHEN p_base = 16 AND p_grid_size = 2  THEN '{0,1}'::bit[] --'{G,H}'
+  WHEN p_base = 16 AND p_grid_size = 4  THEN '{00,01,11,10}'::varbit[] --'{J,K,L,M}'
+  WHEN p_base = 16 AND p_grid_size = 8  THEN '{000,001,010,011,100,101,110,111}'::varbit[] --'{N,P,Q,R,S,T,V,Z}'
   WHEN p_base = 16 AND p_grid_size = 16 THEN '{0000,0001,0010,0011,0100,0101,0110,0111,1000,1001,1010,1011,1100,1101,1110,1111}'::varbit[]
   WHEN p_base = 32 AND p_grid_size = 32 THEN '{00000,00001,00010,00011,00100,00101,00110,00111,01000,01001,01010,01011,01100,01101,01110,01111,10000,10001,10010,10011,10100,10101,10110,10111,11000,11001,11010,11011,11100,11101,11110,11111}'::varbit[]
   END
@@ -269,13 +269,45 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
                       CASE
                         WHEN p_base = 18
                         THEN
-                        (
-                          ('{"00": "0", "01": "1", "02": "2", "03": "3", "04": "4", "05": "5", "06": "6", "07": "7",
-                            "08": "8", "09": "9", "0A": "A", "0B": "B", "0C": "C", "0D": "D", "0E": "E", "0F": "F",
-                            "10": "g", "11": "h", "12": "j", "13": "k", "14": "l", "15": "m", "16": "n", "17": "p",
-                            "18": "q", "19": "r", "1A": "s", "1B": "t", "1C": "v", "1D": "z"}'::jsonb)->>(substring(code,1,2))
-                            || upper(substring(code,3))
-                        )
+                          CASE
+                            -- tr g->F, h->F
+                            WHEN p_jurisd_base_id = 76 AND length(code) > 2
+                            THEN
+                            (
+                              ('{"00": "0", "01": "1", "02": "2", "03": "3", "04": "4", "05": "5", "06": "6", "07": "7",
+                                "08": "8", "09": "9", "0A": "A", "0B": "B", "0C": "C", "0D": "D", "0E": "E", "0F": "F",
+                                "10": "F", "11": "F", "12": "j", "13": "k", "14": "l", "15": "m", "16": "n", "17": "p",
+                                "18": "q", "19": "r", "1A": "s", "1B": "t", "1C": "v", "1D": "z"}'::jsonb)->>(substring(code,1,2))
+                            )
+                            -- tr g->E, h->5, j->0
+                            WHEN p_jurisd_base_id = 858 AND length(code) > 2 AND substring(code,1,3) IN ('100','101','102','10J','10N','10P', '12A','12B','12T', '11M','11V','11Z','11C','11D','11E','11F')
+                            THEN
+                            (
+                              ('{"10": "E", "11": "5", "12": "0"}'::jsonb)->>(substring(code,1,2))
+                            )
+                            WHEN p_jurisd_base_id = 858 AND length(code) > 2 AND substring(code,1,3) NOT IN (
+                            '0E0','0E1','0E2','0EN','0EJ','0EP',
+                            '00A','00B','00T',
+                            '05M','05V','05Z','05C','05D','05E','05F'
+
+                            '100','101','102','10J','10N','10P',
+                            '12A','12B','12T',
+                            '11M','11V','11Z','11C','11D','11E','11F'
+                            )
+                            THEN
+                            (
+                              ('{"00": "0", "01": "1", "02": "2", "03": "3", "04": "4", "05": "5", "06": "6", "07": "7",
+                                "08": "8", "09": "9", "0A": "A", "0B": "B", "0C": "C", "0D": "D", "0E": "E", "0F": "F"}'::jsonb)->>(substring(code,1,2))
+                            )
+                            WHEN length(code) = 2
+                            THEN
+                            (
+                              ('{"00": "0", "01": "1", "02": "2", "03": "3", "04": "4", "05": "5", "06": "6", "07": "7",
+                                "08": "8", "09": "9", "0A": "A", "0B": "B", "0C": "C", "0D": "D", "0E": "E", "0F": "F",
+                                "10": "g", "11": "h", "12": "j", "13": "k", "14": "l", "15": "m", "16": "n", "17": "p",
+                                "18": "q", "19": "r", "1A": "s", "1B": "t", "1C": "v", "1D": "z"}'::jsonb)->>(substring(code,1,2))
+                            )
+                          END || upper(substring(code,3))
                         ELSE code
                       END
                   ,
@@ -370,6 +402,11 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
       WHERE isolabel_ext = t.isolabel_ext
     ) s
     ON TRUE
+
+    WHERE
+    CASE WHEN p_jurisd_base_id = 858 THEN code NOT IN (
+    '0EG','10G','12G','00L','12L','0EJ','05H','11H'
+    ) ELSE TRUE  END
 $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION libosmcodes.osmcode_encode(geometry(POINT),int,int,int,int,float[],varbit,int,boolean)
   IS 'Encodes geometry to OSMcode.'
@@ -468,13 +505,34 @@ CREATE or replace FUNCTION api.osmcode_decode(
                 CASE
                   WHEN p_base = 18
                   THEN
-                  (
-                    ('{"0": "00", "1": "01", "2": "02", "3": "03", "4": "04", "5": "05", "6": "06", "7": "07",
-                       "8": "08", "9": "09", "A": "0A", "B": "0B", "C": "0C", "D": "0D", "E": "0E", "F": "0F",
-                       "g": "10", "h": "11", "j": "12", "k": "13", "l": "14", "m": "15", "n": "16", "p": "17",
-                       "q": "18", "r": "19", "s": "1A", "t": "1B", "v": "1C", "z": "1D"}'::jsonb)->>(substring(code,1,1))
-                       || upper(substring(code,2))
-                  )
+                    CASE
+                      -- FL,FT,FS,FA,FB,F8,F9: tr F -> 0F
+                      WHEN upper(p_iso) = 'BR' AND substring(code,1,2) IN ('FL','FT','FS','FA','FB','F8','F9')
+                      THEN ('0F')
+                      -- FQ,F4,F5: tr F -> h
+                      WHEN upper(p_iso) = 'BR' AND substring(code,1,2) IN ('FQ','F4','F5')
+                      THEN ('11')
+                      -- FR,F6,F7: tr F -> g
+                      WHEN upper(p_iso) = 'BR' AND substring(code,1,2) IN ('FR','F6','F7')
+                      THEN ('10')
+
+                      -- E0,E1,E2: tr F -> g
+                      WHEN upper(p_iso) = 'UY' AND substring(code,1,2) IN ('E0','E1','E2','EJ','EN','EP')
+                      THEN ('10')
+                      -- EE,ED,EF: tr 0 -> j
+                      WHEN upper(p_iso) = 'UY' AND substring(code,1,2) IN ('0A','0B','0T')
+                      THEN ('12')
+                      -- ,,: tr 5 -> h
+                      WHEN upper(p_iso) = 'UY' AND substring(code,1,2) IN ('5M','5V','5Z','5C','5D','5E','5F')
+                      THEN ('11')
+                      ELSE
+                      (
+                        ('{"0": "00", "1": "01", "2": "02", "3": "03", "4": "04", "5": "05", "6": "06", "7": "07",
+                          "8": "08", "9": "09", "A": "0A", "B": "0B", "C": "0C", "D": "0D", "E": "0E", "F": "0F",
+                          "g": "10", "h": "11", "j": "12", "k": "13", "l": "14", "m": "15", "n": "16", "p": "17",
+                          "q": "18", "r": "19", "s": "1A", "t": "1B", "v": "1C", "z": "1D"}'::jsonb)->>(substring(code,1,1))
+                      )
+                    END || upper(substring(code,2))
                   ELSE upper(code)
                 END AS code
                     FROM regexp_split_to_table(p_code,',') code
@@ -531,7 +589,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
               AND ( (id::bit(64))::bit(10) = ((('{"CO":170, "BR":76, "UY":858, "EC":218}'::jsonb)->(upper_p_iso))::int)::bit(10) )
               -- cobertura municipal
               AND ( (id::bit(64)<<24)::bit(2) ) <> 0::bit(2)
-              AND CASE WHEN (id::bit(64)<<26)::bit(1) <> b'0' THEN ST_Contains(r.geom,ST_Centroid(v.geom)) ELSE TRUE  END
+              AND CASE WHEN (id::bit(64)<<26)::bit(1) <> b'0' THEN ST_Contains(r.geom,ST_Centroid(v.geom)) ELSE TRUE END
             ) t
             ON TRUE
             -- infos de jurisdiction
@@ -542,6 +600,9 @@ CREATE or replace FUNCTION api.osmcode_decode(
               WHERE isolabel_ext = t.isolabel_ext
             ) s
             ON TRUE
+
+            WHERE
+            CASE WHEN upper_p_iso = 'UY' THEN c.code NOT IN ('0EG','10G','12G','00L','12L','0EJ','05H','11H') ELSE TRUE END
           )
       )
 $f$ LANGUAGE SQL IMMUTABLE;
