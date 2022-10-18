@@ -250,6 +250,53 @@ CREATE INDEX osm_coverage_geom4326_idx1 ON libosmcodes.coverage USING gist (geom
 ------------------
 -- encode:
 
+CREATE or replace FUNCTION libosmcodes.osmcode_encode_16h1c(
+  p_code           text,
+  p_jurisd_base_id int
+) RETURNS text AS $wrap$
+  SELECT
+    CASE
+      -- tr g->F, h->F
+      WHEN p_jurisd_base_id = 76 AND length(p_code) > 2
+      THEN
+      (
+        ('{"00": "0", "01": "1", "02": "2", "03": "3", "04": "4", "05": "5", "06": "6", "07": "7",
+          "08": "8", "09": "9", "0A": "A", "0B": "B", "0C": "C", "0D": "D", "0E": "E", "0F": "F",
+          "10": "F", "11": "F", "12": "j", "13": "k", "14": "l", "15": "m", "16": "n", "17": "p",
+          "18": "q", "19": "r", "1A": "s", "1B": "t", "1C": "v", "1D": "z"}'::jsonb)->>(substring(p_code,1,2))
+      )
+      -- tr g->E, h->5, j->0
+      WHEN p_jurisd_base_id = 858 AND length(p_code) > 2 AND substring(p_code,1,3) IN ('100','101','102','10J','10N','10P', '12A','12B','12T', '11M','11V','11Z','11C','11D','11E','11F')
+      THEN
+      (
+        ('{"10": "E", "11": "5", "12": "0"}'::jsonb)->>(substring(p_code,1,2))
+      )
+      WHEN p_jurisd_base_id = 858 AND length(p_code) > 2 AND substring(p_code,1,3) NOT IN (
+      '0E0','0E1','0E2','0EN','0EJ','0EP',
+      '00A','00B','00T',
+      '05M','05V','05Z','05C','05D','05E','05F'
+
+      '100','101','102','10J','10N','10P',
+      '12A','12B','12T',
+      '11M','11V','11Z','11C','11D','11E','11F'
+      )
+      THEN
+      (
+        ('{"00": "0", "01": "1", "02": "2", "03": "3", "04": "4", "05": "5", "06": "6", "07": "7",
+          "08": "8", "09": "9", "0A": "A", "0B": "B", "0C": "C", "0D": "D", "0E": "E", "0F": "F"}'::jsonb)->>(substring(p_code,1,2))
+      )
+      WHEN length(p_code) = 2
+      THEN
+      (
+        ('{"00": "0", "01": "1", "02": "2", "03": "3", "04": "4", "05": "5", "06": "6", "07": "7",
+          "08": "8", "09": "9", "0A": "A", "0B": "B", "0C": "C", "0D": "D", "0E": "E", "0F": "F",
+          "10": "g", "11": "h", "12": "j", "13": "k", "14": "l", "15": "m", "16": "n", "17": "p",
+          "18": "q", "19": "r", "1A": "s", "1B": "t", "1C": "v", "1D": "z"}'::jsonb)->>(substring(p_code,1,2))
+      )
+    END || upper(substring(p_code,3))
+$wrap$ LANGUAGE SQL IMMUTABLE;
+
+
 CREATE or replace FUNCTION libosmcodes.osmcode_encode(
   p_geom       geometry(POINT),
   p_base       int     DEFAULT 32,
@@ -346,24 +393,24 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
             SELECT jsonb_agg(
                 ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,
                     jsonb_build_object(
-                        'code', upper(ghs) ,
-                        'code_subcell', substr(ghs,length(code)+1,length(ghs)) ,
-                        'prefix', code,
+                        'code', upper(libosmcodes.osmcode_encode_16h1c(ghs,p_jurisd_base_id)) ,
+                        'code_subcell', substr(libosmcodes.osmcode_encode_16h1c(ghs,p_jurisd_base_id),length(libosmcodes.osmcode_encode_16h1c(code,p_jurisd_base_id))+1,length(libosmcodes.osmcode_encode_16h1c(ghs,p_jurisd_base_id))) ,
+                        'prefix', libosmcodes.osmcode_encode_16h1c(code,p_jurisd_base_id),
                         'area', ST_Area(geom),
                         'side', SQRT(ST_Area(geom)),
                         'base', base
                         )
                     )::jsonb)
-            FROM libosmcodes.ggeohash_GeomsFromVarbit(
-                  c.bit_string,p_l0code,false,p_srid,CASE WHEN p_base IN (16,17,18) THEN 16 ELSE 32 END,
-                  CASE
-                    WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1
-                    ELSE p_grid_size
-                  END,
-                  p_bbox,
-                  p_lonlat,
-                  CASE WHEN p_grid_size % 2 = 1 THEN TRUE ELSE FALSE END
-                  )
+              FROM libosmcodes.ggeohash_GeomsFromVarbit(
+                    c.bit_string,p_l0code,false,p_srid,CASE WHEN p_base IN (16,17,18) THEN 16 ELSE 32 END,
+                    CASE
+                      WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1
+                      ELSE p_grid_size
+                    END,
+                    p_bbox,
+                    p_lonlat,
+                    CASE WHEN p_grid_size % 2 = 1 THEN TRUE ELSE FALSE END
+                    )
           )
         ELSE '[]'::jsonb
         END AS subcells
@@ -641,7 +688,7 @@ $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.osmcode_decode_reduced(text,text,int)
   IS 'Decodes OSMcode reduced. Wrap for osmcode_decode.'
 ;
--- EXPLAIN ANALYZE SELECT api.osmcode_decode_reduced('0JKRPV','CO-Itagui');
+-- EXPLAIN ANALYZE SELECT api.osmcode_decode_reduced('8HB','CO-Itagui');
 
 ------------------
 -- jurisdiction coverage:
