@@ -531,7 +531,7 @@ CREATE or replace FUNCTION api.osmcode_decode(
       'features',
           (
             SELECT jsonb_agg(
-                ST_AsGeoJSONb(ST_Transform(v.geom,4326),8,0,null,
+                ST_AsGeoJSONb(ST_Transform_resilient(v.geom,4326,0.005),8,0,null,
                     jsonb_strip_nulls(jsonb_build_object(
                         'code', CASE WHEN p_base = 18 THEN code18 ELSE code END,
                         'short_code', short_code,
