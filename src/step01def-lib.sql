@@ -312,7 +312,7 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
       'type', 'FeatureCollection',
       'features',
         (
-          (ST_AsGeoJSONb(ST_Transform(geom_cell,4326),8,0,null,
+          (ST_AsGeoJSONb(ST_Transform_resilient(geom_cell,4326,0.005),8,0,null,
               jsonb_strip_nulls(jsonb_build_object(
                   'code',
                       CASE
@@ -391,26 +391,32 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
         THEN
           (
             SELECT jsonb_agg(
-                ST_AsGeoJSONb(ST_Transform(geom,4326),8,0,null,
+                ST_AsGeoJSONb(ST_Transform_resilient(geom,4326,0.005),8,0,null,
                     jsonb_build_object(
-                        'code', upper(libosmcodes.osmcode_encode_16h1c(ghs,p_jurisd_base_id)) ,
-                        'code_subcell', substr(libosmcodes.osmcode_encode_16h1c(ghs,p_jurisd_base_id),length(libosmcodes.osmcode_encode_16h1c(code,p_jurisd_base_id))+1,length(libosmcodes.osmcode_encode_16h1c(ghs,p_jurisd_base_id))) ,
-                        'prefix', libosmcodes.osmcode_encode_16h1c(code,p_jurisd_base_id),
+                        'code', upper(ghs) ,
+                        'code_subcell', substr(ghs,length(code2)+1,length(ghs)) ,
+                        'prefix', code2,
                         'area', ST_Area(geom),
                         'side', SQRT(ST_Area(geom)),
                         'base', base
                         )
                     )::jsonb)
-              FROM libosmcodes.ggeohash_GeomsFromVarbit(
-                    c.bit_string,p_l0code,false,p_srid,CASE WHEN p_base IN (16,17,18) THEN 16 ELSE 32 END,
-                    CASE
-                      WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1
-                      ELSE p_grid_size
-                    END,
-                    p_bbox,
-                    p_lonlat,
-                    CASE WHEN p_grid_size % 2 = 1 THEN TRUE ELSE FALSE END
-                    )
+              FROM
+             (
+              SELECT geom,
+                  CASE WHEN p_base = 18 THEN libosmcodes.osmcode_encode_16h1c(ghs,p_jurisd_base_id) ELSE ghs END AS ghs,
+                  CASE WHEN p_base = 18 THEN libosmcodes.osmcode_encode_16h1c(code,p_jurisd_base_id) ELSE code END AS code2
+                FROM libosmcodes.ggeohash_GeomsFromVarbit(
+                      c.bit_string,p_l0code,false,p_srid,CASE WHEN p_base IN (16,17,18) THEN 16 ELSE 32 END,
+                      CASE
+                        WHEN p_grid_size % 2 = 1 THEN p_grid_size - 1
+                        ELSE p_grid_size
+                      END,
+                      p_bbox,
+                      p_lonlat,
+                      CASE WHEN p_grid_size % 2 = 1 THEN TRUE ELSE FALSE END
+                      )
+             ) xx
           )
         ELSE '[]'::jsonb
         END AS subcells
@@ -433,7 +439,8 @@ CREATE or replace FUNCTION libosmcodes.osmcode_encode(
       --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(10))::bit(20) ) = 0::bit(20)
       --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
       -- )
-      (   vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,4)
+      (   vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,5)
+       OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,4)
        OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,3)
        OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,2)
        OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,1)
@@ -630,7 +637,8 @@ CREATE or replace FUNCTION api.osmcode_decode(
               --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(10))::bit(20) ) = 0::bit(20)
               --  OR ( (id::bit(64)<<32)::bit(20) # (codebits::bit(5) )::bit(20) ) = 0::bit(20)
               -- )
-              (  vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,4)
+              (   vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,5)
+              OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,4)
               OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,3)
               OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,2)
               OR vbit_to_baseh( substring(baseh_to_vbit(prefix,16) from 4),32) = substr(c.code,1,1)
@@ -746,7 +754,7 @@ CREATE or replace FUNCTION api.jurisdiction_coverage(
           )
           UNION ALL
           (
-            SELECT geom, bbox, prefix AS code,
+            SELECT geom, bbox, prefix AS code, --**** CONVERTER
                     CASE
                     WHEN p_base IN (16,17,18)
                     THEN vbit_to_baseh(((id::bit(64)<<27)::bit(8))>>3,16)
@@ -768,7 +776,7 @@ $f$ LANGUAGE SQL IMMUTABLE;
 COMMENT ON FUNCTION api.jurisdiction_coverage(text,int)
   IS 'Return l0cover.'
 ;
--- EXPLAIN ANALYZE SELECT api.jurisdiction_coverage('CO-ANT-Itagui');
+-- EXPLAIN ANALYZE SELECT api.jurisdiction_coverage('BR-SP-SaoCaetanoSul');
 
 
 /*
