@@ -1,1117 +1,1117 @@
 isolabel_ext,status,cover,overlay
-CO-AMA-ElEncanto,0,89q 8bg 8cg 8cq 8dg 8dq 8eg,
-CO-AMA-LaChorrera,0,8bg 8bq 8cq 8eg 8eq 91g 94g,
-CO-AMA-LaPedrera,0,a8q a9q aag aaq abg abq b0g,
-CO-AMA-LaVictoria,0,953v 954v 955r 955v 956h 956m 956r 956v 957h 957m 957r 959m 95ch 95cm,
-CO-AMA-Leticia,0,a0q a2g a2q,
-CO-AMA-MiritiParana,0,8eq 8fg 8fq 94g 95g 95q aag aaq b0g,
-CO-AMA-PuertoAlegria,0,8aq 8bg 8bq 8eg 90g 91g,
-CO-AMA-PuertoArica,0,8cq 8dg 8dq 8eg 8fg a8g a8q aag,
-CO-AMA-PuertoNarino,0,a20r a20v a21r a22h a22m a22r a22v a23h a23r a28m a28v a29h a29r a2bh,
-CO-AMA-PuertoSantander,0,8dq 8eg 8eq 8fg 8fq 94g aag,
-CO-AMA-Tarapaca,0,a2q a8g a8q a9q,
-CO-ANT-Abejorral,0,677m 677v 67dm c22h c22m c22r c22v c28h,
-CO-ANT-Abriaqui,0,67bv 67er 6d1m 6d1v 6d4h 6d4r,
-CO-ANT-Alejandria,0,c2am c2bh c2bm c2br c2bv,
-CO-ANT-Amaga,0,67cm 67dh 67dr,
-CO-ANT-Amalfi,0,c80v c81r c81v c82m c83h c83m c83r c83v c86h c86r c89m c89v c8ch,
-CO-ANT-Andes,0,673m 674h 674m 674r 674v 676h 676m,
-CO-ANT-Angelopolis,0,67cv 67dh 67dr,
-CO-ANT-Angostura,0,6d5v c80r c80v c82h c82m,
-CO-ANT-Anori,0,c82m c82v c83h c83r c83v c88m c88v c89h c89m c89r c89v c8bm,
-CO-ANT-Anza,0,67cr 67cv 67eh 67em 67ev,
-CO-ANT-Apartado,0,6e5m 6e5v 6f0h 6f0m 6f0r 6f0v 6f2m,
-CO-ANT-Arboletes,0,6f8m 6f8r 6f8v 6f9h 6f9r 6fah 6fam 6fav 6fbh,
-CO-ANT-Argelia,0,c22m c23h c23m,
-CO-ANT-Armenia,0,67cv 67dr 67em,
-CO-ANT-Barbosa,0,c2ah c2am c2ar c2av,
-CO-ANT-Bello,0,67fh 67fm 67fr 67fv,
-CO-ANT-Belmira,0,67fr 67fv 6d5h 6d5m 6d5r 6d5v,
-CO-ANT-Betania,0,673m 676h 676m 676r,
-CO-ANT-Betulia,0,67ch 67cr 67cv 67eh 67em,
-CO-ANT-Briceno,0,6d7r 6d7v 6ddh 6ddm c88h,
-CO-ANT-Buritica,0,6d4m 6d4r 6d4v 6d6h 6d6m,
-CO-ANT-Caceres,0,6f5m c88v c89r c89v c8ah c8am c8ar c8av c8bh c8bm c8br c8bv ca0h ca0m ca0r ca0v ca1h ca1r,
-CO-ANT-Caicedo,0,67bv 67eh 67em 67er 67ev,
-CO-ANT-Caldas,0,67dh 67dm 67dr 67dv,
-CO-ANT-Campamento,0,c82h c82m c82r c82v c88h c88m,
-CO-ANT-Canasgordas,0,6d1v 6d3m 6d4h 6d4r 6d6h 6d6r,
-CO-ANT-Caracoli,0,c2cr c2cv c2eh c2em c2er c2ev,
-CO-ANT-Caramanta,0,675r 675v,
-CO-ANT-Carepa,0,6e5h 6e5m 6e5v 6f0h 6f0m 6f0r 6f0v,
-CO-ANT-CarolinaPrincipe,0,c80m c80r c80v,
-CO-ANT-Caucasia,0,c8bh c8br c8bv c8er ca0m ca0v ca1h ca1m ca1r ca1v ca2m ca3h ca3m ca4h,
-CO-ANT-Chigorodo,0,6cfm 6cfr 6cfv 6dah 6dam 6dar 6dav 6e5h 6e5m 6f0h 6f0m,
-CO-ANT-Cisneros,0,c2bay c2bbs c2bbt c2bby c810j c810n c810p c811j c811k c811n c811p c811s c811z,
-CO-ANT-CiudadBolivar,0,673m 673v 676h 676r 676v,
-CO-ANT-Cocorna,0,c23r c28m c28v c29h c29r,
-CO-ANT-Concepcion,0,c2am c2av c2bh c2br,
-CO-ANT-Concordia,0,67ch 67cm 67cr 67cv,
-CO-ANT-Copacabana,0,67fm 67fv c2ah,
-CO-ANT-Dabeiba,0,6d0r 6d0v 6d1r 6d2h 6d2m 6d2r 6d2v 6d3h 6d3m 6d3r 6d3v 6d6h 6d6r 6d8h 6d8m 6d9h 6d9m 6dch,
-CO-ANT-DonMatias,0,67fv c2ar c2av c80h c80m,
-CO-ANT-Ebejico,0,67cv 67em 67ev 67fh 67fr,
-CO-ANT-ElBagre,0,c8cv c8dr c8eh c8em c8er c8ev c8fh c8fr ca4h ca4m ca4r ca4v ca5h ca5r,
-CO-ANT-ElCarmenViboral,0,c22v c23r c28h c28m c28r c28v c29h,
-CO-ANT-ElPenol,0,c28v c29r c2am c2bh,
-CO-ANT-ElRetiro,0,67dm 67dv c28h c28r,
-CO-ANT-ElSantuario,0,c28m c28v c29r,
-CO-ANT-Entrerrios,0,67fv 6d5h 6d5m c2ar c80h,
-CO-ANT-Envigado,0,67dcj 67dck 67dcn 67dcp 67dcs 67dct 67dcy 67dcz 67ddk 67dds 67ddt 67ddy 67dej 67dek 67den 67dep 67dfj 67dfk 67dfn 67dfp,
-CO-ANT-Fredonia,0,676v 677h 677r 677v 67dh 67dm,
-CO-ANT-Frontino,0,67ar 67av 67br 6d0h 6d0m 6d0r 6d0v 6d1h 6d1m 6d1r 6d1v 6d2m 6d3h 6d3m,
-CO-ANT-Giraldo,0,6d4h 6d4m 6d4r 6d4v,
-CO-ANT-Girardota,0,67f7p 67f7y 67f7z 67fdn 67fdp 67fdz c2a2j c2a2k c2a2n c2a2p c2a2s c2a2t c2a2y c2a2z c2a8j c2a8k c2a8n c2a8p c2a8s,
-CO-ANT-GomezPlata,0,c80m c80v c81h c81r c82m,
-CO-ANT-Granada,0,c28v c29h c29r,
-CO-ANT-Guadalupe,0,c80v c82m c83h,
-CO-ANT-Guarne,0,67dv 67fm c28r c2ah,
-CO-ANT-Guatape,0,c28v c29r c2am c2bh,
-CO-ANT-Heliconia,0,67cv 67dr 67em 67fh,
-CO-ANT-Hispania,0,6763p 6763t 6763y 6763z 6766k 6766s 6766t 6769j 6769n 6769p 676cj 676ck 676cp 676cs,
-CO-ANT-Itagui,0,67d9y 67dbn 67dbp 67dct 67dej 67dek,
-CO-ANT-Ituango,0,6dg 6dq c8q,
-CO-ANT-Jardin,0,674m 674v 675r 676m,
-CO-ANT-Jerico,0,676m 676v 677h 677r,
-CO-ANT-LaCeja,0,677v 67dm c22r c28h,
-CO-ANT-LaEstrella,0,67d9k 67d9n 67d9p 67d9s 67d9t 67d9y 67d9z 67dbj 67dbn 67dck,
-CO-ANT-LaPintada,0,6771p 6771y 6771z 6773n 6773p 6773y 6773z 6774k 6774s 6774t 6776j 6776k 6776n 6776p 6776s 6776t 6776z 6779n 677cj,
-CO-ANT-LaUnion,0,c22r c22v c28h c28m,
-CO-ANT-Liborina,0,6d4m 6d4v 6d5h 6d5r,
-CO-ANT-Maceo,0,c2er c2ev c84h c84m c85h,
-CO-ANT-Marinilla,0,c28r c28v c2am,
-CO-ANT-Medellin,0,67dr 67dv 67fh 67fm,
-CO-ANT-Montebello,0,67g 67q,
-CO-ANT-Murindo,0,6c5h 6c5m 6c5r 6c5v 6c7h 6c7m 6c7r 6c7v 6d0h 6d0r 6d2h 6d2r,
-CO-ANT-Mutata,0,6cdv 6cfm 6d8h 6d8m 6d8r 6d8v 6d9h 6d9r 6dah 6dam,
-CO-ANT-Narino,0,c20m c20v c21r c22m c23h,
-CO-ANT-Nechi,0,ca1m ca1v ca3m ca4h ca4r ca4v ca5r ca6h ca6m ca6r,
-CO-ANT-Necocli,0,6e7v 6edm 6edr 6edv 6efh 6efm 6f8h 6f8m 6f8r 6f8v 6fah,
-CO-ANT-Olaya,0,6d4m 6d5h,
-CO-ANT-Peque,0,6d6h 6d6m 6d6r 6d6v 6dch 6dcm,
-CO-ANT-Pueblorrico,0,676m 676r 676v,
-CO-ANT-PuertoBerrio,0,c2em c2er c2ev c2fh c2fm c2fr c2fv c84m c85h c85m c85r c85v,
-CO-ANT-PuertoNare,0,c2ch c2cm c2cr c2cv c2dh c2dr c2em c2fh,
-CO-ANT-PuertoTriunfo,0,c26r c26v c2ch c2cm c2dh,
-CO-ANT-Remedios,0,c84v c85r c85v c86h c86m c86r c86v c87h c87m c87r c87v c8ch c8cm c8dh c8dm c92h c92r,
-CO-ANT-Rionegro,0,67dv c28h c28r,
-CO-ANT-Sabanalarga,0,6d4v 6d5r 6d6m 6d6v 6d7h 6d7r,
-CO-ANT-Sabaneta,0,67d9p 67d9y 67d9z 67dck 67dcs 67dct,
-CO-ANT-Salgar,0,673v 676r 676v 679m 67ch 67cm,
-CO-ANT-SanAndresCuerquia,0,6d5r 6d7h 6d7m 6d7r 6d7v,
-CO-ANT-SanCarlos,0,c29m c29r c29v c2bh c2bm c2ch c2cr c2cv c2eh c2em,
-CO-ANT-SanFrancisco,0,c23h c23m c23r c23v c26r c29h c29m,
-CO-ANT-SanJeronimo,0,67ev 67fh 67fr,
-CO-ANT-SanJoseLaMontana,0,6d5r 6d5v 6d7h,
-CO-ANT-SanJuanUraba,0,6fah 6fam 6far 6fav,
-CO-ANT-SanLuis,0,c23r c23v c26r c29h c29m c29r c29v c2ch c2cr,
-CO-ANT-SanPedroMilagros,0,67fh 67fm 67fr 67fv c2ar,
-CO-ANT-SanPedroUraba,0,6f2m 6f2v 6f3h 6f3r 6f8m 6f8v 6f9h 6f9m 6f9r 6f9v,
-CO-ANT-SanRafael,0,c29r c2bh c2bm c2bv c2eh,
-CO-ANT-SanRoque,0,c2bm c2br c2bv c2eh c2er c81m,
-CO-ANT-SanVicente,0,c28r c28v c2ah c2am c2ar c2av,
-CO-ANT-SantaBarbara,0,677m 677r 677v 67dh 67dm,
-CO-ANT-SantaFeAntioquia,0,67er 67ev 6d4h 6d4m 6d4v,
-CO-ANT-SantaRosaOsos,0,6d5m 6d5r 6d5v 6d7h 6d7m c2ar c80h c80m c80r c80v,
-CO-ANT-SantoDomingo,0,c2av c2br c2bv c80m c81h c81m,
-CO-ANT-Segovia,0,c86r c86v c89m c8ch c8cm c8cr c8cv c8dh c8dm c8dr c8dv c8fm,
-CO-ANT-Sonson,0,c20h c20m c20r c20v c22h c22m c22v c23h c23m c23r c23v c26h c26m c26r c26v,
-CO-ANT-Sopetran,0,67ev 67fr 6d4m 6d5h,
-CO-ANT-Tamesis,0,674v 675r 676m 677h 677r,
-CO-ANT-Taraza,0,6ddv 6dfm 6dfv 6f5m c88m c88r c88v c89r c8ah c8am c8ar ca0h,
-CO-ANT-Tarso,0,676v 677r,
-CO-ANT-Titiribi,0,67cm 67cv 67dh 67dr,
-CO-ANT-Toledo,0,6d7h 6d7r,
-CO-ANT-Turbo,0,6cq 6dq 6eg 6eq 6fg 6fq,
-CO-ANT-Uramita,0,6d1v 6d3h 6d3m 6d3v 6d6h 6d6r,
-CO-ANT-Urrao,0,678r 678v 679m 679r 679v 67ah 67am 67ar 67av 67bh 67bm 67br 67bv 67ch 67cr 67eh 67er 6d0h 6d0m 6d1h 6d1m,
-CO-ANT-Valdivia,0,6d7v 6ddm 6ddv c82r c88h c88m c88r c88v c8am,
-CO-ANT-Valparaiso,0,675r 675v 677h 677m,
-CO-ANT-Vegachi,0,c81v c83m c84r c84v c85r c86h c86m c86r c87h,
-CO-ANT-Venecia,0,676v 677r 67cm 67dh,
-CO-ANT-VigiaFuerte,0,66q 67q 6cg 6dg,
-CO-ANT-Yali,0,c81m c81v c84h c84m c84r c84v c85r,
-CO-ANT-Yarumal,0,6d5v 6d7m 6d7r 6d7v c80r c82h c82r c82v c88h c88m,
-CO-ANT-Yolombo,0,c2bv c2er c80m c81h c81m c81r c81v c83h c83m c84h c84m c84v c85h c85r,
-CO-ANT-Yondo,0,c8g c9g c9q,
-CO-ANT-Zaragoza,0,c89m c89v c8bh c8bm c8br c8bv c8ch c8cr c8cv c8eh c8em c8er ca4h,
-CO-ARA-Arauca,0,cdg e2q e8g,
-CO-ARA-Arauquita,0,c7q cdg,
-CO-ARA-CravoNorte,0,e2q e3q e8g,
-CO-ARA-Fortul,0,c6fr c6fv cc5h cc5m cc5r cc5v cd0h cd0m cd0r cd0v cd1h cd1m cd1r cd2m,
-CO-ARA-PuertoRondon,0,c7dr c7dv c7eh c7em c7er c7ev c7fh c7fm c7fr c7fv cd1m cd4h cd4m cd5h cd5m e28r e2ah e2ar e80h,
-CO-ARA-Saravena,0,cc5r cc5v cc7m cc7v cd0r cd0v cd2h cd2m cd2r cd2v,
-CO-ARA-Tame,0,c6q c7q ccg cdg,
-CO-ATL-Baranoa,0,d29m d29v d2ch d2cr,
-CO-ATL-Barranquilla,0,d29v d2cr d2eh,
-CO-ATL-CampoLaCruz,0,d21v d23m d24r d26h,
-CO-ATL-Candelaria,0,d23m d23v d26h d26r,
-CO-ATL-Galapa,0,d29v d2cr,
-CO-ATL-JuanAcosta,0,d28m d29h d29m d29r d29v,
-CO-ATL-Luruaco,0,d22v d23r d28m d29h,
-CO-ATL-Malambo,0,d2ch d2cm d2cr d2cv,
-CO-ATL-Manati,0,d21r d21v d23h d23m d23v,
-CO-ATL-PalmarVarela,0,d26r d26v d2ch d2cm,
-CO-ATL-Piojo,0,d22v d23r d28m d29h d29m,
-CO-ATL-Polonuevo,0,d2c0k d2c0p d2c0s d2c0t d2c0y d2c0z d2c2j d2c2k d2c2n d2c2p d2c2s d2c2z d2c3j d2c3k d2c3s,
-CO-ATL-Ponedera,0,d26h d26m d26r d26v d2ch,
-CO-ATL-PuertoColombia,0,d29v d2bm d2cr d2eh,
-CO-ATL-Repelon,0,d22m d22v d23h d23m d23r d23v,
-CO-ATL-Sabanagrande,0,d2c3j d2c3k d2c3n d2c3p d2c3s d2c3t d2c3y d2c3z d2c6j d2c6k d2c6s d2c6t,
-CO-ATL-Sabanalarga,0,d23m d23r d23v d26r d29h d29m d2ch,
-CO-ATL-SantaLucia,0,d21v d23m,
-CO-ATL-SantoTomas,0,d26r d2ch d2cm,
-CO-ATL-Soledad,0,d2c8y d2c8z d2c9s d2c9t d2c9y d2c9z d2can d2cbj d2cbk d2cbn d2cbp d2ccs d2cct d2cej d2cek,
-CO-ATL-Suan,0,d21dn d21dp d21ds d21dt d21dy d21dz d21fn d21fp d21fz d248s d248t d24aj d24ak d24as,
-CO-ATL-Tubara,0,d29m d29r d29v,
-CO-ATL-Usiacuri,0,d23v d29h d29m,
-CO-BOL-Achi,0,cacv cadh cadm cadr cadv caem caev cafh cafm cafr cafv,
-CO-BOL-AltosRosario,0,cafm cafv cbah cbam cbar cbav,
-CO-BOL-Arenal,0,ca7m ca7v cb2h cb2r cb2v cb8h cb8m cb9h cb9r,
-CO-BOL-Arjona,0,75fv 775m d0ar d0av d20h d20m d20r d20v,
-CO-BOL-Arroyohondo,0,d21h d21m d21r d21v,
-CO-BOL-BarrancoLoba,0,cafv cbah cbam cbar cbav d10h d10m,
-CO-BOL-Calamar,0,d21h d21m d21r d21v,
-CO-BOL-Cantagallo,0,c87v c8dm c92r c92v c98h c98m c98r c98v c99h c99r c9bh,
-CO-BOL-CartagenaIndias,0,75g 77g d2g d2q,
-CO-BOL-Cicuco,0,d04r d04v d06h d06m,
-CO-BOL-Clemencia,0,d22h d22m d22r d22v,
-CO-BOL-Cordoba,0,d03v d06r d09m d09v d0ch d0cr,
-CO-BOL-ElCarmenBolivar,0,d08h d08m d08r d08v d09h d09m d09r d09v d0ah d0am,
-CO-BOL-ElGuamo,0,d0br d0bv d0eh d0er d21m d24h,
-CO-BOL-ElPenon,0,cbbh cbbr cbbv d11h,
-CO-BOL-HatilloLoba,0,d05m d10h d10m d11h,
-CO-BOL-Magangue,0,caev cafr d01v d03m d03v d04h d04m d04r d04v d05h d06h d06m d06r d06v,
-CO-BOL-Mahates,0,d0av d0br d20m d20v d21h d21r,
-CO-BOL-Margarita,0,d05v d10h d10m d10r d10v,
-CO-BOL-MariaBaja,0,d0ah d0am d0ar d0av d20h,
-CO-BOL-Montecristo,0,c8q cag caq cbg,
-CO-BOL-Morales,0,cb2h cb2m cb2r cb2v cb3h cb3m cb3r cb3v cb8m cb9h cb9m cb9r,
-CO-BOL-Norosi,0,cb8h cb8m cb8r cb8v cb9r cbam,
-CO-BOL-Pinillos,0,cafm cafr cafv cbah cbar d04m d05h d05m d05r d10h,
-CO-BOL-Regidor,0,cb9v cbbh cbbm cbbr cbbv,
-CO-BOL-RioViejo,0,ca7v cadm cb2r cb8h cb8m cb8r cb8v cb9h cb9m cb9r cb9v cbah cbam cbbh cbbm,
-CO-BOL-SanCristobal,0,d21bk d21bp d21bs d21bt d21by d21bz d21ek d21es d21et d231j d231k d231n d231p,
-CO-BOL-SanEstanislao,0,d20v d21r d22m d23h,
-CO-BOL-SanFernando,0,d05h d05m d05r d05v d07m d10h d10r,
-CO-BOL-SanJacinto,0,d08v d09r d09v d0am d0bh d0bm,
-CO-BOL-SanJacintoCauca,0,ca6h ca6m ca6r ca6v ca7r cacm cadh,
-CO-BOL-SanJuanNepomuceno,0,d0am d0av d0bh d0bm d0br d0bv d0eh d0er d21h d21m,
-CO-BOL-SanMartinLoba,0,cbam cbav cbbh cbbr d10m d11h,
-CO-BOL-SanPablo,0,c87v c8dm c8dv c8fm c92r c98h c98r c98v c99r c9ah c9am c9ar c9av c9bh c9bm c9br c9bv,
-CO-BOL-SantaCatalina,0,d22m d22v d28m,
-CO-BOL-SantaCruzMompox,0,d04m d04v d05h d05r d05v d06m d07h d07m,
-CO-BOL-SantaRosaLima,0,d22h d22m d22r d22v,
-CO-BOL-SantaRosaSur,0,c8q c9q cag cbg,
-CO-BOL-Simiti,0,c9ah c9ar c9av c9br c9bv cb0h cb0m cb0v cb1h cb1m cb1r cb1v cb2m cb2v cb3h cb3r,
-CO-BOL-Soplaviento,0,d21r d23h,
-CO-BOL-TalaiguaNuevo,0,d04v d06m d06r d06v d07h,
-CO-BOL-Tiquisio,0,ca7v cadh cadm cadv cafm cb8h cb8r cbah cbam,
-CO-BOL-Turbaco,0,d20r d20v d22h d22m,
-CO-BOL-Turbana,0,775m 775v d20h d20r,
-CO-BOL-Villanueva,0,d20v d22m d23h,
-CO-BOL-Zambrano,0,d09v d0bm d0ch d0cr d0eh,
-CO-BOY-Almeida,0,c1cm c1cv c1dr,
-CO-BOY-Aquitania,0,c4ah c4am c4ar c4av c60h c60m c60r c60v c61h c61r,
-CO-BOY-Arcabuco,0,c36m c36v c37h,
-CO-BOY-Belen,0,c62v c68h c68m c68v c69h,
-CO-BOY-Berbeo,0,c1fm c1fv c4ah c4ar,
-CO-BOY-Beteitiva,0,c62v c63r c68m c69h,
-CO-BOY-Boavita,0,c69v c6bh c6bm c6br c6bv,
-CO-BOY-Boyaca,0,c345s c345t c345y c345z c347n c347p c350s c350t c350y c352j c352k c352n c352p c352s c352z,
-CO-BOY-Briceno,0,c31ay c31az c31bs c31bt c31by c330j c330k c330n c330p c330s c330z c331j c331k c331n c331s c331t,
-CO-BOY-Buenavista,0,c30m c30v c31h c31r,
-CO-BOY-Busbanza,0,c62cn c62cp c62cy c62cz c62dj c62dk c62ds c62dt c62en c62fj,
-CO-BOY-Caldas,0,c318y c318z c319j c319k c319p c319s c319t c319y c319z c31an c31bj c31bk c31bn c31bp c31bs c31bt c31by c31bz,
-CO-BOY-Campohermoso,0,c1dm c1dv c1fh c1fm c48r c4ah,
-CO-BOY-Cerinza,0,c62bt c62by c62bz c62es c62et c681j c681k c681n c681p c681s c681y c681z c684j c684k c684s,
-CO-BOY-Chinavita,0,c1ev c1fh c1fr,
-CO-BOY-Chiquinquira,0,c31r c31v c33h c33m c34r,
-CO-BOY-Chiquiza,0,c34v c35r c36m c37h,
-CO-BOY-Chiscas,0,c6bv c6er c6ev cc1m cc4h cc4m cc4r cc4v cc6h cc6m,
-CO-BOY-Chita,0,c66r c66v c69m c69v c6bm c6ch c6cm c6cr c6eh,
-CO-BOY-Chitaraque,0,c36v c37r c3cm c3dh,
-CO-BOY-Chivata,0,c359k c359p c359s c359t c359y c359z c35bj c35bn c35bp c35ck c35cs c35ct c35ej c35ek c35es c35et,
-CO-BOY-Chivor,0,c1cm c1cv c1dh c1dr,
-CO-BOY-Cienega,0,c1fbt c1fby c350p c350y c350z c351j c351k c351n c351p c351s c351t c351y c351z c354k c354s c354t,
-CO-BOY-Combita,0,c35r c37h c37r,
-CO-BOY-Coper,0,c30m c30v c31h,
-CO-BOY-Corrales,0,c62m c62v c63r,
-CO-BOY-Covarachia,0,c6av c6br cc0m cc1h,
-CO-BOY-Cubara,0,cc4v cc5r cc5v cc6h cc6m cc6v cc7h cc7m cc7r cc7v,
-CO-BOY-Cuitiva,0,c609y c609z c60bj c60bn c60bp c60cs c60ct c60cy c60ej c60ek c60en c60ep c60es c60ez,
-CO-BOY-Duitama,0,c37v c3dm c62h c62r c68h,
-CO-BOY-ElCocuy,0,c6bm c6eh c6em c6er c6ev,
-CO-BOY-ElEspino,0,c6bfn c6bfp c6bfy c6bfz c6e8t c6eaj c6eak c6ean c6eap c6eas c6eat c6eay c6eaz c6ebs c6ebt cc40j cc40n,
-CO-BOY-Firavitoba,0,c35v c37m c60r c62h c62m,
-CO-BOY-Floresta,0,c62m c62r c62v,
-CO-BOY-Gachantiva,0,c36h c36m c36r c36v,
-CO-BOY-Gameza,0,c62m c62v c63h c63m c63r c63v,
-CO-BOY-Garagoa,0,c1cv c1dr c1fh c1fm,
-CO-BOY-Guacamayas,0,c6bdk c6bdn c6bdp c6bds c6bdt c6bdy c6bdz c6bfj c6bfk c6bfn c6bfp c6e8j c6e8k c6e8s c6e8t c6eaj,
-CO-BOY-Guateque,0,c1ccy c1cdt c1cej c1cek c1cen c1cep c1ces c1cet c1cey c1cez c1cfj c1cfk c1cfs c1e4n,
-CO-BOY-Guayata,0,c1ch c1cm c1cr c1cv,
-CO-BOY-Guican,0,c6em c6er c6ev c6fr cc4h cc4m cc4v cc5h cc5r,
-CO-BOY-Iza,0,c60bj c60bk c60bn c60bp c60bs c60bt c60by c60bz c60ek c60es c60et,
-CO-BOY-Jenesano,0,c1fap c1fas c1fat c1fay c1faz c345n c345p c345y c345z c350j c350k c350n c350s c350t c350y c350z c352n,
-CO-BOY-Jerico,0,c69m c69r c69v,
-CO-BOY-LaCapilla,0,c1e4n c1e4p c1e4y c1e4z c1e5j c1e5k c1e5s c1e5t c1e5y c1e5z c1e6n c1e6p c1e7j c1e7k c1e7n,
-CO-BOY-LaUvita,0,c69v c6bm c6eh,
-CO-BOY-LaVictoria,0,c302s c302t c302y c302z c308j c308k c308n c308p c308z c309j c309k c309s,
-CO-BOY-Labranzagrande,0,c61h c61m c61r c61v c63h c63m c64h c64r,
-CO-BOY-Macanal,0,c1dh c1dr c1dv c1fh c1fm,
-CO-BOY-Miraflores,0,c1fh c1fm c1fv c4ah,
-CO-BOY-Mongua,0,c61r c61v c62m c63h c63m,
-CO-BOY-Mongui,0,c60v c62m c63h,
-CO-BOY-Moniquira,0,c36h c36m c36r c36v c3ch c3cm,
-CO-BOY-Motavita,0,c34dy c34fn c34fp c34fy c34fz c358s c358t c358y c35aj c35ak c35an c35ap c35as c35at c35az c370j,
-CO-BOY-Nobsa,0,c623p c623y c623z c626k c626p c626s c626t c626y c626z c627s c629n c62cj c62cn,
-CO-BOY-NuevoColon,0,c1een c1eep c1eey c1eez c1efj c1efk c1efs c1eft c1efy c344n c344p c345j c345k c345n c345p c345s c345t c345z,
-CO-BOY-Oicata,0,c358y c359t c359y c35an c35ap c35bj c35bk c35bn c35bp c35bs c35bt c35by c35bz c35ek c35es c371j c371n,
-CO-BOY-Otanche,0,c25v c27m c30r c32h c32m c32r c32v,
-CO-BOY-Pachavita,0,c1e5p c1e5y c1e5z c1e7j c1e7k c1e7n c1e7p c1e7s c1e7y c1e7z c1edn c1f0k c1f0s c1f0t c1f2j c1f2k c1f2s c1f2t c1f8j,
-CO-BOY-Paez,0,c1fm c48r c48v c4ah c4am c4ar c4av,
-CO-BOY-Paipa,0,c37m c37v c3dm c62h c62r,
-CO-BOY-Pajarito,0,c4br c4bv c61h c61m,
-CO-BOY-Panqueba,0,c6e2t c6e8j c6e8k c6e8n c6e8p c6e8s c6e8t c6e8y c6e8z c6eaj c6ean c6eap,
-CO-BOY-Pauna,0,c30v c31r c32m c32v c33h,
-CO-BOY-Paya,0,c61v c64r c64v c66h c66m c66v,
-CO-BOY-PazRio,0,c68m c69h c69r,
-CO-BOY-Pesca,0,c1fv c35m c35v c60h c60r,
-CO-BOY-Pijaos,0,c347t c347y c34cn c34cp c34cz c34dj c34dk c34dn c34dp c34ds c34dt c34dy c34dz,
-CO-BOY-Pisba,0,c61v c63m c63v c64r c66h c66m c66r c66v,
-CO-BOY-PuertoBoyaca,0,c26m c26v c27h c27m c27r c27v c2cm c2cv c2dh c2dm c2dr c2fh c32h c32r c38h,
-CO-BOY-Quipama,0,c25v c30h c30r c30v,
-CO-BOY-Ramiriqui,0,c1q c3g,
-CO-BOY-Raquira,0,c31m c31v c34h c34r,
-CO-BOY-Rondon,0,c1fr c1fv c35h c35m,
-CO-BOY-Saboya,0,c31v c33h c33m c34r c36h,
-CO-BOY-Sachica,0,c34r c34v,
-CO-BOY-Samaca,0,c34h c34m c34r c34v,
-CO-BOY-SanEduardo,0,c1fv c4ah c4ar,
-CO-BOY-SanJosePare,0,c3c1j c3c1k c3c1n c3c1p c3c1s c3c1t c3c1y c3c1z c3c3n c3c4j c3c4k c3c4p c3c4s c3c4t c3c4y c3c4z c3c6j c3c6k c3c6n,
-CO-BOY-SanLuisGaceno,0,c17v c1dm c1dv c42r c48h c48r,
-CO-BOY-SanMateo,0,c6bm c6bv c6eh c6er,
-CO-BOY-SanMiguelSema,0,c316y c317s c317t c317y c317z c31cn c31cp c31cy c31cz c31dj c31dk c31dn c31dp c31ds c31dt c31dy c31dz c31en c31ep c31fj c31fn,
-CO-BOY-SanRafaelUmbita,0,c1em c1ev c1fr,
-CO-BOY-SantaMaria,0,c17r c17v c1dh c1dm c1dr c1dv,
-CO-BOY-SantaRosaViterbo,0,c62h c62r c62v c68h,
-CO-BOY-SantaSofia,0,c36h,
-CO-BOY-Santana,0,c3c4t c3c4y c3c6j c3c6k c3c6n c3c6p c3c6s c3c6t c3c6y c3c6z c3c7j c3c7k c3c7s c3c7t c3c7z c3ccj c3ccn,
-CO-BOY-Sativanorte,0,c68m c68v c69h c69m c69r c69v,
-CO-BOY-Sativasur,0,c69h c69m c69r,
-CO-BOY-Siachoque,0,c35h c35m c35r c35v,
-CO-BOY-Soata,0,c6bh c6bm,
-CO-BOY-Socha,0,c63r c63v c69h c69m,
-CO-BOY-Socota,0,c63m c63v c66r c69h c69m c69r c69v c6ch,
-CO-BOY-Sogamoso,0,c60r c60v c61r c62h c62m c63h,
-CO-BOY-Somondoco,0,c1cm c1cv c1dr,
-CO-BOY-Sora,0,c34cy c34cz c34ds c34dt c34dy c34dz c34en c34fj c34fk c34fn c34fp c34fz,
-CO-BOY-Soraca,0,c35h c35r,
-CO-BOY-Sotaquira,0,c37h c37m c37r c37v,
-CO-BOY-Susacon,0,c68v c69r c69v c6bh c6bm,
-CO-BOY-Sutamarchan,0,c34r c36h,
-CO-BOY-Sutatenza,0,c1cey c1cez c1cfj c1cfk c1cfp c1cfs c1cft c1cfy c1cfz c1dak c1das c1dat,
-CO-BOY-Tasco,0,c62v c63r c63v c69h,
-CO-BOY-Tenza,0,c1cey c1cfs c1cft c1cfy c1cfz c1dat c1e4n c1e5j c1e5k c1e5n c1e5p c1e5s c1e5y c1e5z c1f0j c1f0k,
-CO-BOY-Tibana,0,c1ev c1fr c34m c35h,
-CO-BOY-Tibasosa,0,c62h c62m c62r,
-CO-BOY-Tinjaca,0,c31dn c31dp c31dy c31dz c31fn c31fp c31fz c348j c348k c348s c348t c348y c348z c34aj c34ak c34an c34ap c34as c34at c34az,
-CO-BOY-Tipacoque,0,c6b2y c6b3s c6b3t c6b3y c6b8n c6b8p c6b8z c6b9j c6b9k c6b9n c6b9p c6b9s c6b9t c6b9y c6b9z c6bbj c6bbn,
-CO-BOY-Toca,0,c35r c35v c37m c60r,
-CO-BOY-Togui,0,c36r c36v c3ch c3cm,
-CO-BOY-Topaga,0,c626p c626z c627j c627k c627n c627p c627s c627t c627y c627z c632s c632t,
-CO-BOY-Tota,0,c60h c60r c60v,
-CO-BOY-Tunja,2,c347k c347n c347p c347s c347t c347y c347z c34dn c34dp c34dy c34dz c352k c352s c352t c352y c352z c358j c358k c358n c358p c358s c358t c358y c358z c359k c359s c359t c35an c35bj,
-CO-BOY-Tunungua,0,c330s c330t c330y c330z c331s c331t c332j c332n c333j,
-CO-BOY-Turmeque,0,c1ebn c1ebp c1eby c1ebz c1eck c1ecs c1ect c1ecy c1ecz c1eej c1eek c1een c1eep c1ees c1eet c1eey c1eez c344n,
-CO-BOY-Tuta,0,c35r c35v c37h c37m c60r,
-CO-BOY-Tutaza,0,c68m c68v,
-CO-BOY-Ventaquemada,0,c1er c1ev c34h c34m,
-CO-BOY-VillaLeyva,0,c34r c34v c36h c36m,
-CO-BOY-Viracacha,0,c351t c351y c351z c353j c353k c353n c353p c353s c353t c353y c353z c354s c354t c356j c356k,
-CO-BOY-Zetaquira,0,c1fh c1fm c1fr c1fv c35m c4ar c60h,
-CO-CAL-Aguadas,0,675v 677m c20h c20m c20r c20v c22h,
-CO-CAL-Anserma,0,65em 65ev 65fh 65fr,
-CO-CAL-Aranzazu,0,65fv c0ar,
-CO-CAL-Belalcazar,0,65cv 65dr 65em 65fh,
-CO-CAL-Chinchina,0,65dr 65dv 65fh,
-CO-CAL-Filadelfia,0,65fr 65fv 675h 675m,
-CO-CAL-LaDorada,0,c0er c0ev c24h c24m c24r c24v c26h c26m,
-CO-CAL-LaMerced,0,65fey 65fez 65ffs 65fft 6754j 6754k 6754n 6754p 6754s 6754t 6754y 6754z 6755j 6755k 6755s 6755t 6756j 6756k 6756n 6756p 6757j 6757k,
-CO-CAL-Manizales,0,65dv 65fh 65fm c08r c0ah,
-CO-CAL-Manzanares,0,c0am c0av c0bh c0br,
-CO-CAL-Marmato,0,6753p 6753y 6753z 6756k 6756s 6756t 6759n 6759p 675cj 675ck,
-CO-CAL-Marquetalia,0,c0br c0bv,
-CO-CAL-Marulanda,0,c08r c0ah c0am c0ar c0av c0bh c20m,
-CO-CAL-Neira,0,65fh 65fm 65fr 65fv c0ah c0ar,
-CO-CAL-Norcasia,0,c21v c23m c24r c26h,
-CO-CAL-Pacora,0,675m 675v c20h c20r,
-CO-CAL-Palestina,0,65dr 65dv 65fh 65fm,
-CO-CAL-Pensilvania,0,c0av c0br c20h c20m c20v c21h c21r,
-CO-CAL-Riosucio,0,65fr 674m 674v 675h 675m 675r,
-CO-CAL-Risaralda,0,65dr 65em 65fh,
-CO-CAL-Salamina,0,65fv 675m c0ar c0av c20h c20m,
-CO-CAL-Samana,0,c0br c0bv c21h c21m c21r c21v c23h c23m c26h,
-CO-CAL-SanJose,0,65cv 65em 65fh,
-CO-CAL-Supia,0,675h 675m 675r,
-CO-CAL-Victoria,0,c0bv c0er c21m c21v c24h c24r c24v,
-CO-CAL-Villamaria,0,65dm 65dv c08h c08r,
-CO-CAL-Viterbo,0,65cr 65cv 65eh 65em,
-CO-CAQ-Albania,0,376r 376v 37ch 37cm 37cr 37cv,
-CO-CAQ-BelenAndaquies,0,376v 377r 37bm 37cm 37cr 37cv 37dh 37dr 37eh 37em 37er 37ev,
-CO-CAQ-CartagenaChaira,0,90q 91q 92g 92q 93g,
-CO-CAQ-Curillo,0,373m 373v 374v 376h 376m 376r 376v 379m 37ch,
-CO-CAQ-ElDoncello,0,92q 98g,
-CO-CAQ-ElPaujil,0,92q 98g,
-CO-CAQ-Florencia,0,37q 3dg 92q 98g,
-CO-CAQ-LaMontanita,0,37q 92g 92q,
-CO-CAQ-Milan,0,377v 37dm 37dv 920v 922h 922m 922r 922v 928h 928r,
-CO-CAQ-Morelia,0,37cm 37cv 37dh 37dm 37dr 37dv 37em 37fh,
-CO-CAQ-PuertoRico,0,92q 98g 98q,
-CO-CAQ-SanJoseFragua,0,373r 373v 376r 379h 379m 379r 379v 37bm 37ch 37cr 37cv 37eh,
-CO-CAQ-SanVicenteCaguan,0,91q 92g 92q 93g 93q 98g 98q,
-CO-CAQ-Solano,0,37g 8bq 8eq 90g 90q 91g 91q 92g 93g 94g 94q 95g 95q 96g,
-CO-CAQ-Solita,0,374v 375r 375v 376m 376v 377h 377m,
-CO-CAQ-Valparaiso,0,375v 376m 376v 377h 377m 377r 377v 37cm 37dh 37dm 920r 922h 922r,
-CO-CAS-Aguazul,0,c49m c49r c49v c4bh c4bm c4br c4bv c4ch c4cr c4cv c4eh c4em c4er c61m,
-CO-CAS-Chameza,0,c4ah c4am c4av c4bh c4br c60m c61h,
-CO-CAS-HatoCorozal,0,c6g c6q c7g c7q e2q,
-CO-CAS-LaSalina,0,c6ch c6cm c6cr c6cv c6eh c6em,
-CO-CAS-Mani,0,c4g c4q c5g,
-CO-CAS-Monterrey,0,c42v c43r c48h c48m c48r c48v c49h c49r c4am,
-CO-CAS-Nunchia,0,c4fr c64m c64v c65h c65m c65r c65v c66m c67h c67m c70h,
-CO-CAS-Orocue,0,c4g c4q c5g c5q,
-CO-CAS-PazAriporo,0,c6g c6q c7g c7q e2g e2q,
-CO-CAS-Pore,0,c65v c67h c67m c67r c67v c70r c70v c72h,
-CO-CAS-Recetor,0,c4am c4av c4bh c4br c60m c61h,
-CO-CAS-Sabanalarga,0,c42r c42v c48h c48m c48r c48v,
-CO-CAS-Sacama,0,c6ch c6cm c6cv c6dh c6dm c6dr c6dv,
-CO-CAS-SanLuisPalenque,0,c4q c5q c6g c7g,
-CO-CAS-Tamara,0,c66m c66r c66v c67h c67r c67v c6cm c6dh c6dm,
-CO-CAS-Tauramena,0,c4g c4q,
-CO-CAS-Trinidad,0,c5q c7g e0q e2g,
-CO-CAS-Villanueva,0,c40v c41h c41m c41r c41v c42h c42m c42r c42v c43h c43r,
-CO-CAS-Yopal,0,c4q c6g,
-CO-CAU-Almaguer,0,3c4m 3c5h 3c5m 3c5r 3c5v,
-CO-CAU-Argelia,0,3c3m 3c3r 3c3v 3c6h 3c6r 3c9h 3c9m 3cch,
-CO-CAU-Balboa,0,3c1v 3c3m 3c4r 3c6h,
-CO-CAU-Bolivar,0,36ev 36fh 36fr 3c4h 3c4m 3c4r 3c4v 3c5h 3c5r 3c6m 3c7h,
-CO-CAU-BuenosAires,0,3cfv 3dar 3e5m 3f0h 3f0r,
-CO-CAU-Cajibio,0,3cdr 3cdv 3cfh 3cfm 3d8r 3dah,
-CO-CAU-Caldono,0,3dah 3dam 3dar 3dav,
-CO-CAU-Caloto,0,3dav 3f0m 3f0v 3f1h 3f1r,
-CO-CAU-Corinto,0,3f1h 3f1m 3f1r 3f1v,
-CO-CAU-ElTambo,0,3c6m 3c6r 3c6v 3c7h 3c7r 3c7v 3c9m 3c9v 3cbm 3cch 3ccm 3ccr 3ccv 3cdh 3cdm 3cdr 3cdv 3ceh 3cem 3cfh,
-CO-CAU-Florencia,0,36e9j 36e9k 36e9n 36e9p 36e9s 36e9t 36e9y 36e9z 36ebn 36eck 36ecs 36ect 36ecy 36eej 36eek 36een,
-CO-CAU-Guachene,0,3f0m 3f0v,
-CO-CAU-Guapi,0,397m 397v 39dm 39dv 39fm 3c2h 3c2m 3c2r 3c2v 3c3h 3c3r 3c8h 3c8m 3c8r 3c8v 3c9h 3cah,
-CO-CAU-Inza,0,3d3r 3d3v 3d9h 3d9m 3d9r 3d9v 3dch 3dcr,
-CO-CAU-Jambalo,0,3dam 3dav 3dbh 3dbr 3f0m 3f1h,
-CO-CAU-LaSierra,0,3c6v 3c7h 3c7m 3c7r,
-CO-CAU-LaVega,0,3c5m 3c5r 3c5v 3c7h 3c7m 3d0r,
-CO-CAU-Lopez,0,3cq 3eg,
-CO-CAU-Mercaderes,0,36bv 36er 36ev 3c1m 3c4h 3c4m 3c4r,
-CO-CAU-Miranda,0,3f0v 3f1r 3f1v 3f2m 3f3h,
-CO-CAU-Morales,0,3cfh 3cfm 3cfr 3cfv 3dah 3dar 3e5h,
-CO-CAU-Padilla,0,3f0dn 3f0dp 3f0dy 3f0dz 3f0fn 3f0fp 3f0fz 3f18j 3f18k 3f18s 3f18t 3f18y 3f1aj 3f1ak 3f1an 3f1ap 3f1as,
-CO-CAU-Paez,0,3d9r 3d9v 3dbh 3dbm 3dbr 3dbv 3dch 3dcm 3dcr 3dcv 3deh 3dem 3der 3dfh 3f1m 3f4h,
-CO-CAU-Patia,0,3c4h 3c4r 3c4v 3c6h 3c6m 3c6r 3c6v 3c7h 3c7r,
-CO-CAU-Piamonte,0,372h 372m 372r 372v 373h 373m 373r 373v 378m 379h 379r 379v 37bh 37bm,
-CO-CAU-Piendamo,0,3cfm 3d8r 3dah 3dar,
-CO-CAU-Popayan,0,3cdm 3cdv 3d2r 3d8h 3d8m 3d8r,
-CO-CAU-PuertoTejada,0,3f0v 3f2h 3f2m,
-CO-CAU-Purace,0,3d2h 3d2m 3d2r 3d2v 3d8h 3d8m,
-CO-CAU-Rosas,0,3c7h 3c7m 3c7r 3c7v,
-CO-CAU-SanSebastian,0,36fr 36fv 3c5h 3c5m 3c5v 3d0h 3d0r,
-CO-CAU-SantaRosa,0,36q 37g 37q 3cg 3dg,
-CO-CAU-SantanderQuilichao,0,3dar 3dav 3f0h 3f0m 3f0r 3f0v,
-CO-CAU-Silvia,0,3d8r 3d8v 3d9r 3dah 3dam 3dbh 3dbm,
-CO-CAU-Sotara,0,3c5v 3c7m 3c7v 3cdm 3d0r 3d2h 3d2r 3d8h,
-CO-CAU-Suarez,0,3cfh 3cfm 3cfr 3cfv 3e5h 3e5m 3e5r 3e5v 3f0h 3f0r,
-CO-CAU-Sucre,0,3c4v 3c5r 3c6m 3c7h,
-CO-CAU-Timbio,0,3c7r 3c7v 3cdh 3cdm 3d8h,
-CO-CAU-Timbiqui,0,3c3r 3c8m 3c8r 3c8v 3c9h 3c9m 3c9r 3c9v 3cah 3cam 3car 3cav 3cbh 3cbm 3cbr 3cbv 3ccr 3ceh,
-CO-CAU-Toribio,0,3dbr 3dbv 3f1h 3f1m,
-CO-CAU-Totoro,0,3d8h 3d8m 3d8r 3d8v 3d9h 3d9r,
-CO-CAU-VillaRica,0,3f0m 3f0r 3f0v,
-CO-CES-Aguachica,0,cb1v cb3m cb3v cb4r cb6h cb6r cb6v cbch cbcm cbcr cbcv,
-CO-CES-AgustinCodazzi,0,d1q d3g d4q d6g,
-CO-CES-Astrea,0,d12v d13r d13v d18m d19h d19m,
-CO-CES-Becerril,0,d1ch d1cr d1cv d1dh d1dm d1dr d1dv d1fh d1fm d48h d48r d4ah d4am,
-CO-CES-Bosconia,0,d19r d19v d1am d1av d1bh d1bm d1br d1bv,
-CO-CES-Chimichagua,0,d11m d11r d11v d13h d13m d13r d13v d14h d14m d14r d14v d16h,
-CO-CES-Chiriguana,0,d13m d13v d16h d16m d16r d16v d17h d17r d17v d19m d1ch d1cm,
-CO-CES-Curumani,0,d11v d13m d14r d14v d15r d16h d16m d16v d17h d17r,
-CO-CES-ElCopey,0,d1av d1br d1bv d30m d30v d31h d31m d31r d31v d33h d33m,
-CO-CES-ElPaso,0,d19m d19v d1bm d1ch d1cm d1cr d1cv d1eh,
-CO-CES-Gamarra,0,cb3m cb3v cb6r cb9m cbch cbcr,
-CO-CES-Gonzalez,0,cbc5y cbc5z cbc7n cbc7p cbc7y cbc7z cbd0j cbd0k cbd0n cbd0p cbd0s cbd0t cbd0y cbd0z cbd2j cbd2k cbd2n cbd2p cbd2s cbd2t cbd2z,
-CO-CES-LaGloria,0,cb9m cb9v cbbm cbch cbcr cbcv cbeh cbem cber cbev,
-CO-CES-LaJaguaIbirico,0,d16v d17r d17v d1ch d1cm d1cv d1dh d1dm d1dr d48h,
-CO-CES-LaPaz,0,d1q d3g d6g,
-CO-CES-ManaureBalconCesar,0,d35v d37m d60r d60v d62h d62m,
-CO-CES-Pailitas,0,cbbv cber cbev d11m d14h d14m d14r,
-CO-CES-Pelaya,0,cbbm cbbv cbeh cber cbev,
-CO-CES-PuebloBello,0,d31v d33m d34r d34v d36h d36m d36r d36v d3ch d3cm,
-CO-CES-RioOro,0,cb6h cb6m cb6r cb6v cb7h cb7r cbcm cbdh,
-CO-CES-SanAlberto,0,c9er c9ev cb4h cb4m cb4v cb5h cb5r,
-CO-CES-SanDiego,0,d1eh d1em d1er d1ev d1fr d34m d35h d35m d35r d35v,
-CO-CES-SanMartin,0,cb1m cb1v cb4h cb4m cb4r cb4v cb5r cb6h cb6m cb7h,
-CO-CES-Tamalameque,0,cbbm cbbr cbbv cbeh cber d11h d11m,
-CO-CES-Valledupar,0,d1q d3g d3q d6g,
-CO-CHO-Acandi,0,6e3v 6e6r 6e9m 6e9r 6e9v 6ebm 6ech 6ecm 6ecr,
-CO-CHO-AltoBaudo,0,64ev 64fr 661m 661v 663v 664h 664m 664r 664v 665h 665r 666h 666m 666r 666v 669m 66ch 66cm,
-CO-CHO-Bagado,0,65br 670m 671h 671m 671r 671v 673m 674r 676h,
-CO-CHO-BahiaSolano,0,669h 669m 669r 669v 66bh 66bm 66br 66bv 66cr 66eh 6c1h 6c1m 6c1r 6c1v,
-CO-CHO-BajoBaudo,0,64g 64q 66g,
-CO-CHO-Bojaya,0,66q 6cg,
-CO-CHO-CarmenDarien,0,6cg 6cq 6dg 6dq,
-CO-CHO-Certegui,0,65ar 65av 665m 670h 670m 670v 671h,
-CO-CHO-Condoto,0,64dv 64fm 658r 658v 65ah 65am 65av 65bh 65br,
-CO-CHO-ElAtrato,0,665m 665v 667m 670h 670r 670v 672h 672m,
-CO-CHO-ElCantonSanPablo,0,64fr 64fv 665h 665m 665r,
-CO-CHO-ElCarmenAtrato,0,672m 672v 673h 673m 673r 673v 679m,
-CO-CHO-ElLitoralSanJuan,0,3eq 3fq 64g 65g,
-CO-CHO-Istmina,0,64g 64q 65g 65q,
-CO-CHO-Jurado,0,69q 6cg 6cq,
-CO-CHO-LasAnimas,0,64fm 64fv 65ar 665m 670h,
-CO-CHO-Lloro,0,670h 670m 670r 670v 671h 671r 671v 672m 673h 673m,
-CO-CHO-MedioAtrato,0,667r 667v 66cm 66cv 66dh 66dm 66dr 66dv 672r 678h 678m 678r 678v 679r,
-CO-CHO-MedioBaudo,0,649v 64bm 64cr 64cv 64dr 64eh 64em 64er 64ev 64fh 64fm 64fr 665h,
-CO-CHO-MedioSanJuan,0,646v 647h 647m 647r 647v 64dh 64dm 64dr 64dv 64fm,
-CO-CHO-Novita,0,647v 64dh 64dm 64dv 652r 658h 658m 658r 658v,
-CO-CHO-Nuqui,0,661m 661r 661v 663m 663v 664r 666h 666r 669m,
-CO-CHO-Paimado,0,664m 664v 665h 665m 665r 665v 666m 667h 667m,
-CO-CHO-Quibdo,0,66g 66q 67g 67q,
-CO-CHO-RioIro,0,64fm 65ah 65am 65ar 65av 65bh,
-CO-CHO-Riosucio,0,6cg 6cq 6dg 6dq 6eg,
-CO-CHO-SanJosePalmar,0,652v 653r 658h 658m 658v 659h 659m 659r 659v 65am 65bh 65bm,
-CO-CHO-Sipi,0,645v 647m 647r 647v 64dh 64dm 650r 650v 652h 652m 652r 652v 653h 653r 658h 658m 659h,
-CO-CHO-Tado,0,65ah 65ar 65av 65bh 65bm 65br 65bv 670m 671h 671m,
-CO-CHO-Unguia,0,6e3v 6e4m 6e4r 6e4v 6e6h 6e6m 6e6r 6e6v 6e7h 6e7r 6ech 6ecm,
-CO-COR-Ayapel,0,ca2h ca2m ca2r ca2v ca3h ca3m ca3r ca3v ca6h ca6r ca8m ca9h ca9m ca9r ca9v cach,
-CO-COR-Buenavista,0,6f7m 6f7v 6fdm ca0r ca2h ca2m ca2r ca2v ca8h ca8m,
-CO-COR-Canalete,0,6fbh 6fbm 6fbr 6fbv,
-CO-COR-Cerete,0,6fer 6fev 6ffr 754h 754m 755h,
-CO-COR-Chima,0,755h 755m 755r 755v 757h 757m,
-CO-COR-Chinu,0,755m 755v caav d00h d00m d00r d00v d01h,
-CO-COR-CienagaOro,0,6fdv 6ffm 6ffr 6ffv 755h 755m,
-CO-COR-Cotorra,0,754m 754v 755h 755r,
-CO-COR-LaApartada,0,ca0r ca0v ca2h ca2m ca3h,
-CO-COR-Lorica,0,751v 754h 754m 754r 754v 755r 756h 756m 757h,
-CO-COR-LosCordobas,0,6fam 6fav 6fbh 6fbr 6fbv 750m 751h,
-CO-COR-Momil,0,755r 757h 757m 757v,
-CO-COR-Monitos,0,751v 753m 754r 756h,
-CO-COR-Montelibano,0,6dq 6fg cag,
-CO-COR-Monteria,0,6fg 6fq 75g,
-CO-COR-PlanetaRica,0,6f6m 6f6v 6f7h 6f7m 6f7r 6f7v 6fdh 6fdm 6fdr 6fdv ca2r ca8h,
-CO-COR-PuebloNuevo,0,6fdm 6fdr 6fdv 6ffm ca2v ca8h ca8m ca8r ca8v,
-CO-COR-PuertoEscondido,0,6fbr 6fbv 751h 751m 751r 751v 754h,
-CO-COR-PuertoLibertador,0,6dcr 6dcv 6deh 6dem 6der 6dev 6dfh 6dfr 6f4m 6f4v 6f5h 6f5m 6f5r 6f5v 6f7h 6f7m,
-CO-COR-Purisima,0,755r 756m 757h 757r,
-CO-COR-Sahagun,0,6fdv 6ffm 6ffv 755m ca8r ca8v caah caam caar caav d00h d00m,
-CO-COR-SanAndresSotavento,0,755m 755v 757m d00r d02h,
-CO-COR-SanAntero,0,756m 756v 757h 757r,
-CO-COR-SanBernardoViento,0,753m 756h 756m 756r 756v,
-CO-COR-SanCarlos,0,6fdr 6fdv 6fem 6fev 6ffh 6ffm 6ffr 6ffv,
-CO-COR-SanJoseUre,0,6dfr 6dfv 6f5h 6f5m 6f5v ca0h ca0r,
-CO-COR-SanPelayo,0,6fev 751m 751v 754h 754m 754r 754v 755h 755r,
-CO-COR-Tierralta,0,6dq 6fg 6fq,
-CO-COR-Tuchin,0,755v 757m d02h,
-CO-COR-Valencia,0,6f0v 6f2m 6f3h 6f3m 6f3r 6f3v 6f6r 6f9h 6f9m 6fch,
-CO-CUN-AguaDios,0,c04r c04v,
-CO-CUN-Alban,0,c0d1y c0d3n c0d3p c0d3t c0d3y c0d3z c0d6j c0d6k c0d6s c0d6t c0d9j c0d9k c0d9n c0d9p c0d9s c0dcj,
-CO-CUN-Anapoima,0,c06m c06v c07h c07r,
-CO-CUN-Anolaima,0,c07r c07v c0dh c0dm,
-CO-CUN-Apulo,0,c04v c05r c06m c06v c07h,
-CO-CUN-Arbelaez,0,c05h c05m c10h,
-CO-CUN-Beltran,0,c06h c06r c06v c0ch c0cm,
-CO-CUN-Bituima,0,c0dh c0dr,
-CO-CUN-Bojaca,0,c07m c07v c0dm c12h c12r,
-CO-CUN-Cabrera,0,9adr 9adv 9afh 9afm 9afr 9afv,
-CO-CUN-Cachipay,0,c07r c07v c0dm,
-CO-CUN-Cajica,0,c186y c187s c187t c187y c187z c18cn c18cp c18dj c18dk c18dn c18dp c18ds c18dt c18dy c18dz c18fn,
-CO-CUN-Caparrapi,0,c0em c0ev c0fh c0fr c24m c25h c25m c25r c25v,
-CO-CUN-Caqueza,0,c10v c11r,
-CO-CUN-CarmenCarupa,0,c1av c1bh c1br c30m c31h,
-CO-CUN-Chaguani,0,c0cm c0cr c0cv c0dh c0dr,
-CO-CUN-Chia,0,c184y c185t c185y c186n c186p c186y c186z c187j c187k c187n c187p c187s c187t c187y c187z c18cn c18dn c192t,
-CO-CUN-Chipaque,0,c10m c10v c11r c12m c13h,
-CO-CUN-Choachi,0,c12m c12v c13h c13m c13r c13v,
-CO-CUN-Choconta,0,c19v c1bm c1bv c1cr c1eh c1em c1er,
-CO-CUN-Cogua,0,c18v c19r c1am c1bh,
-CO-CUN-Cota,0,c12bp c12by c12bz c12es c12et c181n c181p c181y c181z c184j c184k c184p c184s c184t c184y c184z c186j c186n,
-CO-CUN-Cucunuba,0,c1bh c1bm c1br c1bv c1er,
-CO-CUN-ElColegio,0,c07h c07m c07v,
-CO-CUN-ElPenon,0,c0fm c0fv c1ar,
-CO-CUN-ElRosal,0,c0dm c18h c18r,
-CO-CUN-Facatativa,0,c0q c1q,
-CO-CUN-Fomeque,0,c11r c11v c13h c13m c13v c16h,
-CO-CUN-Fosca,0,c10m c10v c11h c11r,
-CO-CUN-Funza,0,c12r c18h,
-CO-CUN-Fuquene,0,c1bv c31m,
-CO-CUN-Fusagasuga,0,c05h c05m c05r c05v c10r,
-CO-CUN-Gachala,0,c16h c16m c16r c16v c17r c1cm c1dh,
-CO-CUN-Gachancipa,0,c199s c199t c199y c199z c19bj c19bk c19bn c19bp c19bs c19bt c19by c19bz,
-CO-CUN-Gacheta,0,c19m c1ch c1cm c1cr,
-CO-CUN-Gama,0,c16r c16v c1ch,
-CO-CUN-Girardot,0,c01m c01v c04h c04r,
-CO-CUN-Granada,0,c074k c074p c074s c074y c074z c075k c075p c075s c075t c075y c075z c076n c076p c077j c077n c077p,
-CO-CUN-Guacheta,0,c1bv c1er c31m c34h,
-CO-CUN-Guaduas,0,c0cr c0cv c0dr c0eh c0em c0er c0ev c0fh c24m,
-CO-CUN-Guasca,0,c13r c13v c19h c19m c19r,
-CO-CUN-Guataqui,0,c04r c06h,
-CO-CUN-Guatavita,0,c19h c19m c19r c19v c1ch c1cr,
-CO-CUN-GuayabalSiquima,0,c0d0y c0d1t c0d1y c0d2n c0d2p c0d2y c0d2z c0d3j c0d3k c0d3n c0d3p c0d3s c0d3t c0d3y c0d3z c0d8n c0d8p c0d8z c0d9j c0d9k c0d9s,
-CO-CUN-Guayabetal,0,9bbr c11h c11m c11v,
-CO-CUN-Gutierrez,0,9bah 9bam 9bar 9bav 9bbr c10m c11h,
-CO-CUN-Jerusalen,0,c04r c04v c06h c06m c06r c06v,
-CO-CUN-Junin,0,c13m c13v c16h c16r c19m c1ch,
-CO-CUN-LaCalera,0,c12v c13h c13r c13v c18m c19h,
-CO-CUN-LaMesa,0,c07h c07r c07v,
-CO-CUN-LaPalma,0,c0fr c0fv c25h c25m,
-CO-CUN-LaPena,0,c0fh c0fm c0fr c0fv,
-CO-CUN-LaVega,0,c0dm c0dv c0fm c18r,
-CO-CUN-Lenguazaque,0,c1bv c1er c34h,
-CO-CUN-Macheta,0,c19v c1cr c1cv c1eh c1em,
-CO-CUN-Madrid,0,c07v c0dm c12r c18h,
-CO-CUN-Manta,0,c1cr c1cv c1eh c1em,
-CO-CUN-Medina,0,c14h c14m c14r c14v c15r c15v c16h c16m c16v c17h c17m c17r,
-CO-CUN-Mosquera,0,c0g c1g,
-CO-CUN-Narino,0,c04r c06h,
-CO-CUN-Nemocon,0,c19r c1bh c1bm,
-CO-CUN-Nilo,0,c04h c04m c04v c05h c05r,
-CO-CUN-Nimaima,0,c0fh c0fm,
-CO-CUN-Nocaima,0,c0dr c0dv c0fh c0fm,
-CO-CUN-Pacho,0,c0fm c0fv c18r c1ah c1am c1ar c1av,
-CO-CUN-Paime,0,c1ar c1av c30h c30m,
-CO-CUN-Pandi,0,9afr c05h,
-CO-CUN-Paratebueno,0,c14m c14v c15h c15m c15r c15v c17h c17m c17r c17v c40r c42h c42r,
-CO-CUN-Pasca,0,c05m c05v c10h c10r,
-CO-CUN-PuertoSalgar,0,c24m c24v c25h c25r c26m c27h,
-CO-CUN-Puli,0,c06r c06v,
-CO-CUN-Quebradanegra,0,c0f0j c0f0k c0f0n c0f0p c0f0s c0f0t c0f0y c0f0z c0f1j c0f1k c0f1n c0f1p c0f1s c0f1t c0f1y c0f1z c0f2n c0f3j c0f3k c0f3n c0f3p,
-CO-CUN-Quetame,0,c11h c11m c11r c11v,
-CO-CUN-Quipile,0,c06v c07r c0cm c0dh,
-CO-CUN-Ricaurte,0,c04h c04m c04r c04v,
-CO-CUN-SanAntonioTequendama,0,c07m c07v,
-CO-CUN-SanBernardo,0,9afr 9afv 9bar c05h c05m c10h,
-CO-CUN-SanCayetano,0,c1ar c1av c1br c30m,
-CO-CUN-SanFrancisco,0,c0dm c0dv c18h c18r,
-CO-CUN-SanJuanRioseco,0,c06v c0ch c0cm c0cr c0cv c0dh,
-CO-CUN-Sasaima,0,c0dm c0dr c0dv,
-CO-CUN-Sesquile,0,c19r c19v c1bm c1cr,
-CO-CUN-Sibate,0,c05v c07m c10r c12h,
-CO-CUN-Silvania,0,c05r c05v c07m,
-CO-CUN-Simijaca,0,c31h c31m c31r c31v,
-CO-CUN-Soacha,0,c07m c07v c10r c12h c12r,
-CO-CUN-Sopo,0,c18m c18v c19h c19r,
-CO-CUN-Subachoque,0,c18h c18m c18r c18v c1ah c1am,
-CO-CUN-Suesca,0,c19r c19v c1bh c1bm c1bv c1er,
-CO-CUN-Supata,0,c0dv c0fm c18r c1ah,
-CO-CUN-Susa,0,c31h c31m c31v,
-CO-CUN-Sutatausa,0,c1b3y c1b3z c1b9j c1b9k c1b9n c1b9p c1b9s c1b9t c1b9y c1b9z c1bbn c1bcj c1bck c1bcs c1bct,
-CO-CUN-Tabio,0,c186t c186y c18cj c18ck c18cn c18cp c18cs c18ct c18cy c18cz c18dk c18ds c18dt c18ej c18ek c18en c18ep c18fj,
-CO-CUN-Tausa,0,c1am c1av c1bh c1br,
-CO-CUN-Tena,0,c073y c076t c079n c079p c07cj c07ck c07cn c07cp c07cs c07ct c07cy c07cz c07dk c07ds c07dt c07en,
-CO-CUN-Tenjo,0,c12r c18h c18m,
-CO-CUN-Tibacuy,0,c05h c05r c05v,
-CO-CUN-Tibirita,0,c1ces c1cet c1cey c1e1n c1e1p c1e1z c1e4j c1e4k c1e4n c1e4p c1e4s c1e4t c1e4y c1e4z c1e6j,
-CO-CUN-Tocaima,0,c04r c04v c05r c06m c06v,
-CO-CUN-Tocancipa,0,c18v c19r,
-CO-CUN-Topaipi,0,c0q c1q c2g c3g,
-CO-CUN-Ubala,0,c16r c16v c17r c17v c1ch c1cm c1dh,
-CO-CUN-Ubaque,0,c11r c12m c13h,
-CO-CUN-Ubate,0,c1br c1bv c31h c31m,
-CO-CUN-Une,0,c10h c10m c10v,
-CO-CUN-Utica,0,c0f0y c0f1t c0f1y c0f2n c0f2p c0f2y c0f2z c0f3j c0f3k c0f3n c0f3p c0f3s c0f3t c0f3y c0f3z c0f8n c0f8p c0f9j c0f9k c0f9n c0f9p c0f9s c0f9z,
-CO-CUN-Venecia,0,9afh 9afr 9afv,
-CO-CUN-Vergara,0,c0dv c0fm c1ah,
-CO-CUN-Viani,0,c0cm c0dh c0dr,
-CO-CUN-Villagomez,0,c1ah c1ar c1av,
-CO-CUN-Villapinzon,0,c1eh c1em c1er c1ev c34h,
-CO-CUN-Villeta,0,c0dr c0dv c0fh c0fm,
-CO-CUN-Viota,0,c05r c05v c07h c07m,
-CO-CUN-Yacopi,0,c25m c25r c25v c27h c27m c27v c30h c30r c32h,
-CO-CUN-Zipacon,0,c07r c07v c0dm,
-CO-CUN-Zipaquira,0,c18v c19r c1am,
-CO-DC-Bogota,0,9aq 9bq c1g c1q,
-CO-GUA-Barrancominas,0,9dq b8g b8q b9q bag baq bbg bbq,
-CO-GUA-Cacahual,0,be1v be3m be3v be4h be4r be4v be5r be6h be6m be6r be6v be7h be7m be7r be7v becm becv bedh bedr,
-CO-GUA-Inirida,0,b9g b9q bbg bbq beg beq,
-CO-GUA-LaGuadalupe,0,b72r b72v b78h b78m b78r b78v b79h b79r b7ah b7am b7ar b7av b7bh,
-CO-GUA-MorichalNuevo,0,b8g b8q b9g b9q,
-CO-GUA-PanaPana,0,b2q b3q b6q b8g b9g b9q bcg,
-CO-GUA-PuertoColombia,0,b9g b9q bbg bcg bcq beg,
-CO-GUA-SanFelipe,0,b7ah b7ar b7av bc4r bc4v bc5m bc5v bc6h bc6m bc6r bc6v bc7h bc7m bc7r bc7v bcch bccm bcdh bcdm bd0h bd0m bd0r bd2h bd2r bd8h,
-CO-GUV-Calamar,0,93g 93q 96g 96q 99g 9cg,
-CO-GUV-ElRetorno,0,97q 9cg 9cq 9dg b8g,
-CO-GUV-Miraflores,0,96g 96q 97g 97q 9cg 9dg,
-CO-GUV-SanJoseGuaviare,0,99g 99q 9cg 9cq 9dg 9dq b8g b8q,
-CO-HUI-Acevedo,0,37bm 37bv 37eh 37er 37ev 3d4h 3d4m,
-CO-HUI-Agrado,0,3d6m 3d6v 3d7h 3d7r,
-CO-HUI-Aipe,0,3f5v 3f7m 9a0h 9a0m 9a0r 9a0v 9a2h 9a2m,
-CO-HUI-Algeciras,0,982r 982v 988h 988m 988r 988v 989r 98am 98bh,
-CO-HUI-Altamira,0,3d4v 3d5r 3d6m 3d7h,
-CO-HUI-Baraya,0,98bv 9a0v 9a1h 9a1m 9a1r 9a1v 9a3h 9a3m 9a4h 9a4r,
-CO-HUI-Campoalegre,0,988h 988r 988v 98ah 98am,
-CO-HUI-Colombia,0,9ag 9aq,
-CO-HUI-Elias,0,3d4r 3d4v,
-CO-HUI-Garzon,0,3d5r 3d5v 3d7h 3d7m 3d7r 3d7v 982h 982r,
-CO-HUI-Gigante,0,3d7r 3d7v 3ddh 3ddm 3ddv 982r 988h,
-CO-HUI-Guadalupe,0,3d4v 3d5h 3d5r 3d5v,
-CO-HUI-Hobo,0,3ddm 3ddv 988h 988r,
-CO-HUI-Iquira,0,3dcv 3ddh 3ddr 3ddv 3dem 3dfh 3dfm,
-CO-HUI-Isnos,0,3d0v 3d1h 3d1m 3d1r 3d1v 3d2m 3d2v,
-CO-HUI-LaArgentina,0,3d2m 3d2v 3d3h 3d3m 3d3r 3d4r 3d6h 3d6r 3d6v,
-CO-HUI-LaPlata,0,3d3h 3d3m 3d3v 3d6h 3d6r 3d6v 3d9m 3dch 3dcm,
-CO-HUI-Nataga,0,3dcm 3dcv 3ddr,
-CO-HUI-Neiva,0,3fg 98q 9ag,
-CO-HUI-Oporapa,0,3d1v 3d3m 3d4r 3d6h,
-CO-HUI-Paicol,0,3d6v 3d7r 3dcm 3ddh 3ddm,
-CO-HUI-Palermo,0,3dfm 3dfr 3dfv 3f5h 3f5m 98ah 98ar 98av 9a0h,
-CO-HUI-Palestina,0,37bh 37bm 37br 37bv,
-CO-HUI-Pital,0,3d6h 3d6m 3d6r 3d6v 3d7h 3d7r,
-CO-HUI-Pitalito,0,37br 37bv 37er 3d1h 3d1m 3d1v 3d4h 3d4r,
-CO-HUI-Rivera,0,989r 98ah 98am 98ar 98av 98bh,
-CO-HUI-Saladoblanco,0,3d0v 3d1r 3d1v 3d2m 3d2v 3d3h 3d3m 3d4r,
-CO-HUI-SanAgustin,0,37av 37br 3d0h 3d0m 3d0r 3d0v 3d1h 3d1r 3d2h 3d2m,
-CO-HUI-SantaMaria,0,3dev 3dfh 3dfr 3dfv 3f5h 3f5m,
-CO-HUI-Suaza,0,37ev 37fr 3d4h 3d4m 3d4v 3d5h 3d5r,
-CO-HUI-Tarqui,0,3d4r 3d4v 3d6h 3d6m 3d7h,
-CO-HUI-Tello,0,98br 98bv 9a0m 9a0v 9a1h 9a1m 9a1r,
-CO-HUI-Teruel,0,3ddv 3deh 3dem 3der 3dev 3dfh 3dfm 3dfr 3dfv 3f4h,
-CO-HUI-Tesalia,0,3dcm 3dcv 3ddh 3ddm 3ddr 3ddv,
-CO-HUI-Timana,0,3d4h 3d4m 3d4r 3d4v,
-CO-HUI-Villavieja,0,9a0v 9a1r 9a2m 9a3h 9a3m 9a3r,
-CO-HUI-Yaguara,0,3ddm 3ddv 3dfm 988r 98ah,
-CO-LAG-Albania,0,d6bm d6br d6bv d6eh d6er dc1m dc4h,
-CO-LAG-Barrancas,0,d68v d69h d69r d69v d6am d6bh d6bm d6bv d6eh,
-CO-LAG-Dibulla,0,d3ch d3cr d3cv d3dr d3eh d3em d3er d3ev d3fh d3fm d3fr d3fv d95h d95m,
-CO-LAG-Distraccion,0,d68m d68r d68v d6ah d6am,
-CO-LAG-ElMolino,0,d62m d62r d62v d63r d68h d68m,
-CO-LAG-Fonseca,0,d63r d68m d68v d69h d69r d6am,
-CO-LAG-HatoNuevo,0,d6am d6bh d6bm d6br d6bv d6eh,
-CO-LAG-LaJaguaPilar,0,d37m d62h d62m,
-CO-LAG-Maicao,0,d6bm d6bv d6eh d6er d6ev d6fr dc1h dc1m dc1v dc4h dc4m dc4r dc4v dc5h dc5r dc5v dc7h dc7m,
-CO-LAG-Manaure,0,dc0v dc1h dc1m dc1r dc1v dc2m dc3h dc3m dc3v dc4r dc4v dc6h dc6m dc6r dc6v,
-CO-LAG-Riohacha,0,d3q d6q d9g dcg,
-CO-LAG-SanJuanCesar,0,d37v d3cv d3dh d3dm d3dr d3dv d62r d62v d63r d68h d68m d68r d68v d69h d6ah,
-CO-LAG-Uribia,0,dcg dcq ddg ddq,
-CO-LAG-Urumita,0,d37m d37v d62h d62m d62r,
-CO-LAG-Villanueva,0,d37v d62h d62m d62r d62v,
-CO-MAG-Algarrobo,0,d1av d30h d30m d30r d30v d31r,
-CO-MAG-Aracataca,0,d32h d32m d32r d32v d33h d33m d33r d33v d36r d38m d39h d39m d39v d3ch d3cm d3cr,
-CO-MAG-Ariguani,0,d18h d18r d18v d19r d19v d1ah d1am d1ar d1av d1bh,
-CO-MAG-CerroSanAntonio,0,d21m d21v d24h d24r d24v,
-CO-MAG-Chibolo,0,d0ev d0fh d0fr d0fv d24m d25h d25m,
-CO-MAG-Cienaga,0,d32r d32v d38m d38r d38v d39h d39m d39r d39v d3ah d3am d3bh,
-CO-MAG-Concordia,0,d24h d24m d24r d24v,
-CO-MAG-ElBanco,0,d10h d10m d10r d10v d11h d11m d11r d11v d12m d13h,
-CO-MAG-ElPinon,0,d24m d24r d24v d25h d25r d26h d26m,
-CO-MAG-ElReten,0,d27r d27v d2dm d32h d32r d38h,
-CO-MAG-Fundacion,0,d30r d30v d31r d31v d32h d32m d32r d33h d33m d33v d36h d36r,
-CO-MAG-Guamal,0,d05v d07m d10r d10v d12h d12m d12v d13h d13r,
-CO-MAG-NuevaGranada,0,d0dh d0dm d0dr d0dv d0fh d0fm d0fv d18h d18r d1ah,
-CO-MAG-Pedraza,0,d0er d0ev d21m d24h d24m,
-CO-MAG-PijinoCarmen,0,d07h d07m d07r d07v d12r d12v d18h d18m d18v d19h d19m d19r d19v,
-CO-MAG-Pivijay,0,d24v d25h d25m d25r d25v d26m d26v d27h d27m d27r d27v d30r d32h d32r,
-CO-MAG-Plato,0,d0ch d0cm d0cr d0cv d0dh d0dm d0dr d0dv d0eh d0em d0fh d0fm d0fr d0fv,
-CO-MAG-Puebloviejo,0,d2dh d2dm d2dr d2dv d2fm d32r d38h d38r d3ah,
-CO-MAG-Remolino,0,d26m d26v d27h d27r d27v d2cm d2dh d2dm,
-CO-MAG-SabanasSanAngel,0,d0fm d0fv d1ah d1am d1ar d1av d25h d25m d25r d25v d30h d30m d30r,
-CO-MAG-Salamina,0,d26h d26m d26v,
-CO-MAG-SanSebastianBuenavista,0,d07m d12h d12m d12r d12v d13r,
-CO-MAG-SanZenon,0,d07h d07m d07v d12h d12r,
-CO-MAG-SantaAna,0,d0g d0q d1g d1q,
-CO-MAG-SantaBarbaraPinto,0,d06r d06v d07r d0ch d0cm d0cv d0dh d0dr,
-CO-MAG-SantaMarta,0,d39m d39r d39v d3ah d3am d3ar d3av d3bh d3bm d3br d3bv d3ch d3cr d3eh d3er d90h d90m d91h,
-CO-MAG-Sitionuevo,0,d2cm d2cr d2cv d2dh d2dm d2dr d2eh d2em d2fh,
-CO-MAG-Tenerife,0,d0eh d0em d0er d0ev d0fh d0fr,
-CO-MAG-Zapayan,0,d0er d0ev d24h d24m d24v d25h,
-CO-MAG-ZonaBananera,0,d32r d32v d38h d38m d38r d38v,
-CO-MET-Acacias,0,9bav 9bbh 9bbm 9bbr 9bbv 9bcr 9bcv 9beh 9bem 9ber c11h c11m,
-CO-MET-BarrancaUpia,0,c40r c40v c42h c42m c42r,
-CO-MET-Cabuyaro,0,9ear 9eav c15m c15v c40h c40m c40r c40v c41h c41r c42h,
-CO-MET-CastillaNueva,0,9b9v 9bbm 9bcm 9bcr 9bcv 9bdh 9bdr 9beh,
-CO-MET-Cubarral,0,9adm 9adv 9afm 9b8m 9b8r 9b8v 9b9h 9b9r 9b9v 9bah 9bam 9bbh 9bbm,
-CO-MET-Cumaral,0,9bev 9bfr 9bfv 9ear c14h c14m c14r c14v c15h c15m c15r c40h,
-CO-MET-ElCalvario,0,c11m c11v c14h c14r,
-CO-MET-ElCastillo,0,9b3r 9b3v 9b8m 9b9h 9b9m 9b9r,
-CO-MET-ElDorado,0,9b9h 9b9m 9b9r 9b9v,
-CO-MET-FuenteOro,0,9b3m 9b3v 9b4r 9b6h 9b6m 9b6r 9b6v,
-CO-MET-Granada,0,9b3h 9b3m 9b3r 9b3v 9b6r 9b9m 9bch,
-CO-MET-Guamal,0,9b9v 9bah 9bam 9bav 9bbh 9bbm 9bbr,
-CO-MET-LaMacarena,0,92q 93q 98g 98q 99g 99q,
-CO-MET-Lejanias,0,9b2r 9b2v 9b3r 9b8h 9b8m 9b8r 9b8v 9b9h,
-CO-MET-Mapiripan,0,9cq 9dq 9eg 9fg,
-CO-MET-Mesetas,0,99q 9ag 9bg 9bq,
-CO-MET-PuertoCarreno,0,9eg 9eq 9fg 9fq c4g c5g c5q,
-CO-MET-PuertoConcordia,0,9c8m 9c8v 9c9r 9c9v 9cam 9cav 9cbh 9cbm 9cbr 9cbv 9ceh 9e0m 9e1h,
-CO-MET-PuertoLleras,0,99q 9bg 9cq 9eg,
-CO-MET-PuertoLopez,0,9bq 9eq c4g,
-CO-MET-PuertoRico,0,99dh 99dm 99dr 99dv 99em 99ev 99fh 99fm 99fr 99fv 9b5h 9b5m 9c8h 9c8m 9c8r 9c8v 9cah 9cam 9car 9cav 9e0h 9e0m,
-CO-MET-Restrepo,0,9bev 9bfr 9bfv c14h c14m c14r c15h c15m,
-CO-MET-SanCarlosGuaroa,0,9bcv 9bdh 9bdm 9bdr 9bdv 9bem 9bfh 9bfm 9eah,
-CO-MET-SanJuanArama,0,9b0v 9b1r 9b1v 9b2m 9b2v 9b3h 9b3m 9b3r 9b4m 9b4r 9b4v 9b6h,
-CO-MET-SanJuanito,0,c11v c13m c14r c16h,
-CO-MET-SanMartin,0,9bg 9bq 9eg 9eq,
-CO-MET-Uribe,0,98q 99q 9ag 9aq 9bg 9bq,
-CO-MET-Villavicencio,0,9bbv 9beh 9bem 9ber 9bev 9bfh 9bfm 9bfr 9bfv c11m c14h c14m,
-CO-MET-VistaHermosa,0,99g 99q 9bg 9cq,
-CO-NAR-Alban,0,36cbk 36cbn 36cbp 36cby 36cbz 36cej 36cek 36ces 36cet 36cey 36e1n 36e1p 36e4j 36e4k 36e4n,
-CO-NAR-Aldana,0,360bn 360bp 360bs 360bt 360by 360bz 3621j 3621k 3621n 3621p 3621s 3621t 3621y 3621z,
-CO-NAR-Ancuya,0,362ft 362fy 3685j 3685k 3685n 3685p 3685s 3685t 3685y 3685z 3687n 3687p 3687z 3690j 3690k 3690s 3690t 3692j 3692k 3692s,
-CO-NAR-Arboleda,0,36cak 36cap 36cay 36caz 36cbk 36cbp 36cbs 36cbt 36cby 36cbz 36e0n 36e0p 36e1j 36e1k 36e1n,
-CO-NAR-Barbacoas,0,33g 33q 39g 3cg,
-CO-NAR-Belen,0,36e1y 36e3n 36e3p 36e3y 36e3z 36e4t 36e4y 36e6j 36e6k 36e6n 36e6p 36e6s 36e6t 36e6z,
-CO-NAR-Buesaco,0,369m 369v 36ch 36cm 36cr 36cv,
-CO-NAR-Chachagui,0,369m 369v 36bm 36cr,
-CO-NAR-Colon,0,36e3p 36e3y 36e3z 36e6k 36e6p 36e6s 36e6t 36e6y 36e6z 36e7t 36e9n 36e9p 36ecj 36eck 36ecn 36ecp 36edj,
-CO-NAR-Consaca,0,363r 369h 369m,
-CO-NAR-Contadero,0,360ft 360fy 3625j 3625k 3625n 3625p 3625s 3625t 3625z 3630j 3630k 3630p 3630s 3630z,
-CO-NAR-Cordoba,0,360v 361h 361m 361r 361v 364h,
-CO-NAR-Cuaspud,0,3609y 360an 360ap 360as 360at 360ay 360az 360bj 360bk 360bn 360bp 360bs 360bt 360bz 3620j 3620n 3620p 3621j,
-CO-NAR-Cumbal,0,335r 335v 336m 337h 337m 337r 337v 360r 362h,
-CO-NAR-Cumbitara,0,36am 36ar 36av 36bh 36br 3c0h 3c0m,
-CO-NAR-ElCharco,0,39g 39q 3cg,
-CO-NAR-ElPenol,0,369r 36bh,
-CO-NAR-ElRosario,0,36br 36bv 3c0h 3c0m 3c0v 3c1h 3c1m 3c1r,
-CO-NAR-ElTablonGomez,0,36cm 36cr 36cv 36dh 36dr 36em,
-CO-NAR-ElTambo,0,369h 369r 369v 36bh 36bm,
-CO-NAR-FranciscoPizarro,0,391h 391m 391r 391v 392m 393h 393m 393v,
-CO-NAR-Funes,0,361r 361v 363h 363m 363r 364h 364r,
-CO-NAR-Guachucal,0,337m 362h 362m,
-CO-NAR-Guaitarilla,0,362v 363r 368m 369h,
-CO-NAR-Gualmatan,0,360ey 360ft 3624n 3624p 3624y 3624z 3625j 3625k 3625s 3625t,
-CO-NAR-Iles,0,3624y 3625s 3625t 3625y 3625z 3626n 3627j 3627k 3627n 3627p 3630s 3630t 3630y 3630z 3632j 3632k 3632n 3632p 3632s 3632z,
-CO-NAR-Imues,0,3627y 362dj 362dk 362dn 362dp 362ds 362dy 362dz 3632s 3632t 3632y 3632z 3638j 3638k 3638n 3638p 3638s 3638t 3638y 3638z,
-CO-NAR-Ipiales,0,34am 34av 34bh 34bm 34br 34bv 34eh 34er 360h 360m 360r 360v 361h 361m 361r 362m 364h,
-CO-NAR-LaCruz,0,36em 36ev 36fh 36fr,
-CO-NAR-LaFlorida,0,369h 369m 369r 369v,
-CO-NAR-LaLlanada,0,33fm 33fv 368v 36ah 36am 36ar,
-CO-NAR-LaTola,0,394v 396m 396v 39cm 39cr 39cv,
-CO-NAR-LaUnion,0,36bv 36eh 36em 36er 36ev,
-CO-NAR-Leiva,0,3c1h 3c1m 3c1r 3c1v 3c3m 3c4h 3c4r,
-CO-NAR-Linares,0,368m 368v 369h 369r 36bh,
-CO-NAR-LosAndesSotomayor,0,33fm 33fr 33fv 368v 369r 36ah 36am 36ar 36av 36bh 395m 3c0h 3c0m,
-CO-NAR-MaguiPayan,0,33er 33ev 33fr 33fv 394h 394m 394r 394v 395h 395m 395r 395v 396m 397h 397m 3c0h,
-CO-NAR-Mallama,0,337m 337r 337v 33dh 33dm 33dv 362h 362r 368h,
-CO-NAR-Mosquera,0,393m 393r 393v 396h 396r 399h 399m 399v 39ch 39cr,
-CO-NAR-Narino,0,3691y 3691z 3693n 3693p 3693z 3694k 3694s 3694t 3696j 3696k 3696p 3696s 3696t 3696y 3696z 369cj 369cn,
-CO-NAR-OlayaHerrera,0,393m 393v 394r 394v 396h 396m 396r 396v 39ch 39cm 39cr 39cv,
-CO-NAR-Ospina,0,3626n 3626p 3626y 3626z 3627j 3627k 3627p 3627s 3627t 3627y 3627z 362dj 362dk 362dn 3632k 3632s 3632t 3638j,
-CO-NAR-Pasto,0,361v 363m 363v 364r 366h 366m 366r 366v 369h 369m 36ch,
-CO-NAR-Policarpa,0,36av 36bh 36br 36bv 3c0m 3c1h,
-CO-NAR-Potosi,0,360m 360v 361h 361m 361r 364h,
-CO-NAR-Providencia,0,362ey 362fs 362ft 3684k 3684n 3684p 3684y 3684z 3685j 3685k 3685s 3686n 3686p,
-CO-NAR-Puerres,0,360v 361m 361r 361v 362m 363h 364h 364r,
-CO-NAR-Pupiales,0,360r 360v 362h 362m,
-CO-NAR-Ricaurte,0,336h 336m 336r 336v 337h 337r 337v 33cm 33dh 33dm 33dr 33dv,
-CO-NAR-RobertoPayan,0,339v 33bm 33bv 33cr 33eh 33er 33ev 391m 391v 393m 393v 394h 394r 396h,
-CO-NAR-Samaniego,0,33dv 33fm 362v 368h 368m 368r 368v 36ah 36am,
-CO-NAR-SanBernardo,0,36cv 36eh 36em,
-CO-NAR-SanLorenzo,0,369v 36bm 36bv 36cr 36eh 36er,
-CO-NAR-SanPablo,0,36em 36ev 36fr,
-CO-NAR-SanPedroCartago,0,36cr 36eh 36em,
-CO-NAR-Sandona,0,368m 369h 369r,
-CO-NAR-SantaBarbara,0,395v 397m 397r 397v 39dh 39dm 39dr 39dv 3c0r 3c0v 3c2h 3c2m,
-CO-NAR-Santacruz,0,33dm 33dv 362r 362v 368h 368m 368r 368v,
-CO-NAR-Sapuyes,0,362h 362m 362r 362v,
-CO-NAR-Taminango,0,36bh 36bm 36br 36bv,
-CO-NAR-Tangua,0,363h 363m 363r 363v 369h 369m,
-CO-NAR-Tumaco,0,32q 33g 33q 39g 39q,
-CO-NAR-Tuquerres,0,362h 362m 362r 362v 368h 368m,
-CO-NAR-Yacuanquer,0,363r 363v,
-CO-NSA-Abrego,0,cb5h cb5m cb5r cb5v cb7h cb7m cb7r cb7v ce0h ce0r ce2h ce2r,
-CO-NSA-Arboledas,0,ccah ccam ccar ccav ccbr ce1h,
-CO-NSA-Bochalema,0,ccbh ccbm ccbr ccbv ce1m,
-CO-NSA-Bucarasica,0,ce0r ce0v ce2h ce2m ce2r ce2v,
-CO-NSA-Cachira,0,c9fh c9fr c9fv cb5m ccar ce0h,
-CO-NSA-Cacota,0,cc9h cc9m cc9r cc9v,
-CO-NSA-Chinacota,0,ccbm ccbv,
-CO-NSA-Chitaga,0,cc3h cc3m cc3r cc3v cc6h cc6m cc6r cc6v cc9h cc9m ccch,
-CO-NSA-Convencion,0,cbq d1g d4g,
-CO-NSA-Cucuta,0,ccbv ce1m ce1v ce3m ce3v ce4h ce4r ce4v ce6h ce6m ce6r ce9m cech,
-CO-NSA-Cucutilla,0,cc8v cc9r ccam ccav ccbh ccbr,
-CO-NSA-Durania,0,ccbr ccbv ce1h ce1m,
-CO-NSA-ElCarmen,0,cbq d1g d4g,
-CO-NSA-ElTarra,0,cbdv cbfm ce8r ce8v ceah ceam cear ceav,
-CO-NSA-ElZulia,0,ce1r ce1v ce3h ce3m ce3r ce3v,
-CO-NSA-Gramalote,0,ce0m ce0v ce1h ce1r,
-CO-NSA-Hacari,0,cb7v cbdm ce2r ce8h ce8r,
-CO-NSA-Herran,0,ccbm cccr cceh,
-CO-NSA-LaEsperanza,0,c9em c9er c9ev c9fh c9fr c9fv cb4h cb4m cb5h cb5m,
-CO-NSA-LaPlayaBelen,0,cb7h cb7m cb7r cb7v cbdh cbdm ce2r,
-CO-NSA-Labateca,0,cc9m cc9v ccch cccr,
-CO-NSA-LosPatios,0,ccbv ce1m ce4h,
-CO-NSA-Lourdes,0,ce0v ce1r ce2m,
-CO-NSA-Mutiscua,0,cc8m cc8v cc9h cc9r,
-CO-NSA-Ocana,0,cb5r cb6m cb6v cb7h cb7r cbcm cbdh,
-CO-NSA-Pamplona,0,cc8v cc9m cc9r cc9v ccbh,
-CO-NSA-Pamplonita,0,cc9r cc9v ccbh ccbm,
-CO-NSA-PuertoSantander,0,ce6ay ce6bk ce6bp ce6bs ce6bt ce6by ce6bz cec0n cec0p cec0y cec0z cec1j cec1k cec1n cec1p cec1s cec1t,
-CO-NSA-Ragonvalia,0,ccb7s ccb7t ccb7y ccb7z ccbdj ccbdk ccbdn ccbdp ccbds ccbdy ccbdz cce2s cce2t cce2y cce2z cce8j cce8k cce8n cce8p cce8s cce8t cceaj,
-CO-NSA-Salazar,0,ccar ccav ccbr ce0h ce0m ce0v ce1h,
-CO-NSA-SanCalixto,0,cbdh cbdm cbdr cbdv ce8h ce8r,
-CO-NSA-SanCayetano,0,ce1h ce1m ce1r ce1v,
-CO-NSA-Santiago,0,ce1h ce1r,
-CO-NSA-Sardinata,0,ce0v ce1r ce2m ce2r ce2v ce3h ce3m ce3r ce3v ce8h ce8m ce8r ce8v ce9h ce9m,
-CO-NSA-Silos,0,cc2v cc3r cc8m cc8v cc9h,
-CO-NSA-Teorama,0,cbdh cbdm cbdr cbdv cbfh cbfm cbfv ceah cear d15m d40h d40m d40r d40v,
-CO-NSA-Tibu,0,ceg ceq d4g,
-CO-NSA-Toledo,0,cc6m cc6r cc6v cc7r cc7v cc9v ccbm ccch cccm cccr cccv ccdh ccdr cceh,
-CO-NSA-VillaCaro,0,ce0h ce0m ce0r ce0v ce2h,
-CO-NSA-VillaRosario,0,ccbv ccer ce1m ce4h ce4r,
-CO-PUT-Colon,0,366r 366v 36ch 36cm,
-CO-PUT-Mocoa,0,367m 367r 367v 36dh 36dm 36dr 36dv 370v 372h 372m 372r 378h 378r,
-CO-PUT-Orito,0,34eh 34er 34ev 34fr 34fv 364h 364m 364r 364v 365h 365m 365r 365v 366h 366m,
-CO-PUT-PuertoAsis,0,34q 35q 36g 37g,
-CO-PUT-PuertoCaicedo,0,35ar 365m 365v 370h 370m 370r 370v 371h 371r,
-CO-PUT-PuertoGuzman,0,35q 37g 90q 92g,
-CO-PUT-PuertoLeguizamo,0,35g 35q 90g 90q 91g 92g,
-CO-PUT-SanFrancisco,0,366v 367h 367m 367r 367v 36dh 36dm,
-CO-PUT-SanMiguel,0,34cv 34dr 34dv 34em 34fh 34fm,
-CO-PUT-Santiago,0,366m 366r 366v 367h 367r 36cm,
-CO-PUT-Sibundoy,0,366v 367r 36cm 36dh,
-CO-PUT-ValleGuamuez,0,34cr 34cv 34dr 34eh 34em 34er 34ev 34fh 34fm 34fr 34fv,
-CO-PUT-Villagarzon,0,364v 365r 365v 366h 366m 367h 367m 367v 370r 370v 372h 372m 372r,
-CO-QUI-Armenia,0,654v 655r 656m 657h,
-CO-QUI-Buenavista,0,654dp 654dy 654dz 654fn 6558k 6558s 6558t 6558y 6558z 655aj 655ak,
-CO-QUI-Calarca,0,654v 655r 655v 657h 657m,
-CO-QUI-Circasia,0,657h 657r 657v,
-CO-QUI-Cordoba,0,6558t 6558y 6558z 6559s 6559t 6559y 6559z 655aj 655ak 655an 655ap 655az 655bj 655bk 655bn 655bp 655bz 655cs 655ct 655ej 655ek 655es,
-CO-QUI-Filandia,0,657h 657r 657v,
-CO-QUI-Genova,0,3fev 3ffr 654m 655h,
-CO-QUI-LaTebaida,0,654v 656m 657h,
-CO-QUI-Montenegro,0,654v 656m 657h,
-CO-QUI-Pijao,0,654m 654v 655h 655m 655r 655v,
-CO-QUI-Quimbaya,0,656m 656v 657h 657r,
-CO-QUI-Salento,0,657h 657m 657r 657v c02h c02r,
-CO-RIS-Apia,0,65bm 65cr 65eh 65em 65er,
-CO-RIS-Balboa,0,65ch 65cm 65cr 65cv,
-CO-RIS-BelenUmbria,0,65eh 65em 65er 65ev,
-CO-RIS-Dosquebradas,0,65d0y 65d1k 65d1p 65d1s 65d1t 65d1y 65d1z 65d2n 65d2p 65d2y 65d2z 65d3j 65d3k 65d3n 65d3p 65d3s 65d3z,
-CO-RIS-Guatica,0,65ev 65fr 674m 675h,
-CO-RIS-LaCelia,0,659v 65cr,
-CO-RIS-LaVirginia,0,65c6s 65c6t 65c6y 65c6z 65c7t 65ccj 65cck 65ccn 65ccp 65cdj 65cdk,
-CO-RIS-Marsella,0,65cm 65cv 65dh 65dr,
-CO-RIS-Mistrato,0,65er 65ev 671m 671v 674h 674m 674r,
-CO-RIS-Pereira,0,656r 656v 657r 657v 65ch 65cm 65cv 65dh 65dm c02r c08h,
-CO-RIS-PuebloRico,0,65bm 65br 65bv 65eh 65er 671h 671m 674h,
-CO-RIS-Quinchia,0,65ev 65fr 674m 675h,
-CO-RIS-SantaRosaCabal,0,657v 65dh 65dm 65dr 65dv c02r c08h,
-CO-RIS-Santuario,0,659v 65bm 65cr 65cv 65eh,
-CO-SAN-Aguada,0,c3cr c3cv c3eh,
-CO-SAN-Albania,0,c33h c33m c33v,
-CO-SAN-Aratoca,0,c95v cc0h cc0m cc0r cc0v,
-CO-SAN-Barbosa,0,c36as c36at c36ay c36az c36bs c36bt c3c0j c3c0n c3c0p c3c0z c3c1j c3c1k c3c1s,
-CO-SAN-Barichara,0,c95h c95m c95r c95v,
-CO-SAN-Barrancabermeja,0,c90v c92m c93h c93m c93r c93v c96h c96r c99h c99m c9ch c9cm,
-CO-SAN-Betulia,0,c96m c96v c97h c97m c97r c9cm,
-CO-SAN-Bolivar,0,c2dh c2dm c2dr c2dv c2fh c32r c33v c38h c38m c38r c38v c39h c39m c39r c39v c3am,
-CO-SAN-Bucaramanga,0,c97v c9dm cc2r cc8h,
-CO-SAN-Cabrera,0,c3fby c3fbz c3fes c3fet c3fey c951n c951p c951y c951z c953n c954j c954k c954n c954s c954t c956j,
-CO-SAN-California,0,cc8r cc8v,
-CO-SAN-Capitanejo,0,c6br c6bv cc1h,
-CO-SAN-Carcasi,0,cc1h cc1m cc1v cc4h cc4r,
-CO-SAN-Cepita,0,cc06t cc06y cc09p cc09y cc09z cc0bn cc0bp cc0bz cc0cj cc0ck cc0cn cc0cp cc0cs cc0ct cc0cy cc0cz cc0ej cc0ek cc0en cc0ep cc0es cc0ez,
-CO-SAN-Cerrito,0,cc1r cc1v cc3h cc3m cc3r cc3v,
-CO-SAN-Charala,0,c3dm c3dv c3fm c6ah,
-CO-SAN-Charta,0,cc8h cc8m cc8r cc8v,
-CO-SAN-Chima,0,c3em c3ev c3fh c3fr,
-CO-SAN-Chipata,0,c39m c3ch c3cr,
-CO-SAN-Cimitarra,0,c2q c3q c8g c9g,
-CO-SAN-Concepcion,0,cc1r cc1v cc3h cc3m cc4r cc6h,
-CO-SAN-Confines,0,c3fh c3fm c3fv,
-CO-SAN-Contratacion,0,c3cv c3eh c3em,
-CO-SAN-Coromoro,0,c3dv c3fm c68r c68v c6ah c6am,
-CO-SAN-Curiti,0,c6ar c95m c95v cc0h cc0m cc0r cc0v,
-CO-SAN-ElCarmenChucuri,0,c3er c3ev c91m c91v c94h c94m c94r c94v c95h c95r,
-CO-SAN-ElGuacamayo,0,c3cr c3cv c3eh c3em,
-CO-SAN-ElPenon,0,c38m c38v c39h c39m c39r c39v,
-CO-SAN-ElPlayon,0,c9dv c9fh c9fm c9fr c9fv ccah ccar,
-CO-SAN-ElSocorro,0,c3fr c3fv,
-CO-SAN-Encino,0,c3dm c3dv c68h c68m c68r c68v,
-CO-SAN-Enciso,0,cc11s cc11t cc11y cc13j cc13k cc13n cc13p cc13s cc13t cc13y cc13z cc16k cc16s cc16t cc19j cc19k cc19n cc19p cc1cj,
-CO-SAN-Florian,0,c32m c32v c33h c33m c33r c33v,
-CO-SAN-Floridablanca,0,c97v cc2r cc8h,
-CO-SAN-Galan,0,c94m c95h c95r,
-CO-SAN-Gambita,0,c36m c36v c37h c37r c37v c3cm c3dh c3dm,
-CO-SAN-Giron,0,c96v c97h c97m c97r c97v c9ch c9cm c9dh c9dm cc2h,
-CO-SAN-Guaca,0,cc0v cc2m cc2v cc3h cc3r,
-CO-SAN-Guadalupe,0,c3cv c3dr c3em c3fh,
-CO-SAN-Guapota,0,c3f0k c3f0p c3f0s c3f0t c3f0y c3f0z c3f1k c3f1s c3f1t c3f1y c3f2j c3f2k c3f2n c3f2p c3f2z c3f3j c3f3k c3f3n c3f3s,
-CO-SAN-Guavata,0,c33ey c33ez c33fk c33fp c33fs c33ft c33fy c33fz c36as c36at c395j c395k c395n c395p c395s c3c0j c3c0k,
-CO-SAN-Guepsa,0,c3c0y c3c0z c3c1s c3c1t c3c1y c3c3j c3c3k c3c3n c3c3p c3c3s c3c3t c3c3y c3c3z c3c6j c3c6k,
-CO-SAN-Hato,0,c3ev c3fr c94m c95h,
-CO-SAN-JesusMaria,0,c33m c33r c33v,
-CO-SAN-Jordan,0,c957y c95dj c95dk c95dn c95dp c95ds c95dz cc02t cc08j cc08k cc08n cc08p cc08s cc08z,
-CO-SAN-LaBelleza,0,c32r c32v c33r c38h c38m c39h,
-CO-SAN-LaPaz,0,c3bm c3ch c3cr c3eh,
-CO-SAN-Landazuri,0,c38v c39r c39v c3bh c3bm c3br c3bv c3er c91m,
-CO-SAN-Lebrija,0,c97r c97v c9cm c9dh c9dm c9dr,
-CO-SAN-LosSantos,0,c95v c97m cc0r cc2h,
-CO-SAN-Macaravita,0,c6bv cc1m,
-CO-SAN-Malaga,0,cc12t cc12y cc13t cc18j cc18k cc18n cc18p cc18s cc18y cc18z cc19j cc19k cc19s cc19t cc1an cc1ap,
-CO-SAN-Matanza,0,c9dv cc8h cc8r ccah,
-CO-SAN-Mogotes,0,c6ah c6am c6ar c6av cc0h cc0m,
-CO-SAN-Molagavita,0,cc0m cc0v cc1h cc1r,
-CO-SAN-Ocamonte,0,c3f5s c3f5t c3f5y c3f5z c3f7j c3f7k c3f7n c3f7p c3f7s c3f7t c3f7y c3f7z c3fdj c3fdn c6a2j c6a2k c6a2s c6a2t c6a8j,
-CO-SAN-Oiba,0,c3dr c3dv c3fh c3fm,
-CO-SAN-Onzaga,0,c68v c69r c6am c6av c6bh c6br cc0m,
-CO-SAN-Palmar,0,c3fbj c3fbk c3fbp c3fbs c3fbt c3fby c3fbz c951j c951k c951n c951p,
-CO-SAN-PalmasSocorro,0,c3f2y c3f2z c3f3k c3f3s c3f3t c3f3y c3f3z c3f6s c3f6t c3f8n c3f9j c3f9k c3f9n c3f9p c3fcj c3fck,
-CO-SAN-Paramo,0,c3fm c3fv,
-CO-SAN-Piedecuesta,0,c97m c97v cc0r cc0v cc2h cc2m cc2r cc2v,
-CO-SAN-Pinchote,0,c3fcy c3fdt c3fen c3fep c3fes c3fet c3fey c3fez c3ffj c3ffk c3ffs c3fft c954n c955j c955k,
-CO-SAN-PuenteNacional,0,c33m c33v c36h c36r,
-CO-SAN-PuertoParra,0,c3br c3bv c90m c90v c91h c91m c91r c92m c93h,
-CO-SAN-PuertoWilches,0,c99h c99m c99r c99v c9bh c9bm c9bv c9ch c9cr cb1m cb1r cb1v cb3h cb3m cb4r,
-CO-SAN-Rionegro,0,c9q cbg ccq,
-CO-SAN-SabanaTorres,0,c99v c9bm c9bv c9ch c9cm c9cr c9cv c9dh c9dr c9eh c9em c9er,
-CO-SAN-SanAndres,0,cc0m cc0v cc1r cc2m cc3h,
-CO-SAN-SanBenito,0,c3ch c3cm c3cr c3cv,
-CO-SAN-SanGil,0,c3q c6q c9g ccg,
-CO-SAN-SanJoaquin,0,c6am c6av cc0m,
-CO-SAN-SanJoseMiranda,0,cc10p cc10s cc10t cc10y cc10z cc11k cc11s cc11t cc12j cc12k cc12n cc12p cc12s cc12t cc12y cc12z cc13j cc13k cc13s cc13t cc18n,
-CO-SAN-SanMiguel,0,c6br c6bv cc1h cc1m,
-CO-SAN-SanVicenteChucuri,0,c91v c93m c94r c94v c95r c96h c96m c96r c96v c97h c9ch c9cm,
-CO-SAN-SantaBarbara,0,cc2h cc2m cc2v,
-CO-SAN-SantaHelenaOpon,0,c3eh c3em c3er c3ev,
-CO-SAN-Simacota,0,c3bv c3er c3ev c3fr c91h c91m c91r c91v c93h c93m c94h,
-CO-SAN-Suaita,0,c3cm c3cv c3dh c3dm c3dr c3dv,
-CO-SAN-Sucre,0,c32v c33r c33v c38m c38v c39h c39m,
-CO-SAN-Surata,0,cc8r cc8v ccah ccam ccar,
-CO-SAN-Tona,0,cc2r cc2v cc8h cc8m,
-CO-SAN-ValleSanJose,0,c3f7y c3fdj c3fdk c3fdn c3fdp c3fds c3fdt c3fdy c3fdz c3ffn c6a2t c6a8j c6a8k c6a8s c6a8t c6aaj,
-CO-SAN-Velez,0,c36r c39m c39v c3bm c3bv c3ch c3cr c3eh c3er c91m,
-CO-SAN-Vetas,0,cc8m cc8v,
-CO-SAN-Villanueva,0,c95m c95v,
-CO-SAN-Zapatoca,0,c95r c95v c96m c96v c97h c97m c97r,
-CO-SUC-Buenavista,0,d01v d03m d03v d06r,
-CO-SUC-Caimito,0,caam caav cabh cabm cabr cabv d00m d01h,
-CO-SUC-Chalan,0,d02v d08h d08m d08r,
-CO-SUC-Coloso,0,d02r d02v d08h d08m,
-CO-SUC-Corozal,0,d00r d00v d01r d02h d02m d02v,
-CO-SUC-Covenas,0,757r 757v,
-CO-SUC-ElRoble,0,d00m d00v d01h d01m d01r d01v,
-CO-SUC-Galeras,0,d01m d01r d01v d03m d04r,
-CO-SUC-Guaranda,0,ca6r ca6v cach cacm cacv cadh cadr,
-CO-SUC-LaUnion,0,caah caam caar caav d00m,
-CO-SUC-LosPalmitos,0,d02m d02v d03r d08m,
-CO-SUC-Majagual,0,ca9m ca9v cach cacm cacr cacv cadr caeh caem caev cafh,
-CO-SUC-Morroa,0,d02h d02m d02r d02v,
-CO-SUC-Ovejas,0,d02v d03r d03v d08m d08v d09h d09m,
-CO-SUC-Sampues,0,d00r d00v d02h d02m,
-CO-SUC-SanAntonioPalmito,0,757h 757m 757r 757v,
-CO-SUC-SanBenitoAbad,0,ca9r ca9v cabh cabm cabr cabv cacr caeh caer d00m d01h d01m d01v d04h d04r,
-CO-SUC-SanJuanBetulia,0,d00v d02m d02v d03h d03r,
-CO-SUC-SanMarcos,0,ca8m ca8v ca9h ca9r ca9v caah caam cabh cabm,
-CO-SUC-SanOnofre,0,75dm 75dr 75dv 75fm 75fv 775m d08h d08r d08v d0ah d0am d0ar,
-CO-SUC-SanPedro,0,d03h d03m d03r d03v,
-CO-SUC-Since,0,d00v d01r d01v d02m d03h d03m d03r,
-CO-SUC-Sincelejo,0,757m 757v d02h d02m d02r,
-CO-SUC-Sucre,0,cabm cabv cacr caeh caem caer caev cafh cafr d04h d04m,
-CO-SUC-Tolu,0,757v 75dm 75dv d08h d08r,
-CO-SUC-Toluviejo,0,757v 75dm d02r d08h,
-CO-TOL-Alpujarra,0,9a1v 9a3h 9a3m 9a3r 9a3v 9a6h 9a6r,
-CO-TOL-Alvarado,0,c01r c01v c03h c03m c03r c03v c06r,
-CO-TOL-Ambalema,0,c03v c06r c09m c0ch c0cr,
-CO-TOL-Anzoategui,0,c02m c02r c02v c03h c03r c03v,
-CO-TOL-Armero,0,c09m c09v c0bm c0ch c0cr c0cv c0eh c0em,
-CO-TOL-Ataco,0,3f5r 3f5v 3f7h 3f7m 3f7r 3f7v 9a2h 9a2m 9a2r 9a2v 9a8h 9a8m,
-CO-TOL-Cajamarca,0,655m 655v 657m c00r c02h,
-CO-TOL-CarmenApicala,0,9aeh 9aer 9aev c04h c04m,
-CO-TOL-Casabianca,0,c08h c08m c08r c08v c09r c0bh,
-CO-TOL-Chaparral,0,3fg 3fq 9ag 9aq,
-CO-TOL-Coello,0,c01h c01m c01r c01v c03m c04r c06h,
-CO-TOL-Coyaima,0,9a2v 9a8h 9a8m 9a8v 9a9h 9a9m 9a9r 9a9v 9abh,
-CO-TOL-Cunday,0,9acr 9acv 9aeh 9aem 9aer 9aev 9afh 9afr,
-CO-TOL-Dolores,0,9a3v 9a6h 9a6r 9a9m 9ach 9acm 9acr 9acv 9adr,
-CO-TOL-Espinal,0,9abv 9aer c01m c04h,
-CO-TOL-Falan,0,c09r c09v c0bm,
-CO-TOL-Flandes,0,c01m c04h,
-CO-TOL-Fresno,0,c0bh c0bm c0br c0bv,
-CO-TOL-Guamo,0,9abh 9abm 9abr 9abv 9aeh 9aer c01h c01m,
-CO-TOL-Herveo,0,c08h c08r c08v c09r c0ah c0am c0bh,
-CO-TOL-Honda,0,c0bm c0cr c0eh c0em c0er c0ev,
-CO-TOL-Ibague,0,655m 655v 657m c00h c00m c00r c00v c01h c01m c01r c01v c02h c02m c02r c02v c03h,
-CO-TOL-Icononzo,0,9aev 9afh 9afr c05h,
-CO-TOL-Lerida,0,c09m c09v c0ch,
-CO-TOL-Libano,0,c03r c09h c09m c09r c09v,
-CO-TOL-Mariquita,0,c0bm c0bv c0eh c0er,
-CO-TOL-Melgar,0,9aev 9afr c04h c04m c05h,
-CO-TOL-Murillo,0,c02r c02v c03r c08h c08m c08v c09h c09r,
-CO-TOL-Natagaima,0,9a2m 9a2v 9a3h 9a3r 9a3v 9a8m 9a9h 9a9m,
-CO-TOL-Ortega,0,9a8r 9a8v 9a9r 9aah 9aam 9aar 9aav 9abh,
-CO-TOL-Palocabildo,0,c09by c09et c0b1j c0b1k c0b1n c0b1p c0b1s c0b1y c0b1z c0b3n c0b4j c0b4k c0b4p c0b4s c0b4t c0b6j,
-CO-TOL-Piedras,0,c01r c01v c03m c03v c06h c06r,
-CO-TOL-Planadas,0,3der 3dev 3dfr 3f1m 3f1v 3f4h 3f4m 3f4r 3f4v 3f5h 3f5m 3f5r 3f5v 3f6m 3f7h,
-CO-TOL-Prado,0,9a9m 9a9v 9ach 9acr 9acv,
-CO-TOL-Purificacion,0,9a9r 9a9v 9abm 9acr 9acv 9aeh,
-CO-TOL-Rioblanco,0,3f1v 3f3m 3f4r 3f4v 3f6h 3f6m 3f6r 3f6v 3f7h 3f7r 3f7v 3fch 3fcm 3fcr 3fcv 3fdh 3fdm,
-CO-TOL-Roncesvalles,0,3ffh 3ffm 3ffr 3ffv 655h 655m 9aar c00h,
-CO-TOL-Rovira,0,655m 9aar 9aav c00h c00m c00r c00v c01h c01r,
-CO-TOL-Saldana,0,9a9r 9a9v 9abh 9abm,
-CO-TOL-SanAntonio,0,3fdv 3ffh 3ffm 3ffv 9a8r 9aah 9aar,
-CO-TOL-SanLuis,0,9aam 9aav 9abh 9abr c00m c01h c01m c01r,
-CO-TOL-SantaIsabel,0,c02r c02v c03r c08h c08m c09h c09m,
-CO-TOL-Suarez,0,9abm 9aeh 9aer c04h,
-CO-TOL-ValleSanJuan,0,9aav 9abr c00m c01h,
-CO-TOL-Venadillo,0,c03r c03v c06h c06r c09h c09m c0ch,
-CO-TOL-Villahermosa,0,c08h c08m c08v c09h c09r c09v c0bh,
-CO-TOL-Villarrica,0,9acm 9acr 9acv 9adr 9aem 9afh,
-CO-VAC-Alcala,0,656ds 656dt 656dy 656dz 656en 656ep 656fj 656fk 656fn 656fp 6578s 6578t 6578y 6578z 657aj,
-CO-VAC-Andalucia,0,3fbr 3fbv 651h 651m,
-CO-VAC-Ansermanuevo,0,653v 656r 659m 65ch 65cm,
-CO-VAC-Argelia,0,653v 659m,
-CO-VAC-Bolivar,0,650h 650m 650r 650v 651h 651m 651r 651v 652m 653h,
-CO-VAC-Buenaventura,0,1eq 3eg 3eq 64g,
-CO-VAC-Buga,0,3f8v 3f9r 3f9v 3fam 3fbh 3fbm 3fch 3fcr 3fcv 3feh 3fem,
-CO-VAC-Bugalagrande,0,3fbv 3fer 651h 651m 651v 654h,
-CO-VAC-Caicedonia,0,654m 654v,
-CO-VAC-Cali,0,3e7m 3e7v 3f2h 3f2m 3f2r 3f2v,
-CO-VAC-Calima,0,3edv 3efh 3efm 3efr 3f8r 3f8v 3fah 3fam 3far 3fav,
-CO-VAC-Candelaria,0,3f2m 3f2v 3f3h 3f3r,
-CO-VAC-Cartago,0,656r 656v 65ch 65cm,
-CO-VAC-Dagua,0,3e7r 3e7v 3edh 3edm 3edr 3edv 3efh 3efm 3f2r 3f8h 3f8r 3fah,
-CO-VAC-ElAguila,0,659m 659v 65ch 65cr,
-CO-VAC-ElCairo,0,653r 653v 659h 659m,
-CO-VAC-ElCerrito,0,3f8m 3f8v 3f9h 3f9m 3f9r 3f9v 3fch 3fcr,
-CO-VAC-ElDovio,0,652m 653h 653m 653r,
-CO-VAC-Florida,0,3f1r 3f1v 3f2m 3f3h 3f3m 3f4r 3f6h,
-CO-VAC-Ginebra,0,3f9h 3f9m 3f9r 3f9v,
-CO-VAC-Guacari,0,3f8v 3f9h 3f9r 3f9v,
-CO-VAC-Jamundi,0,3e5m 3e5r 3e5v 3e7m 3f0h 3f0r 3f0v 3f2h 3f2m,
-CO-VAC-LaCumbre,0,3edm 3edv 3f2r 3f8h 3f8r,
-CO-VAC-LaUnion,0,653m 656h,
-CO-VAC-LaVictoria,0,653m 654r 654v 656h 656m,
-CO-VAC-Obando,0,656h 656m 656r 656v,
-CO-VAC-Palmira,0,3f2r 3f2v 3f3r 3f3v 3f6r 3f8m 3f9h 3f9m 3fch,
-CO-VAC-Pradera,0,3f3h 3f3m 3f3r 3f3v 3f6h 3f6r,
-CO-VAC-Restrepo,0,3f8r 3f8v 3fah 3fam,
-CO-VAC-Riofrio,0,3fam 3far 3fav 3fbr 650m 651h,
-CO-VAC-Roldanillo,0,651r 651v 653h 653m,
-CO-VAC-SanPedro,0,3fbh 3fbm 3fbr 3fbv,
-CO-VAC-Sevilla,0,3fem 3fer 3fev 3ffr 654h 654m 654r 654v,
-CO-VAC-Toro,0,653m 653v 656h 656r,
-CO-VAC-Trujillo,0,3fav 650m 650v 651h 651r,
-CO-VAC-Tulua,0,3fbm 3fbr 3fbv 3feh 3fem 3fer 3fev 651h 654h,
-CO-VAC-Ulloa,0,656ep 656ey 656ez 656fk 656fn 656fp 656fs 656fz 6578t 6578y 657aj 657ak 657an 657ap,
-CO-VAC-Versalles,0,653h 653m 653r 653v,
-CO-VAC-Vijes,0,3f8h 3f8m 3f8r 3f8v,
-CO-VAC-Yotoco,0,3f8v 3fam 3fav 3fbh 3fbr,
-CO-VAC-Yumbo,0,3f2r 3f2v 3f8h 3f8m,
-CO-VAC-Zarzal,0,651m 651v 653m 654h 654r 654v 656h,
-CO-VAU-Caruru,0,95q 97g 97q,
-CO-VAU-Mitu,0,95q 97g 97q b0q b2g b2q,
-CO-VAU-Pacoa,0,94q 95g 95q 96g 97g b0g b0q,
-CO-VAU-Papunahua,0,97g 97q 9dg b2q b8g,
-CO-VAU-Taraira,0,aag aaq abg abq b0g,
-CO-VAU-Yavarate,0,b0q b1q b2g b3g,
-CO-VID-Cumaribo,0,9dq 9fg 9fq b8q bag baq bbq beq c5g c5q e0g e0q e1g e1q e3g e4g e4q e6g,
-CO-VID-LaPrimavera,0,e0q e1q e2g e2q e3g e3q,
-CO-VID-PuertoCarreno,0,e3g e3q e4q e6g e6q,
-CO-VID-SantaRosalia,0,c5g c5q e0g e0q e2g,
+CO-AMA-ElEncanto,0,89d 89e 89f 8b4 8b5 8c2 8c3 8c6 8c7 8c8 8c9 8ca 8cb 8cc 8cd 8ce 8d8 8e0 8e1 8e4,
+CO-AMA-LaChorrera,0,8b7 8bb 8bc 8bd 8be 8bf 8cc 8cd 8ce 8cf 8e0 8e1 8e2 8e3 8e4 8e5 8e6 8e7 8e8 8e9 8ea 8ec 911 914 915 940,
+CO-AMA-LaPedrera,0,a8a a8b a8e a8f a9a aa0 aa1 aa2 aa3 aa4 aa5 aa6 aa7 aa8 aa9 aaa aab aac aad ab0 ab2 ab8 b00 b01,
+CO-AMA-LaVictoria,0,953 954 955 956 957 959 95c,
+CO-AMA-Leticia,0,a0e a21 a23 a24 a26 a27 a29 a2b a2c a2d a2e a2f,a0ecq
+CO-AMA-MiritiParana,0,8ef 8f6 8f7 8f8 8f9 8fa 8fb 8fc 8fd 8fe 8ff 945 947 950 951 952 953 954 955 956 959 aa0 aa2 aa8 aaa b00,
+CO-AMA-PuertoAlegria,0,8ad 8af 8b3 8b4 8b5 8b6 8b7 8b8 8b9 8ba 8bb 8bc 8bd 8be 8e0 8e2 905 910 911,
+CO-AMA-PuertoArica,0,8cd 8cf 8d3 8d6 8d8 8d9 8da 8db 8dc 8dd 8de 8df 8e5 8f0 8f1 8f3 8f4 8f5 8f6 8f7 a82 a88 a8a aa0 aa2,
+CO-AMA-PuertoNarino,0,a20 a21 a22 a23 a28 a29 a2b,a230q
+CO-AMA-PuertoSantander,0,8y 8z 9n at,
+CO-AMA-Tarapaca,0,a2b a2e a2f a81 a82 a83 a84 a85 a86 a87 a88 a89 a8a a8b a8c a8d a8e a8f a98 a9a,
+CO-ANT-Abejorral,0,677 67d c22 c28,c222q
+CO-ANT-Abriaqui,0,67bfq 67eaq 6d14q 6d15g 6d15q 6d16g 6d16q 6d17g 6d17q 6d1cg 6d1dg 6d1dq 6d40g 6d40q 6d42g 6d42q 6d48g 6d48q,6d177m
+CO-ANT-Alejandria,0,c2a5q c2a7g c2b0q c2b2g c2b2q c2b3g c2b3q c2b6q c2b8g c2b9g c2bcg,c2b2bm
+CO-ANT-Amaga,0,67c5q 67d0q 67d1q 67d2g 67d2q 67d3g 67d3q 67d8g 67d9g,67d27h
+CO-ANT-Amalfi,0,c80 c81 c82 c83 c86 c89 c8c,c833g
+CO-ANT-Andes,0,6735g 6743q 6746q 6748g 6748q 6749g 6749q 674ag 674aq 674bg 674bq 674cg 674cq 674eg 674eq 674fq 6760g 6760q 6761g 6761q 6764g 6764q 6765g 6765q 6766g 6766q 6767g,67641v
+CO-ANT-Angelopolis,0,67cdg 67cdq 67d2q 67d3q 67d8g 67d8q 67d9g 67d9q 67dag 67dbg,67d86m
+CO-ANT-Angostura,0,6d5fg 6d5fq c80ag c80aq c80bg c80bq c80eq c820g c820q c821g c821q c822g c823g c823q c824g c824q c825q c826g c826q c827g c827q,c821dr
+CO-ANT-Anori,0,c82 c83 c88 c89 c8b,c83ag
+CO-ANT-Anza,0,67cbq 67ceq 67e0g 67e0q 67e1g 67e1q 67e2g 67e3g 67e3q 67e4g 67e4q 67e5q 67e6g 67e6q 67ecg 67edg,67e4fr
+CO-ANT-Apartado,0,6e5 6f0 6f2,6f08g
+CO-ANT-Arboletes,0,6f8 6f9 6fa 6fb,6fafg
+CO-ANT-Argelia,0,c225g c225q c226g c227g c230g c230q c231g c231q c232g c232q c233g c234g c234q c236g c237g,c2321r
+CO-ANT-Armenia,0,67ccg 67ccq 67cdg 67cdq 67ceg 67ceq 67cfg 67cfq 67d8q 67dag 67e4g,67cdev
+CO-ANT-Barbosa,0,c2a2q c2a3q c2a6q c2a8g c2a8q c2a9g c2a9q c2abg c2abq c2acg c2acq c2adq c2aeg c2aeq c2afg c2afq,c2a9dr
+CO-ANT-Bello,0,67f3g 67f3q 67f4q 67f5q 67f6g 67f6q 67f7g 67f7q 67f9g 67fcg 67fcq 67fdg,67f67h
+CO-ANT-Belmira,0,67fbg 67fbq 67feq 6d50q 6d51g 6d51q 6d52g 6d52q 6d53g 6d53q 6d54g 6d54q 6d56q 6d58g 6d58q 6d59g 6d59q 6d5ag 6d5aq 6d5bg 6d5bq 6d5cg 6d5cq 6d5eg,6d51br
+CO-ANT-Betania,0,6735g 6735q 6737g 6737q 6760g 6760q 6761q 6762g 6762q 6763g 6763q 6764q 6766g 6766q 6769g,67630r
+CO-ANT-Betulia,0,67c2q 67c3q 67c8g 67c8q 67c9g 67c9q 67cag 67caq 67cbg 67cbq 67ccq 67ceg 67ceq 67e0g 67e0q 67e1g 67e4g,67c92h
+CO-ANT-Briceno,0,6d79q 6d7bg 6d7bq 6d7cg 6d7cq 6d7dg 6d7dq 6d7eg 6d7eq 6d7fg 6d7fq 6dd1g 6dd4g 6dd4q 6dd5g 6dd5q 6dd6g 6dd7g c880q c882g c882q,6d7efm
+CO-ANT-Buritica,0,6d46q 6d49g 6d49q 6d4bg 6d4bq 6d4cg 6d4cq 6d4dg 6d4eg 6d4eq 6d61g 6d61q 6d63g 6d63q 6d64g 6d64q 6d66g 6d66q,6d4c8h
+CO-ANT-Caceres,0,6f5 c88 c89 c8a c8b ca0 ca1,c8a9g
+CO-ANT-Caicedo,0,67bdq 67bfg 67bfq 67e2g 67e2q 67e3g 67e3q 67e6q 67e8g 67e8q 67e9g 67e9q 67eag 67eaq 67ebg 67ecg,67e92h
+CO-ANT-Caldas,0,67d1q 67d3g 67d3q 67d4q 67d6g 67d6q 67d9g 67dcg,67d3ev
+CO-ANT-Campamento,0,c823q c826q c827q c829g c82bg c82bq c82cg c82cq c82dg c82dq c82eg c82eq c881g c881q c884g c884q c886g,c826br
+CO-ANT-Canasgordas,0,6d1dq 6d1fg 6d1fq 6d35g 6d35q 6d37g 6d42q 6d48g 6d48q 6d49g 6d49q 6d4ag 6d4aq 6d4bg 6d4bq 6d60g 6d60q 6d61g 6d61q 6d62g 6d63g 6d63q 6d69g,6d48bv
+CO-ANT-Caracoli,0,c2cbq c2ceq c2cfq c2e1g c2e1q c2e2q c2e3g c2e3q c2e4g c2e4q c2e5g c2e5q c2e6g c2e6q c2e7g c2e8g c2e8q c2e9g c2e9q c2ecg,c2e94r
+CO-ANT-Caramanta,0,6758g 6758q 6759g 6759q 675ag 675bg 675cg 675cq 675eg 675eq,6759cr
+CO-ANT-Carepa,0,6e51q 6e53g 6e53q 6e54g 6e54q 6e55g 6e55q 6e56g 6e56q 6e57g 6e57q 6e5cg 6e5dg 6f00g 6f00q 6f01g 6f01q 6f02g 6f03g 6f03q 6f04g 6f04q 6f06g 6f06q 6f09g 6f0cg,6f008r
+CO-ANT-CarolinaPrincipe,0,c806q c809g c809q c80bg c80bq c80cg c80cq c80eg c80eq c80fg c80fq,c80cch
+CO-ANT-Caucasia,0,c8b c8e ca0 ca1 ca2 ca3 ca4,ca0fq
+CO-ANT-Chigorodo,0,6cf 6da 6e5 6f0,6cffg
+CO-ANT-Cisneros,0,c2baq c2bbq c810g c811g c811q,c8110m
+CO-ANT-CiudadBolivar,0,6737q 673dg 673dq 673fg 673fq 6762g 6762q 6763q 6768g 6768q 6769g 6769q 676ag 676aq 676bg 676bq 676cg 676cq,6768eh
+CO-ANT-Cocorna,0,c23ag c23aq c23bg c23bq c285g c285q c286g c286q c287g c287q c28cg c28dg c290g c290q c291q c292g c292q c293g c298g,c287dh
+CO-ANT-Concepcion,0,c2a5q c2a6g c2a6q c2a7g c2a7q c2acg c2acq c2adg c2adq c2b0q c2b2g c2b2q c2b8g,c2ac5h
+CO-ANT-Concordia,0,67c1g 67c1q 67c2q 67c3g 67c3q 67c4g 67c4q 67c5g 67c5q 67c6g 67c6q 67c9g 67c9q 67ccg 67ccq,67c62r
+CO-ANT-Copacabana,0,67f5q 67f7g 67f7q 67fdg 67fdq c2a2g,67f73v
+CO-ANT-Dabeiba,0,6d0 6d1 6d2 6d3 6d6 6d8 6d9 6dc,6d39g
+CO-ANT-DonMatias,0,67fdq 67ffg c2a8q c2a9q c2aag c2aaq c2abg c2abq c2aeg c2aeq c2afq c800g c801g c804g c804q c805g c805q,c2aa7m
+CO-ANT-Ebejico,0,67ceq 67cfq 67e4g 67e4q 67e5g 67e5q 67e6g 67e6q 67e7g 67e7q 67ecg 67edg 67f0g 67f0q 67f2g 67f2q 67f8g,67e75v
+CO-ANT-ElBagre,0,c8c c8d c8e c8f ca4 ca5,c8e8g
+CO-ANT-ElCarmenViboral,0,c22cg c22cq c22dg c22dq c22eg c22eq c22fg c22fq c238q c23ag c23aq c281g c281q c283g c283q c284g c284q c285g c285q c286g c286q c287g c287q c289g c289q c28cg c28cq c290g,c283fr
+CO-ANT-ElPenol,0,c28dq c28eg c28eq c28fg c28fq c29ag c2a4g c2a4q c2a5g c2a5q c2a6g c2a7g c2b0q,c28f8r
+CO-ANT-ElRetiro,0,67d4g 67d4q 67d5g 67d5q 67d6g 67d6q 67d7g 67d7q 67dcg 67ddg 67ddq c280q c282g c282q c288g,67d79m
+CO-ANT-ElSantuario,0,c286q c28cg c28cq c28dg c28dq c28eg c28fg c298g,c28ccv
+CO-ANT-Entrerrios,0,67feq 67ffq 6d51q 6d53g 6d53q 6d54g 6d54q 6d55g 6d55q 6d56g 6d56q 6d57g 6d57q c2aaq c800g,6d553v
+CO-ANT-Envigado,0,67dcg 67dcq 67ddg 67ddq 67deg 67dfg,67de1m
+CO-ANT-Fredonia,0,676fg 676fq 6773g 6773q 6778g 6778q 6779g 6779q 677ag 677aq 677bg 677bq 677cg 677cq 67d0g 67d0q 67d1g 67d1q 67d4q,677bam
+CO-ANT-Frontino,0,67a 67b 6d0 6d1 6d2 6d3,6d1fg
+CO-ANT-Giraldo,0,6d42g 6d42q 6d43g 6d43q 6d46g 6d46q 6d48g 6d49g 6d49q 6d4cg,6d491m
+CO-ANT-Girardota,0,67f7g 67f7q 67fdg 67fdq c2a2g c2a2q c2a8g c2a8q,c2a2bh
+CO-ANT-GomezPlata,0,c805q c806g c806q c807g c807q c80cg c80cq c80dg c80dq c80eg c80fg c80fq c810q c812g c812q c818g c818q c81ag c81aq c825g,c807bv
+CO-ANT-Granada,0,c28dg c28dq c28fg c292g c292q c293g c293q c298g c298q c299g c299q c29ag c29aq c29bg,c28ddr
+CO-ANT-Guadalupe,0,c80eq c80fg c80fq c824g c824q c825g c825q c827g c827q c830q c832g,c80fah
+CO-ANT-Guarne,0,67dfg 67dfq 67f5g 67f5q 67f7g c28ag c28aq c28bq c2a0g c2a0q c2a1g c2a1q c2a2g c2a2q c2a3g c2a3q,c2a09h
+CO-ANT-Guatape,0,c28fg c28fq c29ag c29aq c2a5g c2a5q c2b0g c2b0q c2b2g,c29aav
+CO-ANT-Heliconia,0,67cfg 67cfq 67d8q 67dag 67daq 67e5g 67f0g,67da9v
+CO-ANT-Hispania,0,6763g 6763q 6766g 6766q 6769g 676cg 676cq,67695v
+CO-ANT-Itagui,0,67d9q 67dbg 67dcq 67deg,67de0h
+CO-ANT-Ituango,0,6d6 6d7 6d8 6d9 6dc 6dd 6de 6df c88,6dd0q
+CO-ANT-Jardin,0,6746q 6747q 674cg 674cq 674dg 674dq 674eg 674eq 674fg 674fq 6758q 675ag 675aq 6765g,674f2v
+CO-ANT-Jerico,0,6765g 6765q 6766g 6767g 6767q 676dg 676dq 6770q 6772g 6772q 6773q 6778g 6778q 6779g 677ag,6767ev
+CO-ANT-LaCeja,0,677fq 67d5g 67d5q c22ag c22aq c280g c280q c281q c282g c282q c283g c283q,c2821v
+CO-ANT-LaEstrella,0,67d9g 67d9q 67dbg 67dcg,67d9ev
+CO-ANT-LaPintada,0,6771g 6771q 6773g 6773q 6774g 6774q 6776g 6776q 6779g 677cg,67762h
+CO-ANT-LaUnion,0,c22ag c22aq c22bg c22bq c22cq c22eg c22eq c280g c280q c281g c281q c283g c284g,c2813v
+CO-ANT-Liborina,0,6d47g 6d47q 6d4cg 6d4cq 6d4dg 6d4dq 6d4eg 6d4fg 6d52q 6d58g 6d58q 6d5ag 6d5aq,6d47br
+CO-ANT-Maceo,0,c2e8q c2e9g c2e9q c2eag c2eaq c2ebg c2ebq c2ecg c2ecq c2edq c2eeg c2eeq c2efg c2efq c840g c840q c841g c841q c844g c844q c845g c845q c846g c847g c847q c852g,c8410v
+CO-ANT-Marinilla,0,c289g c289q c28bg c28bq c28cg c28cq c28eg c28eq c2a4g,c28b4v
+CO-ANT-Medellin,0,67d9q 67dag 67daq 67dbg 67dbq 67deg 67deq 67dfg 67dfq 67f0g 67f0q 67f1g 67f1q 67f2g 67f2q 67f3g 67f3q 67f4g 67f4q 67f5g 67f5q 67f6g,67f44h
+CO-ANT-Montebello,0,677dq 677eg 677eq 677fg 677fq 67d4g 67d5g,67d50m
+CO-ANT-Murindo,0,6c5 6c7 6d0 6d2,6c7cg
+CO-ANT-Mutata,0,6cd 6cf 6d8 6d9 6da,6d87q
+CO-ANT-Narino,0,c204q c206g c206q c207q c20cg c20cq c20dg c20dq c20eg c20eq c20fg c20fq c218g c218q c21ag c21aq c21bg c21bq c224g c224q c225g c230g c231g,c20f7v
+CO-ANT-Nechi,0,ca1 ca3 ca4 ca5 ca6,ca63g
+CO-ANT-Necocli,0,6e7 6ed 6ef 6f8 6fa,6ed6q
+CO-ANT-Olaya,0,6d45g 6d45q 6d47g 6d47q 6d50g 6d50q 6d52g 6d52q,6d473h
+CO-ANT-Peque,0,6d63q 6d64q 6d65q 6d66g 6d66q 6d67g 6d67q 6d69g 6d69q 6d6bg 6d6bq 6d6cg 6d6cq 6d6dg 6d6dq 6d6eg 6d6eq 6d6fg 6d6fq 6dc1g 6dc1q 6dc3g 6dc4g 6dc4q 6dc6g,6d6c8h
+CO-ANT-Pueblorrico,0,6766g 6766q 6767g 6767q 6769q 676bg 676cg 676cq 676dg 676eg 676eq,6766fv
+CO-ANT-PuertoBerrio,0,c2e c2f c84 c85,c2feg
+CO-ANT-PuertoNare,0,c2c1q c2c3g c2c3q c2c4q c2c6g c2c6q c2c7g c2c7q c2c8g c2c8q c2c9g c2c9q c2cbg c2cbq c2ccg c2ccq c2cdg c2cdq c2ceg c2ceq c2cfg c2cfq c2d2g c2d2q c2dag c2daq c2e4g c2e4q c2e5g c2f0g,c2cf5v
+CO-ANT-PuertoTriunfo,0,c26aq c26bg c26bq c26cq c26dq c26eg c26eq c26fg c26fq c2c0g c2c0q c2c1g c2c1q c2c4g c2c4q c2c5g c2c5q c2c6g c2c7g c2d0g c2d0q c2d2g,c26f0m
+CO-ANT-Remedios,0,c84 c85 c86 c87 c8c c8d c92,c86cq
+CO-ANT-Rionegro,0,67ddg 67ddq 67dfg 67dfq c282q c283q c288g c288q c289g c289q c28ag c28aq c28bg c28bq,c289bh
+CO-ANT-Sabanalarga,0,6d4eg 6d4eq 6d4fg 6d4fq 6d5ag 6d5aq 6d64g 6d64q 6d65g 6d65q 6d67g 6d67q 6d6dg 6d6dq 6d6fg 6d70g 6d70q 6d72g 6d72q 6d78g 6d78q 6d7ag,6d653h
+CO-ANT-Sabaneta,0,67d97v 67d9dh 67d9dm 67d9dr 67d9dv 67d9fh 67d9fm 67d9fv 67dc2h 67dc2m 67dc2r 67dc2v 67dc3h 67dc3r 67dc8h 67dc8m 67dc8r 67dc8v 67dc9h 67dc9r 67dcah 67dcam 67dcar 67dcav 67dcbh,67dca2k
+CO-ANT-Salgar,0,673fq 6769q 676aq 676bg 676bq 676eg 676eq 6795g 6795q 6797g 6797q 67c0g 67c0q 67c1g 67c1q 67c2g 67c2q 67c3g 67c3q 67c4g,67c12h
+CO-ANT-SanAndresCuerquia,0,6d5ag 6d5aq 6d70g 6d70q 6d71g 6d71q 6d72g 6d72q 6d73g 6d73q 6d74g 6d74q 6d76g 6d76q 6d79g 6d79q 6d7cg,6d730v
+CO-ANT-SanCarlos,0,c29 c2b c2c c2e,c29eg
+CO-ANT-SanFrancisco,0,c233g c233q c236g c236q c237q c239g c239q c23aq c23bg c23bq c23cg c23cq c23dg c23dq c23eg c23eq c23fg c23fq c268q c26ag c26aq c290g c290q c291g c291q c294g c295g,c2907m
+CO-ANT-SanJeronimo,0,67edg 67edq 67efg 67f2q 67f3q 67f8g 67f8q 67f9g 67f9q 67fag 67faq 67fbg 67fbq,67f8bm
+CO-ANT-SanJoseLaMontana,0,6d59q 6d5ag 6d5aq 6d5bg 6d5bq 6d5eq 6d70g 6d70q 6d71g 6d71q,6d712h
+CO-ANT-SanJuanUraba,0,6fa0q 6fa1g 6fa1q 6fa2g 6fa2q 6fa3g 6fa3q 6fa4g 6fa4q 6fa6g 6fa6q 6fa7g 6fa7q 6fa9g 6facg 6facq,6fa95v
+CO-ANT-SanLuis,0,c23bq c23eq c23fq c26aq c291g c291q c293g c293q c294g c294q c295g c295q c296g c296q c297g c297q c299g c29cg c2c0g c2c0q c2c1q c2c2g c2c2q c2c3g c2c3q c2c8g c2c9g,c2963m
+CO-ANT-SanPedroMilagros,0,67f3q 67f6q 67f9g 67f9q 67fbg 67fbq 67fcg 67fcq 67fdg 67fdq 67feg 67feq 67ffg 67ffq c2a8q c2aag c2aaq,67fcfr
+CO-ANT-SanPedroUraba,0,6f2 6f3 6f8 6f9,6f2fq
+CO-ANT-SanRafael,0,c29aq c29bq c2b0g c2b0q c2b1g c2b1q c2b2g c2b3g c2b3q c2b4g c2b4q c2b5g c2b5q c2b6g c2b6q c2b7g c2b7q c2bcg c2bdg c2e0q c2e2g c2e2q,c2b1dv
+CO-ANT-SanRoque,0,c2b6q c2b7q c2b9g c2b9q c2bag c2bbg c2bbq c2bcg c2bcq c2bdg c2bdq c2beg c2beq c2bfg c2bfq c2e1q c2e2g c2e2q c2e3g c2e3q c2e8g c2e8q c2e9g c2eag c2eaq c814g,c2be2h
+CO-ANT-SanVicente,0,c28bq c28eq c2a1g c2a1q c2a2q c2a3g c2a3q c2a4g c2a4q c2a5q c2a6g c2a6q c2a7g c2a9g c2acg,c2a1dh
+CO-ANT-SantaBarbara,0,6776g 6776q 6779g 6779q 677bg 677bq 677cg 677cq 677dg 677dq 677eg 677eq 677fg 67d1g 67d1q 67d4g 67d4q 67d6g,677e4m
+CO-ANT-SantaFeAntioquia,0,67e 6d4,6d45g
+CO-ANT-SantaRosaOsos,0,6d5 6d7 c2a c80,c802q
+CO-ANT-SantoDomingo,0,c2adg c2adq c2aeq c2afg c2afq c2b8g c2b8q c2b9g c2b9q c2bag c2baq c2bbg c2bbq c2beq c805g c810g c811g c814g,c2ba0h
+CO-ANT-Segovia,0,c86 c89 c8c c8d c8f,c86eg
+CO-ANT-Sonson,0,c20 c22 c23 c26,c224q
+CO-ANT-Sopetran,0,67edg 67edq 67efg 67efq 67fag 67faq 67fbq 6d45g 6d50g 6d50q 6d51g 6d51q 6d52g,67fa9h
+CO-ANT-Tamesis,0,674fg 674fq 6758q 675ag 675aq 675bg 675bq 6765g 6765q 6770g 6770q 6771g 6771q 6772g 6772q 6773g 6773q 6779g,67706h
+CO-ANT-Taraza,0,6dd 6df 6f5 c88 c89 c8a ca0,c8a8g
+CO-ANT-Tarso,0,676cg 676cq 676dg 676dq 676eg 676eq 676fg 676fq 6778q 677ag,676dav
+CO-ANT-Titiribi,0,67c4q 67c5q 67c6g 67c6q 67c7g 67c7q 67ccg 67cdg 67cdq 67d0q 67d2g 67d2q 67d8g,67c7cr
+CO-ANT-Toledo,0,6d72g 6d72q 6d73q 6d78g 6d78q 6d79g 6d79q 6d7ag 6d7bg,6d787v
+CO-ANT-Turbo,0,6ce 6cf 6da 6e4 6e5 6e6 6e7 6ed 6f0 6f2 6f8,6e77g
+CO-ANT-Uramita,0,6d1eq 6d31g 6d31q 6d33g 6d33q 6d34g 6d34q 6d35g 6d35q 6d36g 6d36q 6d37g 6d37q 6d3cg 6d62g 6d62q 6d63q 6d68g 6d69g,6d34er
+CO-ANT-Urrao,0,678 679 67a 67b 67c 67e 6d0 6d1,67b6g
+CO-ANT-Valdivia,0,6d7 6dd c82 c88 c8a,c880g
+CO-ANT-Valparaiso,0,6759q 675bg 675bq 675eg 675eq 6771g 6771q 6773g 6773q 6774g,675bdh
+CO-ANT-Vegachi,0,c81 c83 c84 c85 c86 c87,c84bg
+CO-ANT-Venecia,0,676eq 676fg 676fq 677aq 67c4g 67c4q 67c5g 67c5q 67d0g 67d0q 67d1g 67d1q,67d03m
+CO-ANT-VigiaFuerte,0,66d 66f 678 67a 6c4 6c5 6c7 6d0,6c50q
+CO-ANT-Yali,0,c817g c817q c81dg c81dq c842g c842q c843g c843q c846q c847q c848g c848q c849g c849q c84ag c84bg c84cg c84cq c84dg c84dq c84eg c84fg c84fq c858g c858q c85ag,c842bv
+CO-ANT-Yarumal,0,6d5 6d7 c80 c82 c88,c822q
+CO-ANT-Yolombo,0,c2b c2e c80 c81 c83 c84 c85,c814q
+CO-ANT-Yondo,0,c85 c87 c90 c92 c93 c98 c99,c939g
+CO-ANT-Zaragoza,0,c89 c8b c8c c8e ca4,c8e0q
+CO-ARA-Arauca,0,cd4 cd5 cd6 cd7 e2a e2e e2f e80 e81 e82 e83 e84 e85 e86,cd7fg
+CO-ARA-Arauquita,0,c7e c7f cd0 cd1 cd2 cd3 cd4 cd5 cd6,cd3cq
+CO-ARA-CravoNorte,0,e28 e2a e2b e2c e2d e2e e2f e38 e3a e80 e81 e84 e85,e2b5q
+CO-ARA-Fortul,0,c6f cc5 cd0 cd1 cd2,cd0bg
+CO-ARA-PuertoRondon,0,c7d c7e c7f cd1 cd4 cd5 e28 e2a e80,c7e4q
+CO-ARA-Saravena,0,cc5 cc7 cd0 cd2,cd22q
+CO-ARA-Tame,0,c6c c6d c6e c6f c78 c79 c7a c7b c7e cc5 cd0 cd1 cd4,c7acq
+CO-ATL-Baranoa,0,d295g d295q d296g d296q d297g d297q d29dg d2c0g d2c0q d2c2g d2c2q d2c8g,d2976v
+CO-ATL-Barranquilla,0,d29fq d2cag d2caq d2cbg d2cbq d2e0g d2e0q d2e1g d2e1q d2e2g d2e2q,d2e11h
+CO-ATL-CampoLaCruz,0,d21fg d21fq d235g d24ag d24aq d260g d260q d261g d261q d262g d263g,d24aam
+CO-ATL-Candelaria,0,d235g d235q d237g d237q d23dg d260g d260q d262g d262q d263g d263q d268g,d260av
+CO-ATL-Galapa,0,d29dg d29dq d29fg d29fq d2c8g d2c8q d2cag d2caq,d2c8av
+CO-ATL-JuanAcosta,0,d287q d292q d293g d293q d296g d296q d298g d299g d299q d29cg d29cq,d296av
+CO-ATL-Luruaco,0,d22dg d22dq d22fg d22fq d238g d238q d239q d23ag d23aq d23bg d23bq d285g d285q d290g d291g,d238ev
+CO-ATL-Malambo,0,d2c2q d2c3q d2c6q d2c8g d2c8q d2c9g d2c9q d2ccg d2ccq,d2c96h
+CO-ATL-Manati,0,d21bq d21eq d21fq d231g d231q d233g d234g d234q d235g d235q d236g d236q d237g d237q d23dg,d235am
+CO-ATL-PalmarVarela,0,d26aq d26bg d26bq d26eg d26eq d2c0g d2c1g d2c1q d2c4g d2c4q,d2c1dv
+CO-ATL-Piojo,0,d22fq d23aq d23bq d285g d285q d287g d287q d290g d290q d291g d291q d292g d292q d293g d293q d294g d294q d296g,d291av
+CO-ATL-Polonuevo,0,d2c0g d2c0q d2c2g d2c2q d2c3g d2c3q,d2c24r
+CO-ATL-Ponedera,0,d262g d262q d263g d263q d266q d268g d268q d269g d269q d26ag d26aq d26bg d26bq d26cg d26cq d26eg d2c0g d2c0q,d26b7v
+CO-ATL-PuertoColombia,0,d29eq d29fq d2b4g d2b5g d2b5q d2caq d2e0g d2e0q,d2b51r
+CO-ATL-Repelon,0,d227g d227q d22dg d230g d230q d231g d231q d232g d232q d233g d233q d236g d236q d238g d238q d239g d239q d23cg d23cq,d2327v
+CO-ATL-Sabanagrande,0,d2c3g d2c3q d2c6g d2c6q,d2c37v
+CO-ATL-Sabanalarga,0,d236q d237q d239q d23bg d23bq d23cg d23cq d23dg d23dq d23eg d23eq d23fg d23fq d268g d268q d26ag d26aq d291g d294g d295g d2c0g d2c0q,d23f4v
+CO-ATL-SantaLucia,0,d21dq d21eg d21eq d21fg d21fq d234g,d21f0v
+CO-ATL-SantoTomas,0,d26aq d2c0g d2c0q d2c1g d2c1q d2c2g d2c3g d2c4q d2c6g,d2c1fv
+CO-ATL-Soledad,0,d2c8q d2c9q d2cag d2cbg d2ccq d2ceg,d2cb1m
+CO-ATL-Suan,0,d21dg d21dq d21fg d248q d24ag d24aq,d24a0v
+CO-ATL-Tubara,0,d296q d297q d299q d29bg d29bq d29cg d29cq d29dg d29dq d29eg d29eq d29fg d29fq,d29cdm
+CO-ATL-Usiacuri,0,d23fq d291g d294g d294q d295g d295q d296g d297g,d294fm
+CO-BOL-Achi,0,cac cad cae caf,cadag
+CO-BOL-AltosRosario,0,caf7g caf7q cafdg cafdq cba0q cba1q cba2g cba2q cba3g cba3q cba6g cba6q cba8g cba8q cba9g cba9q cbacg cbacq,cba96v
+CO-BOL-Arenal,0,ca7 cb2 cb8 cb9,cb92q
+CO-BOL-Arjona,0,75f 775 d0a d20,d209g
+CO-BOL-Arroyohondo,0,d211q d213g d213q d216g d216q d217q d219g d219q d21cg d21cq d21dg d21dq d21eg,d21c1h
+CO-BOL-BarrancoLoba,0,cafdq caffg caffq cba1q cba3g cba4q cba6g cba6q cba7g cba7q cba8g cba8q cba9q cbaag cbaaq cbabg cbabq cbacg cbacq cbadg cbadq cbaeg cbaeq d100g d100q d101g d101q d104g d104q,d1043v
+CO-BOL-Calamar,0,d211g d211q d213g d214g d214q d215g d215q d216g d216q d217g d217q d219g d219q d21bg d21cg d21cq d21dg d21dq d21eg d21eq d21fg,d21d4m
+CO-BOL-Cantagallo,0,c87 c8d c92 c98 c99 c9b,c99ag
+CO-BOL-CartagenaIndias,0,753 775 777 d20 d22 d28,7775q
+CO-BOL-Cicuco,0,d04bq d04eg d04eq d04fg d04fq d061g d064g d064q d065g d065q d066g d067g,d065br
+CO-BOL-Clemencia,0,d223q d226q d227q d229g d229q d22cg d22cq d22dg d22eg,d22c3r
+CO-BOL-Cordoba,0,d03 d06 d09 d0c,
+CO-BOL-ElCarmenBolivar,0,d08 d09 d0a,d098q
+CO-BOL-ElGuamo,0,d0b9q d0bbg d0bbq d0bcg d0bcq d0bdg d0bdq d0beg d0beq d0bfg d0bfq d0e2q d0e8g d0e8q d0e9g d0e9q d0eag d0eaq d0ebg d214g d215g d240g,d0be4r
+CO-BOL-ElPenon,0,cbb2q cbb3g cbb3q cbb8g cbb8q cbb9g cbb9q cbbag cbbaq cbbbg cbbbq cbbcq cbbeg d110g d110q d111g d111q d112g,d1124h
+CO-BOL-HatilloLoba,0,d054q d055q d056g d057g d100g d100q d101g d101q d102g d103g d104g d104q d105q d106g d106q d107g d107q d110q d112g,d104dh
+CO-BOL-Magangue,0,cae caf d01 d03 d04 d05 d06,d061q
+CO-BOL-Mahates,0,d0aeq d0afg d0afq d0bag d0baq d204g d204q d205g d205q d206g d206q d207g d207q d20cg d20dg d20dq d210g d210q d211g d211q d212g d212q d213g d213q d218g d218q d219g d219q,d212ar
+CO-BOL-Margarita,0,d05dg d05dq d05fg d100g d100q d101q d102g d102q d103g d103q d106g d106q d108g d108q d109g d109q d10ag d10cg,d10a2h
+CO-BOL-MariaBaja,0,d0a2g d0a2q d0a3g d0a3q d0a6g d0a6q d0a7g d0a7q d0a8g d0a8q d0a9g d0a9q d0aag d0abg d0abq d0acg d0acq d0adg d0adq d0aeg d0aeq d0afg d0afq d201g,d0acch
+CO-BOL-Montecristo,0,c8e c8f ca4 ca5 ca6 ca7 cad cb0 cb2,ca7bq
+CO-BOL-Morales,0,cb2 cb3 cb8 cb9,cb3bg
+CO-BOL-Norosi,0,cb80q cb81q cb82g cb82q cb83g cb83q cb86g cb86q cb87q cb88g cb89g cb89q cb8bg cb8bq cb8cg cb8cq cb8dg cb8dq cb8eg cb8eq cb8fg cb8fq cb98q cb9ag cb9aq cba4g,cb8dbm
+CO-BOL-Pinillos,0,caf cba d04 d05 d10,d051g
+CO-BOL-Regidor,0,cb9eq cbb0q cbb1g cbb1q cbb3g cbb3q cbb4g cbb4q cbb6g cbb6q cbb9g cbb9q cbbcg cbbcq,cbb49r
+CO-BOL-RioViejo,0,ca7 cad cb2 cb8 cb9 cba cbb,cb9eq
+CO-BOL-SanCristobal,0,d21bg d21bq d21eg d21eq d231g,d2315h
+CO-BOL-SanEstanislao,0,d20dq d20eg d20eq d20fg d20fq d218q d21ag d21aq d225g d225q d230g d230q,d2304r
+CO-BOL-SanFernando,0,d053q d055q d056g d056q d057g d057q d059g d05cg d05cq d05dg d05dq d05eg d05eq d05fg d05fq d074g d075g d100q d102g d102q d108g d10aq,d0754h
+CO-BOL-SanJacinto,0,d08fq d09aq d09bq d09eq d09fq d0a4q d0a5g d0a5q d0a6g d0a7g d0a7q d0b0g d0b0q d0b1g d0b1q d0b2g d0b2q d0b3g d0b4g d0b4q d0b5g d0b5q d0b6g d0b7g,d0b07v
+CO-BOL-SanJacintoCauca,0,ca6 ca7 cac cad,ca6eg
+CO-BOL-SanJuanNepomuceno,0,d0a d0b d0e d21,d0b9g
+CO-BOL-SanMartinLoba,0,cba4g cba4q cba5q cba6g cba7g cba7q cbacq cbadg cbadq cbaeg cbaeq cbafg cbafq cbb0g cbb0q cbb1q cbb2g cbb2q cbb3g cbb3q cbb8g cbb8q cbbag cbbaq d104g d104q d105g d105q d110g d110q,d1053m
+CO-BOL-SanPablo,0,c87 c8d c8f c92 c98 c99 c9a c9b,c9b0q
+CO-BOL-SantaCatalina,0,d227q d22cg d22cq d22dg d22dq d22eg d22eq d22fg d22fq d284g d284q d285g d285q d287g d287q,d22cfr
+CO-BOL-SantaCruzMompox,0,d04 d05 d06 d07,d074g
+CO-BOL-SantaRosaLima,0,d220g d220q d221g d221q d223g d223q d224g d224q d226g d226q d229g d22cg,d221em
+CO-BOL-SantaRosaSur,0,c8d c8f c9a ca5 ca7 cb0 cb1 cb2 cb3,cb0fg
+CO-BOL-Simiti,0,c9a c9b cb0 cb1 cb2 cb3,cb1ag
+CO-BOL-Soplaviento,0,d218g d218q d219g d219q d21ag d21aq d21bg d21bq d230g d231g,d2305h
+CO-BOL-TalaiguaNuevo,0,d04fq d065g d065q d066g d066q d067g d067q d069g d069q d06bg d06cg d06cq d06dg d06dq d06eg d070g d070q d072g d072q,d0723h
+CO-BOL-Tiquisio,0,ca7 cad caf cb8 cba,cb8ag
+CO-BOL-Turbaco,0,d208q d209g d209q d20ag d20aq d20bg d20bq d20cq d20eg d20eq d220g d221g d224g,d20b2h
+CO-BOL-Turbana,0,7755q 7757g 7757q 775dg d200q d202g d202q d203q d208g d208q d209g d209q d20ag,d2086v
+CO-BOL-Villanueva,0,d20eq d20fq d224g d224q d225g d225q d226g d226q d227g d227q d230q d232g,d224fm
+CO-BOL-Zambrano,0,d09cq d09dg d09dq d09eg d09fg d09fq d0b5g d0b5q d0c2q d0c8g d0c8q d0c9g d0c9q d0cag d0caq d0cbg d0cbq d0e0g d0e0q d0e2g d0e2q,d0ca7m
+CO-BOY-Almeida,0,c1c7q c1cdg c1cdq c1d8g c1d8q c1dag,c1d8am
+CO-BOY-Aquitania,0,c4a c60 c61,c60cg
+CO-BOY-Arcabuco,0,c364q c365q c366g c366q c367g c367q c36cg c36cq c36dg c370g c370q c372g,c3673v
+CO-BOY-Belen,0,c62eq c62fq c681q c683g c683q c684g c684q c685g c685q c686g c686q c687g c68cg c690q,c684ch
+CO-BOY-Berbeo,0,c1f7q c1fdg c1fdq c1ffg c4a2g c4a2q c4a8g c4a8q c4aag,c1fd6h
+CO-BOY-Beteitiva,0,c62dq c62eg c62eq c62fg c62fq c63ag c63aq c685g c690g,c62fdm
+CO-BOY-Boavita,0,c69eq c6b3g c6b3q c6b4g c6b4q c6b5g c6b5q c6b6g c6b6q c6b7g c6b9g c6b9q c6bcg c6bcq,c6b65v
+CO-BOY-Boyaca,0,c345q c347g c350q c352g c352q,c3523m
+CO-BOY-Briceno,0,c31aq c31bq c330g c330q c331g c331q,c330dh
+CO-BOY-Buenavista,0,c307g c307q c30dg c310q c312g c312q c313g c313q c318g c318q c319g c319q,c3184r
+CO-BOY-Busbanza,0,c62cg c62cq c62dg c62dq c62eg c62fg,c62c7v
+CO-BOY-Caldas,0,c318q c319g c319q c31ag c31bg c31bq,c319cr
+CO-BOY-Campohermoso,0,c1d6q c1d7q c1dcg c1dcq c1ddg c1ddq c1deg c1deq c1dfg c1dfq c1f1g c1f4g c1f5g c1f5q c488q c48ag c48aq c4a0g c4a0q,c1dfdv
+CO-BOY-Cerinza,0,c62bq c62eq c681g c681q c684g c684q,c6840h
+CO-BOY-Chinavita,0,c1edg c1edq c1f2g c1f2q c1f3g c1f3q c1f8g c1f8q c1f9g,c1f23r
+CO-BOY-Chiquinquira,0,c319q c31bg c31bq c31cq c31dq c31eg c31eq c31fg c31fq c331g c331q c334g c334q c34aq,c31e9h
+CO-BOY-Chiquiza,0,c34cq c34eg c34eq c34fg c34fq c35aq c364g c365g c365q c370g c370q,c34e6v
+CO-BOY-Chiscas,0,c6b c6e cc1 cc4 cc6,cc40g
+CO-BOY-Chita,0,c66 c69 c6b c6c c6e,c6cag
+CO-BOY-Chitaraque,0,c36fg c36fq c37aq c3c4g c3c4q c3c5g c3c5q c3c6g c3c7g c3c7q c3d0g c3d0q c3d2g,c3c71h
+CO-BOY-Chivata,0,c359g c359q c35bg c35cg c35cq c35eg c35eq,c359eh
+CO-BOY-Chivor,0,c1c7g c1c7q c1cdg c1d0g c1d0q c1d2g c1d2q c1d3g c1d3q c1d8g c1d9g,c1d29r
+CO-BOY-Cienega,0,c1fbq c350g c350q c351g c351q c354g c354q,c3519r
+CO-BOY-Combita,0,c358q c35ag c35aq c35bg c35bq c370g c370q c371g c371q c372g c372q c373g c378g,c35afm
+CO-BOY-Coper,0,c304q c305g c305q c306g c306q c307g c307q c30cg c30dg c310g c310q c312g,c3078m
+CO-BOY-Corrales,0,c626q c627q c62cg c62dg c62dq c62fg c638q,c62d3v
+CO-BOY-Covarachia,0,c6afq c6b8q c6b9q c6bag c6baq c6bbg c6bbq cc05g cc10g cc10q cc11g,c6ba7r
+CO-BOY-Cubara,0,cc4 cc5 cc6 cc7,cc79g
+CO-BOY-Cuitiva,0,c609q c60bg c60cq c60eg c60eq,c60b5h
+CO-BOY-Duitama,0,c37dq c37fg c37fq c3d4g c3d4q c3d5g c3d5q c3d7g c622q c623q c628g c628q c629g c629q c62ag c62aq c62bg c62bq c680g c680q c682g,c6287m
+CO-BOY-ElCocuy,0,c6b5q c6b7g c6b7q c6e0q c6e1g c6e1q c6e2g c6e2q c6e3g c6e3q c6e4q c6e6g c6e6q c6e8g c6e8q c6e9g c6e9q c6ecg,c6e85r
+CO-BOY-ElEspino,0,c6bfg c6bfq c6e8q c6eag c6eaq c6ebq cc40g,c6ea0r
+CO-BOY-Firavitoba,0,c35fq c375g c60aq c60bq c620g c620q c621g c621q c624q,c6211v
+CO-BOY-Floresta,0,c626q c629g c629q c62bg c62cg c62cq c62eg c62eq c62fg,c62cbm
+CO-BOY-Gachantiva,0,c361g c361q c363g c363q c364g c364q c366g c366q c369g c36cg,c3637m
+CO-BOY-Gameza,0,c627q c62dg c62dq c632q c633q c636q c638g c638q c639g c63cg,c62d5m
+CO-BOY-Garagoa,0,c1cfq c1dag c1daq c1dbg c1dbq c1f0g c1f0q c1f1g c1f1q c1f2g c1f3g c1f4q c1f6g,c1f03m
+CO-BOY-Guacamayas,0,c6bdg c6bdq c6bfg c6e8g c6e8q c6eag,c6e8ar
+CO-BOY-Guateque,0,c1ccq c1cdq c1ceg c1ceq c1cfg c1cfq c1e4g,c1ce7m
+CO-BOY-Guayata,0,c1c3q c1c6q c1c7q c1c9g c1c9q c1ccg c1ccq c1cdg c1cdq c1ceg,c1ccem
+CO-BOY-Guican,0,c6e c6f cc4 cc5,c6e9q
+CO-BOY-Iza,0,c60bg c60bq c60eg c60eq,c60b6r
+CO-BOY-Jenesano,0,c1fag c1faq c345g c345q c350g c350q c352g,c3503v
+CO-BOY-Jerico,0,c697q c699g c69cg c69cq c69dg c69dq c69eg c69fg,c69d8r
+CO-BOY-LaCapilla,0,c1e4g c1e4q c1e5g c1e5q c1e6g c1e7g,c1e59h
+CO-BOY-LaUvita,0,c69eg c69eq c69fg c69fq c6b4g c6b4q c6b5g c6b5q c6b6g c6b6q c6b7g c6b7q c6e0g c6e0q,c6b5br
+CO-BOY-LaVictoria,0,c302q c308g c308q c309g c309q,c3086m
+CO-BOY-Labranzagrande,0,c61 c63 c64,c61dq
+CO-BOY-Macanal,0,c1d2q c1d3q c1d8g c1d8q c1d9g c1d9q c1dag c1daq c1dbg c1dbq c1dcq c1deg c1deq c1f1g c1f4g,c1d8fm
+CO-BOY-Miraflores,0,c1f1g c1f1q c1f3g c1f3q c1f4g c1f4q c1f5g c1f5q c1f6g c1f6q c1f7g c1f7q c1fcg c1fdg c4a2g c4a2q,c1f7bh
+CO-BOY-Mongua,0,c61ag c61aq c61bq c61eq c625q c627g c627q c630g c630q c631g c631q c632g c632q c633g c633q c634g c634q c635g c635q c636g c636q c637g,c6322r
+CO-BOY-Mongui,0,c60fq c624q c625g c625q c626g c627g c630g c630q,c625br
+CO-BOY-Moniquira,0,c362q c363q c366q c368g c369g c369q c36ag c36aq c36bg c36bq c36cg c36cq c36dg c36dq c36eg c36eq c3c1g c3c4g,c36b4h
+CO-BOY-Motavita,0,c34dq c34fg c34fq c358q c35ag c35aq c370g,c35a1h
+CO-BOY-Nobsa,0,c623g c623q c626g c626q c627q c629g c62cg,c6268m
+CO-BOY-NuevoColon,0,c1eeg c1eeq c1efg c1efq c344g c345g c345q,c1efav
+CO-BOY-Oicata,0,c358q c359q c35ag c35bg c35bq c35eg c35eq c371g,c35b0v
+CO-BOY-Otanche,0,c25fq c275g c275q c277g c277q c30ag c30aq c30bg c30bq c320g c320q c321g c321q c322g c322q c323g c323q c326g c326q c328g c328q c329g c329q c32bg c32bq c32cg c32cq c32eg,c3211h
+CO-BOY-Pachavita,0,c1e5g c1e5q c1e7g c1e7q c1edg c1f0g c1f0q c1f2g c1f2q c1f8g,c1e75m
+CO-BOY-Paez,0,c1f5q c1f7g c488q c489q c48ag c48aq c48bg c48bq c48eg c48eq c4a0g c4a0q c4a1g c4a1q c4a2g c4a2q c4a3g c4a3q c4a4g c4a4q c4a6q c4a9g c4acg,c4a0ch
+CO-BOY-Paipa,0,c375g c375q c376g c376q c377g c377q c37cq c37dg c37dq c37eg c37eq c37fg c37fq c3d4g c3d4q c3d5g c3d5q c620g c620q c622g c622q c628g c628q,c377cv
+CO-BOY-Pajarito,0,c4b9q c4baq c4bbg c4bbq c4beg c4beq c4bfq c610g c610q c611g c611q c612g c612q c613g c613q c614g c614q c615g c616g,c4bb1r
+CO-BOY-Panqueba,0,c6e2q c6e8g c6e8q c6eag,c6e8cr
+CO-BOY-Pauna,0,c30eq c30fg c30fq c318q c31ag c31aq c31bg c31bq c324g c325g c325q c326g c326q c327g c327q c32cg c32dg c330g c330q c332g,c3300h
+CO-BOY-Paya,0,c61fg c61fq c648g c648q c649g c649q c64ag c64aq c64bg c64bq c64cg c64cq c64eg c64eq c64fg c64fq c660g c660q c661g c661q c664g c664q c665g c665q c666g c666q c667g c667q c66cg c66dg,c64b8r
+CO-BOY-PazRio,0,c685g c685q c687g c687q c690g c690q c691q c692g c692q c693g c693q c698g,c690cm
+CO-BOY-Pesca,0,c1ffq c355g c355q c357g c357q c35dg c35dq c600g c600q c602g c602q c608g c608q c609q c60ag c60aq c60bg c60bq,c608em
+CO-BOY-Pijaos,0,c347q c34cg c34cq c34dg c34dq,c34d8m
+CO-BOY-Pisba,0,c61fg c61fq c634q c635g c635q c636g c636q c637g c637q c64aq c660g c660q c661g c661q c662g c662q c663g c663q c664q c666g c666q c668g c668q c669g c669q c66cg,c660br
+CO-BOY-PuertoBoyaca,0,c26 c27 c2c c2d c2f c32 c38,c2c5g
+CO-BOY-Quipama,0,c25dq c25fg c25fq c302q c303g c303q c308g c308q c309g c309q c30ag c30aq c30bg c30cg,c3091v
+CO-BOY-Ramiriqui,0,c1f8g c1f8q c1f9g c1f9q c1fag c1faq c1fbg c1fbq c350g c350q c351g c351q c352g c353g,c350dr
+CO-BOY-Raquira,0,c317g c317q c31dg c340q c341q c342g c342q c343g c343q c348g c348q c349g c349q c34bg,c3487r
+CO-BOY-Rondon,0,c1fbg c1fbq c1feg c1feq c1ffq c351g c354g c354q c355g c355q c356g c357g,c3541m
+CO-BOY-Saboya,0,c31eq c31fq c331q c333g c334g c334q c335g c335q c336g c336q c337g c337q c34aq c360g c360q c362g,c3358r
+CO-BOY-Sachica,0,c349g c349q c34bg c34bq c34cg c34cq c34eg,c34b5m
+CO-BOY-Samaca,0,c340q c341g c341q c343g c343q c344q c346g c346q c347g c347q c349g c34cg c34cq c34dg,c346em
+CO-BOY-SanEduardo,0,c1fdg c1fdq c4a2g c4a2q c4a3q c4a8g c4a8q c4a9g c4a9q c4aag c4abg,c4a81r
+CO-BOY-SanJosePare,0,c3c1g c3c1q c3c3g c3c4g c3c4q c3c6g,c3c1fv
+CO-BOY-SanLuisGaceno,0,c17cq c17dq c17eg c17eq c17fg c17fq c1d4g c1d4q c1d5g c1d5q c1d6g c1d6q c1d7g c1d7q c1ddg c1ddq c428q c42ag c42aq c480g c480q c482g c482q c488g c488q c48ag,c1d5ah
+CO-BOY-SanMateo,0,c6b6q c6b7g c6b7q c6bcg c6bcq c6bdg c6bdq c6beg c6bfg c6e2q c6e8g,c6bd1r
+CO-BOY-SanMiguelSema,0,c316q c317q c31cg c31cq c31dg c31dq c31eg c31fg,c31d4r
+CO-BOY-SanRafaelUmbita,0,c1e6g c1e6q c1e7g c1e7q c1ecg c1ecq c1edg c1edq c1eeg c1efg c1f8g,c1ed0v
+CO-BOY-SantaMaria,0,c17bg c17bq c17cq c17eg c17eq c17fq c1d0g c1d0q c1d1g c1d1q c1d2g c1d3g c1d3q c1d4g c1d4q c1d6g c1d6q c1d9g c1d9q c1dcg c1dcq,c1d37h
+CO-BOY-SantaRosaViterbo,0,c623q c629g c629q c62ag c62aq c62bg c62bq c62cg c62eg c62eq c680g c680q c681g c681q,c62b4h
+CO-BOY-SantaSofia,0,c360g c360q c361g c361q c362g c362q c363g c363q,c361am
+CO-BOY-Santana,0,c3c4q c3c6g c3c6q c3c7g c3c7q c3ccg,c3c67r
+CO-BOY-Sativanorte,0,c687q c68dg c68dq c68fg c692q c693q c696q c698g c698q c699g c699q c69ag c69bg c69cg c69cq c69eg,c6993r
+CO-BOY-Sativasur,0,c691q c692q c693g c693q c696q c698g c699g,c693av
+CO-BOY-Siachoque,0,c353g c353q c354q c355q c356g c356q c357g c357q c359g c35cg c35cq c35dg,c35c0r
+CO-BOY-Soata,0,c6b0g c6b0q c6b1g c6b1q c6b2g c6b2q c6b3g c6b3q c6b4g c6b4q c6b6g,c6b34r
+CO-BOY-Socha,0,c639q c63bg c63bq c63eg c63eq c690g c690q c691g c691q c693g c693q c694g c694q c696g c696q,c6919v
+CO-BOY-Socota,0,c63 c66 c69 c6c,c696g
+CO-BOY-Sogamoso,0,c60bq c60eg c60eq c60fg c60fq c61ag c61aq c621g c621q c624g c624q c625g c625q c626g c626q c627g c630g,
+CO-BOY-Somondoco,0,c1c7q c1ccq c1cdg c1cdq c1cfg c1d8q c1dag,c1cf1m
+CO-BOY-Sora,0,c34cq c34dq c34eg c34fg c34fq,c34dam
+CO-BOY-Soraca,0,c350q c351q c352g c352q c353g c353q c358g c359g c359q,c352fr
+CO-BOY-Sotaquira,0,c371q c372g c372q c373g c373q c374q c375q c376g c376q c377g c377q c378g c378q c379g c379q c37ag c37cg c37cq c37dg c37dq,c373dm
+CO-BOY-Susacon,0,c68dq c68fg c68fq c698q c699q c69ag c69aq c69bg c69bq c69eg c69eq c6b0g c6b0q c6b1g c6b1q c6b4g,c69bbm
+CO-BOY-Sutamarchan,0,c348q c349q c34ag c34aq c34bg c34bq c360g c360q c361g,c34adm
+CO-BOY-Sutatenza,0,c1ceq c1cfg c1cfq c1dag c1daq,c1cf8m
+CO-BOY-Tasco,0,c62dq c62fg c62fq c638g c638q c639g c639q c63ag c63aq c63bg c63bq c63cg c63cq c63eg c63eq c690g c690q c691g,c63a3r
+CO-BOY-Tenza,0,c1ceq c1cfq c1daq c1e4g c1e5g c1e5q c1f0g,c1e56h
+CO-BOY-Tibana,0,c1edg c1edq c1efg c1efq c1f8q c1f9q c1fag c1faq c1fbg c345g c350g,c1efdm
+CO-BOY-Tibasosa,0,c620g c620q c621q c622g c622q c623g c623q c624q c626g c629g,c6233h
+CO-BOY-Tinjaca,0,c31dg c31dq c31fg c31fq c348g c348q c34ag c34aq,c34a4h
+CO-BOY-Tipacoque,0,c6b2q c6b3q c6b8g c6b8q c6b9g c6b9q c6bbg,c6b93v
+CO-BOY-Toca,0,c359q c35cg c35cq c35dg c35dq c35eg c35eq c35fg c35fq c374g c608q c60ag c60aq,c35cfh
+CO-BOY-Togui,0,c36bq c36cq c36dq c36eg c36eq c36fg c36fq c3c1g c3c4g c3c4q c3c5g,c36ebm
+CO-BOY-Topaga,0,c626g c626q c627g c627q c632q,c627ch
+CO-BOY-Tota,0,c600g c600q c601g c601q c602g c602q c603g c603q c608g c608q c609g c609q c60bg c60cg c60cq,c609eh
+CO-BOY-Tunja,0,c347g c347q c34dg c34dq c352g c352q c358g c358q c359q c35ag c35bg,c3581r c3581v c3583h c3583m c3583r c3583v c3589h c3589m c3589v c358ch c358cr
+CO-BOY-Tunungua,0,c330q c331q c332g c333g,c3324m
+CO-BOY-Turmeque,0,c1ebg c1ebq c1ecg c1ecq c1eeg c1eeq c344g,c1eecm
+CO-BOY-Tuta,0,c35bq c35eq c35fq c371g c371q c374g c374q c375g c375q c376g c377g c60aq,c3748m
+CO-BOY-Tutaza,0,c685q c686g c686q c687g c687q c68cg c68dg c68dq,c6871r
+CO-BOY-Ventaquemada,0,c1ebg c1ebq c1eeq c341g c341q c344g c344q c345g c345q c346g c347g c347q,c3441r
+CO-BOY-VillaLeyva,0,c34bg c34bq c34eg c34eq c361g c361q c364g c364q c365g c365q c367g,c34eam
+CO-BOY-Viracacha,0,c351q c353g c353q c354q c356g,c3531h
+CO-BOY-Zetaquira,0,c1f3q c1f6q c1f9g c1f9q c1fbg c1fcg c1fcq c1fdg c1fdq c1feg c1feq c1ffg c1ffq c355g c4aag c4aaq c4abq c600g c601g,c1ff0h
+CO-CAL-Aguadas,0,675cq 675dq 675eg 675eq 675fg 675fq 6774g 6774q 6775g 6775q 6776g c201q c203g c203q c206g c206q c208g c208q c209g c209q c20ag c20aq c20bg c20bq c20cg c220g c220q c221g,c20a8h
+CO-CAL-Anserma,0,65e4q 65e5q 65e6g 65e7g 65e7q 65edg 65edq 65efg 65f0q 65f2g 65f2q 65f3g 65f3q 65f8g 65f8q 65fag,65edcm
+CO-CAL-Aranzazu,0,65fcg 65fcq 65fdg 65fdq 65feq 65ffg 65ffq c0a8g c0a8q c0a9g c0a9q c0aag,65fdev
+CO-CAL-Belalcazar,0,65ccg 65ccq 65cdg 65cdq 65ceg 65ceq 65cfg 65cfq 65daq 65e5g 65f0g,65cf1r
+CO-CAL-Chinchina,0,65d8q 65d9g 65d9q 65dag 65daq 65dbg 65dcg 65dcq 65deg 65f0g,65de0h
+CO-CAL-Filadelfia,0,65f9g 65f9q 65fbg 65fbq 65fcg 65fcq 65fdq 65feg 65feq 65ffg 65ffq 6751g 6754g,65fe6m
+CO-CAL-LaDorada,0,c0e c24 c26,c246g
+CO-CAL-LaMerced,0,65feq 65ffq 6754g 6754q 6755g 6755q 6756g 6757g,6754dr
+CO-CAL-Manizales,0,65deg 65deq 65dfg 65dfq 65f1g 65f1q 65f3g 65f3q 65f4g 65f4q 65f5g 65f5q 65f6g 65f7g c08aq c08bg c08bq c0a0g c0a0q c0a1g c0a1q c0a2g c0a3g,65f54v
+CO-CAL-Manzanares,0,c0a7q c0acg c0acq c0adg c0adq c0afg c0b2g c0b2q c0b8g c0b8q c0b9g c0b9q c0bag c0bbg,c0b88v
+CO-CAL-Marmato,0,6753g 6753q 6756g 6756q 6759g 675cg,67568v
+CO-CAL-Marquetalia,0,c0b9q c0bag c0baq c0bbg c0bbq c0beg c0beq,c0bb6h
+CO-CAL-Marulanda,0,c08bq c0a1g c0a1q c0a3g c0a3q c0a4q c0a5q c0a6g c0a6q c0a7g c0a7q c0a9g c0a9q c0abg c0abq c0acg c0acq c0adg c0adq c0aeg c0aeq c0afg c0afq c0b2q c204g c205g,c0ae4m
+CO-CAL-Neira,0,65f2q 65f3g 65f3q 65f5q 65f6g 65f6q 65f7g 65f7q 65f8g 65f8q 65f9g 65f9q 65fbg 65fcg 65fdg c0a0q c0a1q c0a2g c0a2q c0a3g c0a3q c0a8g c0a8q c0a9g,65f78m
+CO-CAL-Norcasia,0,c21cq c21dg c21dq c21fg c21fq c235g c235q c237g c248q c24ag c24aq c24bg c24bq c260g c260q c261g c261q c262g,c21f5h
+CO-CAL-Pacora,0,6756g 6756q 6757g 6757q 675cg 675cq 675dg 675dq 675fg c201q c202g c202q c203g c203q c208g c208q c209g,c2082r
+CO-CAL-Palestina,0,65dag 65daq 65dbg 65dbq 65deg 65deq 65f0g 65f0q 65f1g 65f1q 65f2g 65f3g 65f4g,65dbdh
+CO-CAL-Pensilvania,0,c0adq c0aeq c0afg c0afq c0bag c0baq c0bbq c201g c203g c203q c204g c204q c205g c205q c206g c206q c207g c207q c20dg c210g c210q c211g c211q c212g c212q c213g c213q c218g c218q c219g,c2102r
+CO-CAL-Riosucio,0,65fbq 6744g 6744q 6745g 6745q 6746g 6746q 6747g 6747q 674cg 674dg 674dq 6750g 6750q 6751g 6751q 6752g 6752q 6753g 6753q 6754g 6758g 6758q 6759g,6750fr
+CO-CAL-Risaralda,0,65daq 65e4g 65e4q 65e5g 65e5q 65e7g 65e7q 65f0g 65f0q 65f2g 65f2q,65e7dm
+CO-CAL-Salamina,0,65ffg 65ffq 6755g 6755q 6757g 6757q c0a8q c0a9g c0a9q c0aag c0aaq c0abg c0abq c0aeq c200g c200q c201g c201q c202g c203g c204g c204q c206g,6755em
+CO-CAL-Samana,0,c0b c21 c23 c26,c214q
+CO-CAL-SanJose,0,65ceg 65ceq 65cfq 65e4g 65e5g 65e5q 65e7g 65f0q,65e5ch
+CO-CAL-Supia,0,6751g 6751q 6753g 6753q 6754g 6754q 6756g 6758g 6758q 6759g,67533v
+CO-CAL-Victoria,0,c0b c0e c21 c24,c0bfq
+CO-CAL-Villamaria,0,65d7q 65dcg 65dcq 65ddg 65ddq 65deg 65deq 65dfg 65dfq c080q c081q c082g c082q c083g c083q c088g c088q c089g c089q c08ag c08aq c08bg c08bq,65dfbr
+CO-CAL-Viterbo,0,65cbq 65ccq 65ceg 65ceq 65e1g 65e1q 65e4g 65e4q 65e5q 65e6g,65e41m
+CO-CAQ-Albania,0,3769q 376bg 376bq 376cq 376dq 376eg 376eq 376fg 376fq 37c0g 37c0q 37c1g 37c1q 37c2g 37c3g 37c3q 37c4g 37c4q 37c5g 37c5q 37c6g 37c6q 37c7g 37c9g 37ccg,37c68v
+CO-CAQ-BelenAndaquies,0,376 377 37b 37c 37d 37e,37ccq
+CO-CAQ-CartagenaChaira,0,90d 90e 90f 918 919 91a 91b 91c 91d 91e 923 924 925 926 927 929 92c 92d 92e 930 931 932,92c2q
+CO-CAQ-Curillo,0,373 374 376 379 37c,3763q
+CO-CAQ-ElDoncello,0,929 92a 92b 980 982,92acg
+CO-CAQ-ElPaujil,0,928 929 92a 92b 980 982,92a1q
+CO-CAQ-Florencia,0,37d 37e 37f 3d5 3d7 92a 980 982,37f3q
+CO-CAQ-LaMontanita,0,37d 37f 922 923 928 929 92a,928aq
+CO-CAQ-Milan,0,377 37d 920 922 928,37d7g
+CO-CAQ-Morelia,0,37c7q 37cdg 37cfg 37cfq 37d1g 37d1q 37d2g 37d2q 37d3g 37d3q 37d4g 37d4q 37d6g 37d6q 37d8g 37d8q 37d9g 37d9q 37dag 37daq 37dbg 37dbq 37dcg 37dcq 37deg 37e5g 37e5q 37e7g 37f0g 37f0q,37dabh
+CO-CAQ-PuertoRico,0,929 92a 92b 92c 92e 980 981 982 983 984 988 989,9812q
+CO-CAQ-SanJoseFragua,0,373 376 379 37b 37c 37e,37c2q
+CO-CAQ-SanVicenteCaguan,0,91b 91e 927 92c 92d 92e 92f 930 931 932 933 934 936 937 938 939 93a 93b 93c 93e 981 983 984 985 986 989 98b 98c 98e,9861g
+CO-CAQ-Solano,0,3p 8t 8y 9j 9k 9n 9p,9206g
+CO-CAQ-Solita,0,374 375 376 377,375bq
+CO-CAQ-Valparaiso,0,375 376 377 37c 37d 920 922,377aq
+CO-CAS-Aguazul,0,c49 c4b c4c c4e c61,c4b7q
+CO-CAS-Chameza,0,c4a1q c4a3g c4a3q c4a4q c4a5q c4a6g c4a6q c4a7g c4a7q c4acg c4acq c4adg c4adq c4aeg c4aeq c4afg c4afq c4b2g c4b2q c4bag c4baq c604g c605g c610g,c4ad0h
+CO-CAS-HatoCorozal,0,c67 c6d c72 c73 c78 c79 c7b c7c c7d c7e c7f e28 e29 e2a e2b e2c e2e,c789q
+CO-CAS-LaSalina,0,c6c3q c6c6q c6c9g c6c9q c6cbg c6cbq c6ccg c6ccq c6cdg c6cdq c6ceg c6ceq c6cfg c6e1g c6e1q c6e4g,c6cc3r
+CO-CAS-Mani,0,c43 c44 c45 c46 c47 c49 c4c c4d c4e c50 c52,c4c5q
+CO-CAS-Monterrey,0,c42 c43 c48 c49 c4a,c486q
+CO-CAS-Nunchia,0,c4f c64 c65 c66 c67 c70,c65aq
+CO-CAS-Orocue,0,c47 c4d c4f c52 c53 c58 c59 c5a c5b c5c c5d c5e,c595g
+CO-CAS-PazAriporo,0,c67 c6d c70 c71 c72 c73 c74 c75 c76 c77 c79 c7c c7d e20 e21 e22 e23 e24 e26 e28 e29 e2c e2d,c72ag
+CO-CAS-Pore,0,c65 c67 c70 c72,c676g
+CO-CAS-Recetor,0,c4a7q c4adg c4adq c4afg c4b2q c4b8g c4b8q c4b9g c4b9q c4bag c4baq c4bbg c4bbq c605g c605q c610g c610q,c4b86h
+CO-CAS-Sabanalarga,0,c428q c429g c429q c42ag c42aq c42bg c42bq c42cq c42eg c42eq c42fg c42fq c480g c480q c481g c481q c482g c482q c483g c483q c484g c488g c488q c489g c489q c48ag c48bg c48cg c48cq,c4825r
+CO-CAS-Sacama,0,c6c3g c6c4q c6c5q c6c6g c6c6q c6c7g c6c7q c6ccg c6cdg c6cdq c6d0g c6d0q c6d1q c6d2g c6d2q c6d3g c6d3q c6d6g c6d6q c6d8g c6d9g c6dcg,c6cd1m
+CO-CAS-SanLuisPalenque,0,c4f c5a c5b c5c c5d c5e c5f c65 c70 c71,c704q
+CO-CAS-Tamara,0,c66 c67 c6c c6d,c678g
+CO-CAS-Tauramena,0,c41 c43 c44 c46 c48 c49 c4a c4b c4c,c49ag
+CO-CAS-Trinidad,0,c5b c5e c5f c70 c71 c74 c75 e0a e20,c705q
+CO-CAS-Villanueva,0,c40 c41 c42 c43,c426q
+CO-CAS-Yopal,0,c4b c4c c4d c4e c4f c61 c64 c65,c4ebq
+CO-CAU-Almaguer,0,3c47q 3c50q 3c51q 3c52g 3c52q 3c53g 3c53q 3c54q 3c56g 3c56q 3c58g 3c58q 3c59g 3c59q 3c5cg,3c52dv
+CO-CAU-Argelia,0,3c3 3c6 3c9 3cc,3c3dg
+CO-CAU-Balboa,0,3c1dq 3c1eg 3c1eq 3c1fg 3c1fq 3c34g 3c34q 3c35g 3c35q 3c37g 3c48g 3c48q 3c4ag 3c4aq 3c4bg 3c4bq 3c60g 3c60q 3c61g 3c61q 3c62g 3c62q 3c63g,3c4a2r
+CO-CAU-Bolivar,0,36e 36f 3c4 3c5 3c6 3c7,3c45q
+CO-CAU-BuenosAires,0,3cfdq 3cffg 3cffq 3da8q 3daag 3daaq 3e55g 3e55q 3e57g 3e57q 3f00g 3f00q 3f02g 3f02q 3f03q 3f08g,3e55dm
+CO-CAU-Cajibio,0,3cd9q 3cdaq 3cdbg 3cdbq 3cdcg 3cdcq 3cddg 3cddq 3cdeg 3cdeq 3cdfg 3cdfq 3cf0g 3cf0q 3cf1g 3cf1q 3cf3g 3cf4g 3cf4q 3cf5g 3cf5q 3d88g 3d88q 3d89g 3d89q 3d8ag 3d8aq 3d8bg 3d8bq 3da0g,3d8a5r
+CO-CAU-Caldono,0,3da1g 3da1q 3da2q 3da3g 3da3q 3da4q 3da5q 3da6g 3da6q 3da7g 3da7q 3da8g 3da8q 3da9g 3da9q 3dacg 3dacq 3dadg 3dadq 3dafg,3da68h
+CO-CAU-Caloto,0,3daeq 3dafg 3dafq 3f04g 3f04q 3f05g 3f05q 3f06g 3f06q 3f07g 3f07q 3f0cg 3f0cq 3f0dg 3f0dq 3f10g 3f10q 3f12g 3f12q 3f18g,3f05ah
+CO-CAU-Corinto,0,3f12g 3f12q 3f13g 3f13q 3f16g 3f16q 3f17g 3f17q 3f18g 3f18q 3f19g 3f19q 3f1ag 3f1bg 3f1cg 3f1cq 3f1dg 3f1dq,3f198r
+CO-CAU-ElTambo,0,3c6 3c7 3c9 3cb 3cc 3cd 3ce 3cf,3cd1q
+CO-CAU-Florencia,0,36e9g 36e9q 36ebg 36ecg 36ecq 36eeg,36ec8h
+CO-CAU-Guachene,0,3f06q 3f07g 3f07q 3f0cg 3f0cq 3f0dg 3f0dq 3f0eg 3f0fg,3f0d1h
+CO-CAU-Guapi,0,397 39d 39f 3c2 3c3 3c8 3c9 3ca,39dcq
+CO-CAU-Inza,0,3d3 3d9 3dc,3d9dg
+CO-CAU-Jambalo,0,3da5q 3da7g 3da7q 3dadg 3dadq 3dafg 3dafq 3db0q 3db2g 3db2q 3db3g 3db3q 3db8g 3db8q 3db9g 3dbag 3dbaq 3f05g 3f10g,3db22m
+CO-CAU-LaSierra,0,3c6dg 3c70q 3c71q 3c72g 3c72q 3c73g 3c73q 3c74q 3c75q 3c76g 3c76q 3c77g 3c77q 3c78g,3c760v
+CO-CAU-LaVega,0,3c56q 3c59g 3c59q 3c5ag 3c5aq 3c5bg 3c5bq 3c5cg 3c5cq 3c5dg 3c5dq 3c5eg 3c5eq 3c5fg 3c5fq 3c70g 3c70q 3c71g 3c71q 3c72g 3c73g 3c74g 3c74q 3c75g 3c75q 3d08g 3d08q 3d0ag,3c5cah
+CO-CAU-Lopez,0,3c9 3ca 3cb 3ce 3cf 3e0 3e1 3e4 3e5,3cbdg
+CO-CAU-Mercaderes,0,36b 36e 3c1 3c4,3c40g
+CO-CAU-Miranda,0,3f0fq 3f19q 3f1ag 3f1aq 3f1bg 3f1bq 3f1cg 3f1cq 3f1dg 3f1dq 3f1eg 3f1fg 3f25g 3f30g 3f31g,3f1bcr
+CO-CAU-Morales,0,3cf1g 3cf1q 3cf2g 3cf2q 3cf3g 3cf3q 3cf4q 3cf5q 3cf6g 3cf6q 3cf7g 3cf7q 3cf8g 3cf8q 3cf9g 3cf9q 3cfag 3cfaq 3cfbg 3cfbq 3cfdg 3cfdq 3da0g 3da0q 3da2g 3da2q 3da8g 3da8q 3e50g 3e51g,3cf75m
+CO-CAU-Padilla,0,3f0dg 3f0dq 3f0fg 3f0fq 3f18g 3f18q 3f1ag 3f1aq,3f1a3m
+CO-CAU-Paez,0,3d9 3db 3dc 3de 3df 3f1 3f4,3dcaq
+CO-CAU-Patia,0,3c4 3c6 3c7,3c65g
+CO-CAU-Piamonte,0,372 373 378 379 37b,3738q
+CO-CAU-Piendamo,0,3cf5g 3cf5q 3d8aq 3d8bg 3d8bq 3da0g 3da0q 3da1g 3da1q 3da2g 3da2q 3da3g 3da3q 3da8g,3d8b3v
+CO-CAU-Popayan,0,3cd5q 3cd6g 3cd6q 3cd7g 3cd7q 3cdcg 3cdcq 3cddg 3d2bg 3d2bq 3d80g 3d80q 3d81g 3d81q 3d82g 3d82q 3d83g 3d83q 3d84g 3d84q 3d85g 3d85q 3d86g 3d88g 3d89g,3d80bh
+CO-CAU-PuertoTejada,0,3f0eg 3f0eq 3f0fg 3f0fq 3f21g 3f24g 3f24q 3f25g,3f0e7v
+CO-CAU-Purace,0,3d21g 3d21q 3d23g 3d23q 3d24g 3d24q 3d26g 3d26q 3d27g 3d27q 3d29g 3d29q 3d2bg 3d2bq 3d2cg 3d2cq 3d2dg 3d2dq 3d2eg 3d2eq 3d2fg 3d2fq 3d81g 3d84g 3d85g 3d85q,3d2b7r
+CO-CAU-Rosas,0,3c73q 3c76q 3c77g 3c77q 3c79g 3c79q 3c7bg 3c7cg 3c7cq 3c7dg 3c7eg,3c7c6h
+CO-CAU-SanSebastian,0,36f9q 36fbg 36fbq 36feg 36feq 3c50g 3c50q 3c51g 3c51q 3c54g 3c54q 3c55g 3c55q 3c56g 3c56q 3c57g 3c57q 3c5cg 3c5cq 3c5dg 3d00g 3d00q 3d02g 3d02q 3d08g,3c548r
+CO-CAU-SantaRosa,0,36c 36d 36e 36f 372 378 379 37a 37b 3c5 3d0,37a8q
+CO-CAU-SantanderQuilichao,0,3da8g 3da8q 3da9g 3da9q 3daag 3daaq 3dabg 3dabq 3dacg 3dacq 3dadq 3daeg 3daeq 3dafg 3dafq 3f00g 3f00q 3f01g 3f01q 3f02g 3f02q 3f03g 3f03q 3f04g 3f04q 3f06g 3f06q 3f09g 3f0cg,3f042r
+CO-CAU-Silvia,0,3d8 3d9 3da 3db,3d8fg
+CO-CAU-Sotara,0,3c5 3c7 3cd 3d0 3d2 3d8,3d28g
+CO-CAU-Suarez,0,3cf 3e5 3f0,3cffq
+CO-CAU-Sucre,0,3c4dq 3c4fg 3c4fq 3c58q 3c59q 3c5ag 3c5aq 3c5bg 3c65g 3c65q 3c70g 3c70q 3c72g,3c5a2h
+CO-CAU-Timbio,0,3c7bg 3c7bq 3c7cq 3c7dq 3c7eg 3c7eq 3c7fg 3c7fq 3cd1g 3cd4g 3cd4q 3cd5g 3cd5q 3cd6g 3cd7g 3d80g 3d80q,3c7f9h
+CO-CAU-Timbiqui,0,3c3 3c8 3c9 3ca 3cb 3cc 3ce,3ca3g
+CO-CAU-Toribio,0,3db8g 3db8q 3db9g 3db9q 3dbag 3dbaq 3dbbg 3dbbq 3dbcq 3dbeg 3dbeq 3dbfg 3dbfq 3f10g 3f10q 3f11g 3f11q 3f12g 3f13g 3f14g 3f14q 3f15g 3f15q 3f16g 3f17g 3f17q,3dbadv
+CO-CAU-Totoro,0,3d83g 3d83q 3d84q 3d85g 3d85q 3d86g 3d86q 3d87g 3d87q 3d88g 3d89g 3d89q 3d8cg 3d8cq 3d8dg 3d90g 3d90q 3d92g 3d92q 3d93g 3d93q 3d98g 3d99g,3d878v
+CO-CAU-VillaRica,0,3f06q 3f09g 3f09q 3f0bg 3f0cg 3f0cq 3f0eg 3f0eq,3f0c9r
+CO-CES-Aguachica,0,cb1 cb3 cb4 cb6 cbc,cb6bq
+CO-CES-AgustinCodazzi,0,d1c d1d d1e d1f d35 d4a d60,d1feg
+CO-CES-Astrea,0,d12 d13 d18 d19,d13aq
+CO-CES-Becerril,0,d1c d1d d1f d48 d4a,d1d9q
+CO-CES-Bosconia,0,d19 d1a d1b,d1b9g
+CO-CES-Chimichagua,0,d11 d13 d14 d16,d134q
+CO-CES-Chiriguana,0,d13 d16 d17 d19 d1c,d169g
+CO-CES-Curumani,0,d11 d13 d14 d15 d16 d17,d14eq
+CO-CES-ElCopey,0,d1a d1b d30 d31 d33,d310q
+CO-CES-ElPaso,0,d19 d1b d1c d1e,d19dg
+CO-CES-Gamarra,0,cb36q cb37q cb3cg cb3cq cb3dg cb3dq cb3fg cb3fq cb68g cb68q cb6ag cb6aq cb95g cb95q cb97g cb97q cbc0g cbc0q cbc1q cbc2g cbc2q cbc3g cbc8g,cb951h
+CO-CES-Gonzalez,0,cbc5q cbc7g cbc7q cbd0g cbd0q cbd2g cbd2q,cbd0av
+CO-CES-LaGloria,0,cb9 cbb cbc cbe,cbb4g
+CO-CES-LaJaguaIbirico,0,d16 d17 d1c d1d d48,d1d0q
+CO-CES-LaPaz,0,d1c d1e d1f d35 d37 d60,d35fq
+CO-CES-ManaureBalconCesar,0,d35fq d375g d60ag d60aq d60bg d60bq d60eg d60eq d620g d621g d624g d624q,d60afv
+CO-CES-Pailitas,0,cbb cbe d11 d14,d140q
+CO-CES-Pelaya,0,cbb4q cbb5q cbb6g cbb7g cbb7q cbbdg cbe0g cbe0q cbe2g cbe2q cbe3g cbe3q cbe8g cbe8q cbe9g cbe9q cbeag cbeaq cbebg cbebq cbecg cbecq cbedg cbedq cbeeg cbefg,cbe0bv
+CO-CES-PuebloBello,0,d31 d33 d34 d36 d3c,d361g
+CO-CES-RioOro,0,cb60q cb61q cb62g cb63g cb63q cb64q cb65q cb66g cb66q cb67g cb67q cb69g cb69q cb6bg cb6cg cb6cq cb6dg cb6dq cb6eg cb6eq cb6fg cb6fq cb72g cb7ag cb7aq cbc4g cbc5g cbc5q cbd0g cbd0q,cb7a8h
+CO-CES-SanAlberto,0,c9e cb4 cb5,cb50g
+CO-CES-SanDiego,0,d1e d1f d34 d35,d35eg
+CO-CES-SanMartin,0,cb1 cb4 cb5 cb6 cb7,cb4eq
+CO-CES-Tamalameque,0,cbb6q cbb7q cbbbg cbbbq cbbcg cbbcq cbbdg cbbdq cbbeg cbbeq cbbfg cbbfq cbe2q cbe8g cbe8q cbeag d111g d111q d114g d114q d115g d115q d116g d116q d117g d117q,cbbe3m
+CO-CES-Valledupar,0,d1b d1e d31 d34 d35 d36 d37 d3c d3d d62,d371q
+CO-CHO-Acandi,0,6e3 6e6 6e9 6eb 6ec,6e9dq
+CO-CHO-AltoBaudo,0,64e 64f 661 663 664 665 666 669 66c,664dg
+CO-CHO-Bagado,0,65b 670 671 673 674 676,6705q
+CO-CHO-BahiaSolano,0,669 66b 66c 66e 6c1,669bq
+CO-CHO-BajoBaudo,0,643 644 646 649 64b 64c 64d 64e 64f 660 661 664,649cq
+CO-CHO-Bojaya,0,669 66b 66c 66e 66f 6c1 6c4 6c5 6c6 6c7,66efq
+CO-CHO-CarmenDarien,0,6c1 6c3 6c4 6c6 6c7 6cc 6cd 6d2 6d8,6cc5q
+CO-CHO-Certegui,0,65a8q 65aag 65aaq 65abg 65abq 65aeq 6655q 6657g 6700g 6700q 6701g 6701q 6702g 6703g 6703q 6704g 6704q 6705g 6705q 6706g 6706q 6707g 6707q 670cg 6712g,67006h
+CO-CHO-Condoto,0,64deg 64deq 64dfg 64dfq 64f5g 64f5q 658ag 658aq 658bg 658bq 658eg 658eq 65a0g 65a0q 65a1g 65a1q 65a3g 65a4g 65a4q 65a5q 65a6g 65a7g 65a7q 65adg 65b0q 65b2g 65b2q 65b8g,64f5dm
+CO-CHO-ElAtrato,0,6657g 6657q 665dg 665dq 665fg 665fq 6675g 6700q 6702g 6702q 6708g 6708q 6709q 670ag 670aq 670bg 670bq 670cq 670eq 6720g 6721g 6721q 6724g 6724q,67088m
+CO-CHO-ElCantonSanPablo,0,64f9q 64fbg 64fbq 64fcq 64fdq 64feg 64feq 64ffg 64ffq 6651g 6651q 6652g 6652q 6653g 6653q 6654g 6654q 6655g 6655q 6656g 6657g 6658g 6659g,
+CO-CHO-ElCarmenAtrato,0,672 673 679,673eg
+CO-CHO-ElLitoralSanJuan,0,3ea 3eb 3ee 3ef 3fa 640 641 643 644 645 646 650,6416g
+CO-CHO-Istmina,0,644 645 646 647 64c 64d 64f 650 65a,64f7q
+CO-CHO-Jurado,0,69d 6c0 6c1 6c2 6c3 6c8 6ca,6c80g
+CO-CHO-LasAnimas,0,64f7q 64fdg 64fdq 64feq 64ffg 64ffq 65a8g 65a8q 65aag 65aaq 6655g 6655q 6700g 6700q,65aa0v
+CO-CHO-Lloro,0,670 671 672 673,6709g
+CO-CHO-MedioAtrato,0,667 66c 66d 672 678 679,66d4q
+CO-CHO-MedioBaudo,0,649 64b 64c 64d 64e 64f 665,64e4g
+CO-CHO-MedioSanJuan,0,646 647 64d 64f,64f5q
+CO-CHO-Novita,0,647 64d 652 658,6588q
+CO-CHO-Nuqui,0,661 663 664 666 669,6635q
+CO-CHO-Paimado,0,664 665 666 667,6656q
+CO-CHO-Quibdo,0,665 666 667 66c 66d 66e 66f 670 672 673 678 679,6675q
+CO-CHO-RioIro,0,64f5q 64f7g 65a0q 65a1q 65a2g 65a2q 65a3g 65a3q 65a4q 65a5q 65a6g 65a6q 65a7g 65a7q 65a9g 65acg 65acq 65adg 65b2g 65b2q,65a6bh
+CO-CHO-Riosucio,0,6c0 6c1 6c2 6c3 6c6 6c8 6c9 6ca 6cb 6cc 6cd 6ce 6cf 6d2 6d8 6e1 6e4,6ce1g
+CO-CHO-SanJosePalmar,0,652 653 658 659 65a 65b,6593q
+CO-CHO-Sipi,0,645 647 64d 650 652 653 658 659,647dq
+CO-CHO-Tado,0,65a 65b 670 671,65a9q
+CO-CHO-Unguia,0,6e3 6e4 6e6 6e7 6ec,6e64q
+CO-COR-Ayapel,0,ca2 ca3 ca6 ca8 ca9 cac,ca3aq
+CO-COR-Buenavista,0,6f7 6fd ca0 ca2 ca8,6f7dq
+CO-COR-Canalete,0,6fb0q 6fb1g 6fb1q 6fb2g 6fb2q 6fb3g 6fb3q 6fb4g 6fb4q 6fb5q 6fb6g 6fb6q 6fb7g 6fb7q 6fb8g 6fb9g 6fb9q 6fbcg 6fbcq 6fbdg 6fbdq,6fb9dh
+CO-COR-Cerete,0,6febq 6fedq 6feeg 6feeq 6fefg 6fefq 6ff8q 6ffag 6ffaq 7540g 7540q 7541g 7541q 7544g 7545g 7545q 7550g 7550q 7552g,6feffh
+CO-COR-Chima,0,7552g 7552q 7553g 7553q 7556q 7558g 7558q 7559g 7559q 755ag 755bg 755bq 755cg 755cq 755eg 755eq 755fg 7571g 7574g,755e2h
+CO-COR-Chinu,0,755 caa d00 d01,d009q
+CO-COR-CienagaOro,0,6fd 6ff 755,6ffeq
+CO-COR-Cotorra,0,7547g 7547q 754dg 754dq 7552g 7552q 7558g 7558q,7547fh
+CO-COR-LaApartada,0,ca0bg ca0bq ca0eg ca0eq ca0fq ca21g ca21q ca23g ca24g ca24q ca25g ca25q ca26g ca26q ca27g ca30g ca30q ca32g,ca217v
+CO-COR-Lorica,0,751 754 755 756 757,
+CO-COR-LosCordobas,0,6fa7q 6fadg 6fadq 6fafg 6fafq 6fb2q 6fb8g 6fb8q 6fb9g 6fb9q 6fbag 6fbaq 6fbbg 6fbbq 6fbcq 6fbdq 6fbeg 6fbeq 6fbfg 6fbfq 7505g 7510g 7510q 7511g 7511q,6fbabr
+CO-COR-Momil,0,755bg 755bq 7571g 7571q 7573g 7573q 7574g 7574q 7576g 7576q 757cg,75719m
+CO-COR-Monitos,0,751cq 751dq 751eg 751eq 751fg 751fq 7534g 7534q 7535g 7535q 7537g 7537q 754ag 754aq 7560g 7560q 7562g,75359r
+CO-COR-Montelibano,0,6dc 6de 6f4 6f5 6f6 6f7 ca0 ca2,ca0ag
+CO-COR-Monteria,0,6f6 6f7 6f9 6fb 6fc 6fd 6fe 6ff 751 754,6fecg
+CO-COR-PlanetaRica,0,6f6 6f7 6fd ca2 ca8,6fd6g
+CO-COR-PuebloNuevo,0,6fd 6ff ca2 ca8,6fddq
+CO-COR-PuertoEscondido,0,6fbbq 6fbeq 7510q 7511g 7511q 7513g 7513q 7514g 7514q 7515g 7515q 7516g 7516q 7517g 7517q 7519g 751cg 751cq 751dg 7542g 7542q,7513cr
+CO-COR-PuertoLibertador,0,6dc 6de 6df 6f4 6f5 6f7,6f59g
+CO-COR-Purisima,0,755bq 7565q 7567g 7570g 7570q 7571g 7571q 7572g 7572q 7573g 7573q 7579g,7570dh
+CO-COR-Sahagun,0,6fd 6ff 755 ca8 caa d00,d000q
+CO-COR-SanAndresSotavento,0,7556q 7557q 755cg 755cq 755dg 755dq 755eg 755fg 755fq 7575g d008q d00ag d00aq d020g d020q,755f6m
+CO-COR-SanAntero,0,7566q 7567g 7567q 756cg 756cq 756dg 756dq 756eg 756fg 7572g 7572q 7573q 7578g 7578q 7579g 7579q,75783r
+CO-COR-SanBernardoViento,0,7537g 7537q 7560g 7560q 7561g 7561q 7562g 7562q 7563g 7563q 7566g 7566q 7567q 7568g 7569g 7569q 756bg 756cg 756cq 756dg 756eg,75694v
+CO-COR-SanCarlos,0,6fd9q 6fdag 6fdaq 6fdbg 6fdbq 6fdeq 6fe7g 6fe7q 6fedg 6fedq 6ff0g 6ff0q 6ff1g 6ff1q 6ff2g 6ff2q 6ff3g 6ff3q 6ff4g 6ff4q 6ff6g 6ff6q 6ff8g 6ff8q 6ff9g 6ff9q 6ffag 6ffbg 6ffcg 6ffcq,6ff98h
+CO-COR-SanJoseUre,0,6df9g 6df9q 6dfbg 6dfbq 6dfcg 6dfcq 6dfeg 6dfeq 6dffg 6dffq 6f51g 6f51q 6f54g 6f54q 6f55g 6f55q 6f56g 6f56q 6f57g 6f57q 6f5cg 6f5cq 6f5dg 6f5dq 6f5fg ca00q ca02g ca02q ca08g ca08q,6f55av
+CO-COR-SanPelayo,0,6feeq 7515q 7517g 7517q 751dg 7540q 7541g 7541q 7542g 7542q 7543g 7543q 7544g 7544q 7545g 7545q 7546g 7546q 7547g 7547q 7548g 7549g 754cg 7550g 7550q 7551q 7552g 7552q 7553g 7558g,7545am
+CO-COR-Tierralta,0,6d8 6d9 6da 6db 6dc 6de 6f0 6f1 6f2 6f3 6f4 6f6 6f7 6fc,6f68g
+CO-COR-Tuchin,0,755eg 755eq 755fg 755fq 7574g 7574q 7575g 7575q 7576g 7577g d020g d020q,755fah
+CO-COR-Valencia,0,6f0 6f2 6f3 6f6 6f9 6fc,6f3fg
+CO-CUN-AguaDios,0,c049g c049q c04bg c04cg c04cq c04dg c04dq c04eg c04fg,c04cem
+CO-CUN-Alban,0,c0d1q c0d3g c0d3q c0d6g c0d6q c0d9g c0d9q c0dcg,c0d3dh
+CO-CUN-Anapoima,0,c067q c06dg c070g c070q c071g c071q c072g c072q c073g c073q c078g,c0724r
+CO-CUN-Anolaima,0,c07aq c07bq c07eq c0d0g c0d0q c0d1g c0d1q c0d3g c0d4g c0d4q c0d6g,c0d11m
+CO-CUN-Apulo,0,c04fq c05aq c065g c065q c067g c067q c06dg c070g c070q c072g c072q,c065em
+CO-CUN-Arbelaez,0,c050q c051g c051q c052g c053g c053q c054g c054q c055g c055q c056g c056q c100g,c0562v
+CO-CUN-Beltran,0,c062q c063q c068g c068q c069g c069q c06ag c06aq c06bg c06bq c06eq c0c1g c0c1q c0c3g c0c4g c0c4q c0c6g,c0c1cm
+CO-CUN-Bituima,0,c0d0g c0d0q c0d2g c0d2q c0d3g c0d3q c0d8g c0d8q,c0d29m
+CO-CUN-Bojaca,0,c077q c07cq c07dg c07dq c07eg c07eq c07fg c07fq c0d5g c122q c128g,c07f8v
+CO-CUN-Cabrera,0,9ad9g 9ad9q 9adag 9adaq 9adbg 9adbq 9adcq 9adeg 9adeq 9af0g 9af0q 9af1g 9af1q 9af2g 9af2q 9af3g 9af3q 9af4g 9af4q 9af6g 9af6q 9af8g 9af9g 9afcg,9af32v
+CO-CUN-Cachipay,0,c078q c079q c07ag c07aq c07bg c07bq c07eg c07eq c0d4g,c07bdm
+CO-CUN-Cajica,0,c186q c187q c18cg c18dg c18dq c18fg,c18d1m
+CO-CUN-Caparrapi,0,c0e c0f c24 c25,c0fbq
+CO-CUN-Caqueza,0,c10dq c10fg c10fq c118q c119g c119q c11ag c11aq c11bg c11bq,c11a1v
+CO-CUN-CarmenCarupa,0,c1adq c1afg c1afq c1b2q c1b8g c1b8q c1b9q c1bag c1baq c1bbg c1bbq c305g c310g c310q c311g c311q c312g c313g c313q,c1bbav
+CO-CUN-Chaguani,0,c0c6q c0c7q c0c9q c0cbg c0ccg c0ccq c0cdg c0cdq c0ceg c0cfg c0d2q c0d8g c0d8q c0dag,c0cddh
+CO-CUN-Chia,0,c184q c185q c186g c186q c187g c187q c18cg c18dg c192q,c1872r
+CO-CUN-Chipaque,0,c106q c10cg c10cq c10dq c10eg c10eq c10fg c10fq c11aq c124g c124q c125g c125q c130g,c10f8v
+CO-CUN-Choachi,0,c127g c127q c12dg c130q c131q c132g c132q c133g c133q c136q c138g c138q c139g c13cg,
+CO-CUN-Choconta,0,c19eq c19fg c19fq c1b5g c1b5q c1b6g c1b7g c1b7q c1bdg c1cag c1caq c1e0g c1e0q c1e1q c1e2g c1e2q c1e3g c1e3q c1e4q c1e6g c1e8g,c1e20r
+CO-CUN-Cogua,0,c18fq c19aq c1a5g c1a5q c1a7g c1a7q c1b0g c1b0q c1b1q c1b2g,c1b00h
+CO-CUN-Cota,0,c12bg c12bq c12eq c181g c181q c184g c184q c186g,c1849v
+CO-CUN-Cucunuba,0,c1b3g c1b3q c1b6g c1b6q c1b7q c1b9g c1bcg c1bcq c1bdg c1bdq c1beg c1bfg c1e8g,c1bcdm
+CO-CUN-ElColegio,0,c071g c071q c073g c073q c074g c074q c076g c076q c07cg,c073dh
+CO-CUN-ElPenon,0,c0f6q c0f7q c0fcg c0fcq c0fdg c0fdq c0feg c0feq c0ffg c0ffq c1a8g c1a8q c1aag c1aaq,c0fddh
+CO-CUN-ElRosal,0,c0d7q c180q c182g c182q c183g c183q c188g c188q,c1820v
+CO-CUN-Facatativa,0,c0d4g c0d4q c0d5g c0d5q c0d6g c0d6q c0d7g c0d7q c180g c180q c182g,c0d4dv
+CO-CUN-Fomeque,0,c119q c11bg c11bq c11eg c11eq c11fq c130g c131g c131q c133g c133q c134g c134q c135g c135q c136g c136q c137g c137q c13cg c13cq c13dg c13dq c13eg c160q c162g,c1312m
+CO-CUN-Fosca,0,c107q c10dg c10dq c112g c112q c113g c113q c118g c118q c119g c119q,c1186h
+CO-CUN-Funza,0,c12ag c12aq c12bg c12bq c180g c180q c181g,c12a7v
+CO-CUN-Fuquene,0,c1beq c314g c314q c315g c315q c316g c316q c317g c317q,c314cr
+CO-CUN-Fusagasuga,0,c052g c052q c053g c053q c054q c055q c056g c056q c057g c057q c059g c05cg c05cq c05dg c05dq c05eg c05fg c05fq c108q,c05c7h
+CO-CUN-Gachala,0,c161q c162g c162q c163g c163q c166g c166q c168g c168q c169g c169q c16bg c16cg c16cq c16dg c16dq c16eg c16eq c16fg c16fq c17ag c17aq c1c5g c1d0g c1d0q,c16e1h
+CO-CUN-Gachancipa,0,c199q c19bg c19bq,c19b4h
+CO-CUN-Gacheta,0,c195q c197g c197q c1c0g c1c0q c1c1g c1c1q c1c2g c1c2q c1c3g c1c3q c1c4q c1c6g c1c6q c1c8g c1c8q c1c9g c1c9q,c1c0cv
+CO-CUN-Gama,0,c168q c169q c16ag c16aq c16bg c16bq c16eg c1c0g c1c1g,c1c10h
+CO-CUN-Girardot,0,c017g c017q c01dg c042g c042q c043q c048g c048q c049g c049q c04ag c04bg c04bq,c042fm
+CO-CUN-Granada,0,c074g c074q c075g c075q c076g c077g,c0758r
+CO-CUN-Guacheta,0,c1beq c1bfq c1eaq c314g c315g c315q c317g c340g c340q c341g c341q c342g,c3402r
+CO-CUN-Guaduas,0,c0c c0d c0e c0f c24,c0e5g
+CO-CUN-Guasca,0,c139q c13bg c13bq c13cq c13eg c13eq c13fg c13fq c190g c190q c191g c191q c192g c192q c193g c193q c194g c194q c195g c195q c196g c196q c198g c199g,c1933v
+CO-CUN-Guataqui,0,c04ag c04aq c04bg c04bq c060g c060q c061g c061q c062g c062q c063g c063q,c0618r
+CO-CUN-Guatavita,0,c193q c194q c195q c196g c196q c197g c197q c199g c199q c19bg c19cg c19cq c19dg c19dq c1c2q c1c8g,c19c2h
+CO-CUN-GuayabalSiquima,0,c0d0q c0d1q c0d2g c0d2q c0d3g c0d3q c0d8g c0d8q c0d9g c0d9q,c0d39m
+CO-CUN-Guayabetal,0,9bbaq 9bbbq c110g c110q c111g c111q c112g c113g c113q c114g c114q c115g c115q c116g c116q c117g c11cg,c1149r
+CO-CUN-Gutierrez,0,9ba3q 9ba6q 9ba9g 9ba9q 9bacg 9bacq 9badq 9baeg 9baeq 9bafg 9bafq 9bbag 9bbaq c104g c104q c105g c105q c106g c106q c107g c107q c110g c110q c111g c111q c112g c112q c113g,c1074v
+CO-CUN-Jerusalen,0,c04bq c04eq c061g c061q c063g c063q c064g c064q c066g c066q c067g c067q c069g c06cg c06cq c06dg c06dq,c0663h
+CO-CUN-Junin,0,c137g c137q c13cq c13dg c13dq c13eg c13eq c13fg c13fq c160q c162g c162q c168g c168q c16ag c16aq c195g c195q c197g c1c0g c1c0q,c1c03r
+CO-CUN-LaCalera,0,c12dg c12dq c12fg c12fq c132q c133q c138g c138q c139g c139q c13ag c13aq c13bg c13bq c13cg c13cq c13eg c185g c185q c190g c190q c191g,c13a2v
+CO-CUN-LaMesa,0,c072q c073q c078g c078q c079g c079q c07ag c07bg c07cg c07cq c07eg,c0796h
+CO-CUN-LaPalma,0,c0f9q c0fbg c0fbq c0fcq c0fdq c0feg c0feq c0ffg c251g c251q c253g c254g c254q c256g,c2544h
+CO-CUN-LaPena,0,c0f1q c0f3g c0f3q c0f4q c0f6g c0f6q c0f9g c0f9q c0fcg c0fcq c0fdq,c0f6bv
+CO-CUN-LaVega,0,c0d6q c0d7q c0dcg c0dcq c0ddg c0ddq c0deg c0deq c0dfg c0dfq c0f5g c18aq,c0df0v
+CO-CUN-Lenguazaque,0,c1bdg c1bdq c1beg c1beq c1bfg c1bfq c1e8g c1e8q c1eag c1eaq c1ebg c1ebq c340g c341g,c1bf6m
+CO-CUN-Macheta,0,c19dg c19dq c19fg c1c8g c1c8q c1c9q c1cag c1caq c1cbg c1cbq c1ceq c1e0g c1e0q c1e1g c1e1q c1e2g c1e3g c1e4g c1e4q,c1e12h
+CO-CUN-Madrid,0,c07fg c07fq c0d5g c0d5q c128q c12ag c12aq c180g c180q c181q c182g c183g,c12a8m
+CO-CUN-Manta,0,c1c8q c1c9g c1c9q c1cbg c1cbq c1ccq c1ceg c1ceq c1e1g c1e4g,c1ce2h
+CO-CUN-Medina,0,c14 c15 c16 c17,c170q
+CO-CUN-Mosquera,0,c07dg c07dq c07fg c128g c128q c129g c129q c12ag c12aq c12bg,c12a6m
+CO-CUN-Narino,0,c048g c048q c04ag c04aq c04bg c04bq c061g,c04a4r
+CO-CUN-Nemocon,0,c19aq c19bq c1b0g c1b0q c1b1g c1b1q c1b3g c1b4g c1b4q c1b6g,c1b11v
+CO-CUN-Nilo,0,c041q c043g c044g c044q c045q c046g c046q c047g c047q c04cg c04cq c04dg c04dq c052g c052q c058g c058q c059g c059q,c047bv
+CO-CUN-Nimaima,0,c0f1g c0f1q c0f4g c0f4q c0f6g c0f6q c0f7q,c0f4er
+CO-CUN-Nocaima,0,c0dbq c0deg c0deq c0dfq c0f1g c0f4g c0f4q c0f5g,c0f44v
+CO-CUN-Pacho,0,c0f7g c0f7q c0fdg c18bq c1a0q c1a1g c1a1q c1a2g c1a2q c1a3g c1a3q c1a4g c1a4q c1a6g c1a6q c1a7g c1a7q c1a8g c1a8q c1a9g c1a9q c1aag c1acg c1acq c1adg,c1a1ev
+CO-CUN-Paime,0,c1aaq c1abg c1abq c1aeq c300g c300q c301g c301q c303g c304g c304q c306g c306q,c3014v
+CO-CUN-Pandi,0,9af9q 9afbg 9afbq c050g c050q c051g c051q c052g c053g,c0512m
+CO-CUN-Paratebueno,0,c14 c15 c17 c40 c42,c15cq
+CO-CUN-Pasca,0,c055g c055q c057g c057q c05dg c05dq c100g c100q c102g c102q c103g c108g c108q c10ag,c057ev
+CO-CUN-PuertoSalgar,0,c24 c25 c26 c27,c246q
+CO-CUN-Puli,0,c069g c069q c06bg c06bq c06cg c06cq c06dg c06dq c06eg c06eq c06fg c06fq,c06car
+CO-CUN-Quebradanegra,0,c0f0g c0f0q c0f1g c0f1q c0f2g c0f3g,c0f1bh
+CO-CUN-Quetame,0,c113g c113q c116g c116q c119g c119q c11bg c11cg c11cq c11eg,c1194v
+CO-CUN-Quipile,0,c06dg c06dq c06fg c06fq c078g c078q c07ag c07aq c07bg c0c5g c0d0g c0d0q,c07aeh
+CO-CUN-Ricaurte,0,c042q c043g c043q c046g c046q c049g c049q c04cg,c0439h
+CO-CUN-SanAntonioTequendama,0,c076g c076q c077g c077q c07cg c07dg c07dq,c07d0h
+CO-CUN-SanBernardo,0,9afbg 9afbq 9afcg 9afcq 9afdg 9afdq 9afeg 9afeq 9affg 9affq 9ba8q 9baag 9baaq c051g c051q c054g c055g c100g,c0540r
+CO-CUN-SanCayetano,0,c1a9q c1abg c1abq c1acg c1acq c1adg c1adq c1aeg c1aeq c1afg c1afq c1bag c1baq c304g c304q c305g c305q c306g,c1af9v
+CO-CUN-SanFrancisco,0,c0d7g c0d7q c0ddg c0ddq c0dfg c0dfq c182q c188g c188q c18ag c18aq,c0ddfm
+CO-CUN-SanJuanRioseco,0,c06eq c06fq c0c3g c0c3q c0c4g c0c4q c0c5g c0c5q c0c6g c0c6q c0c7g c0c7q c0c9g c0c9q c0ccg c0ccq c0d0g c0d0q c0d2q,c0c71v
+CO-CUN-Sasaima,0,c0d6q c0d9g c0d9q c0dbg c0dcg c0dcq c0deg c0deq,c0d9fm
+CO-CUN-Sesquile,0,c199q c19bg c19bq c19cq c19dg c19dq c19eg c19eq c19fg c19fq c1b4g c1cag,c19eeh
+CO-CUN-Sibate,0,c05dq c05fg c05fq c075g c075q c108q c10ag c10aq c120g c120q c122g,c1203h
+CO-CUN-Silvania,0,c059q c05bg c05bq c05cq c05dq c05eg c05eq c05fg c05fq c074g c075g c075q,c05e4r
+CO-CUN-Simijaca,0,c313g c313q c316g c316q c319g c319q c31cg c31cq,c3195h
+CO-CUN-Soacha,0,c075q c077g c077q c07dg c108q c10ag c10aq c10bg c10bq c120g c120q c121g c121q c122g c122q c123g c123q c128g,c122dm
+CO-CUN-Sopo,0,c185q c187g c187q c18dg c18dq c190q c192g c192q c198g c198q,c192er
+CO-CUN-Subachoque,0,c182q c183g c183q c186q c188g c188q c189g c189q c18ag c18bg c18bq c18cg c18cq c18eg c18eq c1a1g c1a4g,c1893m
+CO-CUN-Suesca,0,c19bq c19eq c19fq c1b1g c1b1q c1b3g c1b4g c1b4q c1b5g c1b5q c1b6g c1b6q c1b7g c1b7q c1bdg c1e8g,c1b4ch
+CO-CUN-Supata,0,c0dfq c0f5g c0f5q c18ag c18aq c18bg c18bq c1a0g c1a0q c1a1g c1a1q,c1a04h
+CO-CUN-Susa,0,c311g c311q c313g c313q c314g c314q c316g c316q c317q c31cg,c3163h
+CO-CUN-Sutatausa,0,c1b3q c1b9g c1b9q c1bbg c1bcg c1bcq,c1b9dh
+CO-CUN-Tabio,0,c186q c18cg c18cq c18dg c18dq c18eg c18fg,c18c1m
+CO-CUN-Tausa,0,c1a7g c1a7q c1acg c1acq c1adg c1adq c1b0q c1b1q c1b2g c1b2q c1b3g c1b3q c1b8g c1b8q c1b9g c1b9q,c1b3br
+CO-CUN-Tena,0,c073q c076q c079g c07cg c07cq c07dg c07dq c07eg,c07cch
+CO-CUN-Tenjo,0,c12bq c180g c180q c181g c181q c183g c183q c184q c186g c186q,c1837r
+CO-CUN-Tibacuy,0,c052g c052q c053q c058g c059g c059q c05cg c05cq,c0596v
+CO-CUN-Tibirita,0,c1ceq c1e1g c1e1q c1e4g c1e4q c1e6g,c1cebv
+CO-CUN-Tocaima,0,c049q c04bg c04bq c04dq c04eg c04eq c04fg c04fq c058q c05ag c05aq c064g c064q c065g c065q c066g c067g c067q c06dg,c04fav
+CO-CUN-Tocancipa,0,c18dq c18fg c198g c198q c199g c199q c19ag c19aq c19bg c19bq,c198fm
+CO-CUN-Topaipi,0,c0feq c0ffg c0ffq c1aag c1aaq c254g c254q c255g c255q c300g c300q,c0ffem
+CO-CUN-Ubala,0,c16 c17 c1c c1d,c16eq
+CO-CUN-Ubaque,0,c11aq c11bq c125g c125q c127g c130g c130q c131g c131q c132g,c1306m
+CO-CUN-Ubate,0,c1b9q c1bbg c1bbq c1bcq c1beg c1beq c311g c314g,c1be3h
+CO-CUN-Une,0,c101g c101q c103g c103q c104g c104q c105q c106g c106q c107g c107q c10cg c10cq c10dg c10dq c10eg c10fg c10fq,c10f1v
+CO-CUN-Utica,0,c0f0q c0f1q c0f2g c0f2q c0f3g c0f3q c0f8g c0f9g c0f9q,c0f3bh
+CO-CUN-Venecia,0,9af2q 9af8g 9af8q 9af9g 9af9q 9afbg 9afcg 9afcq 9afeg,9af9br
+CO-CUN-Vergara,0,c0dfq c0f4g c0f4q c0f5g c0f5q c0f6g c0f6q c0f7g c0f7q c1a0q c1a2g,c0f5ah
+CO-CUN-Viani,0,c0c5q c0c7g c0c7q c0d0g c0d0q c0d2g c0d2q c0d8g c0d8q,c0d28m
+CO-CUN-Villagomez,0,c1a3q c1a8q c1a9g c1a9q c1aag c1aaq c1abg c1abq c1acg c1acq,c1a9av
+CO-CUN-Villapinzon,0,c1e2q c1e3g c1e3q c1e4q c1e6g c1e6q c1e8g c1e8q c1e9g c1e9q c1eag c1ebg c1ebq c1ecg c1ecq c1eeg c341g,c1e90v
+CO-CUN-Villeta,0,c0d8g c0d8q c0d9q c0dag c0daq c0dbg c0dbq c0deg c0deq c0f0g c0f1g c0f4g,c0db3v
+CO-CUN-Viota,0,c058q c059q c05ag c05aq c05bg c05bq c05eq c070g c071g c071q c074g c074q,c05acv
+CO-CUN-Yacopi,0,c25 c27 c30 c32,c257g
+CO-CUN-Zipacon,0,c07bg c07eg c07eq c07fq c0d4g c0d4q c0d5g,c0d44m
+CO-CUN-Zipaquira,0,c18dq c18eg c18eq c18fg c18fq c198q c19ag c19aq c19bq c1a4g c1a4q c1a5g c1a5q c1a6g c1a7g,c18fdh
+CO-DC-Bogota,0,9ad 9af 9ba c10 c12 c18,c126q
+CO-GUA-Barrancominas,0,9dd 9df b82 b88 b89 b8a b8b b8c b8e b8f b9a ba1 ba3 ba4 ba5 ba6 ba7 bad bb0 bb1 bb2 bb3 bb4 bb6 bb7 bb8 bb9 bbc,ba78q
+CO-GUA-Cacahual,0,be1 be3 be4 be5 be6 be7 bec bed,
+CO-GUA-Inirida,0,b93 b98 b99 b9a b9b b9c b9e b9f bb0 bb1 bb4 bb5 bb6 bb7 bbc bbd bbf be0 be1 be2 be3 be4 be6 be8 be9 bea beb bec bee,beb4g
+CO-GUA-LaGuadalupe,0,b72 b78 b79 b7a b7b,
+CO-GUA-MorichalNuevo,0,b82 b83 b84 b85 b86 b87 b88 b89 b8c b8d b8e b8f b92 b93 b98 b99 b9a,
+CO-GUA-PanaPana,0,b2e b2f b3a b3b b3e b3f b6a b81 b84 b85 b87 b90 b91 b92 b93 b94 b95 b96 b97 b99 b9c bc0 bc2,
+CO-GUA-PuertoColombia,0,b93 b94 b95 b96 b97 b99 b9c b9d b9e b9f bb5 bc0 bc1 bc2 bc3 bc4 bc6 bc8 bc9 bca bcb bcc bcd bce be0 be1 be4,
+CO-GUA-SanFelipe,0,b7a bc4 bc5 bc6 bc7 bcc bcd bd0 bd2,
+CO-GUV-Calamar,0,936 937 93c 93d 93e 93f 960 962 963 968 969 96a 96b 96c 96e 994 995 9c0 9c1 9c2 9c3 9c4,9c1cg
+CO-GUV-ElRetorno,0,97b 97e 9c1 9c2 9c3 9c4 9c5 9c6 9c7 9c9 9cc 9d0 9d1 9d2 9d3 9d4 9d5 9d6 9d7 b80 b81 b82 b83 b84 b86,9c3eg
+CO-GUV-Miraflores,0,963 964 965 966 967 969 96c 96d 96e 96f 970 972 973 978 979 97a 97b 9c4 9c5 9d0 9d1,96d7q
+CO-GUV-SanJoseGuaviare,0,9s 9z bs,9c9cg
+CO-HUI-Acevedo,0,37b 37e 3d4,3d44g
+CO-HUI-Agrado,0,3d67g 3d67q 3d6dg 3d6dq 3d6fg 3d6fq 3d70q 3d72g 3d72q 3d73g 3d73q 3d78g 3d78q 3d79g 3d79q 3d7ag 3d7aq 3d7bg 3d7bq,3d6d6m
+CO-HUI-Aipe,0,3f5 3f7 9a0 9a2,9a0eg
+CO-HUI-Algeciras,0,982 988 989 98a 98b,9883q
+CO-HUI-Altamira,0,3d4cq 3d4dq 3d4eg 3d4eq 3d4fg 3d4fq 3d5ag 3d5aq 3d64g 3d65g 3d70g 3d70q 3d71q 3d72g 3d73g,3d4f9v
+CO-HUI-Baraya,0,98b 9a0 9a1 9a3 9a4,9a19g
+CO-HUI-Campoalegre,0,9882q 9883q 9888g 9888q 9889g 9889q 988ag 988aq 988bg 988bq 988cg 988cq 988eg 988eq 988fg 988fq 98a0g 98a0q 98a1g 98a1q 98a3g 98a4g 98a4q 98a5g 98a5q,98a15h
+CO-HUI-Colombia,0,9a1 9a3 9a4 9a6 9a7 9ac 9ad,9a62g
+CO-HUI-Elias,0,3d48g 3d48q 3d49g 3d49q 3d4ag 3d4bg 3d4cq 3d4eg,3d49bv
+CO-HUI-Garzon,0,3d5 3d7 982,3d73g
+CO-HUI-Gigante,0,3d79q 3d7bg 3d7bq 3d7cg 3d7cq 3d7dg 3d7dq 3d7eg 3d7eq 3d7fg 3d7fq 3dd1g 3dd4g 3dd4q 3dd5g 3dd5q 3dd6g 3dd6q 3dd7g 3dd7q 3dddg 9828g 9828q 982ag 982aq 9880g 9880q 9882g,3dd45h
+CO-HUI-Guadalupe,0,3d4dg 3d4dq 3d4fg 3d52g 3d52q 3d53g 3d53q 3d58g 3d58q 3d59g 3d59q 3d5ag 3d5aq 3d5bg 3d5cq 3d5eg,3d4f5v
+CO-HUI-Hobo,0,3dd6q 3dd7g 3dd7q 3dddg 3dddq 3ddfg 9880q 9882g 9882q 9883q 9888g 9888q 988ag 988aq,98888r
+CO-HUI-Iquira,0,3dcfq 3dd3q 3dd9g 3dd9q 3ddag 3ddaq 3ddbg 3ddbq 3ddcg 3ddcq 3ddeg 3ddeq 3de5g 3de5q 3de6g 3de7g 3df0g 3df0q 3df1g 3df1q 3df2g 3df2q 3df3g 3df3q 3df4g,3ddbch
+CO-HUI-Isnos,0,3d0 3d1 3d2,3d13q
+CO-HUI-LaArgentina,0,3d27q 3d2dg 3d2dq 3d31q 3d32g 3d32q 3d33g 3d33q 3d34g 3d34q 3d35g 3d35q 3d36g 3d37g 3d38g 3d38q 3d39g 3d4aq 3d60g 3d60q 3d62g 3d62q 3d63g 3d63q 3d68g 3d69g 3d6cg,3d627r
+CO-HUI-LaPlata,0,3d3 3d6 3d9 3dc,3dc4g
+CO-HUI-Nataga,0,3dc6q 3dc7g 3dc7q 3dccg 3dccq 3dcdg 3dcdq 3dcfg 3dcfq 3dd8q 3ddag 3ddaq,3dcd0v
+CO-HUI-Neiva,0,3f5 98a 98b 9a0 9a1 9a2,98aeg
+CO-HUI-Oporapa,0,3d1dq 3d1fg 3d1fq 3d34g 3d34q 3d35g 3d48q 3d4ag 3d4aq 3d4bg 3d4bq 3d60g 3d61g,3d4a4m
+CO-HUI-Paicol,0,3d6eq 3d6fg 3d6fq 3d7ag 3d7aq 3d7bq 3dc4g 3dc4q 3dc5g 3dc5q 3dc6g 3dc7g 3dd0g 3dd0q 3dd1g 3dd1q 3dd4g 3dd4q 3dd6g,3dc5em
+CO-HUI-Palermo,0,3df 3f5 98a 9a0,98a8q
+CO-HUI-Palestina,0,37b3g 37b3q 37b6g 37b6q 37b9g 37b9q 37bcg 37bcq 37bdg 37bdq 37beg 37beq 37bfg 37bfq,37be5h
+CO-HUI-Pital,0,3d63q 3d66g 3d66q 3d67g 3d67q 3d69g 3d69q 3d6cg 3d6cq 3d6dg 3d6dq 3d6eg 3d6eq 3d6fg 3d6fq 3d70q 3d72g 3d72q 3d78g,3d6d2v
+CO-HUI-Pitalito,0,37b 37e 3d1 3d4,3d15q
+CO-HUI-Rivera,0,989aq 98a1q 98a3g 98a3q 98a4q 98a5g 98a5q 98a6g 98a6q 98a7g 98a7q 98a9g 98acg 98acq 98adg 98b0g 98b0q 98b1q 98b2g 98b2q 98b3g 98b3q,98a66m
+CO-HUI-Saladoblanco,0,3d0fq 3d1aq 3d1bg 3d1bq 3d1cq 3d1dg 3d1dq 3d1eg 3d1eq 3d1fg 3d1fq 3d25g 3d25q 3d27g 3d27q 3d2dg 3d30g 3d30q 3d31g 3d31q 3d32g 3d32q 3d33g 3d34g 3d34q 3d35g 3d48g 3d48q,3d1ddv
+CO-HUI-SanAgustin,0,37a 37b 3d0 3d1 3d2,3d12g
+CO-HUI-SantaMaria,0,3defg 3defq 3df2q 3df3q 3df8g 3df8q 3df9g 3df9q 3dfag 3dfaq 3dfbg 3dfbq 3dfcq 3dfeg 3dfeq 3dffg 3dffq 3f50g 3f51g 3f51q 3f54g 3f54q,3dfe2v
+CO-HUI-Suaza,0,37eeg 37eeq 37efg 37efq 37faq 3d41q 3d43g 3d43q 3d44g 3d44q 3d45g 3d45q 3d46g 3d46q 3d47g 3d47q 3d4cg 3d4cq 3d4dg 3d4dq 3d50g 3d50q 3d52g 3d52q 3d58g,3d4d3r
+CO-HUI-Tarqui,0,3d4ag 3d4aq 3d4bg 3d4bq 3d4eg 3d4eq 3d60g 3d60q 3d61g 3d61q 3d62g 3d63g 3d63q 3d64g 3d64q 3d65g 3d65q 3d66g 3d66q 3d67g 3d70g 3d70q 3d72g,3d647m
+CO-HUI-Tello,0,98b 9a0 9a1,9a12g
+CO-HUI-Teruel,0,3dd 3de 3df 3f4,3df4q
+CO-HUI-Tesalia,0,3dc5q 3dc7g 3dc7q 3dcdg 3dcdq 3dcfg 3dd0q 3dd1q 3dd2g 3dd2q 3dd3g 3dd3q 3dd4q 3dd6g 3dd6q 3dd8g 3dd8q 3dd9g 3dd9q 3ddag 3ddaq 3ddbg 3ddbq 3ddcg,3dd23h
+CO-HUI-Timana,0,3d40q 3d41q 3d42g 3d42q 3d43g 3d43q 3d46q 3d48g 3d49g 3d49q 3d4cg 3d4cq 3d4eg,3d493v
+CO-HUI-Villavieja,0,9a0cg 9a0cq 9a0dg 9a0dq 9a0fg 9a0fq 9a18g 9a18q 9a19q 9a1ag 9a1aq 9a1bg 9a1bq 9a24g 9a24q 9a25g 9a25q 9a27g 9a27q 9a30g 9a30q 9a31g 9a31q 9a32g 9a32q 9a33g 9a33q 9a34g 9a38g 9a39g,9a0f0v
+CO-HUI-Yaguara,0,3dd6g 3dd6q 3dd7q 3ddcg 3ddcq 3dddg 3dddq 3ddeg 3ddeq 3ddfg 3ddfq 3df4g 3df4q 3df5g 3df5q 3df7g 988ag 988aq 98a0g 98a0q 98a2g,3ddfam
+CO-LAG-Albania,0,d6b d6e dc1 dc4,d6bcg
+CO-LAG-Barrancas,0,d68 d69 d6a d6b d6e,d69aq
+CO-LAG-Dibulla,0,d3c d3d d3e d3f d95,d3fbq
+CO-LAG-Distraccion,0,d686g d686q d687q d689g d689q d68bg d68bq d68cg d68cq d68dg d68dq d68eg d68eq d68fg d6a1g d6a1q d6a4g d6a4q,d68cfh
+CO-LAG-ElMolino,0,d627q d629q d62bg d62bq d62cg d62cq d62dg d62dq d62eg d62eq d62fg d62fq d638q d63ag d681g d684g,d62e3r
+CO-LAG-Fonseca,0,d63ag d63aq d685g d685q d686g d686q d687g d687q d68cg d68cq d68dg d68dq d68eg d68eq d68fg d68fq d690g d690q d691g d691q d692g d692q d693g d693q d698g d698q d699g d6a4g d6a4q d6a5g,d68d9h
+CO-LAG-HatoNuevo,0,d6a5q d6a7g d6a7q d6b0g d6b0q d6b1q d6b2g d6b2q d6b3g d6b3q d6b6q d6b7g d6b7q d6b8g d6b9g d6bcg d6e2g,d6b21m
+CO-LAG-LaJaguaPilar,0,d374q d375g d375q d376g d377g d377q d620g d620q d621g d621q d622g d622q d624g d624q,d6229h
+CO-LAG-Maicao,0,d6b d6e d6f dc1 dc4 dc5 dc7,dc47g
+CO-LAG-Manaure,0,dc0 dc1 dc2 dc3 dc4 dc6,dc68q
+CO-LAG-Riohacha,0,d3d d3f d68 d6a d6b d95 dc0 dc1,dc0eq
+CO-LAG-SanJuanCesar,0,d37 d3c d3d d62 d63 d68 d69 d6a,d683g
+CO-LAG-Uribia,0,dc4 dc5 dc6 dc7 dcc dcd dcf dd2 dd3 dd8 dd9 dda ddb ddc dde,dc67q
+CO-LAG-Urumita,0,d377g d377q d37dg d620g d620q d621g d621q d622g d622q d623g d623q d624q d625q d626g d626q d627g d627q d628g d629g,d6290v
+CO-LAG-Villanueva,0,d37dg d623q d626g d626q d627q d628g d628q d629g d629q d62ag d62aq d62bg d62bq d62cg d62cq d62dg,d629eh
+CO-MAG-Algarrobo,0,d1aeg d1aeq d1afq d303g d303q d304g d304q d305g d305q d306g d306q d307g d307q d309g d309q d30bg d30bq d30cg d30cq d30dg d30dq d30eg d30eq d30fg d318g,d3070v
+CO-MAG-Aracataca,0,d32 d33 d36 d38 d39 d3c,d329q
+CO-MAG-Ariguani,0,d18 d19 d1a d1b,d1a0q
+CO-MAG-CerroSanAntonio,0,d217q d21dg d21dq d242q d248g d248q d249g d249q d24ag d24aq d24bg d24bq d24cg d24cq,d24a1r
+CO-MAG-Chibolo,0,d0edg d0edq d0eeg d0efg d0efq d0f2q d0f8g d0f8q d0f9q d0fag d0faq d0fbg d0fbq d0fcq d0feg d0feq d245g d245q d247g d250g d250q d251g d251q d252g d252q d253g d253q d254g d254q d256g,d0ef4m
+CO-MAG-Cienaga,0,d32 d38 d39 d3a d3b,d3a0g
+CO-MAG-Concordia,0,d242q d243g d243q d246g d246q d248g d248q d249g d249q d24cg,d2485r
+CO-MAG-ElBanco,0,d10 d11 d12 d13,
+CO-MAG-ElPinon,0,d246q d247q d249q d24aq d24bg d24bq d24cg d24cq d24dg d24dq d24eg d24eq d24fg d24fq d252q d253q d258g d258q d259g d25ag d25aq d260g d261g d261q d264g d264q d265g d265q d266g,d2605v
+CO-MAG-ElReten,0,d27bq d27eg d27eq d27fg d27fq d2d4g d2d4q d2d5g d2d5q d2d6g d2d7g d322q d323q d328g d328q d329g d329q d32ag d32aq d380g,d328bv
+CO-MAG-Fundacion,0,d30 d31 d32 d33 d36,d323q
+CO-MAG-Guamal,0,d05 d07 d10 d12 d13,d10ag
+CO-MAG-NuevaGranada,0,d0d d0f d18 d1a,d0f4g
+CO-MAG-Pedraza,0,d0eaq d0ebq d0eeq d215g d215q d217g d217q d240g d240q d241g d241q d242g d242q d243g d243q d244g d244q d246g d246q,d2176m
+CO-MAG-PijinoCarmen,0,d07 d12 d18 d19,d073q
+CO-MAG-Pivijay,0,d24 d25 d26 d27 d30 d32,d265q
+CO-MAG-Plato,0,d0c d0d d0e d0f,d0cbq
+CO-MAG-Puebloviejo,0,d2d d2f d32 d38 d3a,d3a0g
+CO-MAG-Remolino,0,d267q d26cq d26dg d26dq d26eg d26eq d26fg d26fq d272q d278g d278q d279g d279q d27ag d27aq d27bg d27bq d27cq d27eg d27eq d2c4g d2c4q d2c5g d2c5q d2d0g d2d0q d2d1g d2d1q d2d4g,d2c41v
+CO-MAG-SabanasSanAngel,0,d0f d1a d25 d30,d1abg
+CO-MAG-Salamina,0,d261q d263g d263q d264q d266g d266q d267g d267q d26cg d26cq d26dg d26dq,d2633h
+CO-MAG-SanSebastianBuenavista,0,d074g d074q d075g d075q d077g d077q d120g d120q d122g d122q d123g d123q d126q d128g d128q d129g d129q d12bg d12bq d12cg d12cq d12dg d12dq d12eg d12eq d12fg d138g d138q,d0752v
+CO-MAG-SanZenon,0,d070g d070q d071g d071q d072g d073g d073q d074g d074q d075q d076g d076q d077g d077q d07dg d122q d128g d128q d129q d12ag d12bg d12bq,d0718m
+CO-MAG-SantaAna,0,d06 d07 d0d d12 d18 d19,d072q
+CO-MAG-SantaBarbaraPinto,0,d06bg d06bq d06cq d06dg d06dq d06eg d06eq d06fg d06fq d07aq d0c1g d0c1q d0c4g d0c4q d0c5g d0c5q d0c6g d0c6q d0c7g d0c7q d0cdg d0d0g d0d0q d0d2g d0d2q d0d8g,d06e4h
+CO-MAG-SantaMarta,0,d39 d3a d3b d3c d3e d90 d91,d3abg
+CO-MAG-Sitionuevo,0,d2c d2d d2e d2f,d2c6g
+CO-MAG-Tenerife,0,d0e0g d0e0q d0e1g d0e1q d0e2g d0e2q d0e3g d0e3q d0e4q d0e6g d0e6q d0e7g d0e7q d0e8g d0e9g d0e9q d0ecg d0ecq d0edg d0edq d0f0q d0f2g d0f2q d0f8g,d0e23m
+CO-MAG-Zapayan,0,d0e9q d0eag d0eaq d0ebg d0ebq d0ecq d0edq d0eeg d0eeq d0efg d0efq d241g d244g d244q d245g d245q d246g d246q d247g d247q d24cg d24dg d252g d252q,d2461h
+CO-MAG-ZonaBananera,0,d32aq d32bg d32bq d32eq d380g d380q d381g d381q d382g d382q d383g d383q d384g d384q d386g d386q d388g d388q d389g d389q d38ag d38bg d38bq d38cg d38cq d38eg,d3835m
+CO-MET-Acacias,0,9ba 9bb 9bc 9be c11,9bb6q
+CO-MET-BarrancaUpia,0,c409q c40aq c40bg c40bq c40cq c40eg c40eq c40fg c40fq c420g c420q c421g c421q c422g c422q c423g c423q c424g c424q c426g c428g c428q c429g c429q c42ag c42aq,c4237h
+CO-MET-Cabuyaro,0,9ea c15 c40 c41 c42,c412q
+CO-MET-CastillaNueva,0,9b9dq 9b9fg 9b9fq 9bb5g 9bb5q 9bc7q 9bc8q 9bc9g 9bc9q 9bcag 9bcaq 9bcbg 9bcbq 9bccg 9bccq 9bcdg 9bcdq 9bceg 9bceq 9bcfg 9bcfq 9bd2q 9bd8g 9bd8q 9bdag 9bdaq 9be0g 9be1g,9bca2r
+CO-MET-Cubarral,0,9ad 9af 9b8 9b9 9ba 9bb,9b99q
+CO-MET-Cumaral,0,9be 9bf 9ea c14 c15 c40,c146g
+CO-MET-ElCalvario,0,c116q c117q c11cg c11cq c11dg c11dq c11eg c11eq c11fg c11fq c142g c142q c148g c148q c149g c149q c14ag,c11d6v
+CO-MET-ElCastillo,0,9b3ag 9b3aq 9b3bg 9b3bq 9b3eg 9b3eq 9b3fg 9b3fq 9b85g 9b85q 9b87g 9b87q 9b90g 9b90q 9b91g 9b91q 9b92g 9b92q 9b93g 9b93q 9b94g 9b94q 9b95g 9b95q 9b96g 9b97g 9b98g 9b99g,9b3eeh
+CO-MET-ElDorado,0,9b93g 9b93q 9b96g 9b96q 9b99g 9b99q 9b9cg 9b9cq,9b995v
+CO-MET-FuenteOro,0,9b3 9b4 9b6,9b68g
+CO-MET-Granada,0,9b33q 9b36g 9b36q 9b37g 9b37q 9b39g 9b39q 9b3bg 9b3cg 9b3cq 9b3dg 9b3dq 9b3eg 9b3fg 9b3fq 9b68g 9b68q 9b6ag 9b6aq 9b95g 9b95q 9bc0g 9bc0q,9b3fcv
+CO-MET-Guamal,0,9b9 9ba 9bb,9bb4g
+CO-MET-LaMacarena,0,92f 93a 93b 93e 984 985 986 987 98c 98d 990 991 992 993 994 996 998 999 99c,9936g
+CO-MET-Lejanias,0,9b2 9b3 9b8 9b9,9b2fg
+CO-MET-Mapiripan,0,9ca 9cb 9ce 9cf 9da 9db 9de 9e0 9e1 9e3 9e4 9e5 9e6 9e7 9f0 9f1 9f2 9f3 9f4 9f6,9cf9q
+CO-MET-Mesetas,0,998 999 99a 99b 9a7 9b0 9b1 9b2 9b3 9b8,9b27g
+CO-MET-PuertoCarreno,0,9e5 9e6 9e7 9ec 9ed 9ee 9ef 9f2 9f3 9f6 9f8 9f9 9fa 9fb 9fc 9fe c45 c50 c51 c52 c53 c54 c56 c59 c5c,c453q
+CO-MET-PuertoConcordia,0,9c8 9c9 9ca 9cb 9ce 9e0 9e1,9c9ag
+CO-MET-PuertoLleras,0,99e 99f 9b4 9b5 9b6 9b7 9ca 9e0 9e2,9b5aq
+CO-MET-PuertoLopez,0,9bd 9bf 9e8 9e9 9ea 9eb 9ec 9ee 9ef c40 c41 c44 c45,9ea9q
+CO-MET-PuertoRico,0,99d 99e 99f 9b5 9c8 9ca 9e0,99feg
+CO-MET-Restrepo,0,9be 9bf c14 c15,c143g
+CO-MET-SanCarlosGuaroa,0,9bc 9bd 9be 9bf 9ea,9bd6q
+CO-MET-SanJuanArama,0,9b0 9b1 9b2 9b3 9b4 9b6,9b33g
+CO-MET-SanJuanito,0,c11fg c11fq c135g c135q c148q c14ag c14aq c14bq c160g c160q c161g c161q c162g c163g,c14aav
+CO-MET-SanMartin,0,9b6 9b7 9b9 9bc 9bd 9e0 9e1 9e2 9e3 9e6 9e8 9e9 9ec,9b97q
+CO-MET-Uribe,0,98b 98c 98d 98e 98f 998 999 99a 9a1 9a4 9a5 9a6 9a7 9ad 9b0 9b2 9b8,9a5eq
+CO-MET-Villavicencio,0,9bb 9be 9bf c11 c14,9beaq
+CO-MET-VistaHermosa,0,996 997 999 99a 99b 99c 99d 99e 99f 9b0 9b1 9b4 9c8,9b17q
+CO-NAR-Alban,0,36cbg 36cbq 36ceg 36ceq 36e1g 36e4g,36cbdv
+CO-NAR-Aldana,0,360bg 360bq 3621g 3621q,360b9v
+CO-NAR-Ancuya,0,362fq 3685g 3685q 3687g 3687q 3690g 3690q 3692g 3692q,3685fv
+CO-NAR-Arboleda,0,36cag 36caq 36cbg 36cbq 36e0g 36e1g,36e10m
+CO-NAR-Barbacoas,0,333 336 339 33c 33d 33e 33f 395 3c0,33edg
+CO-NAR-Belen,0,36e1q 36e3g 36e3q 36e4q 36e6g 36e6q,36e67h
+CO-NAR-Buesaco,0,3695q 3697g 3697q 369dg 369dq 369fg 36c0g 36c0q 36c1g 36c1q 36c2g 36c2q 36c3g 36c3q 36c4q 36c6g 36c6q 36c8g 36c8q 36c9g 36c9q 36cag 36cbg 36ccg 36ccq,36c8dh
+CO-NAR-Chachagui,0,3696g 3696q 3697g 3697q 369cg 369cq 369dg 369dq 369eg 369eq 369fg 369fq 36b4g 36c8g,369d0r
+CO-NAR-Colon,0,36e3g 36e3q 36e6g 36e6q 36e7q 36e9g 36ecg 36edg,36ec4m
+CO-NAR-Consaca,0,363ag 363aq 363bg 363bq 3690g 3690q 3691g 3691q 3694g,36904v
+CO-NAR-Contadero,0,360fq 3625g 3625q 3630g 3630q,36251m
+CO-NAR-Cordoba,0,360dq 360fg 360fq 3613q 3615q 3616g 3616q 3617g 3617q 3618g 3618q 3619g 3619q 361ag 361aq 361bg 361cg 361cq 361dg 3640g 3640q 3642g,360f7m
+CO-NAR-Cuaspud,0,3609q 360ag 360aq 360bg 360bq 3620g 3621g,360b2r
+CO-NAR-Cumbal,0,335 336 337 360 362,3620g
+CO-NAR-Cumbitara,0,36a6g 36a6q 36a7g 36a7q 36a9q 36abg 36acg 36acq 36adg 36adq 36aeg 36aeq 36afg 36afq 36b2g 36b2q 36b8g 36b8q 3c01g 3c01q 3c03g 3c03q 3c04g 3c04q 3c06g 3c06q,36ad0h
+CO-NAR-ElCharco,0,394 395 396 397 39c 39d 39e 3c0 3c1 3c2 3c3,39c7g
+CO-NAR-ElPenol,0,369ag 369aq 369bg 369bq 36b0g 36b0q 36b1g 36b1q 36b2g 36b3g,369a7v
+CO-NAR-ElRosario,0,36b 3c0 3c1,36beg
+CO-NAR-ElTablonGomez,0,36c5q 36c6g 36c6q 36c7g 36c7q 36c9q 36cbg 36ccg 36ccq 36cdg 36cdq 36ceg 36ceq 36cfg 36cfq 36d2g 36d2q 36d8g 36d8q 36dag 36daq 36e4g 36e5g,36cb4m
+CO-NAR-ElTambo,0,3693q 3698g 3698q 3699g 3699q 369ag 369aq 369bg 369bq 369cg 369cq 369eg 369eq 36b1g 36b4g,3699em
+CO-NAR-FranciscoPizarro,0,391 392 393,391ag
+CO-NAR-Funes,0,361aq 361bq 361eq 361fg 361fq 3630g 3630q 3631g 3631q 3632g 3632q 3633g 3633q 3634g 3634q 3635g 3635q 3636g 3638g 3639g 3642q 3648g 3648q 3649q 364ag 364aq,36327h
+CO-NAR-Guachucal,0,3375q 3377g 3620g 3620q 3621g 3621q 3622g 3622q 3623g 3623q 3626g,3621ah
+CO-NAR-Guaitarilla,0,362cq 362dq 362eg 362fg 362fq 3638q 363ag 363aq 3685g 3690g,362f4h
+CO-NAR-Gualmatan,0,360eq 360fq 3624g 3624q 3625g 3625q,36251r
+CO-NAR-Iles,0,3624q 3625q 3626g 3627g 3630q 3632g 3632q,3625fv
+CO-NAR-Imues,0,3627q 362dg 362dq 3632q 3638g 3638q,36380m
+CO-NAR-Ipiales,0,34a 34b 34e 360 361 362 364,360cq
+CO-NAR-LaCruz,0,36e4q 36e5g 36e5q 36e6g 36e6q 36e7g 36e7q 36edg 36f0g 36f0q 36f1q 36f2g 36f2q 36f3g 36f3q 36f8g,36e73v
+CO-NAR-LaFlorida,0,3691g 3691q 3692g 3692q 3693g 3693q 3694g 3694q 3696q 3698g 3698q 3699g 3699q 369cg 369cq 369dg,36933m
+CO-NAR-LaLlanada,0,33f5q 33f7g 33f7q 33fdg 368eg 368eq 368fg 368fq 36a0g 36a0q 36a1g 36a1q 36a2g 36a2q 36a3g 36a4g 36a4q 36a5g 36a5q 36a6g 36a8g,368f8r
+CO-NAR-LaTola,0,394 396 39c,39c4g
+CO-NAR-LaUnion,0,36bdg 36e0g 36e0q 36e1q 36e2g 36e2q 36e3g 36e3q 36e4q 36e8g 36e8q 36e9g 36ecg,36e32v
+CO-NAR-Leiva,0,3c13g 3c13q 3c14q 3c15q 3c16g 3c16q 3c17g 3c17q 3c19g 3c19q 3c1cg 3c1cq 3c1dg 3c1dq 3c1eg 3c1eq 3c1fg 3c34g 3c34q 3c42q 3c48g 3c48q,3c16fr
+CO-NAR-Linares,0,3687g 3687q 368dg 368dq 368fg 368fq 3692q 3698g 3698q 369ag 369aq 36b0g,368d5h
+CO-NAR-LosAndesSotomayor,0,33f 368 369 36a 36b 395 3c0,368fq
+CO-NAR-MaguiPayan,0,33e 33f 394 395 396 397 3c0,33eeq
+CO-NAR-Mallama,0,337 33d 362 368,337fg
+CO-NAR-Mosquera,0,393 396 399 39c,3997q
+CO-NAR-Narino,0,3691q 3693g 3693q 3694g 3694q 3696g 3696q 369cg,36960r
+CO-NAR-OlayaHerrera,0,393 394 396 39c,396aq
+CO-NAR-Ospina,0,3626g 3626q 3627g 3627q 362dg 3632g 3632q 3638g,362d1h
+CO-NAR-Pasto,0,361 363 364 366 369 36c,3695g
+CO-NAR-Policarpa,0,36adg 36adq 36aeq 36afg 36afq 36b2g 36b2q 36b3g 36b3q 36b8g 36b8q 36b9g 36b9q 36bag 36baq 36bbg 36bbq 36bcg 36bcq 3c04g 3c04q 3c05g 3c05q 3c06g 3c07g 3c10g 3c11g,36b2em
+CO-NAR-Potosi,0,3606q 3607q 360cg 360cq 360dg 360dq 360fg 3611g 3611q 3612g 3612q 3613g 3613q 3614g 3614q 3615g 3615q 3616g 3616q 3617g 3618g 3618q 3619g 361ag 3640g 3640q,360d8v
+CO-NAR-Providencia,0,362eq 362fq 3684g 3684q 3685g 3685q 3686g,3684dh
+CO-NAR-Puerres,0,360fq 3617g 3617q 3619q 361ag 361aq 361bg 361bq 361cg 361cq 361dg 361dq 361eg 361eq 361fg 361fq 3625g 3630g 3640q 3642g 3642q 3648g 3648q 364ag,361a8r
+CO-NAR-Pupiales,0,360bg 360bq 360eg 360eq 360fq 3621g 3621q 3623g 3624g 3624q 3626g,360e8m
+CO-NAR-Ricaurte,0,336 337 33c 33d,33d1g
+CO-NAR-RobertoPayan,0,339 33b 33c 33e 391 393 394 396,33ecq
+CO-NAR-Samaniego,0,33d 33f 362 368 36a,3686q
+CO-NAR-SanBernardo,0,36ceq 36e1g 36e4g 36e4q 36e5g 36e5q 36e6g,36e43h
+CO-NAR-SanLorenzo,0,369eq 369fg 369fq 36b4g 36b5g 36b5q 36b7g 36b7q 36bdg 36cag 36caq 36e0g 36e0q 36e2g 36e2q 36e8g,36e00h
+CO-NAR-SanPablo,0,36e7q 36ecg 36ecq 36edg 36edq 36efg 36f8g 36f8q,36ec7h
+CO-NAR-SanPedroCartago,0,36cbq 36e0g 36e0q 36e1g 36e1q 36e3g 36e4g 36e4q,36e1bh
+CO-NAR-Sandona,0,3687g 3690q 3691g 3691q 3692g 3692q 3693g 3698g,36924r
+CO-NAR-SantaBarbara,0,395 397 39d 3c0 3c2,39d1q
+CO-NAR-Santacruz,0,33d 362 368,3681g
+CO-NAR-Sapuyes,0,3622g 3622q 3623g 3623q 3626g 3626q 3627q 3628g 3629g 3629q 362cg 362dg,3626eh
+CO-NAR-Taminango,0,36b1g 36b1q 36b3g 36b3q 36b4g 36b4q 36b5g 36b5q 36b6g 36b6q 36b7g 36b7q 36b9g 36bcg 36bcq 36bdg,36b70m
+CO-NAR-Tangua,0,3633g 3633q 3634q 3636g 3636q 3639g 3639q 363bg 363bq 363cg 363cq 363eg 363eq 3691g 3694g,3639ch
+CO-NAR-Tumaco,0,32f 333 338 339 33a 33b 33c 33e 390 391 392 393 399,3904g
+CO-NAR-Tuquerres,0,3623q 3626q 3629g 3629q 362bg 362bq 362cg 362cq 362dg 362dq 362eg 362eq 362fg 362fq 3681g 3684g 3684q 3686g,362c6r
+CO-NAR-Yacuanquer,0,3638g 3638q 3639g 3639q 363ag 363bg 363bq 363eg,3639bm
+CO-NSA-Abrego,0,cb5 cb7 ce0 ce2,cb74q
+CO-NSA-Arboledas,0,cca3g cca3q cca4g cca4q cca5q cca6g cca6q cca7g cca7q cca9g cca9q ccabg ccacg ccacq ccadg ccadq ccaeg ccaeq ccafg ccafq ccb8g ccb8q ccb9q ccbag ccbaq ccbbg ccbbq ce10g ce11g,ccb8ah
+CO-NSA-Bochalema,0,ccb2q ccb3g ccb3q ccb6q ccb8g ccb8q ccb9g ccb9q ccbbg ccbcg ccbcq ccbeg ccbeq ccbfq ce14g ce15g,ccbc2r
+CO-NSA-Bucarasica,0,ce0bg ce0bq ce0eq ce0fq ce21g ce21q ce23g ce23q ce24g ce24q ce25g ce25q ce26g ce26q ce27g ce29g ce2cg,ce250r
+CO-NSA-Cachira,0,c9f cb5 cca ce0,ce00g
+CO-NSA-Cacota,0,cc91q cc92q cc93g cc93q cc94q cc96g cc96q cc99g cc99q cc9cg cc9cq,cc96am
+CO-NSA-Chinacota,0,ccb4q ccb5g ccb5q ccb6g ccb6q ccb7g ccb7q ccbcg ccbcq ccbdg ccbdq ccbeg ccbeq ccbfg,ccbc6v
+CO-NSA-Chitaga,0,cc3 cc6 cc9 ccc,cc91g
+CO-NSA-Convencion,0,cbc cbd cbf d15 d40 d42,cbd8g
+CO-NSA-Cucuta,0,ccb ce1 ce3 ce4 ce6 ce9 cec,ce1dg
+CO-NSA-Cucutilla,0,cc8eq cc8fg cc8fq cc9aq cca4g cca4q cca5g cca5q cca7g cca7q ccadg ccadq ccb0g ccb0q ccb1g ccb1q ccb2g ccb2q ccb3g ccb3q ccb8g ccb8q,ccb23v
+CO-NSA-Durania,0,ccb9q ccbaq ccbbg ccbbq ccbeg ccbeq ce10g ce11g ce11q ce13g ce14g ce14q ce16g ce16q,ccbbfm
+CO-NSA-ElCarmen,0,cbc cbd cbe cbf d14 d15 d17 d40 d42,cbcdq
+CO-NSA-ElTarra,0,cbd cbf ce8 cea,ce8ag
+CO-NSA-ElZulia,0,ce1 ce3,ce1cq
+CO-NSA-Gramalote,0,ce07g ce07q ce0cg ce0dg ce0dq ce0fg ce12q ce18g ce18q ce1ag ce1aq,ce180r
+CO-NSA-Hacari,0,cb7dq cb7eq cb7fg cb7fq cbd4g cbd4q cbd5g cbd5q cbd6g cbd7g cbd7q ce2ag ce2aq ce2bg ce2bq ce80g ce80q ce81g ce81q ce82g ce82q ce83g ce83q ce88g ce89g,cbd51h
+CO-NSA-Herran,0,ccb5g ccb5q ccb7g ccb7q cccaq cce0g cce0q cce2g cce2q,cce21h
+CO-NSA-LaEsperanza,0,c9e c9f cb4 cb5,c9f8q
+CO-NSA-LaPlayaBelen,0,cb73q cb76q cb79g cb79q cb7bg cb7bq cb7cg cb7cq cb7dq cb7eg cb7eq cb7fg cb7fq cbd1g cbd4g cbd4q ce28g ce28q ce2ag ce2aq,cb7c8h
+CO-NSA-Labateca,0,cc94g cc94q cc95g cc95q cc97g cc97q cc9cq cc9dg cc9dq cc9eg cc9fg cc9fq ccc0g ccc0q ccc2g ccc2q ccc8g ccc8q cccag,ccc80r
+CO-NSA-LosPatios,0,ccbdq ccbeg ccbeq ccbfg ccbfq ce15g ce15q ce17g ce17q ce40g ce40q ce42g ce42q,ce177v
+CO-NSA-Lourdes,0,ce0cg ce0cq ce0dg ce0dq ce0eg ce0eq ce0fg ce0fq ce1ag ce1aq ce25g,ce0der
+CO-NSA-Mutiscua,0,cc87q cc8dg cc8dq cc8fg cc92q cc93q cc98g cc98q cc99g cc99q cc9ag cc9bg,cc986m
+CO-NSA-Ocana,0,cb5 cb6 cb7 cbc cbd,cb7ag
+CO-NSA-Pamplona,0,cc8fg cc8fq cc96q cc97q cc99g cc99q cc9ag cc9aq cc9bg cc9bq cc9cg cc9cq cc9dg cc9dq cc9eg cc9eq cc9fg cc9fq ccb0g ccb1g ccb1q,cc9e2h
+CO-NSA-Pamplonita,0,cc9bq cc9eg cc9eq cc9fg cc9fq ccb1g ccb1q ccb3g ccb3q ccb4g ccb4q ccb5g ccb5q ccb6g ccb6q,ccb40m
+CO-NSA-PuertoSantander,0,ce6aq ce6bg ce6bq cec0g cec0q cec1g cec1q,cec19h
+CO-NSA-Ragonvalia,0,ccb7q ccbdg ccbdq cce2q cce8g cce8q cceag,cce2bv
+CO-NSA-Salazar,0,ccabg ccabq ccaeg ccaeq ccafg ccafq ccbaq ce01g ce01q ce03g ce04g ce04q ce05g ce05q ce06g ce06q ce07g ce07q ce0cg ce0dg ce10g ce10q ce11g ce11q ce12g ce12q ce13g,ce05dr
+CO-NSA-SanCalixto,0,cbd1g cbd1q cbd3g cbd3q cbd4g cbd4q cbd6g cbd6q cbd7g cbd7q cbd9g cbdcg cbdcq cbddg cbddq cbdeg cbdfg ce82g ce82q ce83g ce83q ce88g ce88q ce89g ce89q ce8ag ce8bg,cbd64h
+CO-NSA-SanCayetano,0,ce13g ce13q ce14g ce14q ce15q ce16g ce16q ce17g ce17q ce19g ce1cg ce1dg,ce1c1h
+CO-NSA-Santiago,0,ce10q ce11q ce12g ce12q ce13g ce13q ce18g ce18q ce19g ce19q ce1ag ce1bg,ce13am
+CO-NSA-Sardinata,0,ce0 ce1 ce2 ce3 ce8 ce9,ce30q
+CO-NSA-Silos,0,cc2fg cc2fq cc38q cc3ag cc3aq cc85g cc85q cc86q cc87g cc87q cc8dg cc90g cc90q cc91g cc91q cc92g cc92q cc93g cc93q,cc90er
+CO-NSA-Teorama,0,cbd cbf cea d15 d40,cbd3q
+CO-NSA-Tibu,0,ce3 ce8 ce9 cea ceb cec d40 d41,ceb0g
+CO-NSA-Toledo,0,cc6 cc7 cc9 ccb ccc ccd cce,ccc8g
+CO-NSA-VillaCaro,0,ce01q ce02g ce02q ce03g ce03q ce06g ce06q ce08g ce08q ce09g ce09q ce0ag ce0aq ce0bg ce0bq ce0cg ce0cq ce0eg ce0eq ce0fq ce20g ce21g ce21q ce23g,ce09cm
+CO-NSA-VillaRosario,0,ccbdq ccbfg ccbfq cce8q cceag cceaq ce15g ce15q ce40g ce40q ce42g ce42q ce48g,ce423v
+CO-PUT-Colon,0,366bq 366eq 366fg 366fq 36c1g 36c1q 36c4g 36c4q 36c5g 36c5q 36c6g 36c7g 36c7q,366fbr
+CO-PUT-Mocoa,0,367 36d 370 372 378,367fg
+CO-PUT-Orito,0,34e 34f 364 365 366,3650q
+CO-PUT-PuertoAsis,0,34d 34f 358 35a 35b 35e 365 370 371,35a9q
+CO-PUT-PuertoCaicedo,0,35a 365 370 371,3702g
+CO-PUT-PuertoGuzman,0,35b 35e 35f 370 371 372 373 374 375 376 90a 920,3725q
+CO-PUT-PuertoLeguizamo,0,357 35b 35c 35d 35e 35f 902 903 904 905 906 907 908 909 90a 90b 90c 910 911 912 920,9063g
+CO-PUT-SanFrancisco,0,366dg 366dq 366fg 366fq 3672q 3673q 3676g 3676q 3678g 3678q 3679g 3679q 367ag 367aq 367bg 367bq 367cg 367cq 367eg 367eq 36d0g 36d0q 36d1g 36d1q 36d2g 36d4g,367acr
+CO-PUT-SanMiguel,0,34ceq 34cfg 34cfq 34dag 34daq 34dbg 34dbq 34deg 34deq 34dfg 34dfq 34e4g 34e4q 34e5g 34e5q 34f0g 34f0q 34f1g 34f4g 34f5g,34f02v
+CO-PUT-Santiago,0,3666g 3666q 3667g 3667q 3669g 3669q 366bg 366bq 366cg 366cq 366dg 366dq 366eg 366eq 366fg 366fq 3672q 3678g 36c4g,366e7m
+CO-PUT-Sibundoy,0,366fg 366fq 367aq 36c5g 36c5q 36c7g 36d0g 36d0q 36d2g,36d00h
+CO-PUT-ValleGuamuez,0,34c 34d 34e 34f,34f2q
+CO-PUT-Villagarzon,0,364 365 366 367 370 372,3722q
+CO-QUI-Armenia,0,654fg 654fq 655ag 655aq 6565g 6565q 6567g 6570g 6570q 6571q 6572g 6573g 6573q,65730m
+CO-QUI-Buenavista,0,654dg 654dq 654fg 6558g 6558q 655ag,65588v
+CO-QUI-Calarca,0,654dg 654dq 654fg 655ag 655aq 655bg 655bq 655eg 655eq 6570g 6570q 6571g 6571q 6573g 6573q 6574g 6574q 6576g,6571er
+CO-QUI-Circasia,0,6572g 6572q 6573g 6573q 6578g 6579g 6579q 657bg 657cg 657cq,65794v
+CO-QUI-Cordoba,0,6558q 6559q 655ag 655aq 655bg 655bq 655cq 655eg 655eq,655a5m
+CO-QUI-Filandia,0,6572q 6578g 6578q 6579g 6579q 657ag 657aq 657bg 657cq 657eg,6579br
+CO-QUI-Genova,0,3fedq 3feeg 3feeq 3fefg 3fefq 3ff8q 3ffag 3ffaq 6544g 6545g 6545q 6547g 6547q 6550g 6550q 6551g 6551q 6552g 6552q 6553g,6545ch
+CO-QUI-LaTebaida,0,654eg 654eq 654fg 654fq 6564g 6565g 6570g,654fer
+CO-QUI-Montenegro,0,654eq 654fq 6564g 6564q 6565g 6565q 6566g 6566q 6567g 6567q 6572g 6572q,65722r
+CO-QUI-Pijao,0,6547g 6547q 654dg 654dq 6550q 6551q 6552g 6552q 6553g 6553q 6556g 6556q 6558g 6558q 6559g 6559q 655cg 655cq,65586m
+CO-QUI-Quimbaya,0,6566g 6566q 6567g 6567q 656cg 656cq 656dg 656dq 6572g 6572q 6578g 6578q,656d5v
+CO-QUI-Salento,0,6573g 6573q 6574g 6574q 6575g 6575q 6576g 6576q 6577g 6577q 6579g 657cg 657cq 657dg 657dq 657eg 657fg c022q c028g c028q c02ag c02bg,657c6r
+CO-RIS-Apia,0,65b7g 65cbq 65e0q 65e1g 65e1q 65e2g 65e2q 65e3g 65e3q 65e4q 65e6g 65e8g 65e9g,65e19v
+CO-RIS-Balboa,0,65c2g 65c2q 65c3g 65c3q 65c6q 65c8g 65c8q 65c9g 65c9q 65cbg 65ccg 65ccq,65c99r
+CO-RIS-BelenUmbria,0,65e3g 65e3q 65e4q 65e6g 65e6q 65e7g 65e7q 65e9g 65e9q 65ecg 65ecq 65edg 65edq 65eeg,65ec4h
+CO-RIS-Dosquebradas,0,65d0q 65d1g 65d1q 65d2g 65d2q 65d3g 65d3q,65d30h
+CO-RIS-Guatica,0,65ecq 65edq 65eeg 65eeq 65efg 65efq 65fag 6744g 6745g 6745q 6750g 6750q,65ef9m
+CO-RIS-LaCelia,0,659fg 659fq 65c8g 65c8q 65c9q 65cag 65caq 65cbg 65cbq,65ca6m
+CO-RIS-LaVirginia,0,65c6q 65c7q 65ccg 65cdg,65c6br
+CO-RIS-Marsella,0,65c7q 65cdg 65cdq 65cfg 65cfq 65d2q 65d8g 65d8q 65dag 65daq,65d82v
+CO-RIS-Mistrato,0,65e9q 65ebg 65ebq 65ecq 65eeg 65eeq 6715q 6717g 6717q 671dg 671dq 6740g 6740q 6741g 6741q 6742g 6742q 6743g 6743q 6744g 6744q 6745g 6746g 6746q 6748g 6748q 6749g,65ee3h
+CO-RIS-Pereira,0,656 657 65c 65d c02 c08,65d0q
+CO-RIS-PuebloRico,0,65b 65e 671 674,65e8g
+CO-RIS-Quinchia,0,65efg 65efq 65f8q 65f9q 65fag 65faq 65fbg 65fbq 6745g 6750g 6750q 6751g,65fabv
+CO-RIS-SantaRosaCabal,0,657eg 657eq 657fg 657fq 65d1g 65d1q 65d2q 65d3g 65d3q 65d4g 65d4q 65d5g 65d5q 65d6g 65d6q 65d7g 65d7q 65d8g 65d8q 65d9g 65d9q 65dcg 65ddg c02aq c080g c080q c081q c082g c082q,65d37r
+CO-RIS-Santuario,0,659fq 65b5g 65b5q 65b7g 65c9q 65caq 65cbg 65cbq 65ccg 65ccq 65ceg 65ceq 65e0g 65e0q 65e1g 65e1q 65e2g,65e12m
+CO-SAN-Aguada,0,c3c9g c3c9q c3cbg c3cbq c3ccg c3ccq c3ceg c3ceq c3e1g,c3ccbr
+CO-SAN-Albania,0,c331q c332g c332q c333g c333q c334q c336g c336q c337q c33cg c33cq c33dg c33dq c33fg,c3327v
+CO-SAN-Aratoca,0,c95dg cc02g cc02q cc03g cc03q cc06q cc08g cc08q cc09g cc09q cc0ag cc0bg cc0bq cc0cg,cc090h
+CO-SAN-Barbosa,0,c36aq c36bq c3c0g c3c0q c3c1g c3c1q,c36bah
+CO-SAN-Barichara,0,c953g c953q c954g c954q c955q c956g c956q c957g c959g c95cg c95cq,c9563h
+CO-SAN-Barrancabermeja,0,c90 c92 c93 c96 c99 c9c,c93bg
+CO-SAN-Betulia,0,c966q c967q c96cg c96cq c96dg c96dq c96eg c96eq c96fg c96fq c970q c971g c971q c972g c972q c973g c973q c974q c976g c976q c978g c978q c979g c979q c97ag c9c4g c9c5g,c971bm
+CO-SAN-Bolivar,0,c2d c2f c32 c33 c38 c39 c3a,c394q
+CO-SAN-Bucaramanga,0,c97eq c97fg c97fq c9d5g c9d5q c9d7g c9d7q cc2aq cc80g cc80q cc82g cc82q,c97ffh
+CO-SAN-Cabrera,0,c3fbq c3feq c951g c951q c953g c954g c954q c956g,c951dv
+CO-SAN-California,0,cc89g cc89q cc8cg cc8cq cc8eg cc8eq cc8fg,cc8car
+CO-SAN-Capitanejo,0,c6b9q c6bbg c6bbq c6bcq c6beg c6beq cc10g cc11g cc11q,c6bbbm
+CO-SAN-Carcasi,0,cc11q cc13g cc14g cc14q cc15g cc15q cc16g cc16q cc17g cc17q cc1cg cc1cq cc1dg cc1dq cc42g cc42q cc48g cc48q,cc161r
+CO-SAN-Cepita,0,cc06q cc09g cc09q cc0bg cc0bq cc0cg cc0cq cc0eg cc0eq,cc09em
+CO-SAN-Cerrito,0,cc1aq cc1bq cc1eg cc1eq cc1fq cc30g cc30q cc31g cc31q cc32g cc32q cc33g cc33q cc34g cc34q cc35g cc35q cc36g cc36q cc37g cc37q cc38g cc39g cc3cg cc3dg,cc311m
+CO-SAN-Charala,0,c3d4q c3d5g c3d5q c3d6g c3d6q c3d7g c3d7q c3dcg c3dcq c3ddg c3ddq c3deg c3deq c3dfg c3dfq c3f4g c3f4q c3f5g c3f5q c3f6g c3f7g c3f7q c6a0g c6a0q c6a2g c6a2q c6a3q,c3f59h
+CO-SAN-Charta,0,cc80q cc81q cc82g cc82q cc83g cc83q cc86g cc86q cc89g cc89q cc8cg,cc83ev
+CO-SAN-Chima,0,c3e5q c3e6g c3e6q c3e7g c3e7q c3ecg c3ecq c3edg c3edq c3f0q c3f2g c3f2q c3f8g,c3f23h
+CO-SAN-Chipata,0,c397g c3c0q c3c1q c3c2g c3c2q c3c3g c3c3q c3c8g c3c9g,c3c2cm
+CO-SAN-Cimitarra,0,c2d c2f c38 c39 c3a c3b c85 c90 c91,c3b0q
+CO-SAN-Concepcion,0,cc18q cc19g cc19q cc1ag cc1aq cc1bg cc1bq cc1cg cc1cq cc1dg cc1dq cc1eg cc1eq cc1fg cc1fq cc30g cc35g cc35q cc48g cc48q cc4ag cc4aq cc60g cc60q,cc1b1m
+CO-SAN-Confines,0,c3f1q c3f3g c3f3q c3f4q c3f6g c3f6q c3fcg,c3f68h
+CO-SAN-Contratacion,0,c3ceq c3cfq c3e1g c3e1q c3e3g c3e4g c3e4q c3e5g c3e5q c3e6g c3e6q c3e7g,c3e4dm
+CO-SAN-Coromoro,0,c3d c3f c68 c6a,c6a0q
+CO-SAN-Curiti,0,c6aaq c6abq c955g c955q c957g c957q c95dg cc00g cc00q cc01g cc01q cc02g cc02q cc03g cc03q cc04q cc06g cc06q cc07g cc08g cc0cg,cc00bm
+CO-SAN-ElCarmenChucuri,0,c3e c91 c94 c95,c94cg
+CO-SAN-ElGuacamayo,0,c3cbq c3ceg c3ceq c3cfg c3cfq c3e0g c3e0q c3e1g c3e1q c3e3g c3e4g c3e5g,c3e44h
+CO-SAN-ElPenon,0,c386q c387g c387q c38cg c38cq c38dg c38dq c38fg c391q c392g c392q c393g c393q c394g c394q c396g c396q c397g c398g c398q c399g c399q c39ag c39cg c39cq,c3963r
+CO-SAN-ElPlayon,0,c9deq c9dfq c9f0q c9f1g c9f1q c9f3g c9f3q c9f4g c9f4q c9f5g c9f5q c9f6g c9f6q c9f7g c9f7q c9f9g c9fcg c9fcq c9fdg c9fdq cca0g cca0q cca2g cca2q cca8g cca8q,c9f4ch
+CO-SAN-ElSocorro,0,c3f9g c3f9q c3fbg c3fbq c3fcg c3fcq c3feg c3feq,c3fb5h
+CO-SAN-Encino,0,c3d5q c3d7g c3d7q c3dcg c3ddg c3ddq c3dfg c680q c681g c681q c682g c682q c683g c683q c686q c688g c688q c689g c689q c68ag c68cg,c3dddm
+CO-SAN-Enciso,0,cc11q cc13g cc13q cc16g cc16q cc19g cc1cg,cc139r
+CO-SAN-Florian,0,c327g c327q c32cg c32cq c32dg c32dq c330q c332g c332q c333q c336q c338g c338q c339g c339q c33cg,c3380m
+CO-SAN-Floridablanca,0,c97dg c97dq c97fg c97fq cc28q cc2ag cc2aq cc2bq cc80g cc81g,c97f5v
+CO-SAN-Galan,0,c947g c950q c951g c951q c952g c952q c953g c953q c958g c958q c959g c959q c95ag,c9533m
+CO-SAN-Gambita,0,c36 c37 c3c c3d,c37aq
+CO-SAN-Giron,0,c96 c97 c9c c9d cc2,c97fg
+CO-SAN-Guaca,0,cc0eg cc0eq cc0fq cc24g cc24q cc25g cc25q cc26g cc27g cc27q cc2dg cc2dq cc2fg cc30q cc32g cc32q cc38g cc38q cc3ag,cc259h
+CO-SAN-Guadalupe,0,c3ccq c3cdq c3ceg c3cfg c3cfq c3dag c3daq c3e5g c3e5q c3e7g c3f0g c3f0q,c3e54m
+CO-SAN-Guapota,0,c3f0g c3f0q c3f1g c3f1q c3f2g c3f2q c3f3g c3f3q,c3f0fv
+CO-SAN-Guavata,0,c33eq c33fg c33fq c36aq c395g c395q c3c0g,c3955h
+CO-SAN-Guepsa,0,c3c0q c3c1q c3c3g c3c3q c3c6g,c3c34h
+CO-SAN-Hato,0,c3efq c3fag c3faq c3fbg c3fbq c945g c945q c947g c950g c950q c951g c951q c952g,c9510m
+CO-SAN-JesusMaria,0,c336q c338q c339g c339q c33ag c33bg c33cg c33cq c33dq c33eg c33eq c33fg,c33e4m
+CO-SAN-Jordan,0,c957q c95dg c95dq cc02q cc08g cc08q,cc088h
+CO-SAN-LaBelleza,0,c32bg c32bq c32cg c32cq c32dg c32dq c32eg c32eq c32fg c32fq c338q c33ag c33aq c33bg c381g c381q c384g c384q c385g c385q c386g c390g,c338bh
+CO-SAN-LaPaz,0,c3b5g c3b5q c3b7g c3b7q c3c3q c3c8g c3c8q c3c9g c3c9q c3cag c3caq c3cbg c3cbq c3e0g c3e0q c3e1g c3e2g c3e2q,c3cb1h
+CO-SAN-Landazuri,0,c38 c39 c3b c3e c91,c39eq
+CO-SAN-Lebrija,0,c979q c97aq c97bg c97bq c97cq c97eg c97eq c9c5g c9c5q c9c7g c9d0g c9d0q c9d1g c9d1q c9d2g c9d2q c9d3g c9d3q c9d4g c9d4q c9d5g c9d5q c9d6g c9d7g c9d8g c9d8q c9d9g c9d9q c9dag c9daq,c97e9r
+CO-SAN-LosSantos,0,c95cq c95dq c95eg c95eq c95fg c95fq c974q c975g c975q cc08q cc0ag cc0aq cc0bg cc0bq cc20g cc20q cc21g,c95dfv
+CO-SAN-Macaravita,0,c6bcq c6beg c6beq c6bfg c6bfq cc14g cc15g cc15q,c6bedh
+CO-SAN-Malaga,0,cc12q cc13q cc18g cc18q cc19g cc19q cc1ag,cc185v
+CO-SAN-Matanza,0,c9ddg c9ddq c9dfg c9dfq cc80q cc82g cc82q cc83q cc88g cc88q cc89g cc89q cc8ag cc8aq cc8bg cc8bq cca0g cca1g,cc898h
+CO-SAN-Mogotes,0,c6a2q c6a3q c6a6q c6a8g c6a8q c6a9g c6a9q c6aag c6aaq c6abg c6abq c6acg c6acq c6adq c6aeg c6aeq c6afg c6afq cc01g cc01q cc04g cc04q cc05g cc05q cc06g cc07g,c6ab4v
+CO-SAN-Molagavita,0,cc05g cc05q cc06g cc06q cc07g cc07q cc0cg cc0dg cc0dq cc10g cc10q cc12g cc12q cc18g cc18q,cc07fm
+CO-SAN-Ocamonte,0,c3f5q c3f7g c3f7q c3fdg c6a2g c6a2q c6a8g,c3f76m
+CO-SAN-Oiba,0,c3d8q c3d9g c3d9q c3dag c3daq c3dbg c3dbq c3dcg c3dcq c3deg c3deq c3f0g c3f0q c3f1g c3f1q c3f3g c3f4g c3f4q,c3f13h
+CO-SAN-Onzaga,0,c68dq c68eg c68eq c68fg c68fq c69aq c6a4g c6a4q c6a5g c6a5q c6a6g c6a6q c6a7g c6a7q c6adg c6adq c6afg c6afq c6b0g c6b0q c6b2g c6b2q c6b3q c6b8g c6b8q c6b9q c6bag c6baq cc05g,c6a77h
+CO-SAN-Palmar,0,c3fbg c3fbq c951g,c3fbbv
+CO-SAN-PalmasSocorro,0,c3f2q c3f3g c3f3q c3f6q c3f8g c3f9g c3fcg,c3f91v
+CO-SAN-Paramo,0,c3f6g c3f6q c3f7g c3f7q c3fcg c3fcq c3fdg c3fdq c3ffg,c3fd2h
+CO-SAN-Piedecuesta,0,c975q c977g c977q c97dg c97dq cc0bg cc0bq cc0eq cc20g cc20q cc21g cc21q cc22g cc22q cc23g cc23q cc24g cc24q cc26q cc28g cc28q cc29g cc29q cc2ag cc2aq cc2bg cc2bq cc2cg cc2cq cc2eg,cc284m
+CO-SAN-Pinchote,0,c3fcq c3fdq c3feg c3feq c3ffg c3ffq c954g c955g,c3fefv
+CO-SAN-PuenteNacional,0,c336g c336q c337g c337q c33dg c33dq c33fg c33fq c360q c362g c362q c368g c368q c369g c369q c36ag c36aq c36bg,c36a0m
+CO-SAN-PuertoParra,0,c3b c90 c91 c92 c93,c907q
+CO-SAN-PuertoWilches,0,c99 c9b c9c cb1 cb3 cb4,c999q
+CO-SAN-Rionegro,0,c9b c9c c9d c9e c9f cb1 cb4 cc8 cca,c9d7q
+CO-SAN-SabanaTorres,0,c99 c9b c9c c9d c9e,c9ceg
+CO-SAN-SanAndres,0,cc06q cc07q cc0cg cc0cq cc0dg cc0dq cc0eg cc0eq cc0fg cc0fq cc18g cc18q cc1ag cc1aq cc24g cc25g cc25q cc30g cc30q cc32g cc32q,cc0f9r
+CO-SAN-SanBenito,0,c3c3g c3c3q c3c6g c3c6q c3c9g c3ccg c3ccq,c3cc3v
+CO-SAN-SanGil,0,c3feq c3ffg c3ffq c6aag c6aaq c954g c954q c955g c955q c957g cc00g,c9554r
+CO-SAN-SanJoaquin,0,c6a6q c6a7q c6acg c6acq c6adg c6adq c6aeg c6aeq c6afg c6afq cc05g,c6ad2r
+CO-SAN-SanJoseMiranda,0,cc10g cc10q cc11g cc11q cc12g cc12q cc13g cc13q cc18g,cc12dm
+CO-SAN-SanMiguel,0,c6bbq c6beq cc11g cc11q cc13g cc14g cc14q cc16g,cc142r
+CO-SAN-SanVicenteChucuri,0,c91 c93 c94 c95 c96 c97 c9c,c965q
+CO-SAN-SantaBarbara,0,cc21q cc23g cc23q cc24g cc24q cc26g cc26q cc27g cc27q cc2cg cc2cq cc2dg cc2dq cc2eg,cc2c4h
+CO-SAN-SantaHelenaOpon,0,c3e0q c3e1q c3e2g c3e2q c3e3g c3e3q c3e4q c3e6g c3e6q c3e8g c3e8q c3e9g c3e9q c3eag c3eaq c3ebg c3ebq c3ecg c3ecq c3edq c3eeg,c3e27m
+CO-SAN-Simacota,0,c3b c3e c3f c91 c93 c94,c3f8q
+CO-SAN-Suaita,0,c3c6q c3c7g c3c7q c3ccg c3ccq c3cdg c3cdq c3cfg c3d2g c3d2q c3d3g c3d3q c3d6g c3d6q c3d8g c3d8q c3d9g c3d9q c3dag c3dcg,c3cd1h
+CO-SAN-Sucre,0,c32 c33 c38 c39,c33eq
+CO-SAN-Surata,0,cc89g cc89q cc8bg cc8bq cc8cg cc8cq cc8eg cc8eq cc8fg cc8fq cca0g cca0q cca1g cca1q cca2g cca2q cca3g cca3q cca4g cca4q cca6g cca8g cca8q cca9g cca9q,cc8b4r
+CO-SAN-Tona,0,cc2bg cc2bq cc2cq cc2dq cc2eg cc2eq cc2fg cc2fq cc80g cc80q cc81g cc81q cc83g cc83q cc84g cc84q cc85g cc85q cc86g cc86q cc87g cc87q,cc81fr
+CO-SAN-ValleSanJose,0,c3f7q c3fdg c3fdq c3ffg c6a2q c6a8g c6a8q c6aag,c3fd9v
+CO-SAN-Velez,0,c36 c39 c3b c3c c3e c91,c3c0q
+CO-SAN-Vetas,0,cc86q cc87q cc8cg cc8cq cc8dg cc8dq cc8eg cc8fg,cc8d2r
+CO-SAN-Villanueva,0,c955q c956g c956q c957g c957q c95cg c95cq c95dg c95dq c95eg,c956fm
+CO-SAN-Zapatoca,0,c958q c959g c959q c95ag c95aq c95bg c95bq c95cg c95cq c95eg c95eq c95fq c967q c96dg c970g c970q c971g c971q c972g c972q c974g c974q c975g c975q c976g c978g,c95bcv
+CO-SUC-Buenavista,0,d01fq d034q d035g d035q d036g d036q d037g d037q d03cg d03dg d03dq d03fg d068q d06ag,d036dm
+CO-SUC-Caimito,0,caa7q caadg caadq caafg caafq cab1g cab1q cab2g cab2q cab3g cab3q cab4g cab4q cab6g cab6q cab8g cab8q cab9g cab9q cabag cabaq cabbg cabbq cabcg cabcq d005g d010g,cab87v
+CO-SUC-Chalan,0,d02eq d081g d081q d083g d083q d084g d084q d086g d086q d089g,d0849h
+CO-SUC-Coloso,0,d02bg d02bq d02eg d02eq d081g d081q d082g d083g d083q d084g,d02bfr
+CO-SUC-Corozal,0,d00bq d00dq d00eg d00eq d00fg d00fq d018g d018q d01ag d01aq d021g d023g d023q d024g d024q d025g d026g d026q d027g d027q d02cg,d026ch
+CO-SUC-Covenas,0,7578g 7579g 7579q 757bg 757cq 757eg 757eq,75799v
+CO-SUC-ElRoble,0,d007q d00cq d00dg d00dq d00eg d00fg d012g d012q d013g d013q d016q d018g d018q d019g d019q d01ag d01aq d01cg,d00ddv
+CO-SUC-Galeras,0,d016q d019g d019q d01bg d01bq d01cg d01cq d01dg d01dq d01eg d01eq d01fg d01fq d034g d035g d048q d04ag,d01b7r
+CO-SUC-Guaranda,0,ca6bg ca6bq ca6eq ca6fg ca6fq cac0q cac1g cac1q cac2g cac3g cac3q cac4g cac4q cac5g cac5q cac6g cac6q cac7g cac7q cacdg cacdq cad0q cad2g cad2q cad8g cad8q,cad84m
+CO-SUC-LaUnion,0,caa3g caa3q caa6g caa6q caa7g caa7q caa9g caa9q caabg caabq caacg caacq caadg caadq caaeg caaeq caafg caafq d005g,caae7h
+CO-SUC-LosPalmitos,0,d026q d027q d02cg d02cq d02dg d02dq d02eg d02eq d02fg d02fq d038g d038q d039q d03ag d03aq d03bg d084g,d02c7v
+CO-SUC-Majagual,0,ca9 cac cad cae caf,cacfg
+CO-SUC-Morroa,0,d023g d023q d026q d029g d029q d02bg d02cg d02cq d02dg d02dq d02eg d02eq,d026bm
+CO-SUC-Ovejas,0,d02eq d02fq d039q d03ag d03aq d03bg d03bq d03eq d084g d084q d085g d085q d086g d086q d087g d087q d08cg d08cq d08dg d090g d090q d091g d091q d092g d092q d094g d094q,d0853m
+CO-SUC-Sampues,0,d009q d00ag d00aq d00bg d00bq d00cg d00cq d00dg d00dq d00eg d00eq d020g d020q d021g d021q d024g,d00bbm
+CO-SUC-SanAntonioPalmito,0,7573q 7575q 7576g 7576q 7577g 7577q 7579g 7579q 757cg 757cq 757dg 757dq,7577am
+CO-SUC-SanBenitoAbad,0,ca9 cab cac cae d00 d01 d04,d014g
+CO-SUC-SanJuanBetulia,0,d00fq d024g d024q d025g d025q d026g d027g d027q d02dg d030g d030q d032g d032q d038g d038q,d025av
+CO-SUC-SanMarcos,0,ca8 ca9 caa cab,cab0q
+CO-SUC-SanOnofre,0,75d 75f 775 d08 d0a,75dfg
+CO-SUC-SanPedro,0,d032q d033q d036q d039g d039q d03bg d03bq d03cg d03cq d03dg d03dq d03eg d03eq d03fg,d039cm
+CO-SUC-Since,0,d00fq d018q d019q d01ag d01aq d01bg d01bq d01eq d025g d025q d027g d030g d030q d031g d031q d032g d032q d033g d033q d034g d034q d035g d035q d036g d036q d038g d038q d039g d039q,d030ch
+CO-SUC-Sincelejo,0,7575q 7577g 7577q 757dg 757dq d020g d020q d021g d021q d022g d022q d023g d023q d024g d024q d026g d028g d028q d029g d029q,d0232m
+CO-SUC-Sucre,0,cab cac cae caf d04,caecq
+CO-SUC-Tolu,0,757cq 757dq 757eg 757eq 757fg 757fq 75d4g 75d4q 75d5g 75d5q 75d6g 75d6q 75d7g 75d7q 75ddg d080g d080q d082g d082q d088g,75d46v
+CO-SUC-Toluviejo,0,757dg 757dq 757fg 757fq 75d5g d028g d028q d029g d029q d02ag d02aq d02bg d02bq d080g d080q d081g d081q d082g d082q d083g d083q,d02a6v
+CO-TOL-Alpujarra,0,9a1eq 9a31g 9a31q 9a33g 9a33q 9a34g 9a34q 9a35g 9a35q 9a36g 9a36q 9a37g 9a37q 9a39g 9a39q 9a3cg 9a3cq 9a3dg 9a3dq 9a3eg 9a3fg 9a60q 9a62g 9a62q 9a68g 9a68q 9a6ag,9a378h
+CO-TOL-Alvarado,0,c01bq c01eq c031g c031q c033g c033q c034g c034q c035q c036g c036q c037g c037q c039g c039q c03cg c03cq c03dg c03dq c03eg c068g,c0367r
+CO-TOL-Ambalema,0,c03fg c03fq c06ag c06aq c06bq c095g c095q c0c0g c0c0q c0c1g c0c1q c0c2g c0c2q c0c3g c0c3q c0c8g c0c9g c0c9q,c0c13m
+CO-TOL-Anzoategui,0,c025q c026g c026q c027g c027q c029q c02bg c02cg c02cq c02dg c02dq c02eg c02fg c032g c032q c033g c033q c038g c038q c039g c039q c03ag c03bg c03cq c03eg,
+CO-TOL-Armero,0,c097q c09cq c09dg c09dq c09eg c09eq c09fg c09fq c0b5g c0b5q c0b7g c0c2q c0c8g c0c8q c0c9g c0c9q c0cag c0caq c0cbg c0cbq c0ccq c0ceg c0e0g c0e0q c0e1g c0e1q c0e2g c0e4g,c09fdr
+CO-TOL-Ataco,0,3f5 3f7 9a2 9a8,9a81g
+CO-TOL-Cajamarca,0,6554q 6556g 6556q 6557g 6557q 655cg 655cq 655dg 655dq 655eg 655eq 655fg 655fq 6574g 6575g 6575q 6577g 6577q c008q c009q c00ag c00aq c00bg c00bq c020g c020q,c00a9v
+CO-TOL-CarmenApicala,0,9ae3q 9ae8g 9ae8q 9ae9g 9ae9q 9aeag 9aebg 9aebq 9aecq 9aeeg 9aeeq c041g c041q c043g c044g,9aeeah
+CO-TOL-Casabianca,0,c083q c086q c089g c089q c08cg c08cq c08dq c08eg c08fg c08fq c09ag c09aq c09bq c0b0g c0b0q c0b1g c0b1q,c0b06m
+CO-TOL-Chaparral,0,3f7 3fc 3fd 3fe 3ff 9a2 9a8 9aa,3fddg
+CO-TOL-Coello,0,c013g c013q c014q c015q c016g c016q c017g c017q c019g c01cg c01cq c01dg c01dq c01fg c01fq c035g c048g c048q c04ag c04aq c060g c060q,c017cr
+CO-TOL-Coyaima,0,9a2 9a8 9a9 9ab,9a8fg
+CO-TOL-Cunday,0,9ac 9ae 9af,9aecq
+CO-TOL-Dolores,0,9a3 9a6 9a9 9ac 9ad,9a3fq
+CO-TOL-Espinal,0,9abeq 9abfg 9abfq 9ae8q 9aeag 9aeaq c014g c014q c015g c015q c016g c017g c040g c040q,9abffh
+CO-TOL-Falan,0,c09bg c09bq c09eg c09eq c09fq c0b4g c0b4q c0b5g c0b5q c0b6g c0b6q c0b7g,c0b4fv
+CO-TOL-Flandes,0,c015q c017g c017q c040g c040q c041q c042g c042q c043g c043q,c042cm
+CO-TOL-Fresno,0,c0b0g c0b0q c0b1q c0b2g c0b2q c0b3g c0b3q c0b6g c0b6q c0b8g c0b9g c0b9q c0bbg c0bcg c0bcq c0beg,c0b37h
+CO-TOL-Guamo,0,9ab3q 9ab4q 9ab6g 9ab6q 9ab7g 9ab7q 9ab9g 9ab9q 9abbg 9abbq 9abcg 9abcq 9abdg 9abdq 9abeg 9abeq 9abfg 9abfq 9ae2q 9ae8g 9ae8q 9aeag c011g c011q c013g c014g c014q,9abc4v
+CO-TOL-Herveo,0,c083q c089g c089q c08bg c08bq c08cq c08eg c08eq c08fg c08fq c09aq c0a1g c0a1q c0a4g c0a4q c0a5g c0a5q c0a6g c0a7g c0a7q c0b0g c0b0q c0b2g c0b2q,c0a57m
+CO-TOL-Honda,0,c0b7g c0cbq c0e0g c0e0q c0e1g c0e1q c0e2g c0e2q c0e3g c0e3q c0e4g c0e4q c0e6g c0e6q c0e8g c0e8q c0e9g c0e9q c0eag c0eaq c0ebg c0ecg c0ecq,c0e95h
+CO-TOL-Ibague,0,655 657 c00 c01 c02 c03,c00fq
+CO-TOL-Icononzo,0,9aedq 9aefg 9aefq 9af2g 9af2q 9af8g 9af8q 9af9q 9afag 9afaq 9afbg 9afbq c050g c050q c051g c052g,c0504h
+CO-TOL-Lerida,0,c094g c094q c095g c095q c096g c096q c097g c097q c09cg c09cq c09dg c09dq c0c0g c0c0q c0c2g c0c2q,c0973m
+CO-TOL-Libano,0,c03bq c090g c090q c091g c091q c092g c092q c093g c093q c094q c096g c096q c098g c099g c099q c09bg c09cg c09cq c09eg,c0991v
+CO-TOL-Mariquita,0,c0b6g c0b6q c0b7g c0b7q c0bcg c0bcq c0bdg c0bdq c0beg c0bfg c0e2g c0e2q c0e8g c0e8q c0e9g c0eag,c0b7ev
+CO-TOL-Melgar,0,9aeeg 9aeeq 9aefg 9aefq 9afaq c041g c041q c043g c044g c044q c045g c045q c047g c050g c050q c052g,c0458h
+CO-TOL-Murillo,0,c02bq c02eq c02fq c03aq c03bq c081g c081q c083g c083q c084g c084q c085g c085q c086g c086q c087g c087q c08dg c090g c090q c091g c092g c092q c098g,c087dm
+CO-TOL-Natagaima,0,9a2 9a3 9a8 9a9,9a90q
+CO-TOL-Ortega,0,9a8 9a9 9aa 9ab,9aa5q
+CO-TOL-Palocabildo,0,c09bq c09eq c0b1g c0b1q c0b3g c0b4g c0b4q c0b6g,c0b1fv
+CO-TOL-Piedras,0,c01bg c01bq c01cq c01dq c01eg c01eq c01fg c01fq c034g c034q c035g c035q c037g c037q c03dg c060g c060q c061g c061q c062g c062q c063q c068g,c0375m
+CO-TOL-Planadas,0,3de 3df 3f1 3f4 3f5 3f6 3f7,3f59q
+CO-TOL-Prado,0,9a94q 9a95q 9a96g 9a96q 9a97g 9a97q 9a9cg 9a9cq 9a9dg 9a9dq 9a9eg 9a9fg 9ac2g 9ac2q 9ac3g 9ac3q 9ac8g 9ac8q 9ac9g 9ac9q 9acag 9accg 9accq,9a9d2m
+CO-TOL-Purificacion,0,9a9bg 9a9bq 9a9cg 9a9cq 9a9eg 9a9eq 9a9fg 9a9fq 9ab4g 9ab4q 9ab5g 9ab5q 9ab7g 9ab7q 9ac8q 9ac9q 9acag 9acaq 9acbg 9acbq 9accq 9aceg 9ae0g 9ae0q 9ae1g 9ae2g 9ae2q,9a9fam
+CO-TOL-Rioblanco,0,3f1 3f3 3f4 3f6 3f7 3fc 3fd,3f7bg
+CO-TOL-Roncesvalles,0,3ff 655 9aa c00,3ff6q
+CO-TOL-Rovira,0,655 9aa c00 c01,c006g
+CO-TOL-Saldana,0,9a9aq 9a9bg 9a9bq 9a9eq 9ab0g 9ab0q 9ab1g 9ab1q 9ab3g 9ab3q 9ab4g 9ab4q 9ab5q 9ab6g 9ab6q 9ab7g,9ab4ah
+CO-TOL-SanAntonio,0,3fdeq 3fdfg 3fdfq 3ff1q 3ff3g 3ff4g 3ff4q 3ff5g 3ff5q 3ff6g 3ff6q 3ff7g 3ff7q 3ffdg 3ffdq 9a8aq 9aa0g 9aa0q 9aa2g 9aa2q 9aa8g 9aa8q 9aaag,3ff5cv
+CO-TOL-SanLuis,0,9aa7q 9aadg 9aadq 9aafg 9ab1q 9ab2g 9ab2q 9ab3g 9ab3q 9ab8g 9ab8q 9ab9g 9ab9q 9abag 9abaq 9abbg 9abbq c007g c007q c010g c010q c011g c011q c012g c012q c013g c013q c014q c016g c018g,9abadm
+CO-TOL-SantaIsabel,0,c02ag c02aq c02bg c02bq c02eg c02eq c02fg c02fq c038q c039q c03ag c03aq c03bg c03bq c081g c081q c084g c085g c091g c091q c094q,c03a7v
+CO-TOL-Suarez,0,9ab5q 9ab7g 9ab7q 9ae0g 9ae0q 9ae2g 9ae2q 9ae3q 9ae8g 9ae8q 9ae9g 9ae9q 9aeag 9aeaq 9aebg 9aebq c040g c040q c041g c041q c043g,9ae86r
+CO-TOL-ValleSanJuan,0,9aaeg 9aaeq 9aafg 9aafq 9abag 9abaq c005g c005q c007g c010g c010q c011q c012g,c0106v
+CO-TOL-Venadillo,0,c03bg c03bq c03cq c03dg c03dq c03eg c03eq c03fg c03fq c062q c068g c068q c069g c069q c06ag c06aq c091g c091q c094g c094q c095g c0c0g,c03f2v
+CO-TOL-Villahermosa,0,c083q c086q c087q c08cg c08cq c08dg c08dq c08fg c092q c098g c098q c099g c099q c09ag c09aq c09bg c09bq c09eg c0b0g,c09acv
+CO-TOL-Villarrica,0,9ac6q 9ac7q 9ac9q 9accg 9accq 9acdg 9acdq 9aceg 9aceq 9acfg 9acfq 9adag 9adaq 9ae4g 9ae4q 9ae5g 9ae5q 9ae6g 9ae7g 9ae7q 9af0g 9af0q 9af2g 9af2q,9ae5er
+CO-VAC-Alcala,0,656dq 656eg 656fg 6578q 657ag,656dev
+CO-VAC-Andalucia,0,3fbbq 3fbdq 3fbeg 3fbeq 3fbfg 3fbfq 6511g 6511q 6514g,65141m
+CO-VAC-Ansermanuevo,0,653fg 653fq 656ag 656aq 6594g 6594q 6595g 6595q 6596g 6597g 65c0g 65c0q 65c1g 65c1q 65c2g 65c2q 65c3g 65c3q 65c6g,65c0dh
+CO-VAC-Argelia,0,653cq 653dq 653eg 653eq 653fg 653fq 6594g 6594q 6595g,653f8h
+CO-VAC-Bolivar,0,650 651 652 653,651cg
+CO-VAC-Buenaventura,0,1y 3y 6n,3ee4g
+CO-VAC-Buga,0,3f8 3f9 3fa 3fb 3fc 3fe,3fb0g
+CO-VAC-Bugalagrande,0,3fbdq 3fbeq 3fbfg 3fbfq 3feag 3feaq 3febq 6511g 6511q 6513g 6513q 6514g 6514q 6515g 6515q 6516g 6516q 6517g 6517q 651cg 6540g 6540q 6541g 6541q 6542g,6514ch
+CO-VAC-Caicedonia,0,6544g 6544q 6545q 6546g 6546q 6547g 6547q 654cg 654cq 654dg 654dq 654eg 654fg,654d2h
+CO-VAC-Cali,0,3e75g 3e75q 3e77g 3e77q 3e7dg 3e7dq 3f20g 3f20q 3f21g 3f21q 3f22g 3f22q 3f23g 3f23q 3f24g 3f24q 3f26g 3f26q 3f28g 3f28q 3f29g 3f29q 3f2ag 3f2aq 3f2bg 3f2cg 3f2cq 3f2eg,3f296h
+CO-VAC-Calima,0,3ed 3ef 3f8 3fa,3fa4q
+CO-VAC-Candelaria,0,3f24g 3f24q 3f25g 3f25q 3f26g 3f26q 3f27g 3f27q 3f2cg 3f2cq 3f2dg 3f2dq 3f30g 3f30q 3f32g 3f32q 3f38g 3f38q,3f27dv
+CO-VAC-Cartago,0,6568q 6569g 6569q 656ag 656aq 656bg 656bq 656cg 656cq 656dq 656eg 656eq 656fg 65c0g 65c1g 65c1q 65c4g,656bfv
+CO-VAC-Dagua,0,3e7 3ed 3ef 3f2 3f8,3ed7g
+CO-VAC-ElAguila,0,6596g 6596q 6597g 6597q 659dg 659dq 659fg 659fq 65c2g 65c2q 65c8g 65c8q 65cag,65c80m
+CO-VAC-ElCairo,0,6539q 653ag 653aq 653bg 653bq 653eg 653eq 6590g 6591g 6591q 6593g 6594g 6594q 6596g,65914m
+CO-VAC-ElCerrito,0,3f85q 3f86g 3f86q 3f87g 3f87q 3f8dg 3f8dq 3f90g 3f90q 3f91q 3f92g 3f92q 3f93g 3f93q 3f94q 3f95q 3f96g 3f96q 3f97g 3f97q 3f98g 3f9dg 3f9dq 3fc2g 3fc2q 3fc3q 3fc8g 3fc8q 3fc9g,3f929m
+CO-VAC-ElDovio,0,6525g 6525q 6527g 6530g 6530q 6531g 6531q 6532g 6532q 6533g 6533q 6534q 6536g 6539g,65319v
+CO-VAC-Florida,0,3f1bg 3f1bq 3f1eg 3f1eq 3f1fg 3f1fq 3f25g 3f25q 3f30g 3f30q 3f31g 3f31q 3f32g 3f33g 3f34g 3f34q 3f35g 3f35q 3f36g 3f36q 3f37g 3f37q 3f4aq 3f60g 3f60q,3f319v
+CO-VAC-Ginebra,0,3f92q 3f93g 3f93q 3f96g 3f96q 3f97q 3f98g 3f98q 3f99g 3f99q 3f9bg 3f9cg 3f9cq 3f9dg 3f9dq 3f9eg 3f9eq 3f9fg,3f990h
+CO-VAC-Guacari,0,3f8dg 3f8dq 3f8fg 3f92q 3f98g 3f98q 3f99q 3f9ag 3f9aq 3f9bg 3f9bq 3f9eg,3f988v
+CO-VAC-Jamundi,0,3e5 3e7 3f0 3f2,3f0bq
+CO-VAC-LaCumbre,0,3ed5q 3ed7g 3ed7q 3eddg 3eddq 3f2aq 3f80g 3f80q 3f81q 3f82g 3f82q 3f83g 3f83q 3f88g 3f88q 3f89g 3f8ag 3f8aq 3f8bq,3f825m
+CO-VAC-LaUnion,0,6534g 6534q 6535g 6535q 6536g 6536q 6537g 6537q 6560q 6562g 6562q,65371h
+CO-VAC-LaVictoria,0,6535g 6535q 654ag 654aq 654bg 654bq 654eq 6560g 6560q 6561g 6561q 6562g 6563g 6564g 6564q 6566g,6560am
+CO-VAC-Obando,0,6561q 6562g 6562q 6563g 6563q 6564q 6566g 6566q 6568g 6568q 6569g 6569q 656cg,65638h
+CO-VAC-Palmira,0,3f2 3f3 3f6 3f8 3f9 3fc,3f3aq
+CO-VAC-Pradera,0,3f32g 3f32q 3f33g 3f33q 3f36g 3f36q 3f37g 3f37q 3f38g 3f38q 3f39g 3f39q 3f3cg 3f3cq 3f3dg 3f3dq 3f62g 3f62q 3f68g 3f68q,3f33br
+CO-VAC-Restrepo,0,3f88g 3f88q 3f89g 3f89q 3f8ag 3f8aq 3f8bg 3f8bq 3f8cq 3f8eg 3f8eq 3fa1g 3fa4g,3f8b6r
+CO-VAC-Riofrio,0,3fa7q 3fa9q 3facg 3facq 3fadg 3fadq 3faeg 3faeq 3fafg 3fafq 3fb8q 3fbag 3fbaq 3fbbg 3fbbq 6505g 6510g 6510q 6511g,3fbafr
+CO-VAC-Roldanillo,0,6519q 651aq 651bg 651bq 651cq 651eg 651eq 651fg 651fq 6530g 6531g 6531q 6534g 6534q 6535g 6535q,651e6r
+CO-VAC-SanPedro,0,3fb1q 3fb2g 3fb2q 3fb3g 3fb3q 3fb4q 3fb5q 3fb6g 3fb6q 3fb7g 3fb8g 3fb8q 3fb9g 3fbcg,3fb3cr
+CO-VAC-Sevilla,0,3fe 3ff 654,6543g
+CO-VAC-Toro,0,6536g 6536q 6537g 6537q 653cg 653dg 653dq 653fg 653fq 6562q 6568g 6568q 656ag,653d4m
+CO-VAC-Trujillo,0,3faeq 3fafq 6504g 6504q 6505g 6505q 6506g 6506q 6507g 6507q 650dg 6510g 6510q 6511g 6511q 6512g 6512q 6513g 6513q 6518g,65109r
+CO-VAC-Tulua,0,3fb 3fe 651 654,3fb9q
+CO-VAC-Ulloa,0,656eg 656eq 656fg 656fq 6578q 657ag,657a3h
+CO-VAC-Versalles,0,6531q 6532g 6532q 6533g 6533q 6536g 6536q 6538g 6538q 6539g 6539q 653ag 653bg 653cg 653cq 653dg 653dq 653eg,6533dm
+CO-VAC-Vijes,0,3f83q 3f86q 3f87q 3f89g 3f89q 3f8cg 3f8cq 3f8dg 3f8eg 3f8eq,3f86em
+CO-VAC-Yotoco,0,3f8cg 3f8cq 3f8dg 3f8dq 3f8eg 3f8eq 3f8fg 3f8fq 3fa4g 3fa4q 3fa5g 3fa5q 3fa6g 3fa7g 3fa7q 3fadg 3fadq 3fb0q 3fb2g 3fb2q 3fb8g 3fb8q,3f8fbv
+CO-VAC-Yumbo,0,3f29q 3f2ag 3f2aq 3f2bg 3f2bq 3f2eg 3f2eq 3f80g 3f80q 3f81g 3f81q 3f83g 3f83q 3f84g 3f84q 3f86g 3f86q,3f815v
+CO-VAC-Zarzal,0,6516q 6517g 6517q 651cg 651cq 651dg 651dq 651eg 651fg 651fq 6535g 6542g 6542q 6548g 6548q 6549q 654ag 654aq 654bg 654bq 654eg 654eq 6560g,651f4v
+CO-VAU-Caruru,0,95b 95e 95f 970 971 972 973 974 975 976 977 979 97b 97c 97d 97e,9762g
+CO-VAU-Mitu,0,95e 95f 974 975 977 97d b09 b0a b0b b0c b0e b20 b21 b22 b23 b24 b26 b27 b28 b29 b2a b2b b2c b2d b2e b2f,b294q
+CO-VAU-Pacoa,0,94f 955 956 957 958 959 95a 95b 95c 95d 95e 95f 965 970 971 974 b00 b01 b02 b03 b04 b06 b08 b09 b0a b0b b0c,
+CO-VAU-Papunahua,0,977 97c 97d 97e 97f 9d4 9d5 b28 b2a b2b b2e b80 b81 b84,
+CO-VAU-Taraira,0,aa7 aa9 aab aac aad aae aaf ab2 ab8 aba b01 b03 b04 b05 b06,b055g
+CO-VAU-Yavarate,0,b0e b0f b1a b1b b24 b25 b26 b27 b30 b31 b32 b33,
+CO-VID-Cumaribo,0,9y 9z bs bt by cn ej ek en ep,e05aq
+CO-VID-LaPrimavera,0,e09 e0a e0b e0c e0d e0e e0f e18 e1a e1b e1e e20 e21 e24 e25 e26 e27 e2c e2d e30 e31 e32 e33 e34 e36 e38 e39 e3c,e212q
+CO-VID-PuertoCarreno,0,e34 e35 e36 e37 e3c e3d e4b e60 e61 e62 e63 e64 e66 e68 e69 e6a e6b e6c e6d e6e,e6cfq
+CO-VID-SantaRosalia,0,c56 c57 c5c c5d c5f e02 e03 e08 e09 e0a e0b e20 e21,c5f4q
