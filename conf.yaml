@@ -33,7 +33,7 @@ osmCode_status:
   proposal_local_adoption:
 
 osmCode_definition:
-  srid: 102022
+  srid: 9377
   grid_xy_origin: 3678500 970000
   grid_cell_side: 524288
   grid_lc: 4 6
