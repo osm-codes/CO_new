@@ -322,7 +322,7 @@ CO-BOY-Toca,0,c359q c35cg c35cq c35dg c35dq c35eg c35eq c35fg c35fq c374g c608q 
 CO-BOY-Togui,0,c36bq c36cq c36dq c36eg c36eq c36fg c36fq c3c1g c3c4g c3c4q c3c5g,
 CO-BOY-Topaga,0,c626g c626q c627g c627q c632q,
 CO-BOY-Tota,0,c600g c600q c601g c601q c602g c602q c603g c603q c608g c608q c609g c609q c60bg c60cg c60cq,
-CO-BOY-Tunja,0,c347g c347q c34dg c34dq c352g c352q c358g c358q c359q c35ag c35bg,
+CO-BOY-Tunja,1, NULL c347g c347q c34dg c34dq c352g c352q c358g c358q c359q c35ag c35bg,
 CO-BOY-Tunungua,0,c330q c331q c332g c333g,
 CO-BOY-Turmeque,0,c1ebg c1ebq c1ecg c1ecq c1eeg c1eeq c344g,
 CO-BOY-Tuta,0,c35bq c35eq c35fq c371g c371q c374g c374q c375g c375q c376g c377g c60aq,
