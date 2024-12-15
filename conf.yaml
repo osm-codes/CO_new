@@ -31,7 +31,7 @@ afaCode_definition:
   sci_size_min: 1
   sci_size_max: 11
   log_base: 32nvu
-  log_sep: -
+  log_sep: "-"
 
 srid_official:
   equalarea: 9377
