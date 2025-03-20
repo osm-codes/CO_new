@@ -34,6 +34,10 @@ afaCode_definition:
   log_base: 32nvu
   log_sep: "-"
   intlevel: 60
+  example_city_isolabel_ext: CO-BOY-Tunja
+  example_city_intlevel: 145
+  example_cities_numbers: 15001 91263
+  raster_delta:
 
 srid_official:
   equalarea: 9377
