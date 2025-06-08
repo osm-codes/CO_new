@@ -8,7 +8,7 @@ CO-AMA-MiritiParana,0,8ef 8f6 8f7 8f8 8f9 8fa 8fb 8fc 8fd 8fe 8ff 945 947 950 95
 CO-AMA-PuertoAlegria,0,8ad 8af 8b3 8b4 8b5 8b6 8b7 8b8 8b9 8ba 8bb 8bc 8bd 8be 8e0 8e2 905 910 911,
 CO-AMA-PuertoArica,0,8cd 8cf 8d3 8d6 8d8 8d9 8da 8db 8dc 8dd 8de 8df 8e5 8f0 8f1 8f3 8f4 8f5 8f6 8f7 a82 a88 a8a aa0 aa2,
 CO-AMA-PuertoNarino,0,a20 a21 a22 a23 a28 a29 a2b,a230Q
-CO-AMA-PuertoSantander,0,8Z 8Y 9N aT,
+CO-AMA-PuertoSantander,0,8Y 8Z 9N aT,
 CO-AMA-Tarapaca,0,a2b a2e a2f a81 a82 a83 a84 a85 a86 a87 a88 a89 a8a a8b a8c a8d a8e a8f a98 a9a,
 CO-ANT-Abejorral,0,677 67d c22 c28,c222Q
 CO-ANT-Abriaqui,0,67bfQ 67eaQ 6d14Q 6d15G 6d15Q 6d16G 6d16Q 6d17G 6d17Q 6d1cG 6d1dG 6d1dQ 6d40G 6d40Q 6d42G 6d42Q 6d48G 6d48Q,
@@ -371,7 +371,7 @@ CO-CAQ-Morelia,0,37c7Q 37cdG 37cfG 37cfQ 37d1G 37d1Q 37d2G 37d2Q 37d3G 37d3Q 37d
 CO-CAQ-PuertoRico,0,929 92a 92b 92c 92e 980 981 982 983 984 988 989,9812Q
 CO-CAQ-SanJoseFragua,0,373 376 379 37b 37c 37e,37c2Q
 CO-CAQ-SanVicenteCaguan,0,91b 91e 927 92c 92d 92e 92f 930 931 932 933 934 936 937 938 939 93a 93b 93c 93e 981 983 984 985 986 989 98b 98c 98e,9861G
-CO-CAQ-Solano,0,3P 8T 8Y 9J 9K 9N 9P,9206G
+CO-CAQ-Solano,0,3P 8T 8Z 9J 9K 9N 9P,9206G
 CO-CAQ-Solita,0,374 375 376 377,375bQ
 CO-CAQ-Valparaiso,0,375 376 377 37c 37d 920 922,377aQ
 CO-CAS-Aguazul,0,c49 c4b c4c c4e c61,c4b7Q
@@ -648,7 +648,7 @@ CO-GUA-SanFelipe,0,b7a bc4 bc5 bc6 bc7 bcc bcd bd0 bd2,
 CO-GUV-Calamar,0,936 937 93c 93d 93e 93f 960 962 963 968 969 96a 96b 96c 96e 994 995 9c0 9c1 9c2 9c3 9c4,9c1cG
 CO-GUV-ElRetorno,0,97b 97e 9c1 9c2 9c3 9c4 9c5 9c6 9c7 9c9 9cc 9d0 9d1 9d2 9d3 9d4 9d5 9d6 9d7 b80 b81 b82 b83 b84 b86,9c3eG
 CO-GUV-Miraflores,0,963 964 965 966 967 969 96c 96d 96e 96f 970 972 973 978 979 97a 97b 9c4 9c5 9d0 9d1,96d7Q
-CO-GUV-SanJoseGuaviare,0,9S 9Z bS,9c9cG
+CO-GUV-SanJoseGuaviare,0,9S 9Y bS,9c9cG
 CO-HUI-Acevedo,0,37b 37e 3d4,3d44G
 CO-HUI-Agrado,0,3d67G 3d67Q 3d6dG 3d6dQ 3d6fG 3d6fQ 3d70Q 3d72G 3d72Q 3d73G 3d73Q 3d78G 3d78Q 3d79G 3d79Q 3d7aG 3d7aQ 3d7bG 3d7bQ,
 CO-HUI-Aipe,0,3f5 3f7 9a0 9a2,9a0eG
@@ -1068,7 +1068,7 @@ CO-VAC-Andalucia,0,3fbbQ 3fbdQ 3fbeG 3fbeQ 3fbfG 3fbfQ 6511G 6511Q 6514G,
 CO-VAC-Ansermanuevo,0,653fG 653fQ 656aG 656aQ 6594G 6594Q 6595G 6595Q 6596G 6597G 65c0G 65c0Q 65c1G 65c1Q 65c2G 65c2Q 65c3G 65c3Q 65c6G,
 CO-VAC-Argelia,0,653cQ 653dQ 653eG 653eQ 653fG 653fQ 6594G 6594Q 6595G,
 CO-VAC-Bolivar,0,650 651 652 653,651cG
-CO-VAC-Buenaventura,0,1Y 3Y 6N,3ee4G
+CO-VAC-Buenaventura,0,1Z 3Z 6N,3ee4G
 CO-VAC-Buga,0,3f8 3f9 3fa 3fb 3fc 3fe,3fb0G
 CO-VAC-Bugalagrande,0,3fbdQ 3fbeQ 3fbfG 3fbfQ 3feaG 3feaQ 3febQ 6511G 6511Q 6513G 6513Q 6514G 6514Q 6515G 6515Q 6516G 6516Q 6517G 6517Q 651cG 6540G 6540Q 6541G 6541Q 6542G,
 CO-VAC-Caicedonia,0,6544G 6544Q 6545Q 6546G 6546Q 6547G 6547Q 654cG 654cQ 654dG 654dQ 654eG 654fG,
@@ -1111,7 +1111,7 @@ CO-VAU-Pacoa,0,94f 955 956 957 958 959 95a 95b 95c 95d 95e 95f 965 970 971 974 b
 CO-VAU-Papunahua,0,977 97c 97d 97e 97f 9d4 9d5 b28 b2a b2b b2e b80 b81 b84,
 CO-VAU-Taraira,0,aa7 aa9 aab aac aad aae aaf ab2 ab8 aba b01 b03 b04 b05 b06,b055G
 CO-VAU-Yavarate,0,b0e b0f b1a b1b b24 b25 b26 b27 b30 b31 b32 b33,
-CO-VID-Cumaribo,0,9Z 9Y bS bT bY cN eJ eK eN eP,e05aQ
+CO-VID-Cumaribo,0,9Y 9Z bS bT bZ cN eJ eK eN eP,e05aQ
 CO-VID-LaPrimavera,0,e09 e0a e0b e0c e0d e0e e0f e18 e1a e1b e1e e20 e21 e24 e25 e26 e27 e2c e2d e30 e31 e32 e33 e34 e36 e38 e39 e3c,e212Q
 CO-VID-PuertoCarreno,0,e34 e35 e36 e37 e3c e3d e4b e60 e61 e62 e63 e64 e66 e68 e69 e6a e6b e6c e6d e6e,e6cfQ
 CO-VID-SantaRosalia,0,c56 c57 c5c c5d c5f e02 e03 e08 e09 e0a e0b e20 e21,c5f4Q
